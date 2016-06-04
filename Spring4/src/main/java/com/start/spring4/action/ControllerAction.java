@@ -48,10 +48,15 @@ public class ControllerAction {
 		return result;
 	}
 
-
 	// @ModelAttribute
 	public void show() {
 		System.out.println("show is ok");
+	}
+
+	@RequestMapping("/int")
+	public String wrong() {
+		Integer.parseInt("a");
+		return result;
 	}
 
 }
