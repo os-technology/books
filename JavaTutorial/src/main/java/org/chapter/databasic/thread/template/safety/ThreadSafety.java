@@ -1,5 +1,6 @@
 package org.chapter.databasic.thread.template.safety;
 
+//6.Java线程安全与同步(Thread Safety and Synchronization)
 public class ThreadSafety {
 
 	public static void main(String[] args) throws InterruptedException {
