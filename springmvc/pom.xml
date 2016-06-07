@@ -8,12 +8,12 @@
 		<artifactId>books</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>Spring4</artifactId>
+	<artifactId>springmvc</artifactId>
 	<packaging>war</packaging>
-	<name>Spring4 Maven Webapp</name>
+	<name>springmvc Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<springframework.version>4.0.6.RELEASE</springframework.version>
+		<springframework.version>4.2.6.RELEASE</springframework.version>
 	</properties>
 	<dependencies>
 		<!-- Spring jars start -->
@@ -47,7 +47,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<pluginManagement>
+	<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -55,12 +55,12 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>Spring4</warName>
+						<warName>springmvc</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<finalName>Spring4</finalName>
+		<finalName>springmvc</finalName>
 	</build>
 </project>

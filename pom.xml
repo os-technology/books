@@ -21,6 +21,7 @@
     <module>HeadFirstDesign</module>
     <module>JavaTutorial</module>
     <module>Spring4</module>
+    <module>springmvc</module>
   </modules>
   <dependencyManagement>
 		<dependencies>
