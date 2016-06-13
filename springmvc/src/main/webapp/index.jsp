@@ -58,11 +58,11 @@
 		<input type="submit" value="submit"/>
 	</form>
 	<br>
-	<a href="mapping/" target="_blank">null</a>
+	<a href="mapping/testServletAPI" target="_blank">test ServletAPI</a>
 	<br>
-	<a href="mapping/" target="_blank">null</a>
+	<a href="mapping/testServletAPI_2" target="_blank">test ServletAPI_2</a>
 	<br>
-	<a href="mapping/" target="_blank">null</a>
+	<a href="mapping/testModelAndView" target="_blank">test ModelAndView</a>
 	<br>
 	<a href="mapping/" target="_blank">null</a>
 	<br>

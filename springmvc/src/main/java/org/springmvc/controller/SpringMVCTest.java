@@ -1,8 +1,11 @@
 package org.springmvc.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springmvc.entity.User;
 
 @RequestMapping("mapping")
@@ -18,6 +22,52 @@ import org.springmvc.entity.User;
 public class SpringMVCTest {
 	private static final String SUCCESS = "success";
 	private static final String res = "res";
+
+	/**
+	 * 目标方法的返回值可以是ModelAndView 类型。<br>
+	 * 其中可以包含视图和模型信息
+	 * 
+	 * @createTime 2016年6月13日 下午6:41:55
+	 */
+	@RequestMapping("/testModelAndView")
+	public ModelAndView testModelAndView() {
+		String viewName = SUCCESS;
+		ModelAndView view = new ModelAndView(viewName);
+		view.addObject(res, "testModelAndView");
+		return view;
+	}
+
+	/**
+	 * <pre>
+	 * 可以使用Servlet 原生的API作为目标方法的参数 具体支持以下类型<br>
+	 * HttpServletRequest
+	 * HttpServletResponse
+	 * HttpSession
+	 * java.security.Principal
+	 * Locale
+	 * InputStream
+	 * OutputStream
+	 * Reader
+	 * Writer
+	 * </pre>
+	 * 
+	 * @param request
+	 * @param response
+	 * @createTime 2016年6月13日 下午3:43:53
+	 */
+	@RequestMapping("/testServletAPI")
+	public String testServletAPI(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute(res, "testServletAPI," + request + "," + response);
+		return SUCCESS;
+	}
+
+	@RequestMapping("/testServletAPI_2")
+	public void testServletAPI_2(HttpServletRequest request, HttpServletResponse response, Writer out)
+			throws IOException {
+
+		out.write("hello springmvc:testServletAPI_2");
+
+	}
 
 	/**
 	 * Spring MVC
