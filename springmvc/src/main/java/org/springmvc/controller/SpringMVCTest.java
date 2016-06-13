@@ -5,15 +5,82 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springmvc.entity.User;
 
 @RequestMapping("mapping")
 @Controller
 public class SpringMVCTest {
 	private static final String SUCCESS = "success";
 	private static final String res = "res";
+
+	/**
+	 * Spring MVC
+	 * 会按请求参数名和POJO属性名进行自动匹配，自动为该对象填充属性值。支持级联属性。如dept.deptId、dept.address.tel等。
+	 * 
+	 * @param user
+	 * @param request
+	 * @createTime 2016年6月13日 上午7:58:53
+	 */
+	@RequestMapping("/testPojo")
+	public String testPojo(User user, HttpServletRequest request) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		request.setAttribute(res, user);
+		return SUCCESS;
+	}
+
+	/**
+	 * 了解：
+	 * 
+	 * @CookieValue 映射一个cookie值。属性同@RequestParam
+	 * @param sessionId
+	 * @param request
+	 * @createTime 2016年6月13日 上午7:35:25
+	 */
+	@RequestMapping("/testCookieValue")
+	public String testCookieValue(@CookieValue("JSESSIONID") String sessionId, HttpServletRequest request) {
+		request.setAttribute(res, sessionId);
+		return SUCCESS;
+	}
+
+	/**
+	 * 了解<br>
+	 * 用法同@RequestParam
+	 *
+	 * @createTime 2016年6月12日 下午10:32:07
+	 */
+	@RequestMapping("/testRequestHeader")
+	public String testRequestHeader(@RequestHeader(value = "Cookie") String language, HttpServletRequest request) {
+
+		request.setAttribute(res, language);
+		return SUCCESS;
+	}
+
+	/**
+	 * <pre>
+	 * 重要
+	 * &#64;RequestParam 来映射请求参数
+	 * value 值即请求参数的参数名
+	 * required 该参数是否必须 . 默认为true
+	 * defaultValue 请求参数的默认值
+	 * </pre>
+	 * 
+	 * @createTime 2016年6月12日 下午10:23:01
+	 */
+	@RequestMapping("/testRequestParams")
+	public String testRequestParams(@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "age", required = false, defaultValue = "0") int age, HttpServletRequest request) {
+		request.setAttribute(res, username + "  " + age);
+		System.out.println(username);
+		System.out.println(age);
+
+		return SUCCESS;
+	}
 
 	/**
 	 * <pre>

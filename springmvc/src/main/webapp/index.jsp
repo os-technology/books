@@ -42,6 +42,26 @@
 		<input type="submit" value = "test Rest PUT"/>
 	</form>
 	<br>
+	<a href="mapping/testRequestParams?username=shui&age=29" target="_blank">test RequestParams</a>
+	<br>
+	<a href="mapping/testRequestHeader" target="_blank">test RequestHeader</a>
+	<br>
+	<a href="mapping/testCookieValue" target="_blank">test CookieValue</a>
+	<br>
+	<form action="mapping/testPojo" target="_blank" method="post">
+		username:<input type="text" name="username"/><br>
+		password:<input type="password" name="password"/><br>
+		age:<input type="text" name="age"/><br>
+		email:<input type="text" name="email"/><br>
+		city:<input type="text" name="address.city"/><br>
+		province:<input type="text" name="address.province"/><br>
+		<input type="submit" value="submit"/>
+	</form>
+	<br>
+	<a href="mapping/" target="_blank">null</a>
+	<br>
+	<a href="mapping/" target="_blank">null</a>
+	<br>
 	<a href="mapping/" target="_blank">null</a>
 	<br>
 	<a href="mapping/" target="_blank">null</a>
