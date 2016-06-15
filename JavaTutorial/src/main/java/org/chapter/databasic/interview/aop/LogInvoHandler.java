@@ -8,6 +8,12 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 实现InvocationHandler接口，使用map来存储不同的InvocationHandler对象，避免生成过多。
+ * 
+ * @author Yu Jinshui
+ * @createTime 2016年6月15日 上午11:48:27
+ */
 public class LogInvoHandler implements InvocationHandler {
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 
@@ -19,6 +25,13 @@ public class LogInvoHandler implements InvocationHandler {
 
 	private static HashMap<Class<?>, LogInvoHandler> invoHandlers = new HashMap<>();
 
+	/**
+	 * 通过Class来生成动态代理对象Proxy
+	 *
+	 * @param clazz
+	 * @return
+	 * @createTime 2016年6月15日 上午11:49:17
+	 */
 	public synchronized static <T> T getProxyInstance(Class<T> clazz) {
 		LogInvoHandler invoHandler = invoHandlers.get(clazz);
 		if (null == invoHandler) {
