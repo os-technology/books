@@ -8,6 +8,13 @@
 </head>
 <body>
 	<h2>默认spring配置文件的配置方式</h2>
-	输出结果为：${res}
+	[公共部分]输出request结果为：${requestScope.res}<br><br>
+	输出session结果为：${sessionScope.res}<br><br><br>
+	
+	输出request  user结果为：${requestScope.user}<br><br>
+	输出session  user结果为：${sessionScope.user}<br><br>
+	输出request  school结果为：${sessionScope.school}<br><br>
+	输出session  school结果为：${sessionScope.school}<br><br>
+	
 </body>
 </html>

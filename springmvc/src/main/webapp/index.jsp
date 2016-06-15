@@ -64,6 +64,27 @@
 	<br>
 	<a href="mapping/testModelAndView" target="_blank">test ModelAndView</a>
 	<br>
+	<a href="mapping/testMap" target="_blank">test Map</a>
+	<br>
+	<a href="mapping/testSessionAttributes" target="_blank">test SessionAttributes</a>
+	<br>
+	
+	<!-- 
+		模拟修改操作
+		1.原始数据为:1,Tom,12345,tom@126.com,12
+		2.密码不能被修改.
+		3.表单回显,模拟操作直接在表单填写对应的属性值
+	 -->
+	<form action="mapping/testModelAttributes" target="_blank" method="post">
+		<input type="hidden" name="id" value="1">
+		username:<input type="text" name="username" value="Tom"/><br>
+		age:<input type="text" name="age" value="12"/><br>
+		email:<input type="text" name="email" value="tom@126.com"/><br>
+		<input type="submit" value="submit"/>
+	</form>
+	<br>
+	<a href="mapping/" target="_blank">null</a>
+	<br>
 	<a href="mapping/" target="_blank">null</a>
 	<br>
 	<a href="mapping/" target="_blank">null</a>

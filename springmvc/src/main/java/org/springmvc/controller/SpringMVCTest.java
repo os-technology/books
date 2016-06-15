@@ -3,20 +3,23 @@ package org.springmvc.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-
+import java.util.Arrays;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmvc.entity.User;
 
+//@SessionAttributes(value = { "user" }, types = { String.class })
 @RequestMapping("mapping")
 @Controller
 public class SpringMVCTest {
@@ -24,8 +27,70 @@ public class SpringMVCTest {
 	private static final String res = "res";
 
 	/**
+	 * 由@ModelAttribute标记的所有方法，会在每个目标方法执行之前被SpringmMVC调用
+	 *
+	 * @param id
+	 * @param map
+	 * @createTime 2016年6月15日 下午3:43:59
+	 */
+	@ModelAttribute
+	public void getUser(@RequestParam(value = "id", required = false) Integer id, Map<String, Object> map) {
+		if (id != null) {
+			// 模拟从数据库中获取对象
+			User user = new User(1, "Tom", "12345", 12, "tom@126.com");
+			System.out.println("从数据库中获取一个对象：" + user);
+
+			map.put("user", user);
+
+		}
+	}
+
+	@RequestMapping("/testModelAttributes")
+	public String testModelAttributes(User user, HttpServletRequest request) {
+		request.setAttribute(res, "testModelAttributes修改：" + user);
+		System.out.println("修改：" + user);
+		return SUCCESS;
+	}
+
+	/**
+	 * @SessionAttributes(value = { "user" }, types = { String.class })
+	 * 
+	 * @SessionAttributes 除了可以通过属性名指定需要放到会话中的属性外(实际上使用的是value属性值)，
+	 *                    还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中(实际上使用的是types属性值)。<br>
+	 *                    注意：该注解只能放在类的上面，而不能用于修饰方法。
+	 *
+	 * @param map
+	 * @return
+	 * @createTime 2016年6月15日 下午3:12:11
+	 */
+	@RequestMapping("/testSessionAttributes")
+	public String testSessionAttributes(Map<String, Object> map) {
+		User user = new User("Tom", "12345", 12, "tom@126.com");
+		map.put("user", user);
+		map.put("school", "qingsoft");
+		return SUCCESS;
+	}
+
+	/**
+	 * 常用<br>
+	 * 目标方法可以添加Map类型(实际上也可以是Model类型或ModelMap类型)的参数 {方法功能描述}
+	 *
+	 * @param map
+	 * @return
+	 * @Author Yu Jinshui
+	 * @createTime 2016年6月15日 下午12:41:56
+	 */
+	@RequestMapping("/testMap")
+	public String testMap(Map<String, Object> map) {
+		System.out.println(map.getClass().getName());
+		map.put(res, Arrays.asList("Tom", "Jerry", "John", "Pola"));
+		return SUCCESS;
+	}
+
+	/**
 	 * 目标方法的返回值可以是ModelAndView 类型。<br>
-	 * 其中可以包含视图和模型信息
+	 * 其中可以包含视图和模型信息<br>
+	 * springMVC 会把ModelAndView 的 model中数据放入request域对象中。
 	 * 
 	 * @createTime 2016年6月13日 下午6:41:55
 	 */

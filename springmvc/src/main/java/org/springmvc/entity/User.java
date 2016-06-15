@@ -1,9 +1,12 @@
 package org.springmvc.entity;
 
 public class User {
+
+	private Integer id;
+
 	private String username;
 	private String password;
-	private String age;
+	private Integer age;
 	private String email;
 
 	private Address address;
@@ -32,11 +35,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
@@ -50,8 +53,28 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", age=" + age + ", email=" + email
-				+ ", address=" + address + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", age=" + age + ", email="
+				+ email + "]";
 	}
 
+	public User(String username, String password, Integer age, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.age = age;
+		this.email = email;
+	}
+
+	public User(Integer id, String username, String password, Integer age, String email) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.age = age;
+		this.email = email;
+	}
+
+	public User() {
+
+	}
 }
