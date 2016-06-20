@@ -1,5 +1,5 @@
 package org.chapter.databasic.thread;
-
+//http://www.importnew.com/9994.html
 public class RunnableImpl implements Runnable {
 
 	@Override
