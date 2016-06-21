@@ -1,4 +1,4 @@
-package org.chapter.databasic.thread.template;
+package org.chapter.databasic.thread.template.threadlocal;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;
@@ -13,7 +13,7 @@ import java.util.Random;
  * @createTime 2016年6月6日 上午10:32:48
  */
 public class ThreadLocalExample implements Runnable {
-
+	// SimpleDateFormat is not thread-safe, so give one to each thread
 	private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>() {
 		@Override
 		protected SimpleDateFormat initialValue() {
