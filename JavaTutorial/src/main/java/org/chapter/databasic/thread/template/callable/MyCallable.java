@@ -1,4 +1,4 @@
-package org.chapter.databasic.thread.template;
+package org.chapter.databasic.thread.template.callable;
 
 import java.util.ArrayList;
 import java.util.Date;
