@@ -14,6 +14,7 @@ public class HttpDemo_1 {
 	public static void main(String[] args) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet("http://localhost:8080/");
+		httpGet.getURI();
 		try {
 			HttpResponse response = httpclient.execute(httpGet);
 			HttpEntity entity = response.getEntity();
