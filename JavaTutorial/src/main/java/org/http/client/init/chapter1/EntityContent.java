@@ -124,7 +124,7 @@ public class EntityContent {
 	 */
 	@Test
 	static void productEntityContent() {
-		File file = new File("somefile.txt");
+		File file = new File("/Users/yujinshui/Desktop/img/a.jpg");
 		FileEntity entity = new FileEntity(file, ContentType.create("plain/text", "UTF-8"));
 		HttpPost httppost = new HttpPost("http://localhost:8081/nexus");
 		httppost.setEntity(entity);
@@ -174,12 +174,13 @@ public class EntityContent {
 	static void test() {
 		// entity();
 		// abortMethod();
-		try {
-			// consumingEntityContent();
-			responseHandlers();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		productEntityContent();
+//		try {
+//			// consumingEntityContent();
+//			responseHandlers();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 

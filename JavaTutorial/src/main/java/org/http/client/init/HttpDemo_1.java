@@ -7,27 +7,33 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 public class HttpDemo_1 {
 
-	public static void main(String[] args) {
-		HttpClient httpclient = new DefaultHttpClient();
+	public static void main(String[] args) throws IOException {
+		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet("http://localhost:8080/");
 		httpGet.getURI();
 		try {
 			HttpResponse response = httpclient.execute(httpGet);
 			HttpEntity entity = response.getEntity();
-			if (entity != null) {
-				InputStream instream = entity.getContent();
-				int l;
-				byte[] tmp = new byte[2048];
-				while ((l = instream.read(tmp)) != -1) {
-				}
-			}
+			String res = EntityUtils.toString(entity);
+			// if (entity != null) {
+			// InputStream instream = entity.getContent();
+			// int l;
+			// byte[] tmp = new byte[2048];
+			// while ((l = instream.read(tmp)) != -1) {
+			// }
+			// }
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			httpclient.close();
 		}
 
 	}
