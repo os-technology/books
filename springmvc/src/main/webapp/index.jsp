@@ -83,7 +83,7 @@
 		<input type="submit" value="submit"/>
 	</form>
 	<br>
-	<a href="mapping/" target="_blank">null</a>
+	<a href="mapping/testViewAndViewResolver" target="_blank">24 . Test ViewAndViewResolver</a>
 	<br>
 	<a href="mapping/" target="_blank">null</a>
 	<br>

@@ -26,6 +26,32 @@ public class SpringMVCTest {
 	private static final String SUCCESS = "success";
 	private static final String res = "res";
 
+	@RequestMapping("/testViewAndViewResolver")
+	public String testViewAndViewResolver(HttpServletRequest request) {
+		System.out.println("view : testViewAndViewResolver");
+		return SUCCESS;
+	}
+
+	/**
+	 * 运行流程：<br>
+	 * 1.执行@ModelAttribute 注解修饰的方法：从数据库中取出对象，把对象放到了map中，键为user<br>
+	 * 2.SpringMVC从Map中取出User对象，并把表单的请求参数赋给该User对象对应的属性<br>
+	 * 3.SpringMVC把上述对象传入目标方法的参数<br>
+	 * 注意：在@ModelAttribute修饰的方法中，放入到Map时的键需要和目标方法入参类型的第一个字母小写的字符串一致！
+	 * 
+	 * @param user
+	 * @param request
+	 * @return
+	 * @Author yujinshui
+	 * @createTime 2016年7月30日 上午11:19:28
+	 */
+	@RequestMapping("/testModelAttributes")
+	public String testModelAttributes(User u, HttpServletRequest request) {
+		request.setAttribute(res, "testModelAttributes修改：" + u);
+		System.out.println("修改：" + u);
+		return SUCCESS;
+	}
+
 	/**
 	 * 由@ModelAttribute标记的所有方法，会在每个目标方法执行之前被SpringmMVC调用
 	 *
@@ -35,6 +61,7 @@ public class SpringMVCTest {
 	 */
 	@ModelAttribute
 	public void getUser(@RequestParam(value = "id", required = false) Integer id, Map<String, Object> map) {
+		System.out.println("ModelAttribute Method");
 		if (id != null) {
 			// 模拟从数据库中获取对象
 			User user = new User(1, "Tom", "12345", 12, "tom@126.com");
@@ -43,13 +70,6 @@ public class SpringMVCTest {
 			map.put("user", user);
 
 		}
-	}
-
-	@RequestMapping("/testModelAttributes")
-	public String testModelAttributes(User user, HttpServletRequest request) {
-		request.setAttribute(res, "testModelAttributes修改：" + user);
-		System.out.println("修改：" + user);
-		return SUCCESS;
 	}
 
 	/**
