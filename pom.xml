@@ -22,6 +22,8 @@
     <module>JavaTutorial</module>
     <module>Spring4</module>
     <module>springmvc</module>
+    
+    <module>dubbo-parent</module>
   </modules>
   <dependencyManagement>
 		<dependencies>
