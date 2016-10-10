@@ -1,18 +1,12 @@
-package org.dubbo.consumer;
+package org.dubbo.consumer.boot;
 
 import java.util.Scanner;
 
 import org.dubbo.inter.api.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest {
-//	@Autowired
-//	private static HelloService hello;
+public class Main {
 	public static void main(String[] args) {
 		ApplicationContext appConsumer = new ClassPathXmlApplicationContext("consumer.xml");
 		HelloService hello = (HelloService) appConsumer.getBean("hello");
@@ -22,5 +16,4 @@ public class AppTest {
 		Scanner scanner = new Scanner(System.in);
 		scanner.nextLine();
 	}
-
 }

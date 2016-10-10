@@ -21,7 +21,7 @@ public class HelloServiceImplTest {
 
 	@Test
 	public void testgetToday() {
-		hello = (HelloService)app.getBean("hello");
+//		hello = (HelloService)app.getBean("hello");
 		String dateTime = hello.getToday();
 		System.out.println(dateTime);
 	}

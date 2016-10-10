@@ -75,6 +75,7 @@
 		2.密码不能被修改.
 		3.表单回显,模拟操作直接在表单填写对应的属性值
 	 -->
+	 (testModelAttributes)<br>
 	<form action="mapping/testModelAttributes" target="_blank" method="post">
 		<input type="hidden" name="id" value="1">
 		username:<input type="text" name="username" value="Tom"/><br>
@@ -85,7 +86,7 @@
 	<br>
 	<a href="mapping/testViewAndViewResolver" target="_blank">24 . Test ViewAndViewResolver</a>
 	<br>
-	<a href="mapping/" target="_blank">null</a>
+	<a href="mapping/testRedirect" target="_blank">test redirect</a>
 	<br>
 	<a href="mapping/" target="_blank">null</a>
 	<br>

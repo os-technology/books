@@ -3,10 +3,14 @@ package org.springmvc.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmvc.entity.User;
 
@@ -25,6 +28,12 @@ import org.springmvc.entity.User;
 public class SpringMVCTest {
 	private static final String SUCCESS = "success";
 	private static final String res = "res";
+
+	@RequestMapping("/testRedirect")
+	public String testRedirect() {
+		System.out.println("test redirect");
+		return "redirect:/output/result.jsp";
+	}
 
 	@RequestMapping("/testViewAndViewResolver")
 	public String testViewAndViewResolver(HttpServletRequest request) {
@@ -49,7 +58,39 @@ public class SpringMVCTest {
 	public String testModelAttributes(User u, HttpServletRequest request) {
 		request.setAttribute(res, "testModelAttributes修改：" + u);
 		System.out.println("修改：" + u);
+		String ip = getIpAddr(request);
+		System.out.println("输出IP：" + ip);
 		return SUCCESS;
+	}
+
+	private String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+			if (ip.equals("127.0.0.1")) {
+				// 根据网卡取本机配置的IP
+				InetAddress inet = null;
+				try {
+					inet = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
+				ip = inet.getHostAddress();
+			}
+		}
+		// 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+		if (ip != null && ip.length() > 15) {
+			if (ip.indexOf(",") > 0) {
+				ip = ip.substring(0, ip.indexOf(","));
+			}
+		}
+		return ip;
 	}
 
 	/**
