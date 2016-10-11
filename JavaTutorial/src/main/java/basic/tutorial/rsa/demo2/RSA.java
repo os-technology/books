@@ -18,6 +18,11 @@ import java.security.spec.X509EncodedKeySpec;
  * @createTime 2016年10月10日 下午5:39:18
  */
 public class RSA {
+	private static final String PRIVATE_KEY_1 = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKWmOMF5zQBqc8xA41zq9BKHI8GUdZdJR8qP57mv8y2N7T/TD1YeNEx3UH7cSWpsZpdzV5BWKAhH7sTOWfhIU+EhrXrWbQWAndWcT2+ZDYlI0ctJ5Bo1gM0MEU01+g3mhOf70I9DJrYGvoVYV815m+F46bjq8qVEL06zZZLEKCTPAgMBAAECgYEAjZl3rrvFp/NXpWRadtVJaoUm5ZVYp8g2nEtDVJG5mFlYU1TCKWWMY0kjAC6ie1zKnfA1C+b6NYn36zhR5FE/kTSwUYT1P6INT4rD7JUEiwE8hi4MTvWIDCyqeUmb2H+abHpBo9VZymmh5wmwRTi1PgPQGTDq5uP519lgD00DzEECQQDZzHPSvgy0GztmD6Uip1mHDI9j7syIEVCEPtuIsNzH63GQdR5jLH7hZn0WRXEgrZa+f3gKZnFIew+lj6Ip1lPRAkEAwrQrwe6dcioJHdc0PsW/In5TOBTY+ppVKhrkJ6x9UOzZT/BYuXUFVJL8kiKGIK0wihOzMhHK57HjoN5fT5w2nwJBAJ5D4npmXgbWrxAYGFCZOQZYyy28DmZl5pNitdabZqPj5A8r/Bvm7oBOIGF5rp4nZh4htJIiJPmdax5MxHMQarECQH8yMPvqpJT2fSovcwQnL2ybVkZm6DEfLc/p7W81slBxyq38eBoAJtFPjQzy3Ojv+6vYntJw6Ttf7TMk0uMxTEUCQDw1ZXU5jiKoktSYjHjFL2EfqtfT9F8xTHVyaruKL+R67Z0OvxMNlM0j77ADUS/BAFlwF2bCsSkMT3PLvcNtpPk=";
+	private static final String PUBLIC_KEY_1 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClpjjBec0AanPMQONc6vQShyPBlHWXSUfKj+e5r/Mtje0/0w9WHjRMd1B+3ElqbGaXc1eQVigIR+7Ezln4SFPhIa161m0FgJ3VnE9vmQ2JSNHLSeQaNYDNDBFNNfoN5oTn+9CPQya2Br6FWFfNeZvheOm46vKlRC9Os2WSxCgkzwIDAQAB";
+
+	private static final String PRIVATE_KEY_2 = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALtIEpWSusR6q7Zgf/ga5/5pfnGj/EMY88d9cWzhNnV5eXggbd6xpOuPA9HF6Jzpb+DVNqDol7Q15PupUIZSjzgHWjdi36T1MFu67cpvMtzuTDpTCctSGVgBZZlJ/FOaephYmL9dOfVvyiPRpRkQlXAp1bTR6vt82YlAqEGnYXZHAgMBAAECgYB6jwfaalNfEQgeKbiVHMaFb3QX2kDTiBjAjA8WOavx5LThMBe2jHpozQaq2OEJDprwf5doZc4hWMOpDXxs6spduKomQZnXMfjjsIWgHcZkILbWrm5t8yMJ9QKNHUj6IJLICxoPzhLgbGiarIRdFnbDSpErIYLRHU7WtjD99WHOQQJBAO19ItoiEjpmzxJId7V/DhWQf1TO+MxVtTI3MNP+cLc+dDFQSONBEYNvGJ53MMufOP3jvyj6zvJa7vsD/oIJBBUCQQDJ4RkMWGGeFnHQRbghhlYiWYHyBb5QXwoMqMjTdFDBosHYGOJZGkc0XCXEcpDFM5EUznIWHLYRG8d2oyOjmpvrAkBdmPT0bXsrozs3JHJxiIqfexyD6zJpLdpE2TWYR25a+fVHPjILxqhFWbKlOap0heMrROghGYAYSjhnm7Jhw3XlAkBfyaaQ7P6kfBHUuL/9aDhGZCH8LC15BR9Hkm53pqEKv6cqWeRMUuOmPHLPG20FpMoaDTqks0rQI1YpPI8Uea+xAkEA2+6/SzFV+K7v2rHA+LkBIuCr0m5JoZU11vSsXjyeY8PewIBDF8JBKLWOPO72RWsILeJf2Tr4fknha20BA+wNPw==";
+	private static final String PUBLIC_KEY_2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7SBKVkrrEequ2YH/4Guf+aX5xo/xDGPPHfXFs4TZ1eXl4IG3esaTrjwPRxeic6W/g1Tag6Je0NeT7qVCGUo84B1o3Yt+k9TBbuu3KbzLc7kw6UwnLUhlYAWWZSfxTmnqYWJi/XTn1b8oj0aUZEJVwKdW00er7fNmJQKhBp2F2RwIDAQAB";
 	public static String ALGORITHM = "RSA";
 
 	public static String SIGN_ALGORITHMS = "SHA1WithRSA";// 摘要加密算饭
@@ -232,15 +237,27 @@ public class RSA {
 
 	}
 
-	public static void main(String[] args) {
+	private static void checkSign() {
 		String str = Base64.encode("test".getBytes());
 		System.out.println("Base64加密-->" + str);
-		String aaa = sign(str,
-				"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKWmOMF5zQBqc8xA41zq9BKHI8GUdZdJR8qP57mv8y2N7T/TD1YeNEx3UH7cSWpsZpdzV5BWKAhH7sTOWfhIU+EhrXrWbQWAndWcT2+ZDYlI0ctJ5Bo1gM0MEU01+g3mhOf70I9DJrYGvoVYV815m+F46bjq8qVEL06zZZLEKCTPAgMBAAECgYEAjZl3rrvFp/NXpWRadtVJaoUm5ZVYp8g2nEtDVJG5mFlYU1TCKWWMY0kjAC6ie1zKnfA1C+b6NYn36zhR5FE/kTSwUYT1P6INT4rD7JUEiwE8hi4MTvWIDCyqeUmb2H+abHpBo9VZymmh5wmwRTi1PgPQGTDq5uP519lgD00DzEECQQDZzHPSvgy0GztmD6Uip1mHDI9j7syIEVCEPtuIsNzH63GQdR5jLH7hZn0WRXEgrZa+f3gKZnFIew+lj6Ip1lPRAkEAwrQrwe6dcioJHdc0PsW/In5TOBTY+ppVKhrkJ6x9UOzZT/BYuXUFVJL8kiKGIK0wihOzMhHK57HjoN5fT5w2nwJBAJ5D4npmXgbWrxAYGFCZOQZYyy28DmZl5pNitdabZqPj5A8r/Bvm7oBOIGF5rp4nZh4htJIiJPmdax5MxHMQarECQH8yMPvqpJT2fSovcwQnL2ybVkZm6DEfLc/p7W81slBxyq38eBoAJtFPjQzy3Ojv+6vYntJw6Ttf7TMk0uMxTEUCQDw1ZXU5jiKoktSYjHjFL2EfqtfT9F8xTHVyaruKL+R67Z0OvxMNlM0j77ADUS/BAFlwF2bCsSkMT3PLvcNtpPk=");
+		String aaa = sign(str, PRIVATE_KEY_1);
 		System.out.println("加签-->" + aaa);
-		System.out.println("验签-->" + verify(str, aaa,
-				"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClpjjBec0AanPMQONc6vQShyPBlHWXSUfKj+e5r/Mtje0/0w9WHjRMd1B+3ElqbGaXc1eQVigIR+7Ezln4SFPhIa161m0FgJ3VnE9vmQ2JSNHLSeQaNYDNDBFNNfoN5oTn+9CPQya2Br6FWFfNeZvheOm46vKlRC9Os2WSxCgkzwIDAQAB"));
+		System.out.println("验签-->" + verify(str, aaa, PUBLIC_KEY_1));
 		System.out.println("原文-->" + new String(Base64.decode(str)));
+	}
+
+	public static void integrationTest(String content) {
+		if (content == null) {
+			content = "Hello,world";
+		}
+		String encryptText = encrypt(content, PRIVATE_KEY_2);
+		System.out.println("密文：" + encryptText.length());
+		String decryptText = decrypt(encryptText, PUBLIC_KEY_2);
+		System.out.println("原文：" + decryptText);
+	}
+
+	public static void main(String[] args) {
+		integrationTest(null);
 	}
 
 }

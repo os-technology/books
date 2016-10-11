@@ -24,6 +24,7 @@
     <module>springmvc</module>
     
     <module>dubbo-parent</module>
+    <module>compress</module>
   </modules>
   <dependencyManagement>
 		<dependencies>
