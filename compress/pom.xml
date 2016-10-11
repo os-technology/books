@@ -20,6 +20,15 @@
 		<uberjar.name>benchmarks</uberjar.name>
 	</properties>
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.12</version>
+		</dependency>
+		<!-- use package compress -->
+
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
 			<artifactId>jmh-core</artifactId>
@@ -43,7 +52,17 @@
 			<artifactId>snappy-java</artifactId>
 			<version>1.1.1.6</version>
 		</dependency>
+		<!-- use package compress -->
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
 	</dependencies>
+	<!-- 1 use package compress -->
 	<build>
 		<plugins>
 			<plugin>
@@ -120,4 +139,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<!-- 1 use package compress -->
 </project>
