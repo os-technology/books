@@ -52,8 +52,9 @@ public class ImgUtil {
 	}
 
 	public static void main(String[] args) {
-		String input = "/Users/yujinshui/Desktop/old.jpg";
-		String output = "/Users/yujinshui/Desktop/result_03.jpg";
+		String name = "wangxiaoyue";
+		String input = "/Users/yujinshui/Desktop/piccheck/"+name+"_1.jpg";
+		String output = "/Users/yujinshui/Desktop/piccheck/"+name+"_2.jpg";
 		reduceImg(input, output, 0.3);
 		System.out.println("输出完成");
 	}
