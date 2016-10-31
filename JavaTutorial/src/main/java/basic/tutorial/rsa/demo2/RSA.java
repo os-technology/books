@@ -23,6 +23,10 @@ public class RSA {
 
 	private static final String PRIVATE_KEY_2 = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALtIEpWSusR6q7Zgf/ga5/5pfnGj/EMY88d9cWzhNnV5eXggbd6xpOuPA9HF6Jzpb+DVNqDol7Q15PupUIZSjzgHWjdi36T1MFu67cpvMtzuTDpTCctSGVgBZZlJ/FOaephYmL9dOfVvyiPRpRkQlXAp1bTR6vt82YlAqEGnYXZHAgMBAAECgYB6jwfaalNfEQgeKbiVHMaFb3QX2kDTiBjAjA8WOavx5LThMBe2jHpozQaq2OEJDprwf5doZc4hWMOpDXxs6spduKomQZnXMfjjsIWgHcZkILbWrm5t8yMJ9QKNHUj6IJLICxoPzhLgbGiarIRdFnbDSpErIYLRHU7WtjD99WHOQQJBAO19ItoiEjpmzxJId7V/DhWQf1TO+MxVtTI3MNP+cLc+dDFQSONBEYNvGJ53MMufOP3jvyj6zvJa7vsD/oIJBBUCQQDJ4RkMWGGeFnHQRbghhlYiWYHyBb5QXwoMqMjTdFDBosHYGOJZGkc0XCXEcpDFM5EUznIWHLYRG8d2oyOjmpvrAkBdmPT0bXsrozs3JHJxiIqfexyD6zJpLdpE2TWYR25a+fVHPjILxqhFWbKlOap0heMrROghGYAYSjhnm7Jhw3XlAkBfyaaQ7P6kfBHUuL/9aDhGZCH8LC15BR9Hkm53pqEKv6cqWeRMUuOmPHLPG20FpMoaDTqks0rQI1YpPI8Uea+xAkEA2+6/SzFV+K7v2rHA+LkBIuCr0m5JoZU11vSsXjyeY8PewIBDF8JBKLWOPO72RWsILeJf2Tr4fknha20BA+wNPw==";
 	private static final String PUBLIC_KEY_2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7SBKVkrrEequ2YH/4Guf+aX5xo/xDGPPHfXFs4TZ1eXl4IG3esaTrjwPRxeic6W/g1Tag6Je0NeT7qVCGUo84B1o3Yt+k9TBbuu3KbzLc7kw6UwnLUhlYAWWZSfxTmnqYWJi/XTn1b8oj0aUZEJVwKdW00er7fNmJQKhBp2F2RwIDAQAB";
+	
+	private static final String PRIVATE_KEY_3 = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAN/lFh/G6d6phEgKypF5VGiCJfzAoHyV+nonjCuYwI4J25HiRkAeLWkkASGdKYatalQnwLhgOuGE6BBx2h4zQL72Vi+xP8H5h5t9KUvxvU1gHyZTWQT9gmChM6D29rFpuNam7m2oA5IEXLwEtuFQdJI8YzWqKNifQNvoFgkScklPAgMBAAECgYB0l4d95MfE++G24me6ecRK5/uAM49fUXquQgnsag9b6CY/QeXzXcOoDOfJ6V3GlGfaixkA6pu+9MckSSWctHPyBAIwmC0iiT/T03KkmY6E2FauxJ7PxFTPuNv4QWb8TKOUqUp4L1xEeCHcjQK/5mmo1DbvshaPqPTMzphmne3ZgQJBAPyIFk4ac1lxoEBHIr/Ar0yt7jO40OLGCg3nidGw+mb61WJeGPCXLNWj4q0RQKRLlqfbPvwW3/2IT5k9fDf0cq0CQQDi+E+tkws/NodGb7kBmIipQlvN6UMVTO4tMY7S8fWDZzi9bd/dUOHZV1vPq8WRzeTpoExOP5Cy+FrVtTnAxidrAkEA8pwDYdHDk+C35kjxN2t0fqRyvjoGZHeCXU1eeJggWSMOMczZBPsX1b/3G/IBOlZsTKMz5ZhMZRS59Cy/1DoCmQJAN6ogmHhMtNchvCOgYwTO13wf2dNQkYPJkinqVk/jH7QMFWFCGxxAF7a2HKuLC+RMNQQMUtCCI3KHjIwiuuWeOwJBAKYpLmWRYXeD6aTo8v0PXX9aUCBKA8gJ3rxDwUyp6yqYOeoajB/Uc5EcqpQCsVrG3xKDPWhcJkRH9lFf1S4y27U=";
+	private static final String PUBLIC_KEY_3 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDb+8va4joVwB+cLDXLFd2F6SLOTpP4DasZ+gOizLxW0B/HPwMDRyrlRMOdZiCNSob1iH/NNmgYR5qcO8c/WdvmZ8xGDDq0qassLo1jSaU3sc8FiYA3oL7Xl8uOWnubZ07OronMSVFzlepvW5uDIyMhbDUCYqXmnI9dRrG6P2JvDQIDAQAB";
+	
 	public static String ALGORITHM = "RSA";
 
 	public static String SIGN_ALGORITHMS = "SHA1WithRSA";// 摘要加密算饭
@@ -240,9 +244,9 @@ public class RSA {
 	private static void checkSign() {
 		String str = Base64.encode("test".getBytes());
 		System.out.println("Base64加密-->" + str);
-		String aaa = sign(str, PRIVATE_KEY_1);
+		String aaa = sign(str, PRIVATE_KEY_3);
 		System.out.println("加签-->" + aaa);
-		System.out.println("验签-->" + verify(str, aaa, PUBLIC_KEY_1));
+		System.out.println("验签-->" + verify(str, aaa, PUBLIC_KEY_3));
 		System.out.println("原文-->" + new String(Base64.decode(str)));
 	}
 
@@ -250,14 +254,15 @@ public class RSA {
 		if (content == null) {
 			content = "Hello,world";
 		}
-		String encryptText = encrypt(content, PRIVATE_KEY_2);
+		String encryptText = encrypt(content, PRIVATE_KEY_3);
 		System.out.println("密文：" + encryptText.length());
-		String decryptText = decrypt(encryptText, PUBLIC_KEY_2);
+		String decryptText = decrypt(encryptText, PUBLIC_KEY_3);
 		System.out.println("原文：" + decryptText);
 	}
 
 	public static void main(String[] args) {
-		integrationTest(null);
+//		integrationTest(null);
+		checkSign();
 	}
 
 }

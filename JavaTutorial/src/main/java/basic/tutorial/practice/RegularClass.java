@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author Yu Jinshui
  * 
  */
-public class JavaTest3 {
+public class RegularClass {
 	/****************** 正则表达式部分开始 *******************/
 	/**
 	 * 匹配小示例
@@ -141,7 +141,7 @@ public class JavaTest3 {
 	 */
 	public static void main(String[] args) {
 
-		JavaTest3 j = new JavaTest3();
+		RegularClass j = new RegularClass();
 //		j.reInfo("<a><font color='red'>123</font>", "\\d+","000", 0);
 //		System.out.println("result = " + j.reInfo("<a><font color='red'>123</font>", "\\d+","000", 0));
 
@@ -214,8 +214,8 @@ public class JavaTest3 {
 //		String replacement = "==$1==";
 //		int i = 0;
 //		j.reInfo(info, regex, replacement, i);
-		System.out.println(j.matchTest2("0", "^\\d+$"));
-
+//		System.out.println(j.matchTest2("1231", "^[0-9]+(.[0-9]{1,3})?$"));
+System.out.println("12.1113".matches("^[0-9]+(.[0-9]{1,3})?$"));
 		/******** 正则内容更改部分 *********/
 	}
 

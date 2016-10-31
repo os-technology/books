@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * @author admin
  * 
  */
-public class JavaTest2 {
+public class StringArray {
 
 	/**
 	 * String的内存分配
@@ -28,7 +28,7 @@ public class JavaTest2 {
 
 	@Override
 	public String toString() {
-		return "String :" + JavaTest2.class;
+		return "String :" + StringArray.class;
 	}
 
 	/************ 数组部分开始 **************/
@@ -383,7 +383,7 @@ public class JavaTest2 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JavaTest2 j = new JavaTest2();
+		StringArray j = new StringArray();
 		// System.out.println(j);
 		// j.arrayTest();
 		// j.fillTest();

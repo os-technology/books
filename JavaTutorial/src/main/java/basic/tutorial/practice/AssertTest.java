@@ -6,7 +6,7 @@ package basic.tutorial.practice;
  * @author Yu Jinshui
  * 
  */
-public class JavaTest5 {
+public class AssertTest {
 
 	/**
 	 * 当Java运行时系统检查到被零除的情况，它构造一个新的异常对象然后引发该异常。这导致
