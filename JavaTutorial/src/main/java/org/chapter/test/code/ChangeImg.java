@@ -8,6 +8,7 @@ import java.io.IOException;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
 
+@SuppressWarnings("restriction")
 public class ChangeImg {
 	/**
 	 * 

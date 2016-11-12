@@ -29,7 +29,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -122,7 +121,6 @@ public class EntityContent {
 	 * @Author yujinshui
 	 * @createTime 2016年7月11日 上午10:55:49
 	 */
-	@Test
 	static void productEntityContent() {
 		File file = new File("/Users/yujinshui/Desktop/img/a.jpg");
 		FileEntity entity = new FileEntity(file, ContentType.create("plain/text", "UTF-8"));
