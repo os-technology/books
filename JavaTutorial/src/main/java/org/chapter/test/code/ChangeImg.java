@@ -39,8 +39,6 @@ public class ChangeImg {
 			BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 			tag.getGraphics().drawImage(src.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
-			// tag.getGraphics().drawImage(src.getScaledInstance(widthdist,
-			// heightdist, Image.SCALE_AREA_AVERAGING), 0, 0, null);
 
 			FileOutputStream out = new FileOutputStream(imgdist);
 			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
