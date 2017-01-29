@@ -17,7 +17,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.home>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre</java.home>
+		<java.mac.home>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre</java.mac.home>
 	</properties>
 	<modules>
 		<module>HeadFirstDesign</module>
@@ -63,7 +63,7 @@
 					<encoding>UTF-8</encoding>
 					<compilerArguments>
 						<bootclasspath>
-							${java.home}/lib/rt.jar:${java.home}/lib/jce.jar
+							${java.mac.home}/lib/rt.jar:${java.mac.home}/lib/jce.jar
 						</bootclasspath>
 					</compilerArguments>
 				</configuration>

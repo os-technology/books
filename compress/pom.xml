@@ -8,9 +8,7 @@
 		<artifactId>books</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.mvn.test</groupId>
 	<artifactId>compress</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>compress</name>
 	<url>http://maven.apache.org</url>
 	<properties>
