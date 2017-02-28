@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <style type="text/css">
+        table {
+            background-color: gray;
+        }
+
+        table th {
+            background: silver;
+        }
+
+        table td {
+            background: #FFF;
+        }
+    </style>
+</head>
+<body>
+$!{header}
+<br>
+<h4>$!{tableName}</h4><br>
+<table cellspacing=1  cellpadding=7>
+    <tr>
+        #foreach($!data in $!title)
+            <th>$!data</th>
+        #end
+    </tr>
+    #foreach($!rows in $!text)
+        <tr>
+            #foreach($!col in $!rows)
+                <td>$!col</td>
+            #end
+        </tr>
+    #end
+</table>
+</body>
+</html>
