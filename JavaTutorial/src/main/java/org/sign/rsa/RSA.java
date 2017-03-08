@@ -1,6 +1,9 @@
-package basic.tutorial.rsa.demo2;
+package org.sign.rsa;
 
 import javax.crypto.Cipher;
+
+import org.sign.base64.Base64;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

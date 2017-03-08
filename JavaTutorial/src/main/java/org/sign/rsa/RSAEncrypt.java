@@ -1,4 +1,4 @@
-package basic.tutorial.rsa.demo1;
+package org.sign.rsa;
 
 import java.io.BufferedReader;
 import java.io.IOException;

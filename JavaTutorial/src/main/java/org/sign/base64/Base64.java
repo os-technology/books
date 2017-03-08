@@ -4,7 +4,7 @@
  * author: shiqun.shi@Lakala.com
  */
 
-package basic.tutorial.rsa.demo2;
+package org.sign.base64;
 
 import java.io.UnsupportedEncodingException;
 

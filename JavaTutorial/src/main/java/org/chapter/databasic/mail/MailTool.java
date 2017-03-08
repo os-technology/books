@@ -24,7 +24,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-import javax.servlet.ServletContextAttributeEvent;
 
 /**
  * java mail 邮箱发送类
