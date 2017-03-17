@@ -1,15 +1,14 @@
 package org.fastjson.bean;
 
-import com.alibaba.fastjson.annotation.JSONField;
 
 public class Fruit {
 
 	//@JSONField(name = "size_1")
 	private int size_1;
 	//@JSONField(name = "shape_1")
-	private String shape_1;
+	private String shape_info;
 	//@JSONField(name = "color_1")
-	private String color_1;
+	private String color_info;
 
 	/**
 	 * @return the size_1
@@ -28,38 +27,36 @@ public class Fruit {
 		this.size_1 = size_1;
 	}
 
+	 
+
 	/**
-	 * @return the shape_1
+	 * @return the shape_info
 	 */
-	//@JSONField(name = "shape_1")
-	public String getShape_1() {
-		return shape_1;
+	public String getShape_info() {
+		return shape_info;
 	}
 
 	/**
-	 * @param shape_1
-	 *            the shape_1 to set
+	 * @param shape_info the shape_info to set
 	 */
-	//@JSONField(name = "shape_1")
-	public void setShape_1(String shape_1) {
-		this.shape_1 = shape_1;
+	public void setShape_info(String shape_info) {
+		this.shape_info = shape_info;
 	}
 
 	/**
-	 * @return the color_1
+	 * @return the color_info
 	 */
-	//@JSONField(name = "color_1")
-	public String getColor_1() {
-		return color_1;
+	public String getColor_info() {
+		return color_info;
 	}
 
 	/**
-	 * @param color_1
-	 *            the color_1 to set
+	 * @param color_info the color_info to set
 	 */
-	//@JSONField(name = "color_1")
-	public void setColor_1(String color_1) {
-		this.color_1 = color_1;
+	public void setColor_info(String color_info) {
+		this.color_info = color_info;
 	}
+
+	 
 
 }
