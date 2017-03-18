@@ -7,17 +7,21 @@
  */
 package org.webservice.weather.stub;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 *  WeatherWebServiceStub java implementation
 */
-
+@SuppressWarnings({"rawtypes","unused","unchecked","serial"})
 public class WeatherWebServiceStub extends org.apache.axis2.client.Stub {
 	protected org.apache.axis2.description.AxisOperation[] _operations;
 
 	// hashmaps to keep the fault mapping
-	private java.util.HashMap faultExceptionNameMap = new java.util.HashMap();
-	private java.util.HashMap faultExceptionClassNameMap = new java.util.HashMap();
-	private java.util.HashMap faultMessageMap = new java.util.HashMap();
+	
+	private Map faultExceptionNameMap = new HashMap();
+	private Map faultExceptionClassNameMap = new HashMap();
+	private Map faultMessageMap = new HashMap();
 
 	private static int counter = 0;
 
@@ -760,7 +764,7 @@ public class WeatherWebServiceStub extends org.apache.axis2.client.Stub {
 	 * A utility method that copies the namepaces from the SOAPEnvelope
 	 */
 	private java.util.Map getEnvelopeNamespaces(org.apache.axiom.soap.SOAPEnvelope env) {
-		java.util.Map returnMap = new java.util.HashMap();
+		java.util.Map returnMap = new HashMap();
 		java.util.Iterator namespaceIterator = env.getAllDeclaredNamespaces();
 		while (namespaceIterator.hasNext()) {
 			org.apache.axiom.om.OMNamespace ns = (org.apache.axiom.om.OMNamespace) namespaceIterator.next();

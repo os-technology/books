@@ -10,7 +10,7 @@ package org.webservice.weather.stub;
 /*
 *  WeatherWSStub java implementation
 */
-
+@SuppressWarnings({ "rawtypes", "unused", "unchecked", "serial" })
 public class WeatherWSStub extends org.apache.axis2.client.Stub {
 	protected org.apache.axis2.description.AxisOperation[] _operations;
 
@@ -317,7 +317,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
 			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(),
-					org.webservice.weather.stub.WeatherWSStub.GetWeatherResponse.class, getEnvelopeNamespaces(_returnEnv));
+					org.webservice.weather.stub.WeatherWSStub.GetWeatherResponse.class,
+					getEnvelopeNamespaces(_returnEnv));
 
 			return (org.webservice.weather.stub.WeatherWSStub.GetWeatherResponse) object;
 
@@ -435,7 +436,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
 			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(),
-					org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse.class, getEnvelopeNamespaces(_returnEnv));
+					org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse.class,
+					getEnvelopeNamespaces(_returnEnv));
 
 			return (org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse) object;
 
@@ -553,7 +555,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
 			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(),
-					org.webservice.weather.stub.WeatherWSStub.GetRegionCountryResponse.class, getEnvelopeNamespaces(_returnEnv));
+					org.webservice.weather.stub.WeatherWSStub.GetRegionCountryResponse.class,
+					getEnvelopeNamespaces(_returnEnv));
 
 			return (org.webservice.weather.stub.WeatherWSStub.GetRegionCountryResponse) object;
 
@@ -671,7 +674,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 			org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
 
 			java.lang.Object object = fromOM(_returnEnv.getBody().getFirstElement(),
-					org.webservice.weather.stub.WeatherWSStub.GetRegionDatasetResponse.class, getEnvelopeNamespaces(_returnEnv));
+					org.webservice.weather.stub.WeatherWSStub.GetRegionDatasetResponse.class,
+					getEnvelopeNamespaces(_returnEnv));
 
 			return (org.webservice.weather.stub.WeatherWSStub.GetRegionDatasetResponse) object;
 
@@ -7716,8 +7720,9 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(org.webservice.weather.stub.WeatherWSStub.GetSupportCityDatasetResponse param,
-			boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(
+			org.webservice.weather.stub.WeatherWSStub.GetSupportCityDatasetResponse param, boolean optimizeContent)
+			throws org.apache.axis2.AxisFault {
 
 		try {
 			return param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityDatasetResponse.MY_QNAME,
@@ -7728,8 +7733,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(org.webservice.weather.stub.WeatherWSStub.GetWeather param, boolean optimizeContent)
-			throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(org.webservice.weather.stub.WeatherWSStub.GetWeather param,
+			boolean optimizeContent) throws org.apache.axis2.AxisFault {
 
 		try {
 			return param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetWeather.MY_QNAME,
@@ -7764,8 +7769,9 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse param,
-			boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(
+			org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse param, boolean optimizeContent)
+			throws org.apache.axis2.AxisFault {
 
 		try {
 			return param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse.MY_QNAME,
@@ -7836,8 +7842,9 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 
 	}
 
-	private org.apache.axiom.om.OMElement toOM(org.webservice.weather.stub.WeatherWSStub.GetSupportCityStringResponse param,
-			boolean optimizeContent) throws org.apache.axis2.AxisFault {
+	private org.apache.axiom.om.OMElement toOM(
+			org.webservice.weather.stub.WeatherWSStub.GetSupportCityStringResponse param, boolean optimizeContent)
+			throws org.apache.axis2.AxisFault {
 
 		try {
 			return param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityStringResponse.MY_QNAME,
@@ -7855,8 +7862,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody().addChild(
-					param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityDataset.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param
+					.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityDataset.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7873,8 +7880,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody()
-					.addChild(param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetWeather.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(
+					param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetWeather.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7891,8 +7898,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody()
-					.addChild(param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionProvince.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(
+					param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionProvince.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7909,8 +7916,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody()
-					.addChild(param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionCountry.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(
+					param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionCountry.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7927,8 +7934,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody()
-					.addChild(param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionDataset.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(
+					param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetRegionDataset.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7945,8 +7952,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-			emptyEnvelope.getBody()
-					.addChild(param.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityString.MY_QNAME, factory));
+			emptyEnvelope.getBody().addChild(param
+					.getOMElement(org.webservice.weather.stub.WeatherWSStub.GetSupportCityString.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -7984,7 +7991,8 @@ public class WeatherWSStub extends org.apache.axis2.client.Stub {
 
 			if (org.webservice.weather.stub.WeatherWSStub.GetWeather.class.equals(type)) {
 
-				return org.webservice.weather.stub.WeatherWSStub.GetWeather.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+				return org.webservice.weather.stub.WeatherWSStub.GetWeather.Factory
+						.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
 
