@@ -9,6 +9,32 @@ package org.webservice.weather.beans;
  */
 public class WeatherWebServiceBean {
 
+	public WeatherWebServiceBean(String[] s) {
+		this.attrProvince = s[0];
+		this.inputCity = s[1];
+		this.cityNumber = s[2];
+		this.numPic = s[3];
+		this.dateTime = s[4];
+		this.Temperature = s[5];
+		this.todayInfo = s[6];
+		this.todayWindInfo = s[7];
+		this.todayWeaPic1 = s[8];
+		this.todayWeaPic2 = s[9];
+		this.todayWeatherInfo = s[10];
+		this.suggest = s[11];
+		this.todayTemperature = s[12];
+		this.tomorrowInfo = s[13];
+		this.tomorrowWindInfo = s[14];
+		this.tomorrowWeaPic1 = s[15];
+		this.tomorrowWeaPic2 = s[16];
+		this.tomorrowTemperature = s[17];
+		this.threeDayInfo = s[18];
+		this.threeDayWindInfo = s[19];
+		this.threeDayWeaPic1 = s[20];
+		this.threeDayWeaPic2 = s[21];
+		this.location = s[22];
+	}
+
 	/**
 	 * str[0]所属省份
 	 */
@@ -537,34 +563,4 @@ public class WeatherWebServiceBean {
 		this.location = location;
 	}
 
-	/**
-	 * 将得到的天气信息进行数据初始化
-	 * 
-	 * @param s
-	 */
-	public void getInstance(String[] s) {
-		this.attrProvince = s[0];
-		this.inputCity = s[1];
-		this.cityNumber = s[2];
-		this.numPic = s[3];
-		this.dateTime = s[4];
-		this.Temperature = s[5];
-		this.todayInfo = s[6];
-		this.todayWindInfo = s[7];
-		this.todayWeaPic1 = s[8];
-		this.todayWeaPic2 = s[9];
-		this.todayWeatherInfo = s[10];
-		this.suggest = s[11];
-		this.todayTemperature = s[12];
-		this.tomorrowInfo = s[13];
-		this.tomorrowWindInfo = s[14];
-		this.tomorrowWeaPic1 = s[15];
-		this.tomorrowWeaPic2 = s[16];
-		this.tomorrowTemperature = s[17];
-		this.threeDayInfo = s[18];
-		this.threeDayWindInfo = s[19];
-		this.threeDayWeaPic1 = s[20];
-		this.threeDayWeaPic2 = s[21];
-		this.location = s[22];
-	}
 }

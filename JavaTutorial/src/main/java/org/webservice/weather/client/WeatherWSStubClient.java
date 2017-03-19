@@ -217,7 +217,7 @@ public class WeatherWSStubClient extends WeatherBasic {
 	 * @param cityCode
 	 * @return
 	 */
-	public String[] getWeatherInfo(String city) {
+	public String[] getWeatherArray(String city) {
 		GetWeather weather = new GetWeather();
 		weather.setTheCityCode(city);
 		try {
@@ -228,9 +228,7 @@ public class WeatherWSStubClient extends WeatherBasic {
 
 			return result;
 		} catch (RemoteException e) {
-
 			System.out.println(e.toString());// org.apache.axis2.AxisFault:
-												// 服务器无法处理请求。 ---> 值不能为空。
 			return weatherException;
 		}
 	}
