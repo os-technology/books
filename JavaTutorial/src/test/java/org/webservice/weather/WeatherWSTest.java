@@ -7,14 +7,28 @@ import org.webservice.weather.client.WeatherWSStubClient;
 public class WeatherWSTest {
 	@Test
 	public void getWeatherDataTest() {
-		String[] str = new WeatherWSStubClient().getWeatherArray("北京");
+		String city = "威海";
+
+		String[] str = new WeatherWSStubClient().getWeatherArray(city);
 		// for(int i=0;i<str.length;i++){
 		// System.out.println(getName(str[i])+":"+getCode(str[i]));
 		// }
 		WeatherWSStubBean s = WeatherWSStubBean.getInstance(str);
-		System.out.println(s.getTodayInfo());
-		System.out.println(s.getTomorrowInfo());
-		System.out.println(s.getThreeInfo());
+		System.out.println(city + "天气如下：");
+		this.weatherData(s);
+		// System.out.println(s.getTodayInfo()+" "+s.get);
+		// System.out.println(s.getTomorrowInfo());
+		// System.out.println(s.getThreeInfo());
+		// System.out.println(s.getFourInfo());
+		// System.out.println(s.getFiveInfo());
 
 	}
+
+	private void weatherData(WeatherWSStubBean s) {
+		System.out.println(s.getAirState());
+		System.out.println(s.getIndex());
+		System.out.println(s.tomorrowData());
+
+	}
+
 }

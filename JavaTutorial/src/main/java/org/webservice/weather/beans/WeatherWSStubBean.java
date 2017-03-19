@@ -780,4 +780,25 @@ public class WeatherWSStubBean {
 
 		return ws;
 	}
+
+	public String todayData() {
+		return getTodayInfo() + " " + getTodayTemperature() + " " + getTodayWindInfo();
+	}
+
+	public String tomorrowData() {
+		return getTomorrowInfo() + " " + getTomorrowTemperature() + " " + getTomorrowWindInfo();
+	}
+
+	public String threeData() {
+		return getThreeInfo() + " " + getThreeTemperature() + " " + getThreeWindInfo();
+	}
+
+	public String fourData() {
+		return getFourInfo() + " " + getFourTemperature() + " " + getFourWindInfo();
+	}
+
+	public String fiveData() {
+		return getFiveInfo() + " " + getFiveTemperature() + " " + getFiveWindInfo();
+	}
+
 }
