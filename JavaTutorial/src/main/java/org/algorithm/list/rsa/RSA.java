@@ -1,8 +1,8 @@
-package org.sign.rsa;
+package org.algorithm.list.rsa;
 
 import javax.crypto.Cipher;
 
-import org.sign.base64.Base64;
+import org.algorithm.list.base64.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

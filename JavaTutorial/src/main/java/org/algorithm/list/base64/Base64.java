@@ -4,7 +4,7 @@
  * author: shiqun.shi@Lakala.com
  */
 
-package org.sign.base64;
+package org.algorithm.list.base64;
 
 import java.io.UnsupportedEncodingException;
 

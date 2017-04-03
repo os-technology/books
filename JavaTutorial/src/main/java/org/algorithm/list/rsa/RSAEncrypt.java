@@ -1,4 +1,4 @@
-package org.sign.rsa;
+package org.algorithm.list.rsa;
 
 import java.io.BufferedReader;
 import java.io.IOException;
