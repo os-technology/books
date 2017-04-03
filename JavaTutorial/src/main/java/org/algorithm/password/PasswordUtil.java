@@ -22,17 +22,6 @@ public class PasswordUtil {
 	}
 
 	/**
-	 * 获得UUID
-	 * 
-	 * @return
-	 * @Author yujinshui
-	 * @createTime 2017年4月3日 下午9:48:33
-	 */
-	private static String uuid() {
-		return getSalt();
-	}
-
-	/**
 	 * 获取加密盐
 	 * 
 	 * @return
