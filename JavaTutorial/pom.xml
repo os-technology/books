@@ -16,14 +16,19 @@
 		<poi.version>3.15</poi.version>
 	</properties>
 	<dependencies>
-	
-	<!-- oracle jdbc jar -->
-	<dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
+		</dependency>
+		<!-- oracle jdbc jar -->
+		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>11.2.0.3</version>
 		</dependency>
-	
+
 		<!-- office poi -->
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
