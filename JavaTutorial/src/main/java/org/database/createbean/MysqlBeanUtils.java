@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,46 +14,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.database.createbean.JavaBeanUtils.MySql;
-import org.database.createbean.JavaBeanUtils.Ora;
-
 /**
  * 
  * MySQL数据库Javabean创建
  * 
  * @author yujinshui
  * @createTime 2017年4月4日 上午10:07:22
- */
+ */@SuppressWarnings({"rawtypes","unchecked"})
 public class MysqlBeanUtils {
-	private PreparedStatement ps = null;
-	private ResultSet rs = null;
 	private static Connection con = null;
-	private CallableStatement cst = null;
-
-	static class Ora {
-		static final String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
-		static final String DATABASE_URL = "jdbc:oracle:thin:@172.30.21.43:1521:orcl";
-		static final String DATABASE_USER = "lxjr_main";
-		static final String DATABASE_PASSWORD = "q1w2e3r4";
-		static final String DATABASE_TABLE = "t_pay_batch"; // 需要生成的表名
-	}
 
 	static class MySql {
 		static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 		static final String DATABASE_URL = "jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8";
 		static final String DATABASE_USER = "root";
 		static final String DATABASE_PASSWORD = "root";
-	}
-
-	public static Connection getOracleConnection() {
-		try {
-			Class.forName(Ora.DRIVER_CLASS);
-			con = DriverManager.getConnection(Ora.DATABASE_URL, Ora.DATABASE_USER, Ora.DATABASE_PASSWORD);
-			return con;
-		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
-		}
-		return con;
 	}
 
 	public static Connection getMySqlConnection() {
@@ -74,8 +47,6 @@ public class MysqlBeanUtils {
 		List<Map> list = new ArrayList<Map>();
 		try {
 			DatabaseMetaData m_DBMetaData = con.getMetaData();
-			// getColumns(java.lang.String catalog, java.lang.String
-			// schema,java.lang.String table, java.lang.String col)
 			ResultSet colrs = m_DBMetaData.getColumns(null, MySql.DATABASE_USER.toUpperCase(), Table.toUpperCase(),
 					"%");
 			while (colrs.next()) {
@@ -84,12 +55,10 @@ public class MysqlBeanUtils {
 				String columnName = colrs.getString("COLUMN_NAME");
 				String columnType = colrs.getString("TYPE_NAME");
 				int datasize = colrs.getInt("COLUMN_SIZE");
-				int digits = colrs.getInt("DECIMAL_DIGITS");
-				int nullable = colrs.getInt("NULLABLE");
+//				int digits = colrs.getInt("DECIMAL_DIGITS");
+//				int nullable = colrs.getInt("NULLABLE");
 				String remarks = colrs.getString("REMARKS");
 
-				// System.out.println(columnName+" "+columnType+" "+datasize+"
-				// "+digits+" "+ nullable);
 				map.put("columnName", columnName);
 				map.put("columnType", columnType);
 				map.put("datasize", datasize);
@@ -97,7 +66,7 @@ public class MysqlBeanUtils {
 				list.add(map);
 
 			}
-			while (colrs.next()) {
+			while (colrs.next()) {//搞清楚为啥此部分不再进行调用
 				System.out.print("列名：" + colrs.getString("COLUMN_NAME"));
 				System.out.print("  数据类型是：" + colrs.getString("DATA_TYPE"));
 				System.out.print("  类型名称是：" + colrs.getString("TYPE_NAME"));
@@ -257,6 +226,7 @@ public class MysqlBeanUtils {
 	 * @Author yujinshui
 	 * @createTime 2017年4月1日 上午11:03:22
 	 */
+	
 	private static void createJavaBean(String tables) throws IOException, FileNotFoundException {
 		// JavaBeanUtils.sysoutOracleTCloumns("pexam_items_title", "his_yhkf");
 		try {
