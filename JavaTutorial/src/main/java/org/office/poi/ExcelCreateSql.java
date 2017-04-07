@@ -22,11 +22,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 
  * excel读取功能
  */
-public class ExcelReadTest {
+public class ExcelCreateSql {
 	/**
 	 * 
 	 * excel 文件读取
@@ -55,7 +57,33 @@ public class ExcelReadTest {
 
 		return listInfo;
 	}
+	/**
+	 * 读取Excel，并按照自定义格式输出
+	 * 
+	 * @param file
+	 * @param password
+	 * @return
+	 * @Author yujinshui
+	 * @createTime 2017年4月5日 下午6:50:25
+	 */
+	public List<StringBuffer> readExcelContent(File file, String password) {
 
+		Workbook wb = null;
+		List<StringBuffer> listInfo = null;
+		try {
+			wb = getWorkbook(file, password);
+			listInfo = sheetContentList(wb);
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (GeneralSecurityException e) {
+			e.printStackTrace();
+		}
+
+		return listInfo;
+	}
 	/**
 	 * 
 	 * 得到文件的Workbook
@@ -147,7 +175,7 @@ public class ExcelReadTest {
 			Sheet sheet = wb.getSheetAt(i);
 			System.out.println("**********************************" + sheet.getSheetName()
 					+ "************************************");
-			List<Object[]> contents = outputContent1(sheet);
+			List<Object[]> contents = outputContentList(sheet);
 			listInfo.add(contents);
 
 			System.out.println("********************end*************************");
@@ -155,7 +183,24 @@ public class ExcelReadTest {
 		return listInfo;
 
 	}
+	public List<StringBuffer> sheetContentList(Workbook wb) {
 
+		List<StringBuffer> listInfo = new ArrayList<>();
+
+		int sheetCount = wb.getNumberOfSheets();// 得到sheet表的个数
+		for (int i = 0; i < sheetCount; i++) {
+
+			Sheet sheet = wb.getSheetAt(i);
+			System.out.println("**********************************" + sheet.getSheetName()
+					+ "************************************");
+			 StringBuffer contents = outputPointContent(sheet);
+			listInfo.add(contents);
+
+			System.out.println("********************end*************************");
+		}
+		return listInfo;
+
+	}
 	/**
 	 * 
 	 * 内容输出部分
@@ -190,11 +235,10 @@ public class ExcelReadTest {
 	 * @Author Yu Jinshui
 	 * @createTime 2015年1月13日 下午1:42:40
 	 */
-	public List<Object[]> outputContent1(Sheet sheet) {
+	public List<Object[]> outputContentList(Sheet sheet) {
 
 		List<Object[]> contents = new ArrayList<Object[]>();
 		int flag = 0;
-		StringBuffer buffer = new StringBuffer();
 		Iterator<Row> rator = sheet.iterator();
 		System.out.println("行数：" + sheet.getLastRowNum() + 1);
 		while (rator.hasNext()) {
@@ -206,16 +250,43 @@ public class ExcelReadTest {
 			while (rowCell.hasNext()) {
 				Cell cell = rowCell.next();
 				String infoValue = getValue(cell);
-				buffer.append(infoValue + " ");
 				cont[col] = infoValue;
-				System.out.print(infoValue);
 				col++;
 			}
-			System.out.println();
 			contents.add(cont);
 			flag++;
 		}
 		return contents;
+	}
+	/**
+	 * 输出指定格式内容，自定义格式
+	 * 
+	 * @param sheet
+	 * @return
+	 * @Author yujinshui
+	 * @createTime 2017年4月5日 下午6:46:18
+	 */
+	public StringBuffer outputPointContent(Sheet sheet) {
+
+		int flag = 0;
+		StringBuffer buffer = new StringBuffer();
+		Iterator<Row> rator = sheet.iterator();
+		System.out.println("行数：" + sheet.getLastRowNum() + 1);
+		while (rator.hasNext()) {
+			Row row = rator.next();
+			Iterator<Cell> rowCell = row.cellIterator();
+			int col = 0;
+			buffer.append("insert into BANK_BATCH_CODE (ID,BANK_NAME,BANK_BATCH_CODE) values(SEQ_BANK_BATCH_CODE.NEXTVAL");
+			while (rowCell.hasNext()) {
+				Cell cell = rowCell.next();
+				String infoValue = getValue(cell);
+				buffer.append(",'" + infoValue + "'");
+				col++;
+			}
+			buffer.append(");\r\n");
+			flag++;
+		}
+		return buffer;
 	}
 
 	private String getValue(Cell cell) {
@@ -248,7 +319,7 @@ public class ExcelReadTest {
 	}
 
 	public static void main(String[] args) {
-		ExcelReadTest excelRead = new ExcelReadTest();
+		ExcelCreateSql excelRead = new ExcelCreateSql();
 
 		ExcelWriteTest we = new ExcelWriteTest();
 
@@ -257,7 +328,8 @@ public class ExcelReadTest {
 
 		File file = new File(fileName);// Excel_1.xlsx
 		String password = "";
-		List<List<Object[]>> info = excelRead.readExcel(file, password);
+		 List<StringBuffer> info = excelRead.readExcelContent(file, password);
+		System.out.println(info);
 		// List<Object> sheetlist = excelRead.getSheetNames(file, password);
 
 		// String fileName2 = "f:/writeInfo.xls";
