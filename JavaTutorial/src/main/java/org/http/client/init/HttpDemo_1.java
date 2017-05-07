@@ -23,6 +23,8 @@ public class HttpDemo_1 {
 		httpGet.addHeader("nonce","9979e09d6bc44f1880cc9484c27d857b");
 		httpGet.addHeader("timestamp","1476756211867");
 		httpGet.addHeader("sign","omAIgsgOcpNnsQkiA5bcqBDMDnXHcIOZkxco1IGKvCa5E5V3xdMaTah3oWLFsTZdCTIV/06MqlTBOL6Vw9x2sYJLLx2lbsghd0oLbYFl9LJqG19VbeTYaDKn1O+xUX6cT2sk4tKrhiXmDcMx9AW8UN6bWK4CuSRAVsXh0w0Iajc=");
+		
+		
 		try {
 			HttpResponse response = httpclient.execute(httpGet);
 			HttpEntity entity = response.getEntity();
