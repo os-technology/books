@@ -1,0 +1,17 @@
+com/create/beans/lakala/mts/response/fundprodlist/Flexible.class
+com/create/beans/lakala/mts/response/fundtotal/BasicProd.class
+com/create/beans/lakala/mts/response/fundtotal/Validinsuprod.class
+com/create/beans/lakala/mts/response/fundtotal/DealProd.class
+com/create/beans/lakala/mts/response/fundtotal/Applyprod.class
+com/create/beans/lakala/mts/params/FundTotalQry.class
+com/create/beans/lakala/mts/response/fundtotal/FundTotalResponse.class
+com/create/beans/lakala/mts/params/ProdListQry.class
+com/create/beans/lakala/mts/response/fundprodlist/Prod.class
+com/create/beans/lakala/mts/params/FundTransferIn.class
+com/create/beans/lakala/mts/params/FundAccountQry.class
+com/create/beans/lakala/mts/response/MtsResult.class
+com/create/beans/lakala/mts/response/fundprodlist/ProdListQryResponse.class
+com/create/beans/lakala/mts/response/fundaccount/FundAccountResponse.class
+com/create/beans/lakala/mts/response/fundtotal/Validprod.class
+com/create/beans/lakala/mts/response/fundtransferin/FundTransferInResponse.class
+com/create/beans/lakala/mts/params/FundSignUp.class

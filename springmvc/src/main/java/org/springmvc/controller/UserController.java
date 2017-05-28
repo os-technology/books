@@ -1,6 +1,8 @@
 package org.springmvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +23,7 @@ public class UserController {
 	@RequestMapping("/user")
 	public String input(HttpServletRequest request) {
 		request.setAttribute("res", "张三");
-
+//		ClassPathXmlApplicationContext
 		return result;
 	}
 }

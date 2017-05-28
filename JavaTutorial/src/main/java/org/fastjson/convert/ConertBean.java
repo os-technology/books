@@ -31,7 +31,7 @@ public class ConertBean {
 	public static void main(String[] args) {
 //		String result = convert();
 //		System.out.println(result);
-		String text = "{\"color_info\":\"red\",\"shape_info\":\"很大\",\"place\":\"北京\"}";
+		String text = "{\"Color_info\":\"red\",\"Shape_Info\":\"很大\",\"PLACE\":\"北京\"}";
 		Apple ap = convertResultData(text,Apple.class);
 //		Apple ap = JSON.parseObject(text, Apple.class);
 		System.out.println(JSON.toJSONString(ap));
