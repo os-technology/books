@@ -31,11 +31,11 @@ public class Producer {
         DefaultMQProducer producer = new DefaultMQProducer("testProductGroup");
 
         producer.setNamesrvAddr("127.0.0.1:9876");
+//        producer.setNamesrvAddr("localhost:9876");
         producer.setInstanceName("Producer");
-
         producer.start();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             try {
                 {
                     Message msg = new Message("TopicTest1",// topic
