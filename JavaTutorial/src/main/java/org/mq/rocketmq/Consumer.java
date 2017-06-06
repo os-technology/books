@@ -7,6 +7,7 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.message.MessageExt;
 
+import java.io.*;
 import java.util.List;
 
 /**
@@ -33,18 +34,21 @@ public class Consumer {
          */
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(
                 "ConsumerGroupName");
-        consumer.setNamesrvAddr("127.0.0.1:9876");
+        consumer.setNamesrvAddr("172.30.21.43:9876");
+//        consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.setInstanceName("Consumber");
 
         /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
          */
+        consumer.subscribe("xdPrdOrderMsgTopic", "xdPrdOrderMsgTag");
         consumer.subscribe("TopicTest1", "TagA || TagC || TagD");
         /**
          * 订阅指定topic下所有消息<br>
          * 注意：一个consumer对象可以订阅多个topic
          */
         consumer.subscribe("TopicTest2", "*");
+        consumer.subscribe("TopicTest3", "*");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
@@ -72,6 +76,17 @@ public class Consumer {
                     }
                 } else if (msg.getTopic().equals("TopicTest2")) {
                     System.out.println(new String(msg.getBody()));
+                } else if (msg.getTopic().equals("xdPrdOrderMsgTopic")) {
+//                    System.out.println(new String(msg.getBody()));
+                    try {
+                        Object obj = deSerialize(msg.getBody());
+                        System.out.println(new String((byte[]) obj));
+//                        System.out.println(new String(((byte[])deSerialize(msg.getBody()))));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -85,5 +100,75 @@ public class Consumer {
 
         System.out.println("Consumer Started.");
     }
+
+
+    public static byte[] getByte(Object list) {
+        byte[] bt=null;
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+
+        try{
+            if(list!=null)
+            {
+                ObjectOutputStream  objos=new ObjectOutputStream(baos);
+                objos.writeObject(list);
+                bt=baos.toByteArray();
+            }
+        }catch(Exception e)
+        {
+            bt=(byte[])null;
+            e.printStackTrace();
+
+        }
+        return bt;
+    }
+
+
+    /**
+     * 反序列化
+     * @param byteArray
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static Object deSerialize(byte[] byteArray) throws IOException,
+            ClassNotFoundException {
+        ByteArrayInputStream bos = null;
+        ObjectInputStream ois = null;
+        Object obj = null;
+        try {
+            bos = new ByteArrayInputStream(byteArray);
+            ois = new ObjectInputStream(bos);
+            obj = ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        } catch (ClassNotFoundException e) {
+
+            throw e;
+        } finally {
+            closeInputStream(bos, ois);
+        }
+        return obj;
+    }
+
+
+    private static void closeInputStream(ByteArrayInputStream bos,
+                                         ObjectInputStream ois) throws IOException {
+        if (bos != null) {
+            try {
+                bos.close();
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        if (ois != null) {
+            try {
+                ois.close();
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+    }
+
 
 }
