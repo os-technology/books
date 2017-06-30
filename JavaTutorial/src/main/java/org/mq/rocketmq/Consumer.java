@@ -21,7 +21,8 @@ import java.util.List;
 
 public class Consumer {
 
-
+private static final String addr = "172.30.21.42:6380";
+//private static final String addr = "172.30.21.43:9876";
     /**
      * 当前例子是PushConsumer用法，使用方式给用户感觉是消息从RocketMQ服务器推到了应用客户端。<br>
      * 但是实际PushConsumer内部是使用长轮询Pull方式从MetaQ服务器拉消息，然后再回调用户Listener方法<br>
@@ -34,7 +35,7 @@ public class Consumer {
          */
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(
                 "ConsumerGroupName");
-        consumer.setNamesrvAddr("172.30.21.43:9876");
+        consumer.setNamesrvAddr(addr);
 //        consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.setInstanceName("Consumber");
 

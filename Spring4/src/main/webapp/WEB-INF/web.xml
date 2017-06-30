@@ -28,25 +28,33 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-	<context-param>
+	<!-- <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:springmvc-config.xml
 		</param-value>
 	</context-param>
 	<servlet>
-		<servlet-name>springmvc</servlet-name><!-- 该处名称与对应的spring配置文件前缀必须相同 -->
+		<servlet-name>springmvc</servlet-name>该处名称与对应的spring配置文件前缀必须相同
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:springmvc-servlet.xml</param-value>
 		</init-param>
-		<!-- <load-on-startup>1</load-on-startup> -->
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+ -->
+	<servlet>
+	<servlet-name>websocket</servlet-name>
+	<servlet-class>com.start.spring4.websocket.HelloWebSocketServlet</servlet-class>
+	</servlet>
+<servlet-mapping>
+		<servlet-name>websocket</servlet-name>
+		<url-pattern>/websocket</url-pattern>
+	</servlet-mapping>
 </web-app>
