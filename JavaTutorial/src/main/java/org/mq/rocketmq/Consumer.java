@@ -1,5 +1,6 @@
 package org.mq.rocketmq;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -21,8 +22,10 @@ import java.util.List;
 
 public class Consumer {
 
-private static final String addr = "172.30.21.42:6380";
+    private static final String addr = "172.30.21.41:9876;172.30.21.42:9876";
+    private static int i = 0;
 //private static final String addr = "172.30.21.43:9876";
+
     /**
      * 当前例子是PushConsumer用法，使用方式给用户感觉是消息从RocketMQ服务器推到了应用客户端。<br>
      * 但是实际PushConsumer内部是使用长轮询Pull方式从MetaQ服务器拉消息，然后再回调用户Listener方法<br>
@@ -42,14 +45,13 @@ private static final String addr = "172.30.21.42:6380";
         /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
          */
-        consumer.subscribe("xdPrdOrderMsgTopic", "xdPrdOrderMsgTag");
-        consumer.subscribe("TopicTest1", "TagA || TagC || TagD");
+        consumer.subscribe("mqtest_topic", "mqtest_tag || TagC || TagD");
         /**
          * 订阅指定topic下所有消息<br>
          * 注意：一个consumer对象可以订阅多个topic
          */
-        consumer.subscribe("TopicTest2", "*");
-        consumer.subscribe("TopicTest3", "*");
+//        consumer.subscribe("TopicTest2", "*");
+//        consumer.subscribe("TopicTest3", "*");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
@@ -60,29 +62,13 @@ private static final String addr = "172.30.21.42:6380";
             public ConsumeConcurrentlyStatus consumeMessage(
                     List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 System.out.println(Thread.currentThread().getName()
-                        + " Receive New Messages: " + msgs.size());
+                        + " Receive New Messages: " + msgs.toString());
 
                 MessageExt msg = msgs.get(0);
-                if (msg.getTopic().equals("TopicTest1")) {
-                    // 执行TopicTest1的消费逻辑
-                    if (msg.getTags() != null && msg.getTags().equals("TagA")) {
-                        // 执行TagA的消费
-                        System.out.println(new String(msg.getBody()));
-                    } else if (msg.getTags() != null
-                            && msg.getTags().equals("TagC")) {
-                        // 执行TagC的消费
-                    } else if (msg.getTags() != null
-                            && msg.getTags().equals("TagD")) {
-                        // 执行TagD的消费
-                    }
-                } else if (msg.getTopic().equals("TopicTest2")) {
-                    System.out.println(new String(msg.getBody()));
-                } else if (msg.getTopic().equals("xdPrdOrderMsgTopic")) {
-//                    System.out.println(new String(msg.getBody()));
+                if (msg.getTopic().equals("mqtest_topic")) {
                     try {
                         Object obj = deSerialize(msg.getBody());
-                        System.out.println(new String((byte[]) obj));
-//                        System.out.println(new String(((byte[])deSerialize(msg.getBody()))));
+                        System.out.println("输出结果：" + JSON.toJSONString(obj));
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {
@@ -104,19 +90,17 @@ private static final String addr = "172.30.21.42:6380";
 
 
     public static byte[] getByte(Object list) {
-        byte[] bt=null;
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        byte[] bt = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        try{
-            if(list!=null)
-            {
-                ObjectOutputStream  objos=new ObjectOutputStream(baos);
+        try {
+            if (list != null) {
+                ObjectOutputStream objos = new ObjectOutputStream(baos);
                 objos.writeObject(list);
-                bt=baos.toByteArray();
+                bt = baos.toByteArray();
             }
-        }catch(Exception e)
-        {
-            bt=(byte[])null;
+        } catch (Exception e) {
+            bt = (byte[]) null;
             e.printStackTrace();
 
         }
@@ -126,6 +110,7 @@ private static final String addr = "172.30.21.42:6380";
 
     /**
      * 反序列化
+     *
      * @param byteArray
      * @return
      * @throws IOException
