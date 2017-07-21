@@ -2,6 +2,9 @@ package org.number;
 
 import java.math.BigDecimal;
 
+/**
+ * test
+ */
 public class Num {
 
 	public static void main(String[] args) {
