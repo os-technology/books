@@ -21,33 +21,24 @@ import java.util.ArrayList;
 
 public class HtmlUtil {
 
-    /**
-     * @param url           网站地址
-     * @param urlPageSuffix 网址页码和后缀名
-     * @return
-     */
-    public static StringBuffer getStringFromUrl(String url, String urlPageSuffix) {
 
-
-        return null;
-
+    public static String getHtmlByUrl(String webSiteUrl){
+        return getHtmlByUrl(webSiteUrl,"UTF-8");
     }
-
-
     /**
      * 获取网站源码[核心方法1]
      *
      * @param webSiteUrl 网站地址
      * @return
      */
-    public static String getHtmlByUrl(String webSiteUrl) {
+    public static String getHtmlByUrl(String webSiteUrl,String encoding) {
         StringBuffer buf = new StringBuffer();
 
         try {
 
             URL url = new URL(webSiteUrl);
             InputStream is = url.openStream();
-            InputStreamReader isr = new InputStreamReader(is);
+            InputStreamReader isr = new InputStreamReader(is,encoding);
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             while (true) {

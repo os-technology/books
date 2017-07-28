@@ -83,7 +83,7 @@ public class HTMLParser {
      * @param html
      * @return
      */
-    public String getName(String html) {
+    public String getName(String html,String encoding) {
         String htmlStart = "<div class=\"co_area2\">";
         String htmlEnd = "</p> <br><center></center>";
         String bStr = "<font color=#07519a>";
@@ -92,11 +92,12 @@ public class HTMLParser {
         ArrayList<String> names = this.getAllUrlFromHTML("", html, htmlStart,
                 htmlEnd, bStr, eStr);
         if (names.size() > 0)
-            try {
-                return new String(names.get(0).getBytes(), "GBK");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+            return names.get(0);
+//            try {
+//                return new String(names.get(0).getBytes(), encoding);
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
         return "";
     }
 }

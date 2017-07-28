@@ -8,20 +8,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class UrlParse {
+
+    public String getHtmlByUrl(String u){
+        return getHtmlByUrl(u,"UTF-8");
+    }
     /**
      * 获取网站源码[核心方法1]
      *
      * @param u 网站地址
      * @return
      */
-    public String getHtmlByUrl(String u) {
+    public String getHtmlByUrl(String u,String encoding) {
         StringBuffer buf = new StringBuffer();
 
         try {
 
             URL url = new URL(u);
             InputStream is = url.openStream();
-            InputStreamReader isr = new InputStreamReader(is);
+            InputStreamReader isr = new InputStreamReader(is,encoding);
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             while (true) {

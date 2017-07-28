@@ -32,15 +32,12 @@ public class HtmlUtilTest {
 
         HtmlFilterDataRequest request = new HtmlFilterDataRequest();
 
-        request.setUrl("http://www.kmeiju.net/archives/1591.html")
+        request.setUrl("http://www.fzbyy.cc/Dianshiju/146089.html")
                 .setUrlPageSuffix("")
-                .setHtmlStartRange("<table class=\"table\">\n" +
-                        "<tbody>")
-                .setHtmlEndRange("</tbody>\n" +
-                        "</table>\n" +
-                        "<h2>高清无字幕</h2>")
-                .setTranslateStart("<td><a href=\"")
-                .setTranslateEnd("\" target=\"_blank\">");
+                .setHtmlStartRange("<div id=\"yjishu2\">\n")
+                .setHtmlEndRange("<script>echoDown(1);</script>")
+                .setTranslateStart("\"><a href=\"")
+                .setTranslateEnd("\" title=\"第");
 
 
         return request;

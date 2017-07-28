@@ -70,9 +70,9 @@ public class UrlTest {
 
         for (String url : urls) {
             buffer.append(url + "\r\n");
-            String htmlz = up.getHtmlByUrl(url);
+            String htmlz = up.getHtmlByUrl(url,"GBK");
             // System.out.println(hp.getName(htmlz) + "\n" + hp.getTel(htmlz));
-            buffer.append(hp.getName(htmlz) + "\r\n");
+            buffer.append(hp.getName(htmlz,"utf-8") + "\r\n");
             buffer.append(hp.getAddress(htmlz) + "\r\n");
             buffer.append("\r\n");
             i++;
