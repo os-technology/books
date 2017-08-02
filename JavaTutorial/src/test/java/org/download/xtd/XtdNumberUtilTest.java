@@ -23,8 +23,6 @@ import java.util.Date;
 public class XtdNumberUtilTest {
 
 
-
-
     @Test
     public void testGetCaiPiaoHtml() {
         HtmlFilterDataRequest request = getValueCaiPiao();
@@ -35,7 +33,7 @@ public class XtdNumberUtilTest {
         Assert.assertTrue(result.size() > 0);
         int i = 0;
         int stage = getFirstStage(html);//期号
-        String date = getToday()+"0";//日期格式，小于1000加0前缀
+        String date = getToday();//日期格式，小于1000加0前缀
         String format = "";//结果字符串拼接，后续处理以 \n 分割为数组
 
         for (String output : result) {
@@ -52,83 +50,113 @@ public class XtdNumberUtilTest {
         System.out.println(mats[0] + "  " + "初始数据");
 
         int time = 0;//倍投下标
-        int multiple[] = getMultiple(10);//倍投倍数值
+        int multiple[] = getMultipleType(10,true);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
         double maxMoney = 0;//最大投入金额
         BigDecimal initMoney = new BigDecimal(1.28);//初始投入金额
         BigDecimal winMoney = new BigDecimal(1.94);//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
-        int maxWinTime=0;//最大连赢次数
+        int maxWinTime = 0;//最大连赢次数
         int tmpWinTime = 0;//每阶段连赢次数
-        int maxLoseTime=0;//最大连挂次数
-        int tmpLoseTime=0;//每阶段连挂次数
+        int maxLoseTime = 0;//最大连挂次数
+        int tmpLoseTime = 0;//每阶段连挂次数
+        int allWinTime = 0;//本次统计总赢次数
+        int allLoseTime = 0;//本次统计总的输次数
         for (int m = 0; m < mats.length - 1; m++) {
-            String init = mats[m].substring(mats[m].length()-2, mats[m].length());
-            String compare = mats[m + 1].substring(mats[m].length()-2, mats[m + 1].length());
+            String init = mats[m].substring(mats[m].length() - 2, mats[m].length());
+            String compare = mats[m + 1].substring(mats[m].length() - 2, mats[m + 1].length());
 
             if (compareNumberIsTrue(init, compare)) {//赢
-                maxLoseTime = maxLoseTime>tmpLoseTime?maxLoseTime:tmpLoseTime;
-                if (time>0){
+                allWinTime++;
+
+                maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
+                if (time > 0) {
                     double inputMoney = getCalResult(initMoney.doubleValue(), multiple[time]);
-                    maxMoney = maxMoney>inputMoney?maxMoney:inputMoney;
-                    System.out.println(mats[m + 1] + "  " + "赢  1   "+inputMoney+"    "
-                            +getMoneyString((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time]))));
+                    maxMoney = maxMoney > inputMoney ? maxMoney : inputMoney;
+                    System.out.println(mats[m + 1] + "  " + "赢  1   " + inputMoney + "    "
+                            + getMoneyString((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time]))));
                     //盈利计算
                     incomeMoney = incomeMoney.add((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
 
-                }else{
-                    System.out.println(mats[m + 1] + "  " + "赢  1   "+getMoneyString(initMoney)+"    "+getMoneyString(winMoney.subtract(initMoney)));
+                } else {
+                    System.out.println(mats[m + 1] + "  " + "赢  1   " + getMoneyString(initMoney) + "    " + getMoneyString(winMoney.subtract(initMoney)));
                     //盈利计算
-                    incomeMoney =incomeMoney.add(winMoney.subtract(initMoney));
+                    incomeMoney = incomeMoney.add(winMoney.subtract(initMoney));
                 }
 
                 //重置操作
                 time = 0;
                 tmpWinTime++;
-                tmpLoseTime=0;
+                tmpLoseTime = 0;
             } else {//输
-                maxWinTime = maxWinTime>tmpWinTime?maxWinTime:tmpWinTime;
+                allLoseTime++;
 
-                System.out.println(mats[m + 1] + "  " + "输  0   "+getCalResult(initMoney.doubleValue(),multiple[time]));
+                maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
+
+                System.out.println(mats[m + 1] + "  " + "输  0   " + getCalResult(initMoney.doubleValue(), multiple[time]));
                 time++;
-                tmpWinTime=0;
+                tmpWinTime = 0;
                 tmpLoseTime++;
             }
 
         }
-        System.out.println("最大倍投金额(仅针对两个号码不同的情况得出的结果)："+maxMoney);
-        System.out.println("最大连赢次数："+maxWinTime);
-        System.out.println("最大连挂次数："+maxLoseTime);
-        System.out.println("总收益："+getMoneyString(incomeMoney));
+        System.out.println("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + maxMoney);
+        System.out.println("最大连赢次数：" + maxWinTime);
+        System.out.println("最大连挂次数：" + maxLoseTime);
+        System.out.println("总赢次数：" + allWinTime);
+        System.out.println("总输次数：" + allLoseTime);
+        System.out.println("总收益：" + getMoneyString(incomeMoney));
     }
 
-    /**{1,2,6,18,54,162,486}
+    private int[] getMultipleType(int t, boolean multiple) {
+        if (multiple) {
+            return getMultiple(t);
+        } else {
+            return getSingle(t);
+        }
+    }
+    /**单倍投注结果*/
+    private int[] getSingle(int t) {
+        int[] multi = new int[t];
+        for (int i = 0; i < t; i++) {
+            multi[i] = 1;
+        }
+        return multi;
+    }
+
+    /**
+     * {1,2,6,18,54,162,486}
      *
      * @param t 倍投次数
      * @return
      */
     private int[] getMultiple(int t) {
         int[] multi = new int[t];
-        for(int i=0;i<t;i++){
-            if (i==0){
+        for (int i = 0; i < t; i++) {
+            if (i == 0) {
                 multi[i] = 1;
-            }else if(i==1){
+            } else if (i == 1) {
                 multi[i] = 2;
-            }else{
-                multi[i] = multi[i-1]*3;
+            } else {
+                multi[i] = multi[i - 1] * 3;
             }
         }
         return multi;
     }
 
-    /**倍投计算*/
-    private double getCalResult(double init,double multiple){
+    /**
+     * 倍投计算
+     */
+    private double getCalResult(double init, double multiple) {
         BigDecimal result = new BigDecimal(init).multiply(new BigDecimal(multiple));
-        return result.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+        return result.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-    /**获取内容的第一次期号*/
-    private int getFirstStage(String html){
-        String start = "<td style=\"background:#fff;color:#333333;\"><b>"+getToday();
-        String result = html.substring(html.indexOf(start)+start.length(),html.indexOf("</b></td>"));
+
+    /**
+     * 获取内容的第一次期号
+     */
+    private int getFirstStage(String html) {
+        String start = "<td style=\"background:#fff;color:#333333;\"><b>20170731-" ;//+getToday();
+        String result = html.substring(html.indexOf(start) + start.length(), html.indexOf("</b></td>"));
         return Integer.valueOf(result);
     }
 
@@ -147,12 +175,13 @@ public class XtdNumberUtilTest {
         return bool;
     }
 
-    private double getMoneyString(BigDecimal inputMoney){
-        return inputMoney.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+    private double getMoneyString(BigDecimal inputMoney) {
+        return inputMoney.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-    private String getToday(){
+
+    private String getToday() {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        return format.format(new Date())+"-";
+        return format.format(new Date()) + "-";
     }
 
     public HtmlFilterDataRequest getValueCaiPiao() {
@@ -173,25 +202,6 @@ public class XtdNumberUtilTest {
 
     private String getHtml() {
         return "<table id=\"tltview\" style=\"width:1688px; \" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n" +
-                "<tbody>\n" +
-                "<th rowspan=\"2\">序号</th>\n" +
-                "<th rowspan=\"2\">期号</th>\n" +
-                "<th rowspan=\"2\" colspan=\"5\">开奖号码</th>\n" +
-                "<th colspan=\"10\"><div class=\"line\">万位</div></th>\n" +
-                "<th colspan=\"10\"><div class=\"line\">千位</div></th>\n" +
-                "<th colspan=\"10\"><div class=\"line\">百位</div></th>\n" +
-                "<th colspan=\"10\"><div class=\"line\">十位</div></th>\n" +
-                "<th colspan=\"10\"><div class=\"line\">个位</div></th>\n" +
-                "</tr>\n" +
-                "<tr style=\"background:#ffd200;color:#222222;height:25px;font-size:13px;\">\n" +
-                "    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>\n" +
-                "    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>\n" +
-                "    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>\n" +
-                "    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>\n" +
-                "    <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>\n" +
-                "</tr>\n" +
-                "<tr class=\"ylfx_content\">\n" +
-                "<td>1</td>\n" +
                 "<td style=\"background:#fff;color:#333333;\"><b>20170731-1146</b></td>\n" +
                 "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
                 "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
