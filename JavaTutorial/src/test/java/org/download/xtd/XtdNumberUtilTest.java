@@ -1,15 +1,9 @@
 package org.download.xtd;
 
-import org.chapter.databasic.thread.gao.Data;
 import org.download.util.HtmlFilterDataRequest;
-import org.download.util.HtmlUtil;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author yuijnshui@lxfintech.com
@@ -25,32 +19,21 @@ public class XtdNumberUtilTest {
 
     @Test
     public void testGetCaiPiaoHtml() {
-        HtmlFilterDataRequest request = getValueCaiPiao();
-//        String html = HtmlUtil.getHtmlByUrl(request.getUrl());
-        String html = getHtml();//HTML内容
-        ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
 
-        Assert.assertTrue(result.size() > 0);
-        int i = 0;
-        int stage = getFirstStage(html);//期号
-        String date = getToday();//日期格式，小于1000加0前缀
-        String format = "";//结果字符串拼接，后续处理以 \n 分割为数组
 
-        for (String output : result) {
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+//        houerFuShiKillTwoNum(mats);
+        fixNum(mats,1,"34567",null);
+    }
 
-            if (i % 5 == 0) {
-                String tmp = date + (stage++) + "  ";
-                format += "\n" + tmp;
-            }
-            format += output;
-            i++;
-        }
-
-        String[] mats = format.trim().split("\n");
+    /**
+     * 后二复式杀号
+     */
+    private void houerFuShiKillTwoNum(String[] mats) {
         System.out.println(mats[0] + "  " + "初始数据");
 
         int time = 0;//倍投下标
-        int multiple[] = getMultipleType(10,true);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
+        int multiple[] = getMultipleType(10, true);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
         double maxMoney = 0;//最大投入金额
         BigDecimal initMoney = new BigDecimal(1.28);//初始投入金额
         BigDecimal winMoney = new BigDecimal(1.94);//每次盈利金额
@@ -62,8 +45,8 @@ public class XtdNumberUtilTest {
         int allWinTime = 0;//本次统计总赢次数
         int allLoseTime = 0;//本次统计总的输次数
         for (int m = 0; m < mats.length - 1; m++) {
-            String init = mats[m].substring(mats[m].length() - 2, mats[m].length());
-            String compare = mats[m + 1].substring(mats[m].length() - 2, mats[m + 1].length());
+            String init = getSubNum(mats[m],2,2);
+            String compare = getSubNum(mats[m+1],2,2);
 
             if (compareNumberIsTrue(init, compare)) {//赢
                 allWinTime++;
@@ -99,6 +82,10 @@ public class XtdNumberUtilTest {
             }
 
         }
+        printResult(maxMoney, incomeMoney, maxWinTime, maxLoseTime, allWinTime, allLoseTime);
+    }
+
+    private void printResult(double maxMoney, BigDecimal incomeMoney, int maxWinTime, int maxLoseTime, int allWinTime, int allLoseTime) {
         System.out.println("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + maxMoney);
         System.out.println("最大连赢次数：" + maxWinTime);
         System.out.println("最大连挂次数：" + maxLoseTime);
@@ -107,6 +94,68 @@ public class XtdNumberUtilTest {
         System.out.println("总收益：" + getMoneyString(incomeMoney));
     }
 
+    /**
+     * 截取结果值个数
+     * @param inputValue 输入值
+     * @param startNum   截取开始位置(万，千，百，十，个 5 4 3 2 1)
+     * @param count      截取个数(1 2 3 4 5)
+     * @return
+     */
+    private String getSubNum(String inputValue, int startNum, int count) {
+
+        String value = inputValue.substring(inputValue.length()-startNum,inputValue.length()-(startNum-count));
+        return value;
+    }
+
+    @Test
+    public void testgetSubNum(){
+        System.out.println(getSubNum("12345",2,2));
+    }
+
+    /**
+     * 定码投注
+     *
+     * @param mats          开奖号码数组
+     * @param location      定码位置(5，4，3，2，1 万，千，百，十，个)
+     * @param array         选码数值组合
+     * @param multipleArray 倍数数组
+     */
+    private void fixNum(String[] mats, int location, String array, int[] multipleArray) {
+
+        int maxWinTime = 0;//最大连赢次数
+        int tmpWinTime = 0;//每阶段连赢次数
+        int maxLoseTime = 0;//最大连挂次数
+        int tmpLoseTime = 0;//每阶段连挂次数
+        for (String mat:mats){
+            String value = getSubNum(mat,location,1);
+            if (array.contains(value)){//赢
+
+                System.out.println(mat+" 赢 ");
+
+                maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
+                tmpWinTime++;
+                tmpLoseTime = 0;
+            }else{
+                System.out.println(mat+" 输 ");
+
+                maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
+                tmpWinTime = 0;
+                tmpLoseTime++;
+            }
+        }
+        System.out.println("固定数字投注模式  投注数字："+array);
+        System.out.println("最大连赢次数：" + maxWinTime);
+        System.out.println("最大连挂次数：" + maxLoseTime);
+    }
+
+
+    /**
+     * 倍投组合类型
+     *
+     * @param t
+     * @param multiple
+     * @return
+     */
     private int[] getMultipleType(int t, boolean multiple) {
         if (multiple) {
             return getMultiple(t);
@@ -114,7 +163,10 @@ public class XtdNumberUtilTest {
             return getSingle(t);
         }
     }
-    /**单倍投注结果*/
+
+    /**
+     * 单倍投注结果
+     */
     private int[] getSingle(int t) {
         int[] multi = new int[t];
         for (int i = 0; i < t; i++) {
@@ -151,15 +203,6 @@ public class XtdNumberUtilTest {
         return result.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    /**
-     * 获取内容的第一次期号
-     */
-    private int getFirstStage(String html) {
-        String start = "<td style=\"background:#fff;color:#333333;\"><b>20170731-" ;//+getToday();
-        String result = html.substring(html.indexOf(start) + start.length(), html.indexOf("</b></td>"));
-        return Integer.valueOf(result);
-    }
-
     //不相同，true，相同，false
     private boolean compareNumberIsTrue(String init, String compare) {
         char[] charValue = init.toCharArray();
@@ -179,10 +222,7 @@ public class XtdNumberUtilTest {
         return inputMoney.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    private String getToday() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        return format.format(new Date()) + "-";
-    }
+
 
     public HtmlFilterDataRequest getValueCaiPiao() {
 
@@ -197,712 +237,6 @@ public class XtdNumberUtilTest {
 
 
         return request;
-    }
-
-
-    private String getHtml() {
-        return "<table id=\"tltview\" style=\"width:1688px; \" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1146</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>2</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1147</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>3</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1148</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>4</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1149</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>5</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1150</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>6</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1151</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td>7</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1152</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>8</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1153</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>9</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1154</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>10</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1155</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>11</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1156</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>12</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1157</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>13</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1158</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>14</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1159</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>15</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1160</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>16</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1161</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>17</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1162</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>18</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1163</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>19</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1164</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>20</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1165</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>21</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1166</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>22</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1167</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>23</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1168</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>24</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1169</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>25</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1170</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td>26</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1171</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>27</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1172</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>28</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1173</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>29</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1174</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>30</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1175</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>31</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1176</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>32</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1177</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>33</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1178</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>34</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1179</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>35</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1180</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>36</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1181</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>37</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1182</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>38</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1183</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>39</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1184</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>40</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1185</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>41</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1186</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>42</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1187</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>43</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1188</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>44</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1189</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>45</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1190</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>46</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1191</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>47</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1192</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>48</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1193</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>49</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1194</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>50</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1195</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>51</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1196</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>52</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1197</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>53</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1198</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>54</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1199</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>55</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1200</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>56</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1201</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>57</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1202</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>58</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1203</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>59</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1204</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td>60</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1205</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>61</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1206</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>62</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1207</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>63</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1208</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>64</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1209</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>65</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1210</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>66</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1211</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>67</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1212</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>68</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1213</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>69</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1214</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>70</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1215</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>71</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1216</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>72</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1217</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>73</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1218</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>74</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1219</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>75</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1220</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td>76</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1221</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>77</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1222</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>78</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1223</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>79</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1224</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>80</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1225</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td>81</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1226</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td>82</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1227</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>83</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1228</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>84</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1229</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>85</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1230</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>86</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1231</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td>87</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1232</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td>88</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1233</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td>89</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1234</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>90</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1235</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>91</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1236</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>92</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1237</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td>93</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1238</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td>94</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1239</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td>95</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1240</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>96</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1241</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">2</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>97</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1242</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">0</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td>98</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1243</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">3</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">8</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">4</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>99</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1244</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">7</div></td>\n" +
-                "<td>100</td>\n" +
-                "<td style=\"background:#fff;color:#333333;\"><b>20170731-1245</b></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">9</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">6</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">1</div></td>\n" +
-                "<td class=\"ylfx_kjhm\"><div class=\"ball_color3\">5</div></td>\n" +
-                "\n" +
-                "<script type=\"text/javascript\">";
     }
 
 
