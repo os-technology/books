@@ -23,7 +23,7 @@ public class XtdNumberUtilTest {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
 //        houerFuShiKillTwoNum(mats);
-        fixNum(mats,1,"34567",null);
+        fixNum(mats, 1, "24579", null);
     }
 
     /**
@@ -35,8 +35,8 @@ public class XtdNumberUtilTest {
         int time = 0;//倍投下标
         int multiple[] = getMultipleType(10, true);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
         double maxMoney = 0;//最大投入金额
-        BigDecimal initMoney = new BigDecimal(1.28);//初始投入金额
-        BigDecimal winMoney = new BigDecimal(1.94);//每次盈利金额
+        BigDecimal initMoney = new BigDecimal(12.8);//初始投入金额
+        BigDecimal winMoney = new BigDecimal(19.4);//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
         int maxWinTime = 0;//最大连赢次数
         int tmpWinTime = 0;//每阶段连赢次数
@@ -45,8 +45,8 @@ public class XtdNumberUtilTest {
         int allWinTime = 0;//本次统计总赢次数
         int allLoseTime = 0;//本次统计总的输次数
         for (int m = 0; m < mats.length - 1; m++) {
-            String init = getSubNum(mats[m],2,2);
-            String compare = getSubNum(mats[m+1],2,2);
+            String init = getSubNum(mats[m], 2, 2);
+            String compare = getSubNum(mats[m + 1], 2, 2);
 
             if (compareNumberIsTrue(init, compare)) {//赢
                 allWinTime++;
@@ -82,10 +82,12 @@ public class XtdNumberUtilTest {
             }
 
         }
-        printResult(maxMoney, incomeMoney, maxWinTime, maxLoseTime, allWinTime, allLoseTime);
+        System.out.println("规则：后二复式，杀个位十位号码，投注共64注");
+        printResult(mats.length,maxMoney, incomeMoney, maxWinTime, maxLoseTime, allWinTime, allLoseTime);
     }
 
-    private void printResult(double maxMoney, BigDecimal incomeMoney, int maxWinTime, int maxLoseTime, int allWinTime, int allLoseTime) {
+    private void printResult(int stageNum,double maxMoney, BigDecimal incomeMoney, int maxWinTime, int maxLoseTime, int allWinTime, int allLoseTime) {
+        System.out.println("本次统计期数："+stageNum+"期");
         System.out.println("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + maxMoney);
         System.out.println("最大连赢次数：" + maxWinTime);
         System.out.println("最大连挂次数：" + maxLoseTime);
@@ -96,6 +98,7 @@ public class XtdNumberUtilTest {
 
     /**
      * 截取结果值个数
+     *
      * @param inputValue 输入值
      * @param startNum   截取开始位置(万，千，百，十，个 5 4 3 2 1)
      * @param count      截取个数(1 2 3 4 5)
@@ -103,13 +106,14 @@ public class XtdNumberUtilTest {
      */
     private String getSubNum(String inputValue, int startNum, int count) {
 
-        String value = inputValue.substring(inputValue.length()-startNum,inputValue.length()-(startNum-count));
+        String value = inputValue.substring(inputValue.length() - startNum, inputValue.length() - (startNum - count));
         return value;
     }
 
-    @Test
-    public void testgetSubNum(){
-        System.out.println(getSubNum("12345",2,2));
+
+    private String getNumLocation(int in){
+        String[] numArray = {"个位","十位","百位","千位","万位"};
+        return numArray[in-1];
     }
 
     /**
@@ -126,24 +130,26 @@ public class XtdNumberUtilTest {
         int tmpWinTime = 0;//每阶段连赢次数
         int maxLoseTime = 0;//最大连挂次数
         int tmpLoseTime = 0;//每阶段连挂次数
-        for (String mat:mats){
-            String value = getSubNum(mat,location,1);
-            if (array.contains(value)){//赢
+        for (String mat : mats) {
+            String value = getSubNum(mat, location, 1);
+            if (array.contains(value)) {//赢
 
-                System.out.println(mat+" 赢 ");
+                System.out.println(mat + " 赢 ");
 
                 maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
                 tmpWinTime++;
                 tmpLoseTime = 0;
-            }else{
-                System.out.println(mat+" 输 ");
+            } else {
+                System.out.println(mat + " 输 ");
 
                 maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
                 tmpWinTime = 0;
                 tmpLoseTime++;
             }
         }
-        System.out.println("固定数字投注模式  投注数字："+array);
+        System.out.println("选号位置："+getNumLocation(location));
+        System.out.println("统计期数："+mats.length+"期");
+        System.out.println("固定数字投注模式  投注数字：" + array);
         System.out.println("最大连赢次数：" + maxWinTime);
         System.out.println("最大连挂次数：" + maxLoseTime);
     }
@@ -196,7 +202,11 @@ public class XtdNumberUtilTest {
     }
 
     /**
-     * 倍投计算
+     * 倍投金额计算
+     *
+     * @param init     首次投入金额
+     * @param multiple 倍数
+     * @return
      */
     private double getCalResult(double init, double multiple) {
         BigDecimal result = new BigDecimal(init).multiply(new BigDecimal(multiple));
@@ -221,7 +231,6 @@ public class XtdNumberUtilTest {
     private double getMoneyString(BigDecimal inputMoney) {
         return inputMoney.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-
 
 
     public HtmlFilterDataRequest getValueCaiPiao() {

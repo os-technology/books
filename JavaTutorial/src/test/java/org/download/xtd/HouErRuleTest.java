@@ -1,5 +1,7 @@
 package org.download.xtd;
 
+import org.junit.Test;
+
 /**
  * 后二规则测试
  *
@@ -13,6 +15,41 @@ package org.download.xtd;
 
 public class HouErRuleTest {
 
+
+    @Test
+    public void testResult(){
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        compareNumResult(mats);
+    }
+
+    private void compareNumResult(String[] mats) {
+        int maxWinTime = 0;//最大连赢次数
+        int tmpWinTime = 0;//每阶段连赢次数
+        int maxLoseTime = 0;//最大连挂次数
+        int tmpLoseTime = 0;//每阶段连挂次数
+        int allWinTime = 0;//本次统计总赢次数
+        int allLoseTime = 0;//本次统计总的输次数
+        for (int m = 0; m < mats.length - 1; m++) {
+            String nums = NumberTools.getSubNum(mats[m], 2, 2);
+            if (getFuShiDaDiString().contains(nums)){
+                System.out.println(mats[m]+"  赢 1");
+
+                maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
+                tmpWinTime++;
+                tmpLoseTime = 0;
+            }else{
+                System.out.println(mats[m]+"  输 0");
+
+                maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
+                tmpWinTime = 0;
+                tmpLoseTime++;
+            }
+        }
+        System.out.println("投注模式：后二直选单式："+getFuShiDaDiString());
+        System.out.println("统计期数："+mats.length+"期");
+        System.out.println("最大连赢次数：" + maxWinTime);
+        System.out.println("最大连挂次数：" + maxLoseTime);
+    }
 
     /**
      * 后二复式大底
