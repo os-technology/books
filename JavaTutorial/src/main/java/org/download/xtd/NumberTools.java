@@ -87,6 +87,7 @@ public class NumberTools {
         printResult.append("本次统计期数：" + bean.getStageNum() + "期").append("\n");
         if (bean.getMaxMoney() != null && bean.getMaxMoney().intValue() != 0) {
             printResult.append("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + getMoneyString(bean.getMaxMoney())).append("\n");
+            printResult.append("最大投入总额："+getMoneyString(bean.getMaxMoney().add(bean.getMaxMoney().divide(new BigDecimal(2))))).append("\n");;
         }
         if (bean.getMaxWinTime() != null && bean.getMaxWinTime() != 0) {
             printResult.append("最大连赢次数：" + bean.getMaxWinTime()).append("\n");

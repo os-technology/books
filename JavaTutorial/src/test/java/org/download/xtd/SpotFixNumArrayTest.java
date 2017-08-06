@@ -18,7 +18,7 @@ public class SpotFixNumArrayTest {
     @Test
     public void testNumArray() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        fixNum(mats, 1, "24579", null);
+        fixNum(mats, 1, "12357", null);
     }
 
     /**
