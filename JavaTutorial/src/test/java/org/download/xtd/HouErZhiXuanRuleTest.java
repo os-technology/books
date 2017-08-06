@@ -24,7 +24,11 @@ public class HouErZhiXuanRuleTest {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
         compare_HouerZhiXuan_NumResult(mats, "111");
     }
-
+    @Test
+    public void test_TaiWanWuFenCai_Result() {
+        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        compare_HouerZhiXuan_NumResult(mats, "182");
+    }
     /**
      * 后二单式直选大底数据比对结果
      *

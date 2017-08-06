@@ -26,6 +26,13 @@ public class HouerFuShiKillTwoNumTest {
         houerFuShiKillTwoNum(mats, "111");
     }
 
+    @Test
+    public void testTaiWanWuFenCaiHtml() {
+        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        houerFuShiKillTwoNum(mats, "182");
+    }
+
+
     /**
      * 后二复式杀号
      */
