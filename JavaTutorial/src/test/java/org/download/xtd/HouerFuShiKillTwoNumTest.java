@@ -23,20 +23,24 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "111",2);
+        houerFuShiKillTwoNum(mats, "111", 2);
     }
 
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        houerFuShiKillTwoNum(mats, "182",2);
+        houerFuShiKillTwoNum(mats, "182", 2);
     }
 
 
     /**
      * 后二复式杀号
+     *
+     * @param mats        出号数组
+     * @param caiPiaoCode 彩票类型编码
+     * @param location    选号位置
      */
-    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode,int location) {
+    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode, int location) {
         StringBuilder dataBuilder = new StringBuilder();//数据builder
         StringBuilder printResult = new StringBuilder();//打印统计结果展示builder
 
