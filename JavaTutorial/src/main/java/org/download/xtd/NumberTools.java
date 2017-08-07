@@ -1,8 +1,10 @@
 package org.download.xtd;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.download.xtd.params.PrintDataBean;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,8 +102,12 @@ public class NumberTools {
         if (bean.getIncomeMoney() != null && bean.getIncomeMoney().intValue() != 0) {
             printResult.append("总收益：" + getMoneyString(bean.getIncomeMoney())).append("\n");
         }
+        printResult.append("统计时间："+getTodayDateTime());
     }
 
+    public static String getTodayDateTime(){
+        return DateFormatUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss");
+    }
 
     /**
      * 两个数字以上的比对操作

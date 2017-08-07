@@ -23,7 +23,7 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "111",5);
+        houerFuShiKillTwoNum(mats, "111",2);
     }
 
     @Test
