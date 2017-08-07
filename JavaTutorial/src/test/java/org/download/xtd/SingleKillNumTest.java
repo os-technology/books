@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * @Company: lxjr.com
  * @Created on 2017/8/6下午4:31
  */
-
+@Deprecated
 public class SingleKillNumTest {
 
     @Test

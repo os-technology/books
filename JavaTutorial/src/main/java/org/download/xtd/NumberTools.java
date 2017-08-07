@@ -1,5 +1,6 @@
 package org.download.xtd;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.download.xtd.params.PrintDataBean;
 
@@ -129,6 +130,32 @@ public class NumberTools {
             }
         }
         return bool;
+    }
+
+    public  static String selectSort(String inputNum){
+        String[] numList = inputNum.split(",| ");
+        //选择排序的优化
+        for(int i = 0; i < numList.length - 1; i++) {// 做第i趟排序
+            int k = i;
+            for(int j = k + 1; j < numList.length; j++){// 选最小的记录
+                if(Integer.valueOf(numList[j]) < Integer.valueOf(numList[k])){
+                    k = j; //记下目前找到的最小值所在的位置
+                }
+            }
+            //在内层循环结束，也就是找到本轮循环的最小的数以后，再进行交换
+            if(i != k){  //交换a[i]和a[k]
+                String temp = numList[i];
+                numList[i] = numList[k];
+                numList[k] = temp;
+            }
+        }
+
+        String out = "";
+        for (String num:numList){
+            out+=" "+num;
+        }
+
+        return out;
     }
 
 

@@ -23,9 +23,12 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "111", 2);
+        houerFuShiKillTwoNum(mats, "101", 2);
     }
 
+    /**
+     * 台湾五分彩
+     */
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();

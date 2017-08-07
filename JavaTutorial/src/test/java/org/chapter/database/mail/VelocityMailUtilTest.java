@@ -8,15 +8,24 @@ import org.chapter.databasic.mail.EmailConfig;
 import org.chapter.databasic.mail.VelocityMailUtil;
 import org.junit.Test;
 
+import javax.mail.MessagingException;
+
 public class VelocityMailUtilTest {
 	@Test
     public void testTableEmail() throws Exception {
+        for(int i=0;i<5;i++){
+            Thread.sleep(1000);
+            sendEmail();
+        }
+    }
+
+    private void sendEmail() throws MessagingException {
         EmailConfig config = new EmailConfig();
 
-        config.setTo(new String[]{"yujinshui@lxfintech.com"});
+        config.setTo(new String[]{"435468827@qq.com"});
 
         config.setTemplateName("mail_table.vm");
-        config.setSubject("Junit test");
+        config.setSubject("柴小溪，你好~");
         config.setModel(getContentTableMap1(config));
 
         VelocityMailUtil.sendHtmlMail(config);
@@ -40,10 +49,10 @@ public class VelocityMailUtilTest {
 
 //        String con  =JSON.toJSONString(config);
 //        content.add(JSONArray.parse(con));
-        map.put("header","table之前的内容");
-        map.put("tableName","table名称");
-        map.put("title", list);
-        map.put("text", content);
+        map.put("header","柴小溪，你好~");
+//        map.put("tableName","table名称");
+//        map.put("title", list);
+//        map.put("text", content);
         return map;
     }
 }

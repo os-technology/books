@@ -22,29 +22,79 @@ public class HouErZhiXuanRuleTest {
     @Test
     public void test_HouerZhiXuan_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        compare_HouerZhiXuan_NumResult(mats, "111");
+        compare_HouerZhiXuan_NumResult(mats, "111",new BigDecimal(0.1));
     }
+
+    @Test
+    public void testCollect_FenFenCai_NumList(){
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        String resultNumList = collectNumList(mats,"",2);
+        String output = NumberTools.selectSort(resultNumList);
+        System.out.println(output);
+    }
+
+    /**
+     * 台湾五分彩
+     */
     @Test
     public void test_TaiWanWuFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        compare_HouerZhiXuan_NumResult(mats, "182");
+        compare_HouerZhiXuan_NumResult(mats, "182",new BigDecimal(0.1));
     }
+
+    @Test
+    public void testCollect_TaiWanWuFenCai_NumList(){
+        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        String resultNumList = collectNumList(mats,"",2);
+        String output = NumberTools.selectSort(resultNumList);
+        System.out.println(output);
+    }
+
+
+
+    /**
+     *
+     * @param mats 出号内容
+     * @param collectType 收集类型，后二等，或者个位十位等
+     * @param num 从起始位置开始，收集个数如后二,两位
+     * @return
+     */
+    private String collectNumList(String[] mats, String collectType, int num) {
+        String numlist = "";
+
+        for (String mat:mats){
+            String nums = NumberTools.getSubNum(mat, 2, num);
+            if (numlist.contains(nums)){
+                continue;
+            }
+            if ("".equals(numlist)){
+                numlist = nums;
+            }else {
+                numlist += " " + nums;
+            }
+        }
+
+        return numlist;
+    }
+
     /**
      * 后二单式直选大底数据比对结果
      *
      * @param mats
      * @param caiPiaoCode 彩票编码
+     *                    @param moneyPattern 金额模式，1，0.1，0.01，0.001
+     *
      */
-    private void compare_HouerZhiXuan_NumResult(String[] mats, String caiPiaoCode) {
+    private void compare_HouerZhiXuan_NumResult(String[] mats, String caiPiaoCode,BigDecimal moneyPattern) {
 
         StringBuilder dataBuilder = new StringBuilder();
         StringBuilder printResult = new StringBuilder();
 
 
         int multiple[] = NumberTools.getMultipleType(10);//倍投倍数值
-
-        BigDecimal initMoney = new BigDecimal(12.8);//初始投入金额
-        BigDecimal winMoney = new BigDecimal(19.4);//每次盈利金额
+        String[] numArray = getFuShiDaDiString().split(",| ");
+        BigDecimal initMoney = new BigDecimal(2).multiply(moneyPattern).multiply(new BigDecimal(numArray.length));;//初始投入金额
+        BigDecimal winMoney = new BigDecimal(19.4).multiply(moneyPattern).multiply(new BigDecimal(10));//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
         int time = 0;//倍投下标
         double maxMoney = 0;//最大投入金额
@@ -120,16 +170,15 @@ public class HouErZhiXuanRuleTest {
      */
     private String getFuShiDaDiString() {
 
-
-        return "00 01 02 03 04 06 07 08 11 12 13 14 15 18 19 20 23 24 25 26 27 28 30 31 33 34 35 38 39 40 42 46 47 48 49 50 51 53 54 56 57 58 59 62 65 66 67 69 70 72 77 78 80 83 84 85 87 88 89 90 91 92 93 95 96 99";
-//        return "02,03,06,07,12,13,16,17," +
-//                "20,21,22,23,24,25,26,27," +
-//                "28,29,30,31,32,33,34,35," +
-//                "36,37,38,39,42,43,46,47," +
-//                "52,53,56,57,60,61,62,63," +
-//                "64,65,66,67,68,69,70,71," +
-//                "72,73,74,75,76,77,78,79," +
-//                "82,83,86,87,92,93,96,97";
+//        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
+        return "02,03,06,07,12,13,16,17," +
+                "20,21,22,23,24,25,26,27," +
+                "28,29,30,31,32,33,34,35," +
+                "36,37,38,39,42,43,46,47," +
+                "52,53,56,57,60,61,62,63," +
+                "64,65,66,67,68,69,70,71," +
+                "72,73,74,75,76,77,78,79," +
+                "82,83,86,87,92,93,96,97";
     }
 
     /**
