@@ -93,7 +93,9 @@ public class HouErZhiXuanRuleTest {
             dataBuilder.append(tmpData).append("\n");
         }
         PrintDataBean bean = new PrintDataBean();
-        bean.setCaiPiaoCode("111")
+        bean.setCaiPiaoCode(caiPiaoCode)
+                .setInitMoney(initMoney)
+                .setWinMoney(winMoney)
                 .setAllLoseTime(allLoseTime)
                 .setAllWinTime(allWinTime)
                 .setIncomeMoney(incomeMoney)

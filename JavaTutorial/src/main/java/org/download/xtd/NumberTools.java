@@ -95,6 +95,8 @@ public class NumberTools {
         printResult.append("最大连挂次数：" + bean.getMaxLoseTime()).append("\n");
         printResult.append("总赢次数：" + bean.getAllWinTime()).append("\n");
         printResult.append("总输次数：" + bean.getAllLoseTime()).append("\n");
+        printResult.append("初始投入金额："+getMoneyString(bean.getInitMoney())).append("\n");
+        printResult.append("初始盈利金额："+getMoneyString(bean.getWinMoney())).append("\n");
         if (bean.getIncomeMoney() != null && bean.getIncomeMoney().intValue() != 0) {
             printResult.append("总收益：" + getMoneyString(bean.getIncomeMoney())).append("\n");
         }
@@ -105,8 +107,8 @@ public class NumberTools {
      * 两个数字以上的比对操作
      * 不相同，true，相同，false
      *
-     * @param init
-     * @param compare
+     * @param init 比对数字
+     * @param compare 待比对数字
      * @return
      */
     public static boolean compareArrayNumberIsTrue(String init, String compare) {

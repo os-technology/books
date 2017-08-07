@@ -19,6 +19,12 @@ public class PrintDataBean {
      * 彩票编码
      */
     private String caiPiaoCode;
+
+    //初始投注金额
+    private BigDecimal initMoney;
+    //投注盈利金额
+    private BigDecimal winMoney;
+
     /**
      * 统计期数
      */
@@ -55,6 +61,24 @@ public class PrintDataBean {
 
     public PrintDataBean setCaiPiaoCode(String caiPiaoCode) {
         this.caiPiaoCode = caiPiaoCode;
+        return this;
+    }
+
+    public BigDecimal getInitMoney() {
+        return initMoney;
+    }
+
+    public PrintDataBean setInitMoney(BigDecimal initMoney) {
+        this.initMoney = initMoney;
+        return this;
+    }
+
+    public BigDecimal getWinMoney() {
+        return winMoney;
+    }
+
+    public PrintDataBean setWinMoney(BigDecimal winMoney) {
+        this.winMoney = winMoney;
         return this;
     }
 

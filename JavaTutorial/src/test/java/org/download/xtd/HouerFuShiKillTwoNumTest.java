@@ -23,20 +23,20 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "111");
+        houerFuShiKillTwoNum(mats, "111",5);
     }
 
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        houerFuShiKillTwoNum(mats, "182");
+        houerFuShiKillTwoNum(mats, "182",2);
     }
 
 
     /**
      * 后二复式杀号
      */
-    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode) {
+    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode,int location) {
         StringBuilder dataBuilder = new StringBuilder();//数据builder
         StringBuilder printResult = new StringBuilder();//打印统计结果展示builder
 
@@ -57,8 +57,8 @@ public class HouerFuShiKillTwoNumTest {
         int allLoseTime = 0;//本次统计总的输次数
         /************/
         for (int m = 0; m < mats.length - 1; m++) {
-            String init = NumberTools.getSubNum(mats[m], 2, 2);
-            String compare = NumberTools.getSubNum(mats[m + 1], 2, 2);
+            String init = NumberTools.getSubNum(mats[m], location, 2);
+            String compare = NumberTools.getSubNum(mats[m + 1], location, 2);
             String tmpData = "";
             if (NumberTools.compareArrayNumberIsTrue(init, compare)) {//赢
 
@@ -105,6 +105,8 @@ public class HouerFuShiKillTwoNumTest {
 
         PrintDataBean bean = new PrintDataBean();
         bean.setCaiPiaoCode(caiPiaoCode)
+                .setInitMoney(initMoney)
+                .setWinMoney(winMoney)
                 .setAllLoseTime(allLoseTime)
                 .setAllWinTime(allWinTime)
                 .setIncomeMoney(incomeMoney)

@@ -18,7 +18,7 @@ public class SpotFixNumArrayTest {
     @Test
     public void testNumArray() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        fixNum(mats, 1, "12357", null);
+        fixNum(mats, 1, "012357", null,"101");
     }
 
     /**
@@ -29,7 +29,7 @@ public class SpotFixNumArrayTest {
      * @param array         选码数值组合
      * @param multipleArray 倍数数组
      */
-    private void fixNum(String[] mats, int location, String array, int[] multipleArray) {
+    private void fixNum(String[] mats, int location, String array, int[] multipleArray,String caipiaoCode) {
 
         int maxWinTime = 0;//最大连赢次数
         int tmpWinTime = 0;//每阶段连赢次数
@@ -52,7 +52,7 @@ public class SpotFixNumArrayTest {
                 tmpLoseTime++;
             }
         }
-        System.out.println("重庆时时彩");
+        System.out.println("彩票类型："+NumberTools.caiPiaoName(caipiaoCode));
         System.out.println("选号位置：" + NumberTools.getNumLocation(location));
         System.out.println("统计期数：" + mats.length + "期");
         System.out.println("固定数字投注模式  投注数字：" + array);
