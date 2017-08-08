@@ -24,6 +24,57 @@ public class NumberTools {
 
 
     /**
+     * 玩法类型
+     * @param playTypeCode
+     * @return
+     */
+    public static String getPlaySelectType(String playTypeCode){
+        Map<String,String> map =new HashMap<>();
+        map.put("01","前二单式");
+        map.put("02","前二复式");
+
+        map.put("10","后二单式");
+        map.put("11","后二复式");
+
+        map.put("20","前三单式");
+        map.put("21","前三复式");
+
+        map.put("30","中三单式");
+        map.put("31","中三复式");
+
+        map.put("40","后三单式");
+        map.put("41","后三复式");
+//        map.put("07","");
+//        map.put("07","");
+
+
+        return map.get(playTypeCode);
+    }
+
+    /**
+     * 根据玩法类型编号获取对应位置名称
+     * @param typeCode
+     * @return
+     */
+    public static String getPlayCase(int typeCode){
+
+        String locationList = "";
+        if (typeCode>0&&typeCode<10){
+            locationList="54";
+        }else if (typeCode>9&&typeCode<20){
+            locationList="21";
+        }
+        char[] numList = locationList.toCharArray();
+        String out = "";
+        for (char ch:numList){
+            out += getNumLocation(Integer.parseInt(ch+""));
+        }
+
+        return out;
+
+    }
+
+    /**
      * 获取彩票名称
      *
      * @param typeName
@@ -133,7 +184,7 @@ public class NumberTools {
     }
 
     public  static String selectSort(String inputNum){
-        String[] numList = inputNum.split(",| ");
+        String[] numList = getStringArray(inputNum);
         //选择排序的优化
         for(int i = 0; i < numList.length - 1; i++) {// 做第i趟排序
             int k = i;
@@ -156,6 +207,10 @@ public class NumberTools {
         }
 
         return out;
+    }
+
+    public static String[] getStringArray(String inputNum) {
+        return inputNum.split(",| ");
     }
 
 
@@ -239,6 +294,32 @@ public class NumberTools {
     public static String getNumLocation(int in) {
         String[] numArray = {"个位", "十位", "百位", "千位", "万位"};
         return numArray[in - 1];
+    }
+
+    /**
+     *
+     * @param mats 出号内容
+     * @param collectType 收集类型，后二等，或者个位十位等
+     * @param num 从起始位置开始，收集个数如后二,两位
+     * @return
+     */
+    public static String collectNumList(String[] mats, String collectType, int location,int num) {
+        String numlist = "";
+
+        System.out.println("收集类型：从 "+NumberTools.getNumLocation(Integer.valueOf(location))+" 开始，收集 "+num+"个位置的号码");
+        for (String mat:mats){
+            String nums = NumberTools.getSubNum(mat, location, num);
+            if (numlist.contains(nums)){
+                continue;
+            }
+            if ("".equals(numlist)){
+                numlist = nums;
+            }else {
+                numlist += " " + nums;
+            }
+        }
+
+        return numlist;
     }
 
     /**

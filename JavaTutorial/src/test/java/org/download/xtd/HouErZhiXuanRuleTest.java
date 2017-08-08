@@ -17,7 +17,25 @@ import java.math.BigDecimal;
  */
 
 public class HouErZhiXuanRuleTest {
+    /**
+     * 后二复式大底
+     * 使用方法：个位与十位不包含2367定位胆即可投注
+     *
+     * @return
+     */
+    private String getFuShiDaDiString() {
 
+//        return "00 04 05 06 07 08 10 11 15 16 19 23 24 25 26 29 33 35 38 42 43 44 45 47 48 51 55 56 57 58 59 60 63 64 65 69 72 73 74 75 77 80 82 83 84 87 88 89 90 91 92 97";
+//        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
+        return "02,03,06,07,12,13,16,17," +
+                "20,21,22,23,24,25,26,27," +
+                "28,29,30,31,32,33,34,35," +
+                "36,37,38,39,42,43,46,47," +
+                "52,53,56,57,60,61,62,63," +
+                "64,65,66,67,68,69,70,71," +
+                "72,73,74,75,76,77,78,79," +
+                "82,83,86,87,92,93,96,97";
+    }
 
     @Test
     public void test_HouerZhiXuanFenFenCai_Result() {
@@ -31,13 +49,6 @@ public class HouErZhiXuanRuleTest {
         compare_HouerZhiXuan_NumResult(mats, "101",new BigDecimal(0.1));
     }
 
-    @Test
-    public void testCollect_FenFenCai_NumList(){
-        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        String resultNumList = collectNumList(mats,"",2);
-        String output = NumberTools.selectSort(resultNumList);
-        System.out.println(output);
-    }
 
     /**
      * 台湾五分彩
@@ -48,40 +59,11 @@ public class HouErZhiXuanRuleTest {
         compare_HouerZhiXuan_NumResult(mats, "182",new BigDecimal(0.1));
     }
 
-    @Test
-    public void testCollect_TaiWanWuFenCai_NumList(){
-        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        String resultNumList = collectNumList(mats,"",2);
-        String output = NumberTools.selectSort(resultNumList);
-        System.out.println(output);
-    }
 
 
 
-    /**
-     *
-     * @param mats 出号内容
-     * @param collectType 收集类型，后二等，或者个位十位等
-     * @param num 从起始位置开始，收集个数如后二,两位
-     * @return
-     */
-    private String collectNumList(String[] mats, String collectType, int num) {
-        String numlist = "";
 
-        for (String mat:mats){
-            String nums = NumberTools.getSubNum(mat, 2, num);
-            if (numlist.contains(nums)){
-                continue;
-            }
-            if ("".equals(numlist)){
-                numlist = nums;
-            }else {
-                numlist += " " + nums;
-            }
-        }
 
-        return numlist;
-    }
 
     /**
      * 后二单式直选大底数据比对结果
@@ -168,25 +150,7 @@ public class HouErZhiXuanRuleTest {
         System.out.println(printResult);
     }
 
-    /**
-     * 后二复式大底
-     * 使用方法：个位与十位不包含2367定位胆即可投注
-     *
-     * @return
-     */
-    private String getFuShiDaDiString() {
 
-//        return "00 04 05 06 08 10 11 15 16 19 23 24 25 26 29 33 35 38 42 43 44 45 47 48 51 55 56 57 58 59 60 63 64 65 69 72 73 74 75 77 80 83 84 87 88 89 90 91 92 97";
-//        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
-        return "02,03,06,07,12,13,16,17," +
-                "20,21,22,23,24,25,26,27," +
-                "28,29,30,31,32,33,34,35," +
-                "36,37,38,39,42,43,46,47," +
-                "52,53,56,57,60,61,62,63," +
-                "64,65,66,67,68,69,70,71," +
-                "72,73,74,75,76,77,78,79," +
-                "82,83,86,87,92,93,96,97";
-    }
 
     /**
      * 个位与十位不包含的数字内容

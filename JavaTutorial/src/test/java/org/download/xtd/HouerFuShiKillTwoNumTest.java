@@ -23,7 +23,7 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "111", 2);
+        houerFuShiKillTwoNum(mats, "111", 2,"11");
     }
 
 
@@ -31,7 +31,7 @@ public class HouerFuShiKillTwoNumTest {
     public void testShiShiCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats, "101", 2);
+        houerFuShiKillTwoNum(mats, "101", 2,"11");
     }
     /**
      * 台湾五分彩
@@ -39,7 +39,7 @@ public class HouerFuShiKillTwoNumTest {
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        houerFuShiKillTwoNum(mats, "182", 5);
+        houerFuShiKillTwoNum(mats, "182", 5,"11");
     }
 
 
@@ -50,7 +50,7 @@ public class HouerFuShiKillTwoNumTest {
      * @param caiPiaoCode 彩票类型编码
      * @param location    选号位置
      */
-    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode, int location) {
+    private void houerFuShiKillTwoNum(String[] mats, String caiPiaoCode, int location,String playTypeCode) {
         StringBuilder dataBuilder = new StringBuilder();//数据builder
         StringBuilder printResult = new StringBuilder();//打印统计结果展示builder
 
@@ -114,7 +114,7 @@ public class HouerFuShiKillTwoNumTest {
             dataBuilder.append(tmpData + "\n");
 
         }
-        printResult.append("规则：后二复式，杀个位十位号码，投注共64注").append("\n");
+        printResult.append("规则："+NumberTools.getPlaySelectType(playTypeCode)+"，杀"+NumberTools.getPlayCase(Integer.valueOf(playTypeCode))+"号码，投注共64注").append("\n");
 
 
         PrintDataBean bean = new PrintDataBean();
