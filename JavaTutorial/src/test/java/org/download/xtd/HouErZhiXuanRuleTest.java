@@ -20,9 +20,15 @@ public class HouErZhiXuanRuleTest {
 
 
     @Test
-    public void test_HouerZhiXuan_Result() {
+    public void test_HouerZhiXuanFenFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
         compare_HouerZhiXuan_NumResult(mats, "111",new BigDecimal(0.1));
+    }
+
+    @Test
+    public void test_HouerZhiXuanShiShiCai_Result() {
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        compare_HouerZhiXuan_NumResult(mats, "101",new BigDecimal(0.1));
     }
 
     @Test
@@ -170,6 +176,7 @@ public class HouErZhiXuanRuleTest {
      */
     private String getFuShiDaDiString() {
 
+//        return "00 04 05 06 08 10 11 15 16 19 23 24 25 26 29 33 35 38 42 43 44 45 47 48 51 55 56 57 58 59 60 63 64 65 69 72 73 74 75 77 80 83 84 87 88 89 90 91 92 97";
 //        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
         return "02,03,06,07,12,13,16,17," +
                 "20,21,22,23,24,25,26,27," +

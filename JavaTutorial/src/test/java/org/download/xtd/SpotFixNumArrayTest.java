@@ -18,9 +18,15 @@ public class SpotFixNumArrayTest {
     @Test
     public void testNumArray() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        fixNum(mats, 1, "02357", null,"101");
+        fixNum(mats, 1, "12357", null,"182");
     }
 
+
+    @Test
+    public void testTaiWanNumArray() {
+        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        fixNum(mats, 1, "01368", null,"182");
+    }
     /**
      * 定码投注
      *
