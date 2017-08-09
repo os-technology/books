@@ -17,9 +17,10 @@ public class NumCollectListTest {
     @Test
     public void testCollect_FenFenCai_NumList(){
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        String resultNumList = NumberTools.collectNumList(mats,"",5,2);
+        String resultNumList = NumberTools.collectNumList(mats,"",2,2);
         String output = NumberTools.selectSort(resultNumList);
         System.out.println(output);
+        System.out.println("收集期数："+mats.length);
         System.out.println("数据组数:"+NumberTools.getStringArray(output).length);
     }
     @Test

@@ -30,8 +30,8 @@ public class NumberTools {
      */
     public static String getPlaySelectType(String playTypeCode){
         Map<String,String> map =new HashMap<>();
-        map.put("01","前二单式");
-        map.put("02","前二复式");
+        map.put("00","前二单式");
+        map.put("01","前二复式");
 
         map.put("10","后二单式");
         map.put("11","后二复式");
@@ -300,15 +300,15 @@ public class NumberTools {
      *
      * @param mats 出号内容
      * @param collectType 收集类型，后二等，或者个位十位等
-     * @param num 从起始位置开始，收集个数如后二,两位
+     * @param count (位数)从起始位置开始，收集个数如后二,两位
      * @return
      */
-    public static String collectNumList(String[] mats, String collectType, int location,int num) {
+    public static String collectNumList(String[] mats, String collectType, int location,int count) {
         String numlist = "";
 
-        System.out.println("收集类型：从 "+NumberTools.getNumLocation(Integer.valueOf(location))+" 开始，收集 "+num+"个位置的号码");
+        System.out.println("收集类型：从 "+NumberTools.getNumLocation(Integer.valueOf(location))+" 开始，收集 "+count+"个位置的号码");
         for (String mat:mats){
-            String nums = NumberTools.getSubNum(mat, location, num);
+            String nums = NumberTools.getSubNum(mat, location, count);
             if (numlist.contains(nums)){
                 continue;
             }
