@@ -59,7 +59,7 @@ public class NumberTools {
     public static String getPlayCase(int typeCode){
 
         String locationList = "";
-        if (typeCode>0&&typeCode<10){
+        if (typeCode>=0&&typeCode<10){
             locationList="54";
         }else if (typeCode>9&&typeCode<20){
             locationList="21";
