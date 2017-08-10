@@ -47,7 +47,7 @@ public class HouerFuShiKillTwoNumTest {
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        houerFuShiKillTwoNum(mats,"182", 5);
+        houerFuShiKillTwoNum(mats,"182", 2);
     }
 
 
@@ -64,12 +64,12 @@ public class HouerFuShiKillTwoNumTest {
 
         dataBuilder.append(mats[0] + "  " + "初始数据").append("\n");
 
-        int multiple[] = NumberTools.getMultipleType(10);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
+        int multiple[] = NumberTools.getMultipleType(12);//倍投倍数值，单倍计算的输赢算法还有问题，需要处理
         /**********/
         int time = 0;//倍投下标
         double maxMoney = 0;//最大投入金额
-        BigDecimal initMoney = new BigDecimal(12.8);//初始投入金额
-        BigDecimal winMoney = new BigDecimal(19.4);//每次盈利金额
+        BigDecimal initMoney = new BigDecimal(1.28);//初始投入金额
+        BigDecimal winMoney = new BigDecimal(1.94);//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
         int maxWinTime = 0;//最大连赢次数
         int tmpWinTime = 0;//每阶段连赢次数

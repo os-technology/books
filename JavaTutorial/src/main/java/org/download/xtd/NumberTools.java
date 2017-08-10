@@ -23,27 +23,48 @@ import java.util.Map;
 public class NumberTools {
 
 
+
+
+//    String str ="2342asfghgyu56asdasda";
+//    Map<String,Integer> maps = new HashMap<String,Integer>();
+//       for(int i=0;i<str.length();i++){
+//        String key = String.valueOf((str.charAt(i)));
+//        if(!maps.containsKey(key))
+//            maps.put(key, 1);
+//        else{
+//            int val =maps.get(key);
+//            maps.put(key, val+1);
+//        }
+//
+//    }
+//
+//       for(Map.Entry i : maps.entrySet()){
+//        System.out.println(i.getKey()+ "=="+i.getValue());
+//    }
+
+
     /**
      * 玩法类型
+     *
      * @param playTypeCode
      * @return
      */
-    public static String getPlaySelectType(String playTypeCode){
-        Map<String,String> map =new HashMap<>();
-        map.put("00","前二单式");
-        map.put("01","前二复式");
+    public static String getPlaySelectType(String playTypeCode) {
+        Map<String, String> map = new HashMap<>();
+        map.put("00", "前二单式");
+        map.put("01", "前二复式");
 
-        map.put("10","后二单式");
-        map.put("11","后二复式");
+        map.put("10", "后二单式");
+        map.put("11", "后二复式");
 
-        map.put("20","前三单式");
-        map.put("21","前三复式");
+        map.put("20", "前三单式");
+        map.put("21", "前三复式");
 
-        map.put("30","中三单式");
-        map.put("31","中三复式");
+        map.put("30", "中三单式");
+        map.put("31", "中三复式");
 
-        map.put("40","后三单式");
-        map.put("41","后三复式");
+        map.put("40", "后三单式");
+        map.put("41", "后三复式");
 //        map.put("07","");
 //        map.put("07","");
 
@@ -53,27 +74,97 @@ public class NumberTools {
 
     /**
      * 根据玩法类型编号获取对应位置名称
+     *
      * @param typeCode
      * @return
      */
-    public static String getPlayCase(int typeCode){
+    public static String getPlayCase(int typeCode) {
 
         String locationList = "";
-        if (typeCode>=0&&typeCode<10){
-            locationList="54";
-        }else if (typeCode>9&&typeCode<20){
-            locationList="21";
+        if (typeCode >= 0 && typeCode < 10) {
+            locationList = "54";
+        } else if (typeCode > 9 && typeCode < 20) {
+            locationList = "21";
         }
         char[] numList = locationList.toCharArray();
         String out = "";
-        for (char ch:numList){
-            out += getNumLocation(Integer.parseInt(ch+""));
+        for (char ch : numList) {
+            out += getNumLocation(Integer.parseInt(ch + ""));
         }
 
         return out;
 
     }
 
+    /**
+     * (?s) 开启单行模式 DOTALL 让. 号匹配任意字符
+     * <p>
+     * (.) 任意字符 并捕获在第一组
+     * <p>
+     * (?=.*\1) 这是断言, 表示后面内容将是 任意个字符加上第一组所捕获的内容
+     * <p>
+     * 这样,如果这整个式子匹配到,表示,第一个捕获组内容在字符串中,至少出现两次，替换为 "" 空串.
+     * <p>
+     * 进行 全局替换后， 整个字符串所出现的字符将不重复。
+     *
+     * @param inputNum
+     * @return
+     */
+    public static String checkNumCount(String inputNum) {
+
+        inputNum = inputNum.replaceAll("(?s)(.)(?=.*\\1)", "");
+
+        return inputNum;
+    }
+
+    /**
+     * 返回长度5
+     *
+     * @param inputNum
+     * @return
+     */
+    public static boolean getLengthFive(String inputNum) {
+        return checkNumCount(inputNum).length() == 5;
+    }
+
+    /**
+     * 返回长度4
+     *
+     * @param inputNum
+     * @return
+     */
+    public static boolean getLengthFour(String inputNum) {
+        return checkNumCount(inputNum).length() == 4;
+    }
+    /**
+     * 返回长度3
+     *
+     * @param inputNum
+     * @return
+     */
+    public static boolean getLengthThree(String inputNum) {
+        return checkNumCount(inputNum).length() == 3;
+    }
+
+    /**
+     * 返回长度2
+     *
+     * @param inputNum
+     * @return
+     */
+    public static boolean getLengthTwo(String inputNum) {
+        return checkNumCount(inputNum).length() == 2;
+    }
+
+    /**
+     * 返回长度1
+     *
+     * @param inputNum
+     * @return
+     */
+    public static boolean getLengthOne(String inputNum) {
+        return checkNumCount(inputNum).length() == 1;
+    }
     /**
      * 获取彩票名称
      *
@@ -141,7 +232,8 @@ public class NumberTools {
         printResult.append("本次统计期数：" + bean.getStageNum() + "期").append("\n");
         if (bean.getMaxMoney() != null && bean.getMaxMoney().intValue() != 0) {
             printResult.append("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + getMoneyString(bean.getMaxMoney())).append("\n");
-            printResult.append("最大投入总额："+getMoneyString(bean.getMaxMoney().add(bean.getMaxMoney().divide(new BigDecimal(2))))).append("\n");;
+            printResult.append("最大投入总额：" + getMoneyString(bean.getMaxMoney().add(bean.getMaxMoney().divide(new BigDecimal(2))))).append("\n");
+            ;
         }
         if (bean.getMaxWinTime() != null && bean.getMaxWinTime() != 0) {
             printResult.append("最大连赢次数：" + bean.getMaxWinTime()).append("\n");
@@ -149,23 +241,23 @@ public class NumberTools {
         printResult.append("最大连挂次数：" + bean.getMaxLoseTime()).append("\n");
         printResult.append("总赢次数：" + bean.getAllWinTime()).append("\n");
         printResult.append("总输次数：" + bean.getAllLoseTime()).append("\n");
-        printResult.append("初始投入金额："+getMoneyString(bean.getInitMoney())).append("\n");
-        printResult.append("初始盈利金额："+getMoneyString(bean.getWinMoney())).append("\n");
+        printResult.append("初始投入金额：" + getMoneyString(bean.getInitMoney())).append("\n");
+        printResult.append("初始盈利金额：" + getMoneyString(bean.getWinMoney())).append("\n");
         if (bean.getIncomeMoney() != null && bean.getIncomeMoney().intValue() != 0) {
             printResult.append("总收益：" + getMoneyString(bean.getIncomeMoney())).append("\n");
         }
-        printResult.append("统计时间："+getTodayDateTime());
+        printResult.append("统计时间：" + getTodayDateTime());
     }
 
-    public static String getTodayDateTime(){
-        return DateFormatUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss");
+    public static String getTodayDateTime() {
+        return DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
     }
 
     /**
      * 两个数字以上的比对操作
      * 不相同，true，相同，false
      *
-     * @param init 比对数字
+     * @param init    比对数字
      * @param compare 待比对数字
      * @return
      */
@@ -183,18 +275,18 @@ public class NumberTools {
         return bool;
     }
 
-    public  static String selectSort(String inputNum){
+    public static String selectSort(String inputNum) {
         String[] numList = getStringArray(inputNum);
         //选择排序的优化
-        for(int i = 0; i < numList.length - 1; i++) {// 做第i趟排序
+        for (int i = 0; i < numList.length - 1; i++) {// 做第i趟排序
             int k = i;
-            for(int j = k + 1; j < numList.length; j++){// 选最小的记录
-                if(Integer.valueOf(numList[j]) < Integer.valueOf(numList[k])){
+            for (int j = k + 1; j < numList.length; j++) {// 选最小的记录
+                if (Integer.valueOf(numList[j]) < Integer.valueOf(numList[k])) {
                     k = j; //记下目前找到的最小值所在的位置
                 }
             }
             //在内层循环结束，也就是找到本轮循环的最小的数以后，再进行交换
-            if(i != k){  //交换a[i]和a[k]
+            if (i != k) {  //交换a[i]和a[k]
                 String temp = numList[i];
                 numList[i] = numList[k];
                 numList[k] = temp;
@@ -202,8 +294,8 @@ public class NumberTools {
         }
 
         String out = "";
-        for (String num:numList){
-            out+=" "+num;
+        for (String num : numList) {
+            out += " " + num;
         }
 
         return out;
@@ -297,24 +389,23 @@ public class NumberTools {
     }
 
     /**
-     *
-     * @param mats 出号内容
+     * @param mats        出号内容
      * @param collectType 收集类型，后二等，或者个位十位等
-     * @param count (位数)从起始位置开始，收集个数如后二,两位
+     * @param count       (位数)从起始位置开始，收集个数如后二,两位
      * @return
      */
-    public static String collectNumList(String[] mats, String collectType, int location,int count) {
+    public static String collectNumList(String[] mats, String collectType, int location, int count) {
         String numlist = "";
 
-        System.out.println("收集类型：从 "+NumberTools.getNumLocation(Integer.valueOf(location))+" 开始，收集 "+count+"个位置的号码");
-        for (String mat:mats){
+        System.out.println("收集类型：从 " + NumberTools.getNumLocation(Integer.valueOf(location)) + " 开始，收集 " + count + "个位置的号码");
+        for (String mat : mats) {
             String nums = NumberTools.getSubNum(mat, location, count);
-            if (numlist.contains(nums)){
+            if (numlist.contains(nums)) {
                 continue;
             }
-            if ("".equals(numlist)){
+            if ("".equals(numlist)) {
                 numlist = nums;
-            }else {
+            } else {
                 numlist += " " + nums;
             }
         }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author Yu Jinshui
  * 
  */
-public class RegularClass {
+public class RegexClass {
 	/****************** 正则表达式部分开始 *******************/
 	/**
 	 * 匹配小示例
@@ -141,7 +141,7 @@ public class RegularClass {
 	 */
 	public static void main(String[] args) {
 
-		RegularClass j = new RegularClass();
+		RegexClass j = new RegexClass();
 //		j.reInfo("<a><font color='red'>123</font>", "\\d+","000", 0);
 //		System.out.println("result = " + j.reInfo("<a><font color='red'>123</font>", "\\d+","000", 0));
 
