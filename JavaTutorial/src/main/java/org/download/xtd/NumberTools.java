@@ -23,8 +23,6 @@ import java.util.Map;
 public class NumberTools {
 
 
-
-
 //    String str ="2342asfghgyu56asdasda";
 //    Map<String,Integer> maps = new HashMap<String,Integer>();
 //       for(int i=0;i<str.length();i++){
@@ -41,6 +39,28 @@ public class NumberTools {
 //       for(Map.Entry i : maps.entrySet()){
 //        System.out.println(i.getKey()+ "=="+i.getValue());
 //    }
+
+
+    public static int[] getFiveStarSixtyModel() {
+        int[] store = {1, 2, 4, 8, 17, 36, 76, 160};
+        return store;
+
+    }
+
+    /**
+     * 倍数求和
+     *
+     * @param in    投注次数(0为第一次)
+     * @param model 倍投模式
+     * @return
+     */
+    public static BigDecimal multiplePlus(int in, int[] model) {
+        int output = 0;
+        for (int i = in; i >= 0; i--) {
+            output += model[i];
+        }
+        return new BigDecimal(output);
+    }
 
 
     /**
@@ -65,6 +85,9 @@ public class NumberTools {
 
         map.put("40", "后三单式");
         map.put("41", "后三复式");
+
+        map.put("100", "五星组选60，只有一个数字重复");
+//        map.put("41", "后三复式");
 //        map.put("07","");
 //        map.put("07","");
 
@@ -136,6 +159,7 @@ public class NumberTools {
     public static boolean getLengthFour(String inputNum) {
         return checkNumCount(inputNum).length() == 4;
     }
+
     /**
      * 返回长度3
      *
@@ -165,6 +189,7 @@ public class NumberTools {
     public static boolean getLengthOne(String inputNum) {
         return checkNumCount(inputNum).length() == 1;
     }
+
     /**
      * 获取彩票名称
      *
@@ -232,7 +257,15 @@ public class NumberTools {
         printResult.append("本次统计期数：" + bean.getStageNum() + "期").append("\n");
         if (bean.getMaxMoney() != null && bean.getMaxMoney().intValue() != 0) {
             printResult.append("最大倍投金额(仅针对两个号码不同的情况得出的结果)：" + getMoneyString(bean.getMaxMoney())).append("\n");
-            printResult.append("最大投入总额：" + getMoneyString(bean.getMaxMoney().add(bean.getMaxMoney().divide(new BigDecimal(2))))).append("\n");
+            printResult.append("最大投入总额：" +
+                    getMoneyString(
+                            bean.getMaxMoney()
+                                    .add(
+                                            bean.getInitMoney()
+                                                    .multiply(NumberTools.multiplePlus(bean.getMaxLoseTime()-1, bean.getMultipleModel()))
+                            )
+                    )
+            ).append("\n");
             ;
         }
         if (bean.getMaxWinTime() != null && bean.getMaxWinTime() != 0) {

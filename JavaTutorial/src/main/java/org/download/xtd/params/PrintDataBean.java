@@ -54,6 +54,20 @@ public class PrintDataBean {
      */
     private Integer allLoseTime;
 
+    /**
+     * 倍投模式
+     */
+    private int[]  multipleModel;
+
+
+    public int[] getMultipleModel() {
+        return multipleModel;
+    }
+
+    public PrintDataBean setMultipleModel(int[] multipleModel) {
+        this.multipleModel = multipleModel;
+        return this;
+    }
 
     public String getCaiPiaoCode() {
         return caiPiaoCode;

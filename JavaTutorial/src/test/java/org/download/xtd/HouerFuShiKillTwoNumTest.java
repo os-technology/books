@@ -38,7 +38,7 @@ public class HouerFuShiKillTwoNumTest {
     public void testShiShiCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats,"101", 5);
+        houerFuShiKillTwoNum(mats,"101", 2);
     }
 
     /**
@@ -50,7 +50,14 @@ public class HouerFuShiKillTwoNumTest {
         houerFuShiKillTwoNum(mats,"182", 2);
     }
 
-
+    /**
+     * 北京PK10
+     */
+    @Test
+    public void testBeiJingPK10_Html() {
+        String[] mats = XTDHtmlStringTranslateUtil.getPKMatArray();
+        houerFuShiKillTwoNum(mats,"1001", 2);
+    }
     /**
      * 后二复式杀号
      *
@@ -102,23 +109,26 @@ public class HouerFuShiKillTwoNumTest {
 
                 //数值操作
 
-                maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
                 time = 0;
                 tmpLoseTime = 0;
                 allWinTime++;
                 tmpWinTime++;
 
+                //数值处理
+                maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
+
             } else {//输
                 tmpData = mats[m + 1] + "  " + "输  0   " + NumberTools.getCalResult(initMoney, multiple[time]);
 
-                //数值处理
 
-                maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
                 tmpWinTime = 0;
                 time++;
                 allLoseTime++;
                 tmpLoseTime++;
+
+                maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
             }
+
             dataBuilder.append(tmpData + "\n");
 
         }
@@ -135,6 +145,7 @@ public class HouerFuShiKillTwoNumTest {
                 .setMaxLoseTime(maxLoseTime)
                 .setMaxWinTime(maxWinTime)
                 .setMaxMoney(new BigDecimal(maxMoney))
+                .setMultipleModel(multiple)
                 .setStageNum(mats.length);
 
         //封装打印的统计展示数据
