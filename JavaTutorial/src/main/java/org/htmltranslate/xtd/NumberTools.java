@@ -39,13 +39,35 @@ public class NumberTools {
 //        System.out.println(i.getKey()+ "=="+i.getValue());
 //    }
 
-
+    /**
+     * 五星组选60倍率
+     * @return
+     */
     public static int[] getFiveStarSixtyModel() {
         int[] store = {1, 2, 4, 8, 17, 36, 76, 160};
         return store;
 
     }
 
+    /**
+     * 三星组三倍率
+     * @return
+     */
+    public static int[] getThreeStarArrayThreeModel() {
+        int[] store = {1,1,1,2,2,3,4,6,8,11,16,22,31,43,60};
+        return store;
+
+    }
+
+    /**
+     * 三星组六倍率
+     * @return
+     */
+    public static int[] getThreeStarArraySixModel() {
+        int[] store = {1,3,12,48,192,767,3064};
+        return store;
+
+    }
     /**
      * 倍数求和
      *
@@ -84,6 +106,8 @@ public class NumberTools {
 
         map.put("40", "后三单式");
         map.put("41", "后三复式");
+        map.put("42", "后三组三");
+        map.put("43", "后三组六");
 
         map.put("100", "五星组选60，只有一个数字重复");
 //        map.put("41", "后三复式");

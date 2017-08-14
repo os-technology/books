@@ -18,7 +18,7 @@ public class TranslateHtmlPlanTest {
     @Test
     public void testGetHtmlPlan() {
         String webUrl = "http://www.7879123.com/json/cqssc_json_A.js";
-        String js = HtmlUtil.getHtmlByUrl(webUrl, "utf-8");
+        String js = HtmlUtil.getHtmlByUrl(webUrl);
 
         TranslatePlan newPlan = JSON.parseObject(js, TranslatePlan.class);
 

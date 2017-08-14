@@ -6,24 +6,31 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * 五星组选60，只有一个数字重复
+ * 三星复式
  *
  * @author yuijnshui@lxfintech.com
- * @Title: FiveStarGroupThreeTest
+ * @Title: ThreeStarCompoundTest
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: lxjr.com
- * @Created on 2017/8/10下午6:54
+ * @Created on 2017/8/14上午10:12
  */
 
-public class FiveStarGroupThreeTest {
+public class ThreeStarCompoundTest {
 
+    /**
+     * 天地分分彩
+     */
+    @Test
+    public void testFenFenCaiZuThreeHtml() {
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        handleNumList(mats, "111", 4,2);
+    }
 
     @Test
-    public void test_FenFenCai_Star() {
-//NumberTools
+    public void testFenFenCaiZuSixHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        handleNumList(mats, "111", 5);
+        handleNumList(mats, "111", 4,3);
     }
 
     /**
@@ -32,7 +39,7 @@ public class FiveStarGroupThreeTest {
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        handleNumList(mats,"182", 5);
+        handleNumList(mats, "182", 5,3);
     }
 
 
@@ -43,12 +50,9 @@ public class FiveStarGroupThreeTest {
      * @param caipiaoCode 彩票名称编码
      * @param location    号码位置
      */
-    private void handleNumList(String[] mats, String caipiaoCode, int location) {
-        if (location == 2) {
-            handleNumList(mats, caipiaoCode, location, "100", new BigDecimal(0.01));
-        } else if (location == 5) {
-            handleNumList(mats, caipiaoCode, location, "100", new BigDecimal(0.01));
-        }
+    private void handleNumList(String[] mats, String caipiaoCode, int location,int arrayLen) {
+
+        handleNumList(mats, caipiaoCode, location, "43", new BigDecimal(0.1),arrayLen);
     }
 
     /**
@@ -59,16 +63,20 @@ public class FiveStarGroupThreeTest {
      * @param location     号码位置
      * @param playTypeCode 彩票选法编码
      */
-    private void handleNumList(String[] mats, String caipiaoCode, int location, String playTypeCode, BigDecimal moneyPattern) {
+    private void handleNumList(String[] mats, String caipiaoCode, int location, String playTypeCode, BigDecimal moneyPattern,int arrayLen) {
 
         StringBuilder dataBuilder = new StringBuilder();
         StringBuilder printResult = new StringBuilder();
 
 
-        int multiple[] = NumberTools.getFiveStarSixtyModel();//倍投倍数值
+        //倍率数组
+        int multiple[] = arrayLen==2?NumberTools.getThreeStarArrayThreeModel()//组三
+                :NumberTools.getThreeStarArraySixModel();//组六
 
-        BigDecimal initMoney = new BigDecimal(1680).multiply(moneyPattern);
-        BigDecimal winMoney = new BigDecimal(3233.34).multiply(moneyPattern);//每次盈利金额
+        BigDecimal initMoney = arrayLen==2?new BigDecimal(180).multiply(moneyPattern)
+                :new BigDecimal(240).multiply(moneyPattern);
+        BigDecimal winMoney = arrayLen==2?new BigDecimal(646.67).multiply(moneyPattern)
+                :new BigDecimal(323.34).multiply(moneyPattern);//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
         int time = 0;//倍投下标
         double maxMoney = 0;//最大投入金额
@@ -81,12 +89,17 @@ public class FiveStarGroupThreeTest {
 
         for (String mat : mats) {
             if (multiple.length<=time){
-                System.out.println("超出最大倍投，不适合投注");
+                System.out.println("超出最大倍投，不适合投注，不再继续统计");
                 break;
             }
             String tmpData = "";
-            String num = NumberTools.getSubNum(mat, location, 5);
-            boolean result = NumberTools.getLengthFour(num);
+            String num = NumberTools.getSubNum(mat, location, 3);
+            boolean result =false;
+            if (arrayLen==2) {//组三
+                  result = NumberTools.getLengthTwo(num);
+            }else {//组六
+                  result = NumberTools.getLengthThree(num);
+            }
             if (result) {
 
                 //每次盈利计算
@@ -114,7 +127,6 @@ public class FiveStarGroupThreeTest {
             } else {
                 double tmpLoseMoney = NumberTools.getCalResult(initMoney, multiple[time]);
                 tmpData = mat + "  输 " + tmpLoseMoney;
-                incomeMoney = incomeMoney.subtract(new BigDecimal(tmpLoseMoney));
 
                 tmpWinTime = 0;
                 time++;
@@ -148,5 +160,4 @@ public class FiveStarGroupThreeTest {
 
 
     }
-
 }

@@ -23,7 +23,7 @@ public class HouerFuShiKillTwoNumTest {
     public void testFenFenCaiHtml() {
 
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        houerFuShiKillTwoNum(mats,"111", 2);
+        houerFuShiKillTwoNum(mats,"111", 5);
     }
 
     public void houerFuShiKillTwoNum(String[] mats,String caipiaoCode, int location) {
@@ -47,7 +47,7 @@ public class HouerFuShiKillTwoNumTest {
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        houerFuShiKillTwoNum(mats,"182", 2);
+        houerFuShiKillTwoNum(mats,"182", 5);
     }
 
     /**
@@ -78,6 +78,10 @@ public class HouerFuShiKillTwoNumTest {
         BigDecimal initMoney = new BigDecimal(1.28);//初始投入金额
         BigDecimal winMoney = new BigDecimal(1.94);//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
+        BigDecimal tmpAllWinMoney = new BigDecimal(0);//临时盈利总金额
+        BigDecimal tmpAllLoseMoney = new BigDecimal(0);//临时输掉总金额
+
+
         int maxWinTime = 0;//最大连赢次数
         int tmpWinTime = 0;//每阶段连赢次数
         int maxLoseTime = 0;//最大连挂次数
@@ -86,6 +90,14 @@ public class HouerFuShiKillTwoNumTest {
         int allLoseTime = 0;//本次统计总的输次数
         /************/
         for (int m = 0; m < mats.length - 1; m++) {
+            if (multiple.length<=time){
+                System.out.println("超出最大倍投，不适合投注");
+                break;
+            }
+            BigDecimal tmpWinMoney = null;
+            BigDecimal tmpLoseMoney = null;
+
+
             String init = NumberTools.getSubNum(mats[m], location, 2);
             String compare = NumberTools.getSubNum(mats[m + 1], location, 2);
             String tmpData = "";
@@ -95,6 +107,10 @@ public class HouerFuShiKillTwoNumTest {
                     double inputMoney = NumberTools.getCalResult(initMoney, multiple[time]);
                     maxMoney = maxMoney > inputMoney ? maxMoney : inputMoney;
 
+                    tmpWinMoney = winMoney.multiply(new BigDecimal(multiple[time]));
+                    tmpLoseMoney = initMoney.multiply(new BigDecimal(multiple[time]));
+
+
                     tmpData = mats[m + 1] + "  " + "赢  1   " + inputMoney + "    "
                             + NumberTools.getMoneyString((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
 
@@ -102,11 +118,16 @@ public class HouerFuShiKillTwoNumTest {
                     incomeMoney = incomeMoney.add((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
 
                 } else {
+                    tmpWinMoney = winMoney;
+                    tmpLoseMoney = initMoney;
+
+
                     tmpData = mats[m + 1] + "  " + "赢  1   " + NumberTools.getMoneyString(initMoney) + "    " + NumberTools.getMoneyString(winMoney.subtract(initMoney));
                     //盈利计算
                     incomeMoney = incomeMoney.add(winMoney.subtract(initMoney));
                 }
-
+                //临时赢取总金额
+                tmpAllWinMoney = tmpAllWinMoney.add(tmpWinMoney);
                 //数值操作
 
                 time = 0;
@@ -118,7 +139,11 @@ public class HouerFuShiKillTwoNumTest {
                 maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
 
             } else {//输
-                tmpData = mats[m + 1] + "  " + "输  0   " + NumberTools.getCalResult(initMoney, multiple[time]);
+                double thisLoseMoney =NumberTools.getCalResult(initMoney, multiple[time]);
+
+                        tmpData = mats[m + 1] + "  " + "输  0   " + thisLoseMoney;
+
+                tmpLoseMoney = new BigDecimal(thisLoseMoney);
 
 
                 tmpWinTime = 0;
@@ -128,6 +153,8 @@ public class HouerFuShiKillTwoNumTest {
 
                 maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
             }
+
+            tmpAllLoseMoney= tmpAllLoseMoney.add(tmpLoseMoney);
 
             dataBuilder.append(tmpData + "\n");
 

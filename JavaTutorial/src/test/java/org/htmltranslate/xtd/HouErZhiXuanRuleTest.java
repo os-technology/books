@@ -26,21 +26,21 @@ public class HouErZhiXuanRuleTest {
     private String getFuShiDaDiString() {
 
 //        return "00 04 05 06 07 08 10 11 15 16 19 23 24 25 26 29 33 35 38 42 43 44 45 47 48 51 55 56 57 58 59 60 63 64 65 69 72 73 74 75 77 80 82 83 84 87 88 89 90 91 92 97";
-        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
-//        return "02,03,06,07,12,13,16,17," +
-//                "20,21,22,23,24,25,26,27," +
-//                "28,29,30,31,32,33,34,35," +
-//                "36,37,38,39,42,43,46,47," +
-//                "52,53,56,57,60,61,62,63," +
-//                "64,65,66,67,68,69,70,71," +
-//                "72,73,74,75,76,77,78,79," +
-//                "82,83,86,87,92,93,96,97";
+//        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
+        return "02,03,06,07,12,13,16,17," +
+                "20,21,22,23,24,25,26,27," +
+                "28,29,30,31,32,33,34,35," +
+                "36,37,38,39,42,43,46,47," +
+                "52,53,56,57,60,61,62,63," +
+                "64,65,66,67,68,69,70,71," +
+                "72,73,74,75,76,77,78,79," +
+                "82,83,86,87,92,93,96,97";
     }
 
     @Test
     public void test_HouerZhiXuanFenFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        compareStrategy(mats, "111", 2);
+        compareStrategy(mats, "111", 5);
     }
 
     @Test
@@ -86,7 +86,11 @@ public class HouErZhiXuanRuleTest {
         BigDecimal initMoney = new BigDecimal(2).multiply(moneyPattern).multiply(new BigDecimal(numArray.length));
         ;//初始投入金额
         BigDecimal winMoney = new BigDecimal(19.4).multiply(moneyPattern).multiply(new BigDecimal(10));//每次盈利金额
-        BigDecimal incomeMoney = new BigDecimal(0);//净利润金额
+        BigDecimal incomeMoney = new BigDecimal(0);//最终净利润金额
+        BigDecimal tmpAllWinMoney = new BigDecimal(0);//临时盈利总金额
+        BigDecimal tmpAllLoseMoney = new BigDecimal(0);//临时输掉总金额
+
+
         int time = 0;//倍投下标
         double maxMoney = 0;//最大投入金额
         int maxWinTime = 0;//最大连赢次数
@@ -96,24 +100,44 @@ public class HouErZhiXuanRuleTest {
         int allWinTime = 0;//本次统计总赢次数
         int allLoseTime = 0;//本次统计总的输次数
         for (int m = 0; m < mats.length - 1; m++) {
+            if (multiple.length <= time) {
+                System.out.println("超出最大倍投，不适合投注");
+                break;
+            }
+            BigDecimal tmpWinMoney = null;
+            BigDecimal tmpLoseMoney = null;
             String tmpData = "";
             String nums = NumberTools.getSubNum(mats[m], location, 2);
             if (getFuShiDaDiString().contains(nums)) {//赢
 
+
                 if (time > 0) {
                     double inputMoney = NumberTools.getCalResult(initMoney, multiple[time]);
                     maxMoney = maxMoney > inputMoney ? maxMoney : inputMoney;
+
+
+                    tmpWinMoney = winMoney.multiply(new BigDecimal(multiple[time]));
+                    tmpLoseMoney = initMoney.multiply(new BigDecimal(multiple[time]));
+
+                    //本次净收益金额
+                    BigDecimal tmpIncomeMoney = (winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time]));
+
+
                     tmpData = mats[m] + "  赢 1  " + inputMoney + "  "
-                            + NumberTools.getMoneyString((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
-                    //盈利计算
-                    incomeMoney = incomeMoney.add((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
+                            + NumberTools.getMoneyString(tmpIncomeMoney);
+
+//                    //盈利计算
+//                    incomeMoney = incomeMoney.add((winMoney.subtract(initMoney).subtract(initMoney.divide(new BigDecimal(2)))).multiply(new BigDecimal(multiple[time])));
 
                 } else {
+                    tmpWinMoney = winMoney;
+                    tmpLoseMoney = initMoney;
 
                     tmpData = mats[m] + "  赢 1  " + NumberTools.getMoneyString(initMoney) + "  " + NumberTools.getMoneyString(winMoney.subtract(initMoney));
-                    //盈利计算
-                    incomeMoney = incomeMoney.add(winMoney.subtract(initMoney));
                 }
+                //临时赢取总金额
+                tmpAllWinMoney = tmpAllWinMoney.add(tmpWinMoney);
+
                 //后续标识操作
 
                 tmpLoseTime = 0;
@@ -124,7 +148,11 @@ public class HouErZhiXuanRuleTest {
                 //统计最大连赢次数
                 maxWinTime = maxWinTime > tmpWinTime ? maxWinTime : tmpWinTime;
             } else {//输
-                tmpData = mats[m] + "  输 0  " + NumberTools.getCalResult(initMoney, multiple[time]);
+                double thisLoseMoney = NumberTools.getCalResult(initMoney, multiple[time]);
+                tmpData = mats[m] + "  输 0  " + thisLoseMoney;
+
+
+                tmpLoseMoney = new BigDecimal(thisLoseMoney);
 
                 //数值处理
 
@@ -135,8 +163,12 @@ public class HouErZhiXuanRuleTest {
                 //统计最大连挂次数
                 maxLoseTime = maxLoseTime > tmpLoseTime ? maxLoseTime : tmpLoseTime;
             }
+            tmpAllLoseMoney= tmpAllLoseMoney.add(tmpLoseMoney);
             dataBuilder.append(tmpData).append("\n");
         }
+
+        incomeMoney = tmpAllWinMoney.subtract(tmpAllLoseMoney);
+
         PrintDataBean bean = new PrintDataBean();
         bean.setCaiPiaoCode(caiPiaoCode)
                 .setInitMoney(initMoney)
