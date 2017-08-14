@@ -1,7 +1,6 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
 import org.apache.commons.lang.StringUtils;
-import org.download.util.HtmlFilterDataRequest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

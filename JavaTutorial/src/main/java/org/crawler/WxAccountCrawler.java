@@ -79,32 +79,35 @@ public class WxAccountCrawler extends BreadthCrawler {
             String jsonStr = page.html().substring(startIndex, endIndex);
             JSONObject json = new JSONObject(jsonStr);
             JSONArray articleJSONArray = json.getJSONArray("list");
+            String titleList = "";
             for (int i = 0; i < articleJSONArray.length(); i++) {
                 JSONObject articleJSON = articleJSONArray.getJSONObject(i).getJSONObject("app_msg_ext_info");
                 String title = articleJSON.getString("title").trim();
                 String key = account + "_" + title;
                 String articleUrl = "http://mp.weixin.qq.com" + articleJSON.getString("content_url").replace("&", "&");
                 next.add(new CrawlDatum(articleUrl, "article").key(key).meta("account", account));
+                titleList+=key+"\n";
             }
 
+            System.out.println(titleList);
         } else if (page.matchType("article")) {
             //对于文章页
             //抽取标题、内容等信息，此处仅print少数信息作为参考
-            String title = page.select("h2.rich_media_title").first().text().trim();
-            String date = page.select("em#post-date").first().text().trim();
-            String content = page.select("div.rich_media_content").first().text().trim();
-
-            try {
-                writeHistoryKey(page.key());
-                JSONObject articleJSON = new JSONObject();
-                articleJSON.append("account", account)
-                        .append("title", title)
-                        .append("date", date)
-                        .append("content", content);
-                System.out.println(articleJSON);
-            } catch (IOException ex) {
-                LOG.info("writer exception", ex);
-            }
+//            String title = page.select("h2.rich_media_title").first().text().trim();
+//            String date = page.select("em#post-date").first().text().trim();
+//            String content = page.select("div.rich_media_content").first().text().trim();
+//
+//            try {
+//                writeHistoryKey(page.key());
+//                JSONObject articleJSON = new JSONObject();
+//                articleJSON.append("account", account)
+//                        .append("title", title)
+//                        .append("date", date)
+//                        .append("content", content);
+//                System.out.println(articleJSON);
+//            } catch (IOException ex) {
+//                LOG.info("writer exception", ex);
+//            }
 
         }
     }

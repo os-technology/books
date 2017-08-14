@@ -1,4 +1,4 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
 /**
  * 新天地参数配置

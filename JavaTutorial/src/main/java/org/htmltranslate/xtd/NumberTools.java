@@ -1,8 +1,7 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.download.xtd.params.PrintDataBean;
+import org.htmltranslate.xtd.params.PrintDataBean;
 
 import java.math.BigDecimal;
 import java.util.Date;

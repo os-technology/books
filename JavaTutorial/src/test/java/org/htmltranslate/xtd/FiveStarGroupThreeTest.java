@@ -1,6 +1,6 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
-import org.download.xtd.params.PrintDataBean;
+import org.htmltranslate.xtd.params.PrintDataBean;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ public class FiveStarGroupThreeTest {
     @Test
     public void test_FenFenCai_Star() {
 //NumberTools
-        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray(200);
         handleNumList(mats, "111", 5);
     }
 

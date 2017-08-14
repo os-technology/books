@@ -1,4 +1,4 @@
-package org.download.xtd.params;
+package org.htmltranslate.xtd.params;
 
 import java.math.BigDecimal;
 

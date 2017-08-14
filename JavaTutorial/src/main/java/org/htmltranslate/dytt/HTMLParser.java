@@ -1,6 +1,5 @@
-package org.download.dytt;
+package org.htmltranslate.dytt;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class HTMLParser {

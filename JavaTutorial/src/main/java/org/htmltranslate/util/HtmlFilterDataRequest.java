@@ -1,4 +1,4 @@
-package org.download.util;
+package org.htmltranslate.util;
 
 /**
  * html过滤参数请求

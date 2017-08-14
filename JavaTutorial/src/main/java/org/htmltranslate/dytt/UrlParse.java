@@ -1,4 +1,4 @@
-package org.download.dytt;
+package org.htmltranslate.dytt;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
 import org.junit.Test;
 

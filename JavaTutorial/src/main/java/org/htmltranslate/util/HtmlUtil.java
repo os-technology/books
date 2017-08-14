@@ -1,4 +1,4 @@
-package org.download.util;
+package org.htmltranslate.util;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -102,4 +102,12 @@ public class HtmlUtil {
 
         return dataList;
     }
+
+
+    public static String getSubResultFromString(String input,String start,String end){
+
+        return input.substring(input.indexOf(start)+1,input.indexOf(end));
+
+    }
+
 }

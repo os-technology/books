@@ -18,7 +18,7 @@ public class HttpStreamTest {
         int bytesum = 0;
         int byteread = 0;
 
-        URL url = new URL("http://www.paymax.cc/api/v1/statement/download?startTime=1483977600000&endTime=1484305398497&channelCategory=VAS&statementType=CERTIFICATION&Authorization=OAuth 6d30f3c50083dddf345e07e967e16ed2f40ddf8d0510ea85bc4d38b6d2864fe5");
+        URL url = new URL("http://www.paymax.cc/api/v1/statement/htmltranslate?startTime=1483977600000&endTime=1484305398497&channelCategory=VAS&statementType=CERTIFICATION&Authorization=OAuth 6d30f3c50083dddf345e07e967e16ed2f40ddf8d0510ea85bc4d38b6d2864fe5");
 
         try {
             URLConnection conn = url.openConnection();

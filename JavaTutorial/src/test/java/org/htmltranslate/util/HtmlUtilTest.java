@@ -1,7 +1,5 @@
-package org.download.util;
+package org.htmltranslate.util;
 
-import org.download.xtd.XtdHtmlParamsRequest;
-import org.download.xtd.XtdNumberUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

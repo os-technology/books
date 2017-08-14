@@ -1,6 +1,6 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
-import org.download.xtd.params.PrintDataBean;
+import org.htmltranslate.xtd.params.PrintDataBean;
 import org.junit.Test;
 
 import java.math.BigDecimal;

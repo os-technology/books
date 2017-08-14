@@ -1,4 +1,4 @@
-package org.download.xtd;
+package org.htmltranslate.xtd;
 
 /**
  * 数据解析坐标参数配置
