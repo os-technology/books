@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+
+</head>
+<body>
+
+
+<textarea id="text" style="width: 500px;height: 300px;"></textarea>
+
+</body>
+
+<script type="text/javascript">
+    var a = 1;
+    function startRun() {
+        $(document).ready(function () {
+
+            $.ajax({
+                async: false,
+                url: "http://www.7879123.com/json/cqssc_json_A.js",
+                type: "GET",
+                dataType: 'json',
+                timeout: 2000,
+                //返回Json类型
+                contentType: "application/json;utf-8",
+                //服务器段返回的对象包含name,data属性.
+                success: function (result) {
+                    var val = $("#text").val();
+                    var newPlan = result.NewGame.WaitGame;
+                    if (val!=newPlan){
+                        $("#text").val(result.NewGame.WaitGame);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+
+        });
+        setTimeout('startRun()',1000);
+    }
+    startRun();
+
+</script>
+</html>
+
+<!--var sUrl = 'http://www.7879123.com/json/cqssc_json_A.js';-->
+<!--$("#planValue").val(result.NewGame.WaitGame);-->
+
