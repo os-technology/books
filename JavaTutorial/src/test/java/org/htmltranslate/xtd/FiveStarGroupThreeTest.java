@@ -31,7 +31,7 @@ public class FiveStarGroupThreeTest {
      */
     @Test
     public void testTaiWanWuFenCaiHtml() {
-        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
         handleNumList(mats,"182", 5);
     }
 

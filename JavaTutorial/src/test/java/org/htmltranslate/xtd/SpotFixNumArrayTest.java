@@ -24,7 +24,7 @@ public class SpotFixNumArrayTest {
 
     @Test
     public void testTaiWanNumArray() {
-        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
         fixNum(mats, 1, "01368", null,"182");
     }
     /**

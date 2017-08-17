@@ -21,7 +21,6 @@ import java.util.Date;
 
 public class XTDHtmlStringTranslateUtil {
 
-
     /**
      * 得到彩票 期 号 数据
      *
@@ -29,9 +28,18 @@ public class XTDHtmlStringTranslateUtil {
      */
     public static String[] getMatArray() {
 
+        return getMatArray(getToday());
+    }
+
+    /**
+     * 得到彩票 期 号 数据
+     *
+     * @return
+     */
+    public static String[] getMatArray(String mark) {
+
         String html = getHtml();
-        String format = "";
-        format = getTranslateLongHtmlNumbersString(getFirstStage(html, getToday()), html);
+        String format = getTranslateLongHtmlNumbersString(getFirstStage(html, mark), html);
 
 //        format = getNumList();
 
@@ -40,22 +48,23 @@ public class XTDHtmlStringTranslateUtil {
     }
 
 
+
     /**
-     * 五分彩解析
+     * 台湾五分彩解析
      *
      * @return
      */
-    public static String[] getWufenMatArray() {
-        String html = getHtml();//HTML内容
-        String format = getTranslateLongHtmlNumbersString(getFirstStage(html, getWuFenCaiMark()), html);
-//        String format = getNumList();
-        String[] mats = format.trim().split("\n");
-        return mats;
+    public static String[] getTaiWanWufenMatArray() {
+        return getMatArray(getTaiWanWuFenCaiMark());
     }
 
-    //五分彩起始标识
-    private static String getWuFenCaiMark() {
-        return "1060";
+    /**
+     * 北京五分彩解析
+     *
+     * @return
+     */
+    public static String[] getBeijingWufenMatArray() {
+        return getMatArray(getBeijingMark());
     }
 
     /**
@@ -64,17 +73,24 @@ public class XTDHtmlStringTranslateUtil {
      * @return
      */
     public static String[] getPKMatArray() {
-        String html = getHtml();//HTML内容
-        String format = getTranslateLongHtmlNumbersString(getFirstStage(html, getPKMark()), html);
-//        String format = getNumList();
-        String[] mats = format.trim().split("\n");
-        return mats;
+        return getMatArray(getPKMark());
     }
 
+
+    private static String getBeijingMark(){
+        return "8";
+    }
+    /**
+     * 北京PK10标识
+     * @return
+     */
     private static String getPKMark() {
         return "63";
     }
-
+    //台湾五分彩起始标识
+    private static String getTaiWanWuFenCaiMark() {
+        return "1060";
+    }
     /**
      * 台湾五分彩
      *

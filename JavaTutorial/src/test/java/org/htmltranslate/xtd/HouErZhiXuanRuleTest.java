@@ -40,7 +40,7 @@ public class HouErZhiXuanRuleTest {
     @Test
     public void test_HouerZhiXuanFenFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        compareStrategy(mats, "111", 5);
+        compareStrategy(mats, "111", 2);
     }
 
     @Test
@@ -55,8 +55,17 @@ public class HouErZhiXuanRuleTest {
      */
     @Test
     public void test_TaiWanWuFenCai_Result() {
-        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
-        compareStrategy(mats, "182", 2);
+        String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
+        compareStrategy(mats, "182", 5);
+    }
+
+    /**
+     * 北京五分彩
+     */
+    @Test
+    public void test_BeiJingWuFenCai_Result() {
+        String[] mats = XTDHtmlStringTranslateUtil.getBeijingWufenMatArray();
+        compareStrategy(mats, "181", 2);
     }
 
     private void compareStrategy(String[] mats, String caipiaoCode, int location) {

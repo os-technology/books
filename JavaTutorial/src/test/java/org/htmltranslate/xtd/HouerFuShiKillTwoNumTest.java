@@ -46,7 +46,7 @@ public class HouerFuShiKillTwoNumTest {
      */
     @Test
     public void testTaiWanWuFenCaiHtml() {
-        String[] mats = XTDHtmlStringTranslateUtil.getWufenMatArray();
+        String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
         houerFuShiKillTwoNum(mats,"182", 5);
     }
 
