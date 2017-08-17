@@ -56,7 +56,10 @@ public class HouerFuShiKillTwoNumTest {
     @Test
     public void testBeiJingPK10_Html() {
         String[] mats = XTDHtmlStringTranslateUtil.getPKMatArray();
-        houerFuShiKillTwoNum(mats,"1001", 2);
+        for (String mat:mats){
+            System.out.println(mat);
+        }
+//        houerFuShiKillTwoNum(mats,"1001", 2);
     }
     /**
      * 后二复式杀号

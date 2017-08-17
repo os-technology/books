@@ -47,6 +47,21 @@ public class XTDHtmlStringTranslateUtil {
         return mats;
     }
 
+    /**
+     * 得到彩票 期 号 数据
+     *
+     * @return
+     */
+    public static String[] getMatArray(String mark,String caipiaoCode) {
+
+        String html = getHtml();
+        String format = getTranslateLongHtmlNumbersString(getFirstStage(html, mark), html,caipiaoCode);
+
+//        format = getNumList();
+
+        String[] mats = format.trim().split("\n");
+        return mats;
+    }
 
 
     /**
@@ -73,7 +88,7 @@ public class XTDHtmlStringTranslateUtil {
      * @return
      */
     public static String[] getPKMatArray() {
-        return getMatArray(getPKMark());
+        return getMatArray(getPKMark(),"1001");
     }
 
 
@@ -109,12 +124,21 @@ public class XTDHtmlStringTranslateUtil {
      * @return
      */
     private static String getTranslateLongHtmlNumbersString(int firstStage, String html) {
+        return getTranslateLongHtmlNumbersString(firstStage,html,null);
+    }
+    private static String getTranslateLongHtmlNumbersString(int firstStage, String html,String caipiaoCode) {
         HtmlFilterDataRequest request = getLongValueCaiPiao();
 
-        return translateHtml2NumListString(firstStage, html, request);
+        return translateHtml2NumListString(firstStage, html, request,caipiaoCode);
     }
 
+
     private static String translateHtml2NumListString(int firstStage, String html, HtmlFilterDataRequest request) {
+       return translateHtml2NumListString(firstStage,html,request,null);
+    }
+
+
+    private static String translateHtml2NumListString(int firstStage, String html, HtmlFilterDataRequest request,String caipiaoCode) {
         ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
 
         Assert.assertTrue(result.size() > 0);
@@ -123,17 +147,31 @@ public class XTDHtmlStringTranslateUtil {
         String date = getToday();//日期格式，小于1000加0前缀
         String format = "";//结果字符串拼接，后续处理以 \n 分割为数组
 
-        for (String output : result) {
+        if (caipiaoCode==null) {
+            for (String output : result) {
 
-            if (i % 5 == 0) {
-                String tmp = date + (stage++) + "  ";
-                format += "\n" + tmp;
+                if (i % 5 == 0) {
+                    String tmp = date + (stage++) + "  ";
+                    format += "\n" + tmp;
+                }
+                format += output;
+                i++;
             }
-            format += output;
-            i++;
+        }else if("1001".equals(caipiaoCode)){
+            for (String output : result) {
+
+                if (i % 10 == 0) {
+                    String tmp = date + (stage++) + "  ";
+                    format += "\n" + tmp;
+                }
+                format += "-"+output;
+                i++;
+            }
         }
         return format;
     }
+
+
 
     /**
      * 获取内容的第一次期号

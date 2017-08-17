@@ -14,8 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.algorithm.list.base64.Base64;
 
 /**
- * 不可用
- * 
+ * 参考地址
+ * http://blog.csdn.net/smartbetter/article/details/54017759
  * @author yujinshui
  * @createTime 2017年4月3日 下午8:08:54
  */
@@ -146,6 +146,6 @@ public class AesUtil {
 		byte[] decryptFrom = parseHexStr2Byte(encryptResultStr);
 		byte[] decryptResult = decrypt(decryBase64.getBytes(), password);
 		System.out.println(new String(decryptResult));
-		// System.out.println("解密后：" + new String(decryptResult));
+		 System.out.println("解密后：" + new String(decryptResult));
 	}
 }

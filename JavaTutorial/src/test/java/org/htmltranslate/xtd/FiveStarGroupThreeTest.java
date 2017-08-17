@@ -32,9 +32,15 @@ public class FiveStarGroupThreeTest {
     @Test
     public void testTaiWanWuFenCaiHtml() {
         String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
-        handleNumList(mats,"182", 5);
+        handleNumList(mats, "182", 5);
     }
 
+    @Test
+    public void test_ShiShiCai_Star() {
+//NumberTools
+        String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
+        handleNumList(mats, "101", 5);
+    }
 
     /**
      * 分类判断处理
@@ -44,11 +50,9 @@ public class FiveStarGroupThreeTest {
      * @param location    号码位置
      */
     private void handleNumList(String[] mats, String caipiaoCode, int location) {
-        if (location == 2) {
-            handleNumList(mats, caipiaoCode, location, "100", new BigDecimal(0.01));
-        } else if (location == 5) {
-            handleNumList(mats, caipiaoCode, location, "100", new BigDecimal(0.01));
-        }
+
+        handleNumList(mats, caipiaoCode, location, "100", new BigDecimal(0.01));
+
     }
 
     /**
@@ -80,7 +84,7 @@ public class FiveStarGroupThreeTest {
         int allLoseTime = 0;//本次统计总的输次数
 
         for (String mat : mats) {
-            if (multiple.length<=time){
+            if (multiple.length <= time) {
                 System.out.println("超出最大倍投，不适合投注");
                 break;
             }
@@ -114,7 +118,6 @@ public class FiveStarGroupThreeTest {
             } else {
                 double tmpLoseMoney = NumberTools.getCalResult(initMoney, multiple[time]);
                 tmpData = mat + "  输 " + tmpLoseMoney;
-                incomeMoney = incomeMoney.subtract(new BigDecimal(tmpLoseMoney));
 
                 tmpWinTime = 0;
                 time++;
