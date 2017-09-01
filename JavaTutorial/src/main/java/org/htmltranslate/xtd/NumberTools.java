@@ -44,7 +44,8 @@ public class NumberTools {
      * @return
      */
     public static int[] getFiveStarSixtyModel() {
-        int[] store = {1, 2, 4, 8, 17, 36, 76, 160};
+//        int[] store = {1, 2, 4, 8, 17, 36, 76, 160};
+        int[] store = {1, 1,1,1,1,1,1,1,1,1,1,1,1,1};
         return store;
 
     }

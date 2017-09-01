@@ -6,48 +6,73 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * 后二规则测试
- *
  * @author yuijnshui@lxfintech.com
- * @Title: HouErZhiXuanRuleTest
+ * @Title: ThreeStarZhiXuanRuleTest
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: lxjr.com
- * @Created on 2017/8/3上午9:57
+ * @Created on 2017/8/28下午2:14
  */
 
-public class HouErZhiXuanRuleTest {
-    /**
-     * 后二复式大底
-     * 使用方法：个位与十位不包含2367定位胆即可投注
-     *
-     * @return
-     */
-    private String getFuShiDaDiString() {
+public class ThreeStarZhiXuanRuleTest {
 
-//        return "20 21 24 25 26 27 28 31 32 34 35 36 40 45 47 48 51 52 53 54 56 57 59 64 67 68 69 70 71 73 74 78 82 84 88 92 93 96 97 99";
-//        return "00 04 05 06 07 08 10 11 15 16 19 23 24 25 26 29 33 35 38 42 43 44 45 47 48 51 55 56 57 58 59 60 63 64 65 69 72 73 74 75 77 80 82 83 84 87 88 89 90 91 92 97";
-//        return "00 01 04 06 07 10 12 13 14 15 16 17 18 19 20 24 26 27 30 31 32 33 35 36 37 39 41 42 43 44 45 46 47 48 50 51 52 53 54 55 59 61 62 63 64 65 66 67 68 71 73 74 75 76 78 79 80 82 83 85 86 87 89 91 92 93 96 97 98 99";
-        return "02,03,06,07,12,13,16,17," +
-                "20,21,22,23,24,25,26,27," +
-                "28,29,30,31,32,33,34,35," +
-                "36,37,38,39,42,43,46,47," +
-                "52,53,56,57,60,61,62,63," +
-                "64,65,66,67,68,69,70,71," +
-                "72,73,74,75,76,77,78,79," +
-                "82,83,86,87,92,93,96,97";
+    private String getThreeDaDiString(){
+        return "005　007　015　016　017　018　025　027　035　037" +
+             "　038　045　047　050　051　052　053　054　055　056" +
+             "　057　058　061　065　067　070　071　072　073　074" +
+                "　075　076　077　078　081　083　085　087　105　106" +
+                "　107　108　116　118　126　128　129　136　138　145" +
+                "　146　148　149　150　154　156　158　160　161　162" +
+                "　163　164　165　166　167　168　169　170　176　178" +
+                "　180　181　182　183　184　185　186　187　188　189" +
+                "　192　194　196　198　205　207　216　218　219　229" +
+                "　236　238　239　245　247　249　250　254　256　259" +
+                "　261　263　265　267　269　270　274　276　278　279" +
+                "　281　283　287　289　291　292　293　294　295　296" +
+                "　297　298　299　305　307　308　316　318　326　328" +
+                "　329　338　346　347　348　349　350　356　358　361" +
+                "　362　364　365　367　368　370　374　376　378　380" +
+                "　381　382　383　384　385　386　387　388　389　392" +
+                "　394　398　405　407　415　416　418　419　425　427" +
+                "　429　436　437　438　439　450　451　452　457　458" +
+                "　459　461　463　467　470　472　473　475　476　478" +
+                "　479　481　483　485　487　491　492　493　495　497" +
+                "　500　501　502　503　504　505　506　507　508　510" +
+                "　514　516　518　520　524　526　529　530　536　538" +
+                "　540　541　542　547　548　549　550　560　561　562" +
+                "　563　570　574　580　581　583　584　592　594　601" +
+                "　605　607　610　611　612　613　614　615　616　617" +
+                "　618　619　621　623　625　627　629　631　632　634" +
+                "　635　637　638　641　643　647　650　651　652　653" +
+                "　661　670　671　672　673　674　681　683　691　692" +
+                "　700　701　702　703　704　705　706　707　708　710" +
+                "　716　718　720　724　726　728　729　730　734　736" +
+                "　738　740　742　743　745　746　748　749　750　754" +
+                "　760　761　762　763　764　770　780　781　782　783" +
+                "　784　792　794　801　803　805　807　810　811　812" +
+                "　813　814　815　816　817　818　819　821　823　827" +
+                "　829　830　831　832　833　834　835　836　837　838" +
+                "　839　841　843　845　847　850　851　853　854　861" +
+                "　863　870　871　872　873　874　881　883　891　892" +
+                "　893　912　914　916　918　921　922　923　924　925" +
+                "　926　927　928　929　932　934　938　941　942　943" +
+                "　945　947　952　954　961　962　972　974　981　982" +
+                "　983　992";
     }
+
+
+
 
     @Test
     public void test_HouerZhiXuanFenFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        compareStrategy(mats, "111", 2,new BigDecimal(0.01));
+        compareStrategy(mats, "111", 3,new BigDecimal(0.01));
     }
 
     @Test
     public void test_HouerZhiXuanShiShiCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        compareStrategy(mats, "101", 5,new BigDecimal(0.01));
+        compareStrategy(mats, "101", 3,new BigDecimal(0.001));
     }
 
     /**
@@ -56,7 +81,7 @@ public class HouErZhiXuanRuleTest {
     @Test
     public void test_TaiWanWuFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getTaiWanWufenMatArray();
-        compareStrategy(mats, "182", 2,new BigDecimal(0.01));
+        compareStrategy(mats, "182", 5,new BigDecimal(0.01));
     }
 
     /**
@@ -65,14 +90,20 @@ public class HouErZhiXuanRuleTest {
     @Test
     public void test_BeiJingWuFenCai_Result() {
         String[] mats = XTDHtmlStringTranslateUtil.getBeijingWufenMatArray();
-        compareStrategy(mats, "181", 2,new BigDecimal(0.01));
+        compareStrategy(mats, "181", 3,new BigDecimal(0.01));
     }
 
+
+
+
+
     private void compareStrategy(String[] mats, String caipiaoCode, int location,BigDecimal moneyModel) {
-        if (location == 2) {
-            compare_HouerZhiXuan_NumResult(mats, caipiaoCode, moneyModel, location, "10");
-        } else if (location == 5) {
-            compare_HouerZhiXuan_NumResult(mats, caipiaoCode, moneyModel, location, "00");
+        if (location == 3) {
+            compare_HouerZhiXuan_NumResult(mats, caipiaoCode, moneyModel, location, "40");
+        } else if (location == 4) {
+            compare_HouerZhiXuan_NumResult(mats, caipiaoCode, moneyModel, location, "30");
+        }else if (location == 5) {
+            compare_HouerZhiXuan_NumResult(mats, caipiaoCode, moneyModel, location, "20");
         }
     }
 
@@ -91,10 +122,10 @@ public class HouErZhiXuanRuleTest {
 
 
         int multiple[] = NumberTools.getMultipleType(10);//倍投倍数值
-        String[] numArray = getFuShiDaDiString().split(",| ");
+        String[] numArray = XTDHtmlStringTranslateUtil.getSelectedArray(getThreeDaDiString());
         BigDecimal initMoney = new BigDecimal(2).multiply(moneyPattern).multiply(new BigDecimal(numArray.length));
         ;//初始投入金额
-        BigDecimal winMoney = new BigDecimal(19.4).multiply(moneyPattern).multiply(new BigDecimal(10));//每次盈利金额
+        BigDecimal winMoney = new BigDecimal(19.4).multiply(moneyPattern).multiply(new BigDecimal(100));//每次盈利金额
         BigDecimal incomeMoney = new BigDecimal(0);//最终净利润金额
         BigDecimal tmpAllWinMoney = new BigDecimal(0);//临时盈利总金额
         BigDecimal tmpAllLoseMoney = new BigDecimal(0);//临时输掉总金额
@@ -116,8 +147,8 @@ public class HouErZhiXuanRuleTest {
             BigDecimal tmpWinMoney = null;
             BigDecimal tmpLoseMoney = null;
             String tmpData = "";
-            String nums = NumberTools.getSubNum(mats[m], location, 2);
-            if (getFuShiDaDiString().contains(nums)) {//赢
+            String nums = NumberTools.getSubNum(mats[m], location, 3);
+            if (getThreeDaDiString().contains(nums)) {//赢
 
 
                 if (time > 0) {
@@ -191,22 +222,11 @@ public class HouErZhiXuanRuleTest {
                 .setMultipleModel(multiple)
                 .setStageNum(mats.length);
 
-        printResult.append("投注模式：" + NumberTools.getPlaySelectType(playTypeCode) + "：" + getFuShiDaDiString()).append("\n").append("\n");
-        printResult.append("注数：" + getFuShiDaDiString().split(",| ").length).append("\n").append("\n");
+        printResult.append("投注模式：" + NumberTools.getPlaySelectType(playTypeCode) + "：" + getThreeDaDiString()).append("\n").append("\n");
+        printResult.append("注数：" + XTDHtmlStringTranslateUtil.getSelectedArray(getThreeDaDiString()).length).append("\n").append("\n");
 
         NumberTools.print(printResult, bean);
         System.out.println(dataBuilder);
         System.out.println(printResult);
     }
-
-
-    /**
-     * 个位与十位不包含的数字内容
-     *
-     * @return
-     */
-    private String getLostNum() {
-        return "2367";
-    }
-
 }

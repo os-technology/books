@@ -34,7 +34,7 @@ public class NumCollectListTest {
     @Test
     public void testCollect_ShiShiCai_NumList() {
         String[] mats = XTDHtmlStringTranslateUtil.getMatArray();
-        handleResult(mats, "101", 5);
+        handleResult(mats, "101", 2);
     }
 
     public void handleResult(String[] mats, String caipiaoCode, int location) {

@@ -104,7 +104,7 @@ public class FiveStarGroupThreeTest {
                         + NumberTools.getMoneyString(tmpIncomeMoney);
                 //总盈利计算
                 incomeMoney = incomeMoney.add(tmpIncomeMoney);
-
+//                System.out.println("---"+NumberTools.getMoneyString(incomeMoney));
                 //后续标识操作
 
                 tmpLoseTime = 0;
