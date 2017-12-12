@@ -22,11 +22,11 @@ public class HtmlFilterDataRequest {
     private String urlPageSuffix;
 
     /**
-     * HTML抓取开始位置
+     * HTML抓取开始位置，在整个HTML内容里必须唯一
      */
     private String htmlStartRange;
     /**
-     * HTML抓取结束位置
+     * HTML抓取结束位置，在整个HTML内容里必须唯一
      */
     private String htmlEndRange;
     /**

@@ -1,13 +1,15 @@
 package org.fastjson.bean;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Fruit {
 
 	//@JSONField(name = "size_1")
 	private int size_1;
 	//@JSONField(name = "shape_1")
 	private String shape_info;
-	//@JSONField(name = "color_1")
+	@JSONField(name = "color_1")
 	private String color_info;
 
 	/**
@@ -57,6 +59,13 @@ public class Fruit {
 		this.color_info = color_info;
 	}
 
-	 
 
+	@Override
+	public String toString() {
+		return "Fruit{" +
+				"size_1=" + size_1 +
+				", shape_info='" + shape_info + '\'' +
+				", color_info='" + color_info + '\'' +
+				'}';
+	}
 }

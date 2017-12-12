@@ -61,7 +61,11 @@ public class ThreeStarZhiXuanRuleTest {
     }
 
 
-
+    @Test
+    public void testValue(){
+        System.out.println(getThreeDaDiString());
+        System.out.println(getThreeDaDiString().split("　").length);
+    }
 
     @Test
     public void test_HouerZhiXuanFenFenCai_Result() {
