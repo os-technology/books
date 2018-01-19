@@ -16,6 +16,13 @@ import java.util.*;
 public class TmpTest {
 
     @Test
+    public void testOut(){
+        String str = "10";
+        System.out.println(str);
+        str="20";
+        System.out.println(str);
+    }
+    @Test
     public void testGetEnum(){
         OrderTypeEnum typeEnum = OrderTypeEnum.valueOf("charge".toUpperCase());
         System.out.println(typeEnum.name());
