@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+</head>
+<body style="overflow-y:hidden;overflow-x:hidden">
+
+
+<input type="button" id="create" value="创建对象"/><br>
+<input type="button" id="ie" value="浏览器判断"/>
+
+<div id="qrcode"></div>
+<br>
+
+</body>
+<script type="text/javascript">
+    //js创建对象练习
+    var clock = function (hour, minute, second) {
+    }
+    clock.prototype = {
+        constructor: clock,    //必须手动设置这个属性，不然就断了与构造函数的联系了。没有实例共享原型的意义了。
+        hour: 12,
+        minute: 12,
+        second: 12,
+        showTime: function () {
+            alert(this.hour + ":" + this.minute + ":" + this.second)
+        }
+    }
+
+    $("#create").click(function () {
+
+        var newClock = new clock();
+        newClock.hour = 23;
+        newClock.showTime();
+    });
+
+    $("#ie").click(function () {
+        var version = IEVersion();
+        alert("IE"+version);
+//        var isIE=!!window.ActiveXObject;
+//        var isIE6=isIE&&!window.XMLHttpRequest;
+//        var isIE8=isIE&&!!document.documentMode;
+//        var isIE7=isIE&&!isIE6&&!isIE8;
+//        if (isIE){
+//            if (isIE6){
+//                alert("ie6");
+//            }else if (isIE8){
+//                alert("ie8");
+//            }else if (isIE7){
+//                alert("ie7");
+//            }
+//        }
+    });
+    function IEVersion() {
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+        var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+        var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+        if (isIE) {
+            var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+            reIE.test(userAgent);
+            var fIEVersion = parseFloat(RegExp["$1"]);
+            if (fIEVersion == 7) {
+                return 7;
+            } else if (fIEVersion == 8) {
+                return 8;
+            } else if (fIEVersion == 9) {
+                return 9;
+            } else if (fIEVersion == 10) {
+                return 10;
+            } else {
+                return 6;//IE版本<=7
+            }
+        } else if (isEdge) {
+            return 'edge';//edge
+        } else if (isIE11) {
+            return 11; //IE11
+        } else {
+            return -1;//不是ie浏览器
+        }
+    }
+</script>
+
+</html>
+

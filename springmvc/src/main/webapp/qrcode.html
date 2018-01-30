@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+</head>
+<body style="overflow-y:hidden;overflow-x:hidden">
+
+<input type="text" id="content" value="hello,world"/>
+<input type="button" id="create" value="创建二维码"/>
+
+<div id="qrcode"></div>
+<br>
+
+<h5>IE8下的二维码创建</h5><br>
+<div id="qrcode-ie8"></div>
+
+</body>
+<script type="text/javascript">
+
+    $("#create").click(function () {
+
+        var data = $("#content").val();
+        $('#qrcode').html("");
+        try {
+            jQuery('#qrcode').qrcode(data);
+        } catch (err) {
+        }
+        jQuery('#qrcode-ie8').qrcode({
+            render: "table",
+            text: data
+        });
+    });
+</script>
+
+</html>
+

@@ -32,8 +32,8 @@
 
     //第一套测试环境，demo商户的
 //  第一套测试环境公用商户
-    public static final String PRIVATE_KEY="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAN/lFh/G6d6phEgKypF5VGiCJfzAoHyV+nonjCuYwI4J25HiRkAeLWkkASGdKYatalQnwLhgOuGE6BBx2h4zQL72Vi+xP8H5h5t9KUvxvU1gHyZTWQT9gmChM6D29rFpuNam7m2oA5IEXLwEtuFQdJI8YzWqKNifQNvoFgkScklPAgMBAAECgYB0l4d95MfE++G24me6ecRK5/uAM49fUXquQgnsag9b6CY/QeXzXcOoDOfJ6V3GlGfaixkA6pu+9MckSSWctHPyBAIwmC0iiT/T03KkmY6E2FauxJ7PxFTPuNv4QWb8TKOUqUp4L1xEeCHcjQK/5mmo1DbvshaPqPTMzphmne3ZgQJBAPyIFk4ac1lxoEBHIr/Ar0yt7jO40OLGCg3nidGw+mb61WJeGPCXLNWj4q0RQKRLlqfbPvwW3/2IT5k9fDf0cq0CQQDi+E+tkws/NodGb7kBmIipQlvN6UMVTO4tMY7S8fWDZzi9bd/dUOHZV1vPq8WRzeTpoExOP5Cy+FrVtTnAxidrAkEA8pwDYdHDk+C35kjxN2t0fqRyvjoGZHeCXU1eeJggWSMOMczZBPsX1b/3G/IBOlZsTKMz5ZhMZRS59Cy/1DoCmQJAN6ogmHhMtNchvCOgYwTO13wf2dNQkYPJkinqVk/jH7QMFWFCGxxAF7a2HKuLC+RMNQQMUtCCI3KHjIwiuuWeOwJBAKYpLmWRYXeD6aTo8v0PXX9aUCBKA8gJ3rxDwUyp6yqYOeoajB/Uc5EcqpQCsVrG3xKDPWhcJkRH9lFf1S4y27U=";
-    public static final String AUTHORIZATION="27ab6b803cae4e69959543aacf0836d6";
+//	public static final String PRIVATE_KEY="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAN/lFh/G6d6phEgKypF5VGiCJfzAoHyV+nonjCuYwI4J25HiRkAeLWkkASGdKYatalQnwLhgOuGE6BBx2h4zQL72Vi+xP8H5h5t9KUvxvU1gHyZTWQT9gmChM6D29rFpuNam7m2oA5IEXLwEtuFQdJI8YzWqKNifQNvoFgkScklPAgMBAAECgYB0l4d95MfE++G24me6ecRK5/uAM49fUXquQgnsag9b6CY/QeXzXcOoDOfJ6V3GlGfaixkA6pu+9MckSSWctHPyBAIwmC0iiT/T03KkmY6E2FauxJ7PxFTPuNv4QWb8TKOUqUp4L1xEeCHcjQK/5mmo1DbvshaPqPTMzphmne3ZgQJBAPyIFk4ac1lxoEBHIr/Ar0yt7jO40OLGCg3nidGw+mb61WJeGPCXLNWj4q0RQKRLlqfbPvwW3/2IT5k9fDf0cq0CQQDi+E+tkws/NodGb7kBmIipQlvN6UMVTO4tMY7S8fWDZzi9bd/dUOHZV1vPq8WRzeTpoExOP5Cy+FrVtTnAxidrAkEA8pwDYdHDk+C35kjxN2t0fqRyvjoGZHeCXU1eeJggWSMOMczZBPsX1b/3G/IBOlZsTKMz5ZhMZRS59Cy/1DoCmQJAN6ogmHhMtNchvCOgYwTO13wf2dNQkYPJkinqVk/jH7QMFWFCGxxAF7a2HKuLC+RMNQQMUtCCI3KHjIwiuuWeOwJBAKYpLmWRYXeD6aTo8v0PXX9aUCBKA8gJ3rxDwUyp6yqYOeoajB/Uc5EcqpQCsVrG3xKDPWhcJkRH9lFf1S4y27U=";
+//    public static final String AUTHORIZATION="27ab6b803cae4e69959543aacf0836d6";
 
     //    ////// 第二、三套环境 王怡萌的商户17500000001
 ////商户自己的私钥【用com.Paymax.sign.RSAKeyGenerateUtil生成RSA秘钥对，公钥通过Paymax网站上传到Paymax，私钥设置到下面的变量中】
@@ -43,8 +43,8 @@
 
 
     //生产环境
-//    public static final String PRIVATE_KEY="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALh+04pzLGmCLIpTjUNGAIAeYkcndciAb1mClbaXdQHDeVQHwai0+uAwQHlLNEmvZtmdNDrBrJ1I2Fu09BjP+b4tiltvjpOTuB+8G25fS+BDCAqinTdVHbTEW+lCH72VP1b1Zv60R1ZYozDtOyAQmxHw2YlPXxEBsAKNVrLoMKcNAgMBAAECgYBlcjdXdaUCDvX2yaJvT1qPGCXqAiSdryGLEmbIE9fetGFOd0VhQsJ/64hIKbYCnlPrbKl/dWc4xQlSw9lEm3cy0Eu8B0/NlpQcHmvUtDiAMFyOoELR3x+VdAacBpdwTpZPVUiqpfAuR7O97KMj+34DorwRwfKbSyNIJnoE2EppAQJBANvAm9Mod0f8IlZp1DbBpINWrMkdP3QK0W2PthfMPZsVNi4rV9uk2E2NGYJLbEvharOFQr6HC01/WMTdyO2XDPECQQDW7W/MDcI6gI2BXw9ROSGSTqDKvd8kuNVjufwdbdlx5CAvNQ9I+LvDhTcKxNiwypht83y2YPqNaY6iH6n/fivdAkBSRZIRRB0kPik84PIqbeUBpvmZcfHHqCUwN5Wc40JNRWu7bU6/VMAGiMT8GvC4l/QysbmDS1vX7810JvSKvvqBAkEAwpCvZEoQSmWVtEgZ1a2idpA3f1Hjb5rjkiQL15haAIBDonimHakOUTGHYnhQsbq1wtNpUrD4IIwuUxXXDzNpAQJBAJzBK99thKns++zD5EYMYRlsPpNlyJj6QVShcoBPDMC6mvzvh5o4opn5J3uPdmbfrljpOYQW9oUqMQlq8+5fozo=";
-//    public static final String AUTHORIZATION="fc03d8dd040a41d49ef3d79ad28ea357";
+    public static final String PRIVATE_KEY="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALh+04pzLGmCLIpTjUNGAIAeYkcndciAb1mClbaXdQHDeVQHwai0+uAwQHlLNEmvZtmdNDrBrJ1I2Fu09BjP+b4tiltvjpOTuB+8G25fS+BDCAqinTdVHbTEW+lCH72VP1b1Zv60R1ZYozDtOyAQmxHw2YlPXxEBsAKNVrLoMKcNAgMBAAECgYBlcjdXdaUCDvX2yaJvT1qPGCXqAiSdryGLEmbIE9fetGFOd0VhQsJ/64hIKbYCnlPrbKl/dWc4xQlSw9lEm3cy0Eu8B0/NlpQcHmvUtDiAMFyOoELR3x+VdAacBpdwTpZPVUiqpfAuR7O97KMj+34DorwRwfKbSyNIJnoE2EppAQJBANvAm9Mod0f8IlZp1DbBpINWrMkdP3QK0W2PthfMPZsVNi4rV9uk2E2NGYJLbEvharOFQr6HC01/WMTdyO2XDPECQQDW7W/MDcI6gI2BXw9ROSGSTqDKvd8kuNVjufwdbdlx5CAvNQ9I+LvDhTcKxNiwypht83y2YPqNaY6iH6n/fivdAkBSRZIRRB0kPik84PIqbeUBpvmZcfHHqCUwN5Wc40JNRWu7bU6/VMAGiMT8GvC4l/QysbmDS1vX7810JvSKvvqBAkEAwpCvZEoQSmWVtEgZ1a2idpA3f1Hjb5rjkiQL15haAIBDonimHakOUTGHYnhQsbq1wtNpUrD4IIwuUxXXDzNpAQJBAJzBK99thKns++zD5EYMYRlsPpNlyJj6QVShcoBPDMC6mvzvh5o4opn5J3uPdmbfrljpOYQW9oUqMQlq8+5fozo=";
+    public static final String AUTHORIZATION="fc03d8dd040a41d49ef3d79ad28ea357";
 
     /**
      * 签名加密算法
@@ -125,8 +125,8 @@
     <title>Paymax demo</title>
 
     <!--Step 1. 嵌入Paymax JS SDK -->
-    <script type='text/javascript' src='http://test.paymax.cc/merchant-api/js/config?config=app_gR0CJIg9W46N511d'></script>
-    <%--<script type='text/javascript' src='https://www.paymax.cc/merchant-api/js/config?config=app_7hqF2S6GYXET457i'></script>--%>
+    <%--<script type='text/javascript' src='https://www.paymax.cc/merchant-api/js/config?config=app_18676p104o63E2s2'></script>--%>
+    <script type='text/javascript' src='https://www.paymax.cc/merchant-api/js/config?config=app_7hqF2S6GYXET457i'></script>
 
 </head>
 <body>
@@ -148,7 +148,7 @@
     map.put("title","Paymax demo");
     map.put("subject","subject1");
     map.put("body","body1");
-    map.put("amount",0.02);
+    map.put("amount",0.01);
     map.put("order_no", generateUUID());
     map.put("client_ip","127.0.0.1");
     map.put("extra",extra);

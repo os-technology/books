@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>-->
+</head>
+
+<body>
+<div id="js" style="text-align:center;">
+    <input type="text" id="password">
+    <input type="button" value="验证" onclick="bian()"/><br>
+
+    <span id="result"></span><br>
+    <input type="button" value="testJs" onclick="show()"/><br>
+    <input type="text" onKeyPress="press()">
+    <span id="message"></span><br>
+    <br>
+    <input type="button" value="<U+FEFF>success">
+
+</div>
+<script type="text/javascript" defer>
+    function press() {
+
+        var key = window.event.which;
+        alert(key);//
+
+    }
+
+    function bian() {
+        var pass = $("#password").val();
+        var check = /\W/;
+        if (!check.test(pass)) {
+            $("#result").html("正确");
+        } else {
+            $("#result").html("<font color='red'>错误</font>");
+        }
+
+    }
+
+    function show() {
+        var val = document.getElementById("password").value;
+
+        utilTools.msg(val);
+    }
+    var utilTools = {
+        init: function () {
+            alert("hello");
+        },
+        msg: function (msg) {
+            document.getElementById("message").innerHTML = msg;
+        },
+    }
+
+</script>
+
+</body>
+</html>
