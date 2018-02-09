@@ -28,7 +28,7 @@ public class QrcodeTest {
 	@Test
 	public void translateQrCode() {
 		try {
-			String result = QRCodeUtil.decode("/Users/yujinshui/Desktop/5.png");
+			String result = QRCodeUtil.decode("/Users/yujinshui/Desktop/pic.jpg");
 			System.out.println("解析结果：" + result);
 		} catch (Exception e) {
 			e.printStackTrace();

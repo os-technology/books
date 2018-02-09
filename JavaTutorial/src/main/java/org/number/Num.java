@@ -7,10 +7,10 @@ import java.math.BigDecimal;
  */
 public class Num {
 
-	public static void main(String[] args) {
+	private void cal(){
 		double a=1;
 		boolean flag = true;
-		for(int i=3;i<100000000l;i+=2){
+		for(int i=3;i<100000000L;i+=2){
 			if (flag) {
 				a = a + (-1.0 / i);
 				flag = false;
@@ -20,6 +20,11 @@ public class Num {
 			}
 		}
 		System.out.println(a*4);
+	}
+
+	public static void main(String[] args) {
+		String value = "你好";
+		System.out.println(value.length());
 	}
 
 }
