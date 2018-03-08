@@ -2,6 +2,7 @@ package org.test.tmp;
 
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -15,6 +16,66 @@ import java.util.*;
 
 public class TmpTest {
 
+    /**
+     * 二进制输出
+     */
+    @Test
+    public void binaryOutput(){
+        long a = 669127l;
+        long out = a>>1;
+        String bin = Long.toBinaryString(out);
+        System.out.println(a+" - "+Long.toBinaryString(a));
+        System.out.println(out+" - "+Long.toBinaryString(out));
+
+        String binary = "10100011010111000111";
+        Long result = Long.parseLong(binary,2);
+        System.out.println(binary+" - "+result);
+    }
+
+
+
+    @Test
+    public void testLen(){
+        for(int i=0;i<128;i++){
+            System.out.print("是");
+        }
+    }
+
+    @Test
+    public void testChineseLen() throws UnsupportedEncodingException {
+        System.out.println("你好".getBytes("UTF-8").length);
+        System.out.println("你好".getBytes().length);
+    }
+
+    @Test
+    public void testChinese(){
+        String str = "java,，你好";
+
+        System.out.println(length(str));
+    }
+
+    /**
+     * 得到一个字符串的长度,显示的长度,一个汉字或日韩文长度为2,英文字符长度为1
+     * @param  s 需要得到长度的字符串
+     * @return int 得到的字符串长度
+     */
+    private  int length(String s) {
+        if (s == null)
+            return 0;
+        char[] c = s.toCharArray();
+        int len = 0;
+        for (int i = 0; i < c.length; i++) {
+            len++;
+            if (!isLetter(c[i])) {
+                len++;
+            }
+        }
+        return len;
+    }
+    public  boolean isLetter(char c) {
+        int k = 0x80;
+        return c / k == 0 ? true : false;
+    }
     @Test
     public void testOut(){
         String str = "10";

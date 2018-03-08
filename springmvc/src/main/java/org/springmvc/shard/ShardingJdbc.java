@@ -88,7 +88,7 @@ public class ShardingJdbc {
         result.setDriverClassName(com.mysql.jdbc.Driver.class.getName());
         result.setUrl(String.format("jdbc:mysql://localhost:3306/%s", dataSourceName));
         result.setUsername("root");
-        result.setPassword("");
+        result.setPassword("root");
         return result;
     }
 
