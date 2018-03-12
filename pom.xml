@@ -19,6 +19,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.mac.home>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre</java.mac.home>
 	</properties>
+
+	<!--spring - cloud专用-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
 	<modules>
 		<module>HeadFirstDesign</module>
 		<module>JavaTutorial</module>
@@ -28,7 +37,8 @@
 		<module>dubbo-parent</module>
 		<module>compress</module>
 		<module>createBeans</module>
-	</modules>
+        <module>springcloud</module>
+    </modules>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
