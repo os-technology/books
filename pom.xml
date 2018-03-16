@@ -28,6 +28,7 @@
 		<module>compress</module>
 		<module>createBeans</module>
 		<module>springboot</module>
+		<module>springcloud</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
