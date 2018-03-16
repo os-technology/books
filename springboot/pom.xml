@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>books</artifactId>
+        <groupId>com.mvn.test</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>com.mvn.springboot</artifactId>
+    <properties>
+        <java.version>1.7</java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--覆盖Spring Boot提供的数据发布训练-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-releasetrain</artifactId>
+                <version>Fowler-SR2</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <!-- 从Spring Boot导入依赖项管理 -->
+                <!--该设置不会让您使用属性重写个别依赖关系.要达到相同的结果，
+                您需要在输入之前在dependencyManagement项目中添加一个 条目。例如，要升级到另一个Spring Data发行版-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
