@@ -24,11 +24,9 @@
 		<module>JavaTutorial</module>
 		<module>Spring4</module>
 		<module>springmvc</module>
-
 		<module>dubbo-parent</module>
 		<module>compress</module>
 		<module>createBeans</module>
-        <module>springcloud</module>
 		<module>springboot</module>
 	</modules>
 	<dependencyManagement>
