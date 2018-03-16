@@ -1,6 +1,9 @@
 package com.example.springcloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
 /**
  * @author yuijnshui@lxfintech.com
  * @Title: SpringcloudApplication
@@ -13,10 +16,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
+@EnableEurekaServer
 public class SpringcloudApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringcloudApplication.class, args);
     }
+
+//    public static void main(String[] args) {
+//        new SpringApplicationBuilder(SpringcloudApplication.class)
+//                .web(true).run(args);
+//    }
 }
 
