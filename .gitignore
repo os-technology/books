@@ -7,7 +7,7 @@
 *.jar
 *.war
 *.ear
-
+*.iml
 .target
 target/
 **/target
