@@ -521,13 +521,27 @@ public class MailTool {
 
 	}
 
+	private static String setContent(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("<table BORDER=1>")//
+		.append("<tr>")//
+		.append("<th>hello</th><th>world</th>")//
+		.append("</tr>")//
+		.append("<tr>")//
+		.append("<td>邮件发送</td><td>测试HTML格式</td>")//
+		.append("</tr>")//
+		.append("</table>");
+		System.out.println(builder);
+		return builder.toString();
+	}
+	
 	public static void main(String[] args) {
 		String from = "sc_yujinshui@126.com";
 		String[] to = { "602570224@qq.com" };
 		String user = "sc_yujinshui";
-		String password = "123";
+		String password = "SHUIJIAYOU";
 		String subject = "邮箱发送测试";
-		String content = "我在进行邮箱发送测试";
+		String content = setContent();
 
 		// String newNames[] = { "remoteJIF" };
 		// String smtpHost = "SMTP.126.com";

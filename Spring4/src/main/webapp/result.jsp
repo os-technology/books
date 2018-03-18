@@ -7,6 +7,6 @@
 <title>spring4结果展示页</title>
 </head>
 <body>index:${index }<br>
-姓名：${name}，年龄：${age }
+姓名：${p.name}，年龄：${p.age }
 </body>
 </html>

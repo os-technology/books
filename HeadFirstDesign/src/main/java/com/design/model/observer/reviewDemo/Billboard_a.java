@@ -20,7 +20,6 @@ public class Billboard_a implements ObserverInter, ElementDisplay {
 		this.a = a;
 		this.b = b;
 		this.c = c;
-		display();
 	}
 
 }

@@ -1,5 +1,5 @@
 package org.chapter.databasic.thread.template.demo;
-
+//http://www.importnew.com/9994.html
 public class MyThread extends Thread {
 
 	public MyThread(String name) {

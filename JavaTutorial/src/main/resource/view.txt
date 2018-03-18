@@ -1,0 +1,11 @@
+数据库索引分类，事务作用
+有一个规律数列（0,1,1,2,3,5,8,13,21,34,55...），请用递归与非递归取得第N个节点的值
+以下哪个命令可以从log文件末尾向前翻阅？
+a.	cat info.log |more
+b.	tac info.log |more
+c.	tail info.log |more
+d.	vi info.log |more
+
+请写出Linux命令，用来查看服务器上所有与Java相关的进程，并且显示出进程的全部信息
+请写出Linux命令，在指定目录/tmp中搜索文件名中包含ABC字符串的文件
+请写出Linux命令，只打印指定文件夹/home/tmp的大小

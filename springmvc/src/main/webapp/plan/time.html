@@ -1,0 +1,15 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<h1>时间创建</h1>
+
+
+<input type="text" id="time"><input type="button" value = "创建" onclick="createTime()"/>
+<script type="text/javascript">
+    function createTime() {
+
+        var time_expire = new Date().getTime() + 3600*1000 ;
+        document.getElementById("time").value = time_expire;
+    }
+
+</script>

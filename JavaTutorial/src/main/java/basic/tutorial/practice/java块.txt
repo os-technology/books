@@ -1,0 +1,27 @@
+准确说块是一个作用域，就是里面的变量之类的数据的作用范围 
+其中，static{}块中的语句是属于类的本身，不属于类中的任何方法。所以在类定义的时候就被执行开始执行。 
+非静态块中的变量在{ }外是不可见的！ 
+这些东西真的是一言难进呀！！！ 
+看以下一个例子，自己分析为什么有这样的结果，好好体会，胜过别人写万字！！ 
+
+public class TestSegment { 
+public void m(){ 
+System.out.println("mmmm");//不调用时，没有自动执行 
+}
+
+public static void main(String[] args) { 
+System.out.println("main"); 
+} 
+static{//静态块 
+{ //非静态块
+int i=11111; //此处i不影响括号外界的i
+System.out.println("ddd"+i); 
+} 
+int i =222222; //在此i与前面不重名
+System.out.println("sss"+i); 
+} 
+} 
+输出结果////////////////////////////////// 
+ddd11111 
+sss222222 
+main

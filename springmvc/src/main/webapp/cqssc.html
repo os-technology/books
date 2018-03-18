@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
+重庆时时彩算法计算器。<br>
+<font color="red">注：计算结果仅供参考，不可完全依赖。</font>
+
+
+<table align="center" border="1" cellspacing="0">
+    <tr>
+    <th>计算模式</th>
+    <th>个位</th>
+    <th>通用</th>
+    </tr>
+    <tr>
+        <td>根据个位数字五期内开号(不定位)</td>
+        <td>请输入个位数字：<input type="text" id="one"><input type="button" value="计算" onclick="result.one()">
+        <br>计算结果：<label id="one_result" style="color: red"></label>
+        </td>
+        <td></td>
+    </tr>
+
+</table>
+<script type="text/javascript">
+
+var result = {
+    one:function(){
+        var oneval = document.getElementById("one").value;
+        if (oneval==0){
+            document.getElementById("one_result").innerHTML = 1;
+        }else if (oneval==1){
+            document.getElementById("one_result").innerHTML = 5;
+        }else if (oneval==2){
+            document.getElementById("one_result").innerHTML = 3;
+        }else if (oneval==3){
+            document.getElementById("one_result").innerHTML = 0;
+        }else if (oneval==4){
+            document.getElementById("one_result").innerHTML = 7;
+        }else if (oneval==5){
+            document.getElementById("one_result").innerHTML = 8;
+        }else if (oneval==6){
+            document.getElementById("one_result").innerHTML = 2;
+        }else if (oneval==7){
+            document.getElementById("one_result").innerHTML = 4;
+        }else if (oneval==8){
+            document.getElementById("one_result").innerHTML = 3;
+        }else if (oneval==9){
+            document.getElementById("one_result").innerHTML = 6;
+        }else{
+            document.getElementById("one_result").innerHTML = '请输入0-9以内的数字';
+        }
+    },
+
+}
+
+
+</script>
+</body>
+</html>

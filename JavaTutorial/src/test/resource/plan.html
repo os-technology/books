@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>重庆时时彩计划</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+</head>
+<body align="center" style="font-size: 20px;">
+
+<form >
+    <input type="radio" name="plan" checked value="http://www.7879123.com/json/cqssc_json_A.js">个位计划
+    <input type="radio" name="plan" value="http://www.7879123.com/json/cqssc_json_B.js">后二直选
+    <input type="radio" name="plan" value="http://www.7879123.com/json/cqssc_json_C.js">后三直选
+    <input type="radio" name="plan" value="http://www.7879123.com/json/cqssc_json_D.js">后三组六
+
+</form>
+
+<textarea id="text" style="width: 650px;height: 50px;font-size: 20px;"></textarea>
+<br>
+<span id="show" style="color: red;size: 25px;font-size:25px; "></span>
+<div id="planlist"></div>
+</body>
+
+<script type="text/javascript">
+
+    function startRun() {
+        var url = $('input:radio[name="plan"]:checked').val();
+
+        $(document).ready(function () {
+
+            $.ajax({
+                async: false,
+                url: url,
+                type: "GET",
+                dataType: 'json',
+                timeout: 2000,
+                //返回Json类型
+                contentType: "application/json;utf-8",
+                //服务器段返回的对象包含name,data属性.
+                success: function (result) {
+                    var val = $("#text").val();
+                    var newPlan = result.NewGame.WaitGame;
+                    if (val!=newPlan){
+                        $("#text").val(result.NewGame.WaitGame);
+                        dataList(result);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#show").html(textStatus);
+                    //计划获取不到，则清空展示数据
+                    $("#text").val('');
+                    $("#planlist").html('');
+                }
+            });
+
+        });
+        setTimeout('startRun()',1000);
+    }
+
+    function dataList(result){
+        $("#planlist").html('');
+        if (result !=null && result.EndList != undefined ) {
+            var	json = JSON.stringify(result.EndList);
+
+            json = JSON.parse(json);
+            $.each( json, function(index, content)
+            {
+                document.getElementById("planlist").innerHTML +=content.Ruestl+'<br>';
+            });
+
+        }
+    }
+
+
+    function executeRun(){
+        startRun();
+    }
+    executeRun();
+</script>
+</html>
+
+<!--var sUrl = 'http://www.7879123.com/json/cqssc_json_A.js';-->
+<!--$("#planValue").val(result.NewGame.WaitGame);-->
+

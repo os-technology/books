@@ -24,4 +24,29 @@
 		<!-- 后缀 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	
+	
+<!-- 一种处理全局异常的方法，在SpringMVC配置文件中配置 -->
+<!-- 
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.NumberFormatException">error</prop>
+				<prop key="java.lang.Exception">exception/wrong</prop>
+				<prop key="java.lang.Throwable">exception/wrong</prop>
+			</props>
+		</property>
+		<property name="statusCodes">  
+            <props>  
+                <prop key="errors/error">500</prop>  
+                <prop key="errors/404">404</prop>  
+            </props>  
+        </property>
+	</bean>
+	 -->
+	
+	
+	
 </beans>

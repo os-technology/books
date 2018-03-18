@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>腾讯分分彩计划 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+</head>
+<body align="center" style="font-size: 20px;">
+
+<form >
+    <input type="radio" name="plan" checked value="plan">个位计划
+    <input type="radio" name="plan" value="h2zx">后二直选
+    <input type="radio" name="plan" value="h3zx">后三直选
+    <input type="radio" name="plan" value="h3z6">后三组六
+    <input type="radio" name="plan" value="h3dz">后三断组
+
+</form>
+
+<div id="plandt">正在更新个位计划，请稍后...</div>
+<br>
+
+</body>
+<script language="javascript" type="text/javascript">
+    function get_url_param_by_key(key) {
+        var reg = new RegExp("(^|&)"+ key +"=([^&]*)(&|$)");
+
+        var r = window.location.search.substr(1).match(reg);
+        alert(r)
+        if(r!=null){
+            return  unescape(r[2]);
+        }
+        return '';
+    }
+
+    $(function(){
+        var lottery_id = get_url_param_by_key(30001);
+        $chart.init(lottery_id);
+    });
+
+</script>
+
+</html>
+
+<!--30001:腾讯分分彩-->
+

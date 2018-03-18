@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.start.spring4.entity.Person;
 
 @Controller
-@RequestMapping("/hello")
+@RequestMapping("hello")
 public class ControllerAction {
 
 	private String result = "result";
@@ -48,10 +48,15 @@ public class ControllerAction {
 		return result;
 	}
 
-
 	// @ModelAttribute
 	public void show() {
 		System.out.println("show is ok");
+	}
+
+	@RequestMapping("/int")
+	public String wrong() {
+		Integer.parseInt("a");
+		return result;
 	}
 
 }
