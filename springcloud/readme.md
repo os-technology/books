@@ -1,4 +1,6 @@
-参考资料：[http://blog.didispace.com/Spring-Cloud%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/](http://blog.didispace.com/Spring-Cloud%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/)
+参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
+
+GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://github.com/dyc87112/SpringCloud-Learning.git)
 
 在eureka-server中配置访问地址，[http://localhost:1111](http://localhost:1111)。  
 先启动eureka-server,然后启动eureka-client。通过http://localhost:2111/hello，访问对应的controller信息。
@@ -9,3 +11,5 @@ springcloud中client的application路径配置需要注意,如果需要使用默
 
 
 官网资料地址：[`https://springcloud.cc/spring-cloud-brixton.html#_quick_start`](https://springcloud.cc/spring-cloud-brixton.html#_quick_start)
+
+spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.html](https://springcloud.cc/spring-cloud-consul.html)

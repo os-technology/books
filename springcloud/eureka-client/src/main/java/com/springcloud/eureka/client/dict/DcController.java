@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @ComponentScan
 @RestController
-public class DcController {
+public class DcController extends AbstractController{
 
 
 
