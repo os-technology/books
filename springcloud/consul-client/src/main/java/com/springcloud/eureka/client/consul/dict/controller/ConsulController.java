@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ConsulController {
+    @RequestMapping("/")
+    public String root() {
+        return "Hello consul root";
+    }
     @RequestMapping("/consul")
     public String home() {
         return "Hello consul";
