@@ -1,12 +1,12 @@
 package org.sql;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.Test;
 
 import java.util.Date;
 
 /**
- * @author yuijnshui@lxfintech.com
  * @Title: PartitionSql
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
@@ -15,40 +15,57 @@ import java.util.Date;
  */
 
 public class PartitionSql {
-
     @Test
-    public void testCreatePartitionSql(){
+    public void testCreatePartitionSql() {
 
-        String[] range={"0401","0701","1001","0101"};
-        testCreatePartitionSql(range);
+        String[] rangeOrder = {"0401", "0701", "1001", "0101"};
+        String[] rangeEvent = {"-04-01", "-07-01", "-10-01", "-01-01"};
+
+        createRangeArray(rangeOrder, null);
+        createRangeArray(rangeEvent, "UNIX_TIMESTAMP");
+
+        testCreatePartitionSql("orders.t_charge_order", "chargeOrder_partition_", rangeOrder);
+        testCreatePartitionSql("orders.t_event", "event_partition_", rangeEvent);
     }
 
-
-    public void testCreatePartitionSql(String[] range){
-//        String year = DateUtils.dateToString(new Date(), "yyyy");
-        int year = Integer.valueOf(DateFormatUtils.format(new Date(),"yyyy"))+1;
-        for (int i=1;i<5;i++){
-            if(i==4){
-                System.out.println(createSql(year+"0"+i,(year+1)+range[i-1]));
-            }else {
-                System.out.println(createSql(year+"0"+i,year+range[i-1]));
+    private void createRangeArray(String[] range, String funcName) {
+        int year = Integer.valueOf(DateFormatUtils.format(new Date(), "yyyy")) + 1;
+        if (StringUtils.isNotBlank(funcName)) {
+            for (int i = 0; i < range.length; i++) {
+                if (i == 3) {
+                    range[i] = funcName + "('" + (year + 1) + range[i] + "')";
+                } else {
+                    range[i] = funcName + "('" + year + range[i] + "')";
+                }
+            }
+        } else {
+            for (int i = 0; i < range.length; i++) {
+                if (i == 3) {
+                    range[i] = (year + 1) + range[i];
+                } else {
+                    range[i] = year + range[i];
+                }
             }
         }
     }
 
 
+    public void testCreatePartitionSql(String tableName, String frontName, String[] range) {
+        int year = Integer.valueOf(DateFormatUtils.format(new Date(), "yyyy")) + 1;
+        String partitionSql = "alter table " + tableName + " add partition(\n";
+        for (int i = 1; i < 5; i++) {
+            partitionSql += createSql(frontName + year + "0" + i, range[i - 1]) + (i == 4 ? "\n" : ",\n");
+        }
+        partitionSql += ");";
+        System.out.println(partitionSql);
+    }
+
     /**
-     * 20170401
-     * 20170701
-     * 20171001
-     * 20180101
-     * @param partitionName **_201801_20180401
+     * @param partitionName **_201801
      * @param date
      * @return
      */
-    private String createSql(String partitionName,String date){
-        return "alter table orders.t_charge_order add partition(\n" +
-                "partition order_partition_"+partitionName+"_"+date+" values less than ("+date+") ENGINE = InnoDB\n" +
-                ");";
+    private String createSql(String partitionName, String date) {
+        return "partition " + partitionName + " values less than (" + date + ") ENGINE = InnoDB";
     }
 }
