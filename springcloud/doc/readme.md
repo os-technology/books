@@ -31,5 +31,9 @@ spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.h
 其他部分按照教程即可。
 注意：如果application.java的路径高于三层包路径，则需要指定基础包范围，即服务的发现路径。`@ComponentScan(basePackages = "com.springcloud.eureka.client.consul")`或者在SpringBootApplication 注解上添加如下内容：`@SpringBootApplication(scanBasePackages = "com.springcloud.eureka.client")`
 
-consul版本不要选太高，否则可能导致服务无法正常，本demo使用0.9.0版本。
+consul版本不要选太高，否则可能导致服务无法正常，本demo使用0.9.0版本。  
+下载地址：  
+Linux-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_linux_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_linux_amd64.zip)  
+mac-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_darwin_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_darwin_amd64.zip)  
+windows-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip)
 
