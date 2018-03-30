@@ -40,4 +40,9 @@ public class DcController extends AbstractController{
     public String home() {
         return "Hello world";
     }
+
+    @RequestMapping("/eurekaclient")
+    public String client() {
+        return "Hello eureka-client";
+    }
 }
