@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script language="javascript">
+	function showtime()
+	{/*使用parseInt将时间上的两位数转换，如：a=parseInt（56/10）即十位数上为5，然后用取余化整的方式把6取出，再使用路径将图片对应即可*/
+		var today = new Date();
+		var y = today.getFullYear();
+		var m = today.getMonth()+1;
+		var d = today.getDate();
+		var h = today.getHours();
+		var M = today.getMinutes();
+		var s = today.getSeconds();
+		var ya=parseInt(y/1000);
+		//alert(y);
+		//===========================
+		var y11=parseInt(y/100);
+		var yb=y11-ya*10;
+		//===========================
+		var y12=parseInt(y/10);
+		var yc=y12-ya*100-yb*10;
+		//===========================
+		var y13=parseInt(y);
+		var yd=y13-ya*1000-yb*100-yc*10;
+		//===========================
+		//var str1 ="<img src="+ya+".bmp>"+"<img src="+yb+".bmp>"+"<img src="+yc+".bmp>"+"<img src="+yd+".bmp>";
+		//document.getElementById(id = "y1").innerHTML
+		//+++++++++++++++++++++++++++++
+		var ma=parseInt(m/10);
+		var mb=parseInt(m);
+		if(mb>9)
+		{
+			var mb=parseInt(m-10);
+		}
+		else
+		{
+			mb=mb;
+		}
+		//var str2="<img src="+ma+".bmp>"+"<img src="+mb+".bmp>";
+		//-------------------------
+		var da=parseInt(d/10);
+		if(da==0)
+		{
+			db=parseInt(d);
+		}
+		else
+		{
+			db=parseInt(d)-da*10;
+		}
+		//******************************
+		var ha=parseInt(h/10);
+		if(ha==0)
+		{
+			hb=parseInt(h);
+		}
+		else
+		{
+			hb=parseInt(h)-ha*10;
+		}
+		//*****************************"<img src="+ha+".bmp>"+"<img src="+hb+".bmp>";
+		var Ma=parseInt(M/10);
+		if(Ma==0)
+		{
+			Mb=parseInt(M);
+		}
+		else
+		{
+			Mb=parseInt(M)-Ma*10;
+		}
+		//*******************************"<img src="+Ma+".bmp>"+"<img src="+Mb+".bmp>";
+		var sa=parseInt(s/10);
+		if(sa==0)
+		{
+			sb=parseInt(s);
+		}
+		else
+		{
+			sb=parseInt(s)-sa*10;
+		}
+		//****************************"<img src="+sa+".bmp>"+"<img src="+sb+".bmp>";
+		//var str3="<img src="+da+".bmp>"+"<img src="+db+".bmp>";
+		document.getElementById("y1").innerHTML="<center>"+"<img src="+ya+".gif>"+"<img src="+yb+".gif>"+"<img src="+yc+".gif>"+"<img src="+yd+".gif>"+"--"+"<img src="+ma+".gif>"+"<img src="+mb+".gif>"+"--"+"<img src="+da+".gif>"+"<img src="+db+".gif>"+"<br><br>"+"<img src="+ha+".gif>"+"<img src="+hb+".gif>"+"<img src=point.gif>"+"<img src="+Ma+".gif>"+"<img src="+Mb+".gif>"+"<img src=point.gif>"+"<img src="+sa+".gif>"+"<img src="+sb+".gif>"+"</center>";
+		//-------------------
+			setTimeout("showtime()",2000);
+					
+	}
+	setTimeout("showtime()",2000);
+</script>
+
+        <div id="y1"></div>
+</body>
+</html>
