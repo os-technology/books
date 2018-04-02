@@ -16,36 +16,6 @@
 		<springframework.version>4.2.6.RELEASE</springframework.version>
 	</properties>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.dangdang/sharding-jdbc-core -->
-		<dependency>
-			<groupId>com.dangdang</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.28</version>
-		</dependency>
-		<!-- 引入sharding-jdbc核心模块 -->
-		<dependency>
-			<groupId>io.shardingjdbc</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
-			<version>2.0.2</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.shardingjdbc/sharding-jdbc-core-spring-namespace -->
-		<dependency>
-			<groupId>io.shardingjdbc</groupId>
-			<artifactId>sharding-jdbc-core-spring-namespace</artifactId>
-			<version>2.0.2</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
