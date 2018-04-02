@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * @Created on 2018/3/30上午11:56
  */
 @RestController
-public class ConsumerController {
+public class EurekaConsumerController {
 
     /**
      * LoadBalancerClient,这是一个负载均衡客户端的抽象定义，下面我们就看看如何使用Spring Cloud提供的负载均衡器客户端接口来实现服务的消费。
