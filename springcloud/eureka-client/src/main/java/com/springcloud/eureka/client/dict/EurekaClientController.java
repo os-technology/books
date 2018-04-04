@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Company: lxjr.com
  * @Created on 2018/3/16下午5:36
  */
-@EnableAutoConfiguration
-@ComponentScan
 @RestController
 public class EurekaClientController extends AbstractController{
 
