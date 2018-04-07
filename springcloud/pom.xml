@@ -32,11 +32,11 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--高版本依赖于JDK1.8,低版本环境需要注意-->
+            <!--2.0版本依赖于JDK1.8,低版本环境需要注意-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>1.5.4.RELEASE</version>
+                <version>1.5.10.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

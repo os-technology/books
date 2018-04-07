@@ -5,6 +5,9 @@ Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](
 ###springcloud版本说明
 说说Spring Cloud版本的那些事儿。
 
+<font color=blue>springBoot 2.0版本已不再支持JDK1.7，需要将jdk版本升级为1.8方可正常使用。</font>
+
+
 版本命名
 之前提到过，Spring Cloud是一个拥有诸多子项目的大型综合项目，原则上其子项目也都维护着自己的发布版本号。那么每一个Spring Cloud的版本都会包含不同的子项目版本，为了要管理每个版本的子项目清单，避免版本名与子项目的发布号混淆，所以没有采用版本号的方式，而是通过命名的方式。
 
@@ -158,7 +161,9 @@ GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://gi
 在eureka-server中配置访问地址，[http://localhost:1111](http://localhost:1111)。  
 先启动eureka-server,然后启动eureka-client。通过http://localhost:2111/hello，访问对应的controller信息。
 
-注意：
+#### **注意：**
+
+**谷歌浏览器mac版会发起两次请求，其他浏览器会正常的发起一次请求，原因尚不清楚。**
 
 springcloud中client的application路径配置需要注意,如果需要使用默认路径，java类路径为xx.xxx.application.java  。参考资料：[http://blog.csdn.net/u014788227/article/details/53670112](http://blog.csdn.net/u014788227/article/details/53670112)
 
