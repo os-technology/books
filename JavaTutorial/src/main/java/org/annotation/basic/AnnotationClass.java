@@ -1,4 +1,4 @@
-package org.annotation;
+package org.annotation.basic;
 
 /**
  * @author yuijnshui@lxfintech.com

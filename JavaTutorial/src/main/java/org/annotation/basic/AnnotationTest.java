@@ -1,4 +1,4 @@
-package org.annotation;
+package org.annotation.basic;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -18,7 +18,7 @@ public class AnnotationTest {
 
 
         try {
-            Class class0 = Class.forName("org.annotation.AnnotationClass");
+            Class class0 = Class.forName("org.annotation.basic.AnnotationClass");
             //获取类注解信息
             Annotation[] annos = class0.getAnnotations();
             for (Annotation an:annos){
