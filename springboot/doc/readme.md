@@ -4,6 +4,9 @@
 
 [Spring-Boot-Reference-Guide-ZH](http://blog.didispace.com/books/spring-boot-reference/)
 
+**学习位置：**  
+1. [http://blog.didispace.com/springbootproperties/](http://blog.didispace.com/springbootproperties/)
+
 较新版的Spring Boot取消了@SpringApplicationConfiguration这个注解,用@SpringBootTest就可以了，`RunWith`注解指定的class类，使用`SpringJUnit4ClassRunner.class`
 
 **详细注解** 参见chapter1模块中的测试类`SpringbootApplicationTests`
