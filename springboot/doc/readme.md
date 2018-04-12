@@ -23,4 +23,17 @@ SpringBoot(1.5.6.RELEASE)源码解析
 ```java
 @Configuration注解(可以理解为xml里面的<beans>标签)，一般和@Bean注解(可以理解为xml里面的<bean>标签)搭配使用。使用这2个注解可以创建一个配置类
 @EnableAutoConfiguration注解自动载入应用程序所需要的所有Bean，这依赖于SpringBoot在类路径中的查找
+
+@Controller和@RestController的区别？
+官方文档：
+@RestController is a stereotype annotation that combines @ResponseBody and @Controller.
+意思是：
+@RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。
+
+1)如果只是使用@RestController注解Controller，则Controller中的方法无法返回jsp页面，配置的视图解析器InternalResourceViewResolver不起作用，返回的内容就是Return 里的内容。
+
+例如：本来应该到success.jsp页面的，则其显示success.
+
+2)如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。
+3)如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。
 ```

@@ -3,10 +3,7 @@ package com.example.springboot.dict.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.springboot.dict.bean.BundingBean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * xml  https://blog.csdn.net/dmw412724/article/details/75106254
@@ -19,10 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @Created on 2018/4/12上午9:29
  */
 
-@RestController
+@Controller
 public class XmlController {
 
     @RequestMapping(value = "/xmlPrase", headers = {"content-type=application/xml"})
+    @ResponseBody
     public String addUser(@RequestBody BundingBean xml) {
         System.out.println(JSON.toJSONString(xml));
         return "success";
