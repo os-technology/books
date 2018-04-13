@@ -30,35 +30,33 @@ import java.io.*;
 @SpringBootTest
 public class UploadTests {
 
-        @Autowired
+    @Autowired
     private UploadService uploadService;
 //    @Autowired
 //    private UploadServiceTmp uploadServiceTmp;
 
     @Test
     @SneakyThrows
-    public void testHandleFileUpload(){
+    public void testHandleFileUpload() {
 
-//        File file = new File("/Users/yujinshui/Desktop/个人处理/jquery-1.8.2.js");
-        File file = new File("/Users/yujinshui/Desktop/tmp.txt");
-        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
-                MediaType.TEXT_PLAIN_VALUE,true,file.getName());
+        File file = new File("src/test/resources/tmp.txt");
+        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("upload_success",
+                MediaType.TEXT_PLAIN_VALUE, true, file.getName());
 //        File file = new File("upload.jpg");
 //        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
 //                MediaType.IMAGE_JPEG_VALUE,true,file.getName());
-
         try {
             InputStream inputStream = new FileInputStream(file);
             OutputStream os = fileItem.getOutputStream();
-            IOUtils.copy(inputStream,os);
-        } catch (IOException e) {
+            IOUtils.copy(inputStream, os);
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
-        System.out.println(uploadService.handleUploadFile(multipartFile));
-
-
+        System.out.println("返回结果信息："+uploadService.handleUploadFile(multipartFile));
     }
 
     @Test

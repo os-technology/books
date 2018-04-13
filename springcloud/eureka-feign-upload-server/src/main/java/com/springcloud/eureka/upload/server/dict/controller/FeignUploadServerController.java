@@ -1,5 +1,6 @@
 package com.springcloud.eureka.upload.server.dict.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -20,6 +21,8 @@ public class FeignUploadServerController {
 
     @PostMapping(value = "/uploadFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadFile(@RequestPart(value = "file")MultipartFile file){
+        System.out.println("上传文件名称："+file.getName());
+        System.out.println(JSON.toJSONString(file));
         return file.getName();
 
     }
