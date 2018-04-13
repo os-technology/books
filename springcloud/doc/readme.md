@@ -1,5 +1,8 @@
 # SpringCloud
 
+**学习位置**  
+1. [http://blog.didispace.com/spring-cloud-starter-dalston-2-4/](http://blog.didispace.com/spring-cloud-starter-dalston-2-4/)
+
 ### Spring Cloud与Spring Boot版本匹配关系
 Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](https://blog.csdn.net/ljj_9/article/details/78645267)
 ###springcloud版本说明
@@ -211,3 +214,59 @@ Spring Cloud Feign是一套基于Netflix Feign实现的声明式服务调用客�
  
  * `@EnableFeignClients`如果没有添加路径参数，则启动时报接口无法正常实例化异常，并启动失败。
  * `@EnableFeignClients`添加了参数路径设置，如果`@ComponentScan`没有指定应用的发现路径，则服务启动后，无法正常进行调用。会提示500错误。
+
+ 
+###Spring Cloud Feign的文件上传实现
+
+在Spring Cloud封装的Feign中并不直接支持传文件，但可以通过引入Feign的扩展包来实现，本来就来具体说说如何实现。
+
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.20</version>
+    <scope>provided</scope>
+</dependency>
+        
+        
+        
+ @SneakyThrows
+这个注解用在方法上，可以将方法中的代码用try-catch语句包裹起来，捕获异常并在catch中用Lombok.sneakyThrow(e)把异常抛出，可以使用@SneakyThrows(Exception.class)的形式指定抛出哪种异常，很简单的注解，直接看个例子：
+
+public class SneakyThrows implements Runnable {
+    @SneakyThrows(UnsupportedEncodingException.class)
+    public String utf8ToString(byte[] bytes) {
+        return new String(bytes, "UTF-8");
+    }
+
+    @SneakyThrows
+    public void run() {
+        throw new Throwable();
+    }
+}
+
+实际效果相当于：
+
+public class SneakyThrows implements Runnable {
+    @SneakyThrows(UnsupportedEncodingException.class)
+    public String utf8ToString(byte[] bytes) {
+        try{
+            return new String(bytes, "UTF-8");
+        }catch(UnsupportedEncodingException uee){
+            throw Lombok.sneakyThrow(uee);
+        }
+    }
+
+    @SneakyThrows
+    public void run() {
+        try{
+            throw new Throwable();
+        }catch(Throwable t){
+            throw Lombok.sneakyThrow(t);
+        }
+    }
+}
+```
+
+<font color=red><B>注意：</B></font>  
+单元测试的java类路径必须与application.java类的路径相同，否则无法正常实例化接口进行调用。本示例中，`eureka-feign-upload-client`模块，application位置在`com.springcloud.feign.upload.client.app`包下，则单元测试的位置也需要在Test中对应的包下进行创建。否则提示接口无法实例化。原因尚不清楚。
