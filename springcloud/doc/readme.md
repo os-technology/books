@@ -1,4 +1,9 @@
 # SpringCloud
+本教程参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
+
+GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://github.com/dyc87112/SpringCloud-Learning.git)
+
+社区信息：[spring for all 社区](http://www.spring4all.com/)
 
 **学习位置**  
 1. [http://blog.didispace.com/spring-cloud-starter-dalston-2-4/](http://blog.didispace.com/spring-cloud-starter-dalston-2-4/)
@@ -156,9 +161,6 @@ Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](
 
 我在开始编写Spring Cloud系列博文时，刚好是Brixton的第一个RELEASE版本，所以果断采用了这个版本来作为样例基础。也可以看到，在这短短的几个月时间里，没有更新多少文章，但是其版本提升尽如此迅速，更加证明了该项目良好的发展势头。所以，何不现在就加入我们一起学习和实践这个将来也许会占领企业微服务架构的强大框架呢？
 
-本教程参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
-
-GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://github.com/dyc87112/SpringCloud-Learning.git)
 
 ###eureka部分
 在eureka-server中配置访问地址，[http://localhost:1111](http://localhost:1111)。  
@@ -175,8 +177,9 @@ springcloud中client的application路径配置需要注意,如果需要使用默
 
 spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.html](https://springcloud.cc/spring-cloud-consul.html)
 
-###consul配置部分
+###consul部分
 
+#####1. consul配置
 在consul-client的pom里面，dependencies部分添加
 
 ```xml
@@ -192,10 +195,16 @@ spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.h
 注意：如果application.java的路径高于三层包路径，则需要指定基础包范围，即服务的发现路径。`@ComponentScan(basePackages = "com.springcloud.eureka.client.consul")`或者在SpringBootApplication 注解上添加如下内容：`@SpringBootApplication(scanBasePackages = "com.springcloud.eureka.client")`
 
 consul版本不要选太高，否则可能导致服务无法正常，本demo使用0.9.0版本。  
-下载地址：  
+#####2. 下载地址：  
 Linux-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_linux_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_linux_amd64.zip)  
 mac-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_darwin_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_darwin_amd64.zip)  
 windows-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip)
+
+
+#####3. 基于consul分布式锁实现
+[http://blog.didispace.com/spring-cloud-consul-lock-and-semphore/](http://blog.didispace.com/spring-cloud-consul-lock-and-semphore/)
+##### 4. 基于Consul的分布式信号量实现
+[http://blog.didispace.com/spring-cloud-consul-lock-and-semphore-2/](http://blog.didispace.com/spring-cloud-consul-lock-and-semphore-2/)
 
 ###Spring Cloud构建微服务架构：服务消费（Ribbon）【Dalston版】
 
