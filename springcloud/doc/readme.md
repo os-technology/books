@@ -183,11 +183,11 @@ spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.h
 在consul-client的pom里面，dependencies部分添加
 
 ```xml
-<!--选用的版本不可以太高，高版本基于JDK1.8开发，如果JDK版本较低，则会报错-->
+<!--选用的版本不可以太高。2.0.x基于JDK1.8开发，如果使用JDK1.7编译会报错-->
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.4.RELEASE</version>
+    <version>1.5.10.RELEASE</version>
     <type>pom</type>
 </dependency>
 ```
