@@ -19,6 +19,9 @@
         <module>eureka-consumer-feign</module>
         <module>eureka-feign-upload-server</module>
         <module>eureka-feign-upload-client</module>
+        <module>consul-distributed-lock</module>
+        <module>config-client</module>
+        <module>config-server-git</module>
     </modules>
 
     <properties>
@@ -29,7 +32,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.SR1</version><!--Dalston.SR1-->
+                <version>Dalston.RELEASE</version><!--Dalston.SR1-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

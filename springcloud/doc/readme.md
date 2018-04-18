@@ -6,10 +6,43 @@ GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://gi
 社区信息：[spring for all 社区](http://www.spring4all.com/)
 
 **学习位置**  
-1. [http://blog.didispace.com/spring-cloud-starter-dalston-2-4/](http://blog.didispace.com/spring-cloud-starter-dalston-2-4/)
+1. [链接地址](http://blog.didispace.com/spring-cloud-starter-dalston-3/)
 
 ### Spring Cloud与Spring Boot版本匹配关系
 Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](https://blog.csdn.net/ljj_9/article/details/78645267)
+
+Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
+
+```
+<dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR1</version><!--Dalston.SR1-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            </dependency>
+            
+            
+点击Dalston.SR1 ,在父pom中得到
+
+ <parent>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-dependencies-parent</artifactId>
+		<version>1.3.2.RELEASE</version>
+		<relativePath/>
+	</parent>
+	
+继续点击1.3.2.REALEASE，进入父pom，得到
+	
+	<scm>
+		<url>https://github.com/spring-cloud/spring-cloud-build</url>
+		<connection>scm:git:git://github.com/spring-cloud/spring-cloud-build.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/spring-cloud/spring-cloud-build.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	
+	打开<url>标签的地址，看到java.version=1.8
+```
 ###springcloud版本说明
 说说Spring Cloud版本的那些事儿。
 
@@ -192,6 +225,13 @@ spring-cloud-consul 资料地址：[https://springcloud.cc/spring-cloud-consul.h
 </dependency>
 ```
 其他部分按照教程即可。
+
+启动consul命令
+
+```
+consul agent -dev
+```
+  
 注意：如果application.java的路径高于三层包路径，则需要指定基础包范围，即服务的发现路径。`@ComponentScan(basePackages = "com.springcloud.eureka.client.consul")`或者在SpringBootApplication 注解上添加如下内容：`@SpringBootApplication(scanBasePackages = "com.springcloud.eureka.client")`
 
 consul版本不要选太高，否则可能导致服务无法正常，本demo使用0.9.0版本。  
@@ -279,3 +319,13 @@ public class SneakyThrows implements Runnable {
 
 <font color=red><B>注意：</B></font>  
 单元测试的java类路径必须与application.java类的路径相同，否则无法正常实例化接口进行调用。本示例中，`eureka-feign-upload-client`模块，application位置在`com.springcloud.feign.upload.client.app`包下，则单元测试的位置也需要在Test中对应的包下进行创建。否则提示接口无法实例化。原因尚不清楚。
+
+###分布式配置中心
+
+ ```
+ Spring Cloud Config是Spring Cloud团队创建的一个全新项目，用来为分布式系统中的基础设施和微服务应用提供集中化的外部配置支持，它分为服务端与客户端两个部分。其中服务端也称为分布式配置中心，它是一个独立的微服务应用，用来连接配置仓库并为客户端提供获取配置信息、加密/解密信息等访问接口；而客户端则是微服务架构中的各个微服务应用或基础设施，它们通过指定的配置中心来管理应用资源与业务相关的配置内容，并在启动的时候从配置中心获取和加载配置信息。Spring Cloud Config实现了对服务端和客户端中环境变量和属性配置的抽象映射，所以它除了适用于Spring构建的应用程序之外，也可以在任何其他语言运行的应用程序中使用。由于Spring Cloud Config实现的配置中心默认采用Git来存储配置信息，所以使用Spring Cloud Config构建的配置服务器，天然就支持对微服务应用配置信息的版本管理，并且可以通过Git客户端工具来方便的管理和访问配置内容。当然它也提供了对其他存储方式的支持，比如：SVN仓库、本地化文件系统。
+
+在本文中，我们将学习如何构建一个基于Git存储的分布式配置中心，并对客户端进行改造，并让其能够从配置中心获取配置信息并绑定到代码中的整个过程。
+ ```
+
+ **项目模块**：springcloud-config-repo-demo(配置仓库名称),config-client(配置中心的应用名称),config-server-git(配置中心),
