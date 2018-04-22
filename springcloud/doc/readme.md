@@ -241,7 +241,7 @@ mac-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_darwin_amd64
 windows-64：[`https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip`](https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_windows_amd64.zip)
 
 
-#####3. 基于consul分布式锁实现
+#####3. 基于consul分布式锁实现[demo尚不可用]
 [http://blog.didispace.com/spring-cloud-consul-lock-and-semphore/](http://blog.didispace.com/spring-cloud-consul-lock-and-semphore/)
 ##### 4. 基于Consul的分布式信号量实现
 [http://blog.didispace.com/spring-cloud-consul-lock-and-semphore-2/](http://blog.didispace.com/spring-cloud-consul-lock-and-semphore-2/)
@@ -328,4 +328,36 @@ public class SneakyThrows implements Runnable {
 在本文中，我们将学习如何构建一个基于Git存储的分布式配置中心，并对客户端进行改造，并让其能够从配置中心获取配置信息并绑定到代码中的整个过程。
  ```
 
- **项目模块**：springcloud-config-repo-demo(配置仓库名称),config-client(配置中心的应用名称),config-server-git(配置中心),
+ **项目模块**：springcloud-config-repo-demo(配置仓库名称),config-client(配置中心的应用名称),config-server-git(配置中心)
+ 
+ 配置仓库地址：[https://github.com/os-technology/springcloud-config-repo-demo](https://github.com/os-technology/springcloud-config-repo-demo)。配置仓库必须单独进行创建，不可在其他项目的子模块等位置创建，否则无法正常生效。
+ 
+ 该部分目前只能使用JDK1.8进行正常启动。操作方式如下：
+ 启动config-server-git模块，然后输入 [http://localhost:2119/config-client/default/master](http://localhost:2119/config-client/default/master)得到如下结果：
+ 
+ ```json
+ {
+name: "config-client",
+profiles: - [
+"default"
+],
+label: "master",
+version: null,
+state: null,
+propertySources: - [
+- {
+name: "https://github.com/os-technology/springcloud-config-repo-demo/config-client.yml",
+source: - {
+info.profile: "default",
+info.from: "git"
+}
+}
+]
+}
+ ```
+ 
+ URL中的default部分，可以替换成dev。访问时会得到对应的json信息。
+ 
+ 
+ 
+ 
