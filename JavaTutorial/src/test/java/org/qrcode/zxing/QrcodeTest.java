@@ -5,7 +5,7 @@ import org.junit.Test;
 public class QrcodeTest {
 	@Test
 	public void createNoLogoQrCode() {
-		String text = "http://www.dans88.com.cn";
+		String text = "HTTPS://AAX0.CN/5YF8AJFUMFNW1BT5QRYD";
 		String file = "pic1.jpg";
 		try {
 			QRCodeUtil.encode(text, "", "/Users/yujinshui/Desktop", true, file);
@@ -16,7 +16,7 @@ public class QrcodeTest {
 
 	@Test
 	public void createLogoQrCode() {
-		String text = "http://www.dans88.com.cn";
+		String text = "HTTPS://AAX0.CN/6YF8AJFUMFNW1BT5QRYA";
 		String file = "logo.jpg";
 		try {
 			QRCodeUtil.encode(text, "/Users/yujinshui/Desktop/11.jpg", "/Users/yujinshui/Desktop", true, file);
@@ -28,7 +28,7 @@ public class QrcodeTest {
 	@Test
 	public void translateQrCode() {
 		try {
-			String result = QRCodeUtil.decode("/Users/yujinshui/Desktop/pic.jpg");
+			String result = QRCodeUtil.decode("/Users/yujinshui/Desktop/2.jpg");
 			System.out.println("解析结果：" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
