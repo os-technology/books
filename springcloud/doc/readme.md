@@ -1,4 +1,8 @@
 # SpringCloud
+
+	本demo已经尽力以JDK1.7为基础进行构建，但是由于官方要求JDK1.8，所以demo的部分模块必须使用JDK1.8运行，否则报错。
+	官方要求使用jdk8，虽然spring boot在jdk7中也能运行，但是这里和spring cloud集成的时候就出问题了，问题表现为在maven build的时候出现8194错误代码。
+	
 本教程参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
 
 GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://github.com/dyc87112/SpringCloud-Learning.git)
@@ -333,7 +337,21 @@ public class SneakyThrows implements Runnable {
  配置仓库地址：[https://github.com/os-technology/springcloud-config-repo-demo](https://github.com/os-technology/springcloud-config-repo-demo)。配置仓库必须单独进行创建，不可在其他项目的子模块等位置创建，否则无法正常生效。
  
  该部分目前只能使用JDK1.8进行正常启动。操作方式如下：
+ 
+**config-servier-git模块操作**
+ 
+ ```
+ 访问配置信息的URL与配置文件的映射关系如下：
+
+/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+ ```
  启动config-server-git模块，然后输入 [http://localhost:2119/config-client/default/master](http://localhost:2119/config-client/default/master)得到如下结果：
+ 
+
  
  ```json
  {
@@ -358,6 +376,31 @@ info.from: "git"
  
  URL中的default部分，可以替换成dev。访问时会得到对应的json信息。
  
+ **config-client模块**  
+ 
+ 在微服务应用中获取上述的配置信息。  
+ 
+ **该模块(config-client)这里需要格外注意：上面这些属性必须配置在bootstrap.properties中，这样config-server中的配置信息才能被正确加载。**
+ 
+ pom.xml配置中，必须要再次添加如下依赖方可正常访问。否则访问`http://localhost:2120/info`提示404异常。
+ 
+ ```
+ <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+ ```
+ 
+ 在完成了上面你的代码编写之后，读者可以将config-server-git、config-client都启动起来，然后访问 [http://localhost:2120/info](http://localhost:2120/info) 
+
+
  
  
  
