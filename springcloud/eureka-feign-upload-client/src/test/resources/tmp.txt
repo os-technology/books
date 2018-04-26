@@ -1,0 +1,2 @@
+select distinct a.merchant_id,a.channel_id,c.agent,a.refund_success_count,a.charge_success_count from orders.t_aggregate a join channel.t_channel b on b.id = a.channel_id join channel.t_channel_config c on c.id = b.channel_config_id where a.day=20180329 and c.agent in('BMCP')  and (a.charge_success_count>=1 or a.refund_success_count>=1) order by merchant_id,channel_id;
+ 

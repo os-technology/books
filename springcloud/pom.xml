@@ -17,6 +17,11 @@
         <module>eureka-consumer</module>
         <module>eureka-consumer-ribbon</module>
         <module>eureka-consumer-feign</module>
+        <module>eureka-feign-upload-server</module>
+        <module>eureka-feign-upload-client</module>
+        <module>consul-distributed-lock</module>
+        <module>config-client</module>
+        <module>config-server-git</module>
     </modules>
 
     <properties>
@@ -45,10 +50,34 @@
     </dependencyManagement>
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <!--<version>1.2.31</version>-->
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArguments>
+                        <bootclasspath>
+                            ${java.mac.home}/lib/rt.jar:${java.mac.home}/lib/jce.jar
+                        </bootclasspath>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
