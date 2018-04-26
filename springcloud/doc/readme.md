@@ -338,8 +338,18 @@ public class SneakyThrows implements Runnable {
 
  **项目模块**：springcloud-config-repo-demo(配置仓库名称),config-client(配置中心的应用名称),config-server-git(配置中心)
  
- 配置仓库地址：[https://github.com/os-technology/springcloud-config-repo-demo](https://github.com/os-technology/springcloud-config-repo-demo)。配置仓库必须单独进行创建，不可在其他项目的子模块等位置创建，否则无法正常生效。
+ 配置仓库地址：[https://github.com/os-technology/springcloud-config-repo-demo](https://github.com/os-technology/springcloud-config-repo-demo)。配置仓库如果在其他项目的子模块等位置创建，仓库地址不变，需要指定搜索的目录，配置参考如下：
  
+  ```properties
+  
+  #仓库地址
+  spring.cloud.config.server.git.uri=https://github.com/os-technology/books/
+  #搜索仓库中指定目录下的配置信息
+  spring.cloud.config.server.git.search-paths=springcloud/config-cloud-repo
+  ```
+ <font color=blue>注意：仓库地址不可直接输入完整uri，否则不生效。本例配置信息完整地址为：
+  https://github.com/os-technology/books/tree/master/springcloud/config-cloud-repo，**这是错误的**。</font>
+  
  该部分目前只能使用JDK1.8进行正常启动。操作方式如下：
  
 **config-servier-git模块操作**
@@ -378,7 +388,7 @@ info.from: "git"
 }
  ```
  
- URL中的default部分，可以替换成dev。访问时会得到对应的json信息。
+ 说明：URL中的default部分，可以替换成dev,master部分，代表所用仓库的分支名称。访问时会得到对应的json信息。
  
  **config-client模块**  
  
@@ -405,7 +415,4 @@ info.from: "git"
  在完成了上面你的代码编写之后，读者可以将config-server-git、config-client都启动起来，然后访问 [http://localhost:2120/info](http://localhost:2120/info) 
 
 ### 分布式配置中心（加密解密）
- 
- 
- 
->>>>>>> dev
+
