@@ -269,8 +269,6 @@ Spring Cloud Feign是一套基于Netflix Feign实现的声明式服务调用客�
  
  * `@EnableFeignClients`如果没有添加路径参数，则启动时报接口无法正常实例化异常，并启动失败。
  * `@EnableFeignClients`添加了参数路径设置，如果`@ComponentScan`没有指定应用的发现路径，则服务启动后，无法正常进行调用。会提示500错误。
-<<<<<<< HEAD
-=======
 
  
 ###Spring Cloud Feign的文件上传实现
