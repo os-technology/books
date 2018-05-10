@@ -1,12 +1,10 @@
 package com.springcloud.eureka.client.dict;
 
 import com.alibaba.fastjson.JSON;
+import com.springcloud.eureka.client.util.HxbDecodeUtil;
+import com.springcloud.eureka.client.util.JXMConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,8 +40,32 @@ public class EurekaClientController extends AbstractController{
     }
 
     @RequestMapping("/hxb")
-    public String testRequest(HttpServletRequest request) throws IOException {
-        String headerValue = (String) request.getHeader("headerValue");
+    public String testRequest(HttpServletRequest request) throws Exception {
+        String platformCode = (String) request.getHeader("PlatformCode");
+//        BufferedReader br = request.getReader();
+//
+//        String str, wholeStr = "";
+//        while((str = br.readLine()) != null){
+//            wholeStr += str;
+//        }
+//        System.out.println(wholeStr);
+
+        Map<String, Object> parameterMap = getStringObjectMap(request);
+        System.out.println(JSON.toJSONString(parameterMap));
+
+        String dataContent = parameterMap.get("dataContent").toString();
+        if(dataContent!=null) {
+            String base64DecodeResData = HxbDecodeUtil.getHXBEntryDataStr(dataContent);
+            String jsonResData = JXMConvertUtil.XmlConvertJson(base64DecodeResData);
+
+            System.out.println(jsonResData);
+        }
+
+        return "OK";
+    }
+
+    @RequestMapping("/hxb/res")
+    public String testResponse(HttpServletRequest request) throws IOException {
         BufferedReader br = request.getReader();
 
         String str, wholeStr = "";
@@ -54,8 +76,6 @@ public class EurekaClientController extends AbstractController{
 
         return "OK";
     }
-
-
     /**
      * 解析请求参数为Map类型
      *
