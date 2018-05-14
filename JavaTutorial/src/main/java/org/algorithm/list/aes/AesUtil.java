@@ -32,8 +32,12 @@ public class AesUtil {
 	 */
 	public static byte[] encrypt(String content, String password) {
 		try {
+			//不使用SecureRandom生成SecretKey，而是使用SecretKeyFactory；重新实现方法generateKey
+			SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+			random.setSeed(password.getBytes());
+
 			KeyGenerator kgen = KeyGenerator.getInstance("AES");
-			kgen.init(128, new SecureRandom(password.getBytes()));
+			kgen.init(128, random);
 			SecretKey secretKey = kgen.generateKey();
 			byte[] enCodeFormat = secretKey.getEncoded();
 			SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
@@ -68,9 +72,15 @@ public class AesUtil {
 	 * @return
 	 */
 	public static byte[] decrypt(byte[] content, String password) {
+
+
 		try {
+			SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+			random.setSeed(password.getBytes());
+
+
 			KeyGenerator kgen = KeyGenerator.getInstance("AES");
-			kgen.init(128, new SecureRandom(password.getBytes()));
+			kgen.init(128, random);
 			SecretKey secretKey = kgen.generateKey();
 			byte[] enCodeFormat = secretKey.getEncoded();
 			SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
@@ -144,7 +154,7 @@ public class AesUtil {
 		System.out.println("加密后：" + encryptResultStr.length());
 		// 解密
 		byte[] decryptFrom = parseHexStr2Byte(encryptResultStr);
-		byte[] decryptResult = decrypt(decryBase64.getBytes(), password);
+		byte[] decryptResult = decrypt(decryptFrom, password);
 		System.out.println(new String(decryptResult));
 		 System.out.println("解密后：" + new String(decryptResult));
 	}
