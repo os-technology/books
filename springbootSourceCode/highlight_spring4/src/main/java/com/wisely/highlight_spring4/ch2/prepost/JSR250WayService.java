@@ -10,7 +10,7 @@ public class JSR250WayService {
     }
     public JSR250WayService() {
         super();
-        System.out.println("³õÊ¼»¯¹¹Ôìº¯Êı-JSR250WayService");
+        System.out.println("åˆå§‹åŒ–æ„é€ å‡½æ•°-JSR250WayService");
     }
     @PreDestroy //2
     public void destroy(){

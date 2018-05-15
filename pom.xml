@@ -30,6 +30,7 @@
 		<module>springcloud</module>
 		<module>springboot</module>
         <module>jmetertest</module>
+        <module>springbootApplication</module>
     </modules>
 	<dependencyManagement>
 		<dependencies>

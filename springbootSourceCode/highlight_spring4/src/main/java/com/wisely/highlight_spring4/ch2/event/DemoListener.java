@@ -9,8 +9,8 @@ public class DemoListener implements ApplicationListener<DemoEvent> {
 	public void onApplicationEvent(DemoEvent event) {
 		
 		String msg = event.getMsg();
-		
-		System.out.println("ÎÒ(bean-demoListener)½ÓÊÜµ½ÁËbean-demoPublisher·¢²¼µÄÏûÏ¢:"
+
+		System.out.println("æˆ‘(bean-demoListener)æ¥å—åˆ°äº†bean-demoPublisherå‘å¸ƒçš„æ¶ˆæ¯:"
 				+ msg);
 
 	}

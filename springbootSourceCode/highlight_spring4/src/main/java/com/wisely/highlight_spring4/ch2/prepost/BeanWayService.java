@@ -6,7 +6,7 @@ public class BeanWayService {
 	    }
 	    public BeanWayService() {
 	        super();
-	        System.out.println("³õÊ¼»¯¹¹Ôìº¯Êı-BeanWayService");
+			System.out.println("åˆå§‹åŒ–æ„é€ å‡½æ•°-BeanWayService");
 	    }
 	    public void destroy(){
 	        System.out.println("@Bean-destory-method");

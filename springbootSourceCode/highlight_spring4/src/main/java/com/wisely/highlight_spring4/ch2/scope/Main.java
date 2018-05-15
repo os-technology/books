@@ -13,8 +13,8 @@ public class Main {
         DemoPrototypeService p1 = context.getBean(DemoPrototypeService.class);
         DemoPrototypeService p2 = context.getBean(DemoPrototypeService.class);
 
-        System.out.println("s1Óës2ÊÇ·ñÏàµÈ£º"+s1.equals(s2));
-        System.out.println("p1Óëp2ÊÇ·ñÏàµÈ£º"+p1.equals(p2));
+        System.out.println("s1ä¸s2æ˜¯å¦ç›¸ç­‰ï¼š"+s1.equals(s2));
+        System.out.println("p1ä¸p2æ˜¯å¦ç›¸ç­‰ï¼š"+p1.equals(p2));
         
         context.close();
 	}
