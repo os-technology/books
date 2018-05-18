@@ -15,7 +15,7 @@
         <java.version>1.7</java.version>
     </properties>
     <modules>
-        <module>boot2</module>
+        <module>boot1</module>
     </modules>
     <dependencies>
         <dependency>

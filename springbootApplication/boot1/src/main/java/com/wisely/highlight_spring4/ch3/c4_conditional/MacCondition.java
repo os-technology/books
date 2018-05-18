@@ -17,6 +17,6 @@ public class MacCondition implements Condition {
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        return false;
+        return context.getEnvironment().getProperty("os.name").contains("Mac");
     }
 }
