@@ -3,33 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>springbootApplication</artifactId>
+        <artifactId>boot2</artifactId>
         <groupId>com.mvn.test</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mvn.test</groupId>
-    <artifactId>boot2</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>springmvc4</module>
-    </modules>
-    <properties>
-        <!-- Generic properties -->
-        <java.version>1.7</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- Web -->
-        <jsp.version>2.2</jsp.version>
-        <jstl.version>1.2</jstl.version>
-        <servlet.version>3.1.0</servlet.version>
-        <!-- Spring -->
-        <!--<springframework-version>4.1.5.RELEASE</springframework-version>-->
-        <!-- Logging -->
-        <logback.version>1.0.13</logback.version>
-        <slf4j.version>1.7.5</slf4j.version>
-    </properties>
+    <artifactId>springmvc4</artifactId>
 
     <dependencies>
         <dependency>
@@ -142,27 +122,4 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

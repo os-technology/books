@@ -1,18 +1,16 @@
-package com.wisely.highlight_springmvc4;
+package com.wisely.highlight.springmvc;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author yuijnshui@lxfintech.com
- * @Title: MyMvcConfig
+ * @Title: com.wisely.highlight.springmvc.MyMvcConfig
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: lxjr.com
- * @Created on 2018/5/18下午7:14
+ * @Created on 2018/5/18下午7:17
  */
 @Configuration
-@ComponentScan
 public class MyMvcConfig {
 
 }
