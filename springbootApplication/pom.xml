@@ -16,6 +16,7 @@
     </properties>
     <modules>
         <module>boot1</module>
+        <module>boot2</module>
     </modules>
     <dependencies>
         <dependency>
