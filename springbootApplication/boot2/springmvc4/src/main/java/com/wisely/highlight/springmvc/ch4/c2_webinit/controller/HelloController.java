@@ -1,4 +1,4 @@
-package com.wisely.highlight.springmvc.controller;
+package com.wisely.highlight.springmvc.ch4.c2_webinit.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

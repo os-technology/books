@@ -1,4 +1,4 @@
-package com.wisely.highlight.springmvc;
+package com.wisely.highlight.springmvc.ch4.c2_webinit;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
