@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -17,7 +20,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan("com.wisely.highlight.springmvc")
 @EnableWebMvc
-public class MyMvcConfig {
+public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public InternalResourceViewResolver viewResolver(){
@@ -28,5 +31,13 @@ public class MyMvcConfig {
 
         return viewResolver;
     }
+
+    //默认页面配置
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        ViewControllerRegistration viewRegistration = registry.addViewController("/");
+        viewRegistration.setViewName("hello");
+    }
+
 
 }
