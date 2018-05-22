@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> New Document </title>
+    <meta name="Generator" content="EditPlus">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+
+</head>
+
+<body>
+<div id="js" style="text-align:center;">
+    <textarea id="it" type="text"  style="height:50px;font-size:20px;width:600px;height:200px;"></textarea>
+    <br>
+    <input type="button" value="编码" onclick="bian()"/>
+    <input type="button" value="解码" onclick="jie()"/>
+    <input type="button" value="jquery实现" onclick="change(2)"/>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
+    <br>
+    <textarea id="cont" style="width:400px;height:300px;"></textarea>
+</div>
+<table align=center id="query" style="text-align:center;display:none;">
+
+    <tr>
+        <td colspan=2><input type="button" value="js实现" onclick="change()"/></td>
+
+    </tr>
+    <tr>
+        <td><label>原始内容</label></td>
+        <td><label>编码之后的内容</label></td>
+    </tr>
+    <tr>
+        <td><textarea id="old" type="text"  style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
+        <td><textarea id="new" type="text"  style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    function bian()
+    {
+        var a = document.getElementById("it").value;
+
+        document.getElementById("cont").value=encodeURIComponent(a);
+    }
+    function jie()
+    {
+        var a = document.getElementById("it").value;
+
+        document.getElementById("cont").value=decodeURIComponent(a);
+    }
+    function change(ch)
+    {
+        if(ch==2)
+        {
+            $("#js").css("display","none");
+            $("#query").css("display","block");
+        }
+        else
+        {
+            $("#js").css("display","block");
+            $("#query").css("display","none");
+        }
+    }
+    $("#old").keyup(
+        function(){
+            var a =$(this).val();
+
+            $("#new").val(encodeURIComponent(a));
+        }
+    );
+
+</script>
+
+
+</body>
+</html>
