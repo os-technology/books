@@ -30,7 +30,9 @@ public class DemoInterceptor extends HandlerInterceptorAdapter {//继承HandlerI
     @Override
     public boolean preHandle(HttpServletRequest request
             , HttpServletResponse response, Object handler) throws Exception {
-
+        if (request.getCharacterEncoding() == null) {
+            request.setCharacterEncoding("UTF-8");
+        }
         long startTime = System.currentTimeMillis();
         request.setAttribute("startTime",startTime);
 

@@ -28,6 +28,7 @@ public class DemoAnnoController {
         return "url:" + request.getRequestURL() + " can access";//演示可接受HttpServletRequest作为参数， 当然也可以接受HttpServletReponse作为参数。 此处的 @ReponseBody用在返回值前面。
     }
 
+    //http://localhost:8080/boot/springmvc4/anno/pathvar/xx
     @RequestMapping(value = "/pathvar/{path}",
             produces = "text/plain;charset=utf-8")//演示接受路径参数， 并在方法参数前结合@PathVariable使用， 访问路径为/anno/pathvar/xx。
     @ResponseBody
@@ -46,7 +47,8 @@ public class DemoAnnoController {
         return "url:" + request.getRequestURL() + " can access,path:" + id;
     }
 
-    //演示解释参数到对象， 访问路径为/anno/obj?id=1&name=xx
+    //演示解释参数到对象， 访问路径为
+    // http://localhost:8080/boot/springmvc4/anno/obj?id=1&name=xx
     @RequestMapping(value = "/obj",
             produces = "text/plain;charset=utf-8")
     @ResponseBody
