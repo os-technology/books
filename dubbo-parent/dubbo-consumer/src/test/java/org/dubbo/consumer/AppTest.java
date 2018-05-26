@@ -15,8 +15,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AppTest {
 
 	private static ApplicationContext appConsumer = new ClassPathXmlApplicationContext("consumer.xml");
-//	@Autowired
-//	private static HelloService hello;
 	public static void main(String[] args) {
 
 		HelloService hello = (HelloService) appConsumer.getBean(HelloService.class);
