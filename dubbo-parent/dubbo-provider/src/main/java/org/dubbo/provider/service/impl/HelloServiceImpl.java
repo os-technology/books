@@ -5,7 +5,8 @@ import java.util.Date;
 
 import org.dubbo.inter.api.HelloService;
 import org.springframework.stereotype.Service;
-@Service("hello")
+@Service//("helloService")
+//@com.alibaba.dubbo.config.annotation.Service//(interfaceName = "helloService")
 public class HelloServiceImpl implements HelloService {
 
 	@Override

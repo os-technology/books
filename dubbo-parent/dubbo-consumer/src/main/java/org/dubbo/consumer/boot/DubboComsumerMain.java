@@ -6,9 +6,9 @@ import org.dubbo.inter.api.HelloService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Main {
+public class DubboComsumerMain {
 	public static void main(String[] args) {
-		//		ApplicationContext appConsumer = new ClassPathXmlApplicationContext("consumer.xml");
+				ApplicationContext appConsumer = new ClassPathXmlApplicationContext("consumer.xml");
 //		HelloService hello = (HelloService) appConsumer.getBean("hello");
 //		String output = hello.hello("dubbo搞定。");
 //		System.out.println(output);
