@@ -113,6 +113,7 @@
             <version>2.3</version>
         </dependency>
 
+        <!--spring web测试依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
