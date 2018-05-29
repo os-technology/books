@@ -22,11 +22,11 @@ public class SpringBootApplicationBannerStart {
      * @param args
      */
     public static void main(String[] args) {
-//        SpringApplication.run(SpringBootApplicationBannerStart.class, args);
+        SpringApplication.run(SpringBootApplicationBannerStart.class, args);
 
         //关闭banner图案
-        SpringApplication app = new SpringApplication(SpringBootApplicationBannerStart.class);
-        app.setBannerMode(Banner.Mode.OFF);
-        app.run(args);
+//        SpringApplication app = new SpringApplication(SpringBootApplicationBannerStart.class);
+//        app.setBannerMode(Banner.Mode.OFF);
+//        app.run(args);
     }
 }
