@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <properties>
         <java.version>1.7</java.version>
-        <springframework-version>4.1.5.RELEASE</springframework-version>
+        <springframework-version>4.2.1.RELEASE</springframework-version>
     </properties>
     <modules>
         <module>boot1</module>
