@@ -1,8 +1,9 @@
 package org.test.tmp;
 
+import org.algorithm.list.base64.Base64;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -16,7 +17,17 @@ import java.util.*;
 
 public class TmpTest {
 
+    @Test
+    public void base64() throws IOException {
+        File filename = new File("/Users/yujinshui/Desktop/paymax/资料文档/给三方的接口文档-华夏银行/测试环境证书信息/commonpay_pri.pfx");
+        FileInputStream inputFromFile = new FileInputStream(filename);
+        byte[] byteData = new byte[inputFromFile.available()];
+        inputFromFile.read(byteData);
+        inputFromFile.close();
 
+        String pfxData = Base64.encode(byteData);
+        System.out.println(pfxData);
+    }
 
 
     /**

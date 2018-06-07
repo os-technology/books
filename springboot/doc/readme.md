@@ -5,6 +5,8 @@ GitHub源码地址：[https://github.com/dyc87112/SpringBoot-Learning](https://g
 社区信息：[spring for all 社区](http://www.spring4all.com/)  
 [Spring-Boot-Reference-Guide-ZH](http://blog.didispace.com/books/spring-boot-reference/)
 
+其他参考资料：[https://github.com/rhwayfun/spring-boot-learning-examples](https://github.com/rhwayfun/spring-boot-learning-examples)
+
 **学习位置：**  
 1. [http://blog.didispace.com/springbootproperties/](http://blog.didispace.com/springbootproperties/)
 
