@@ -1,13 +1,13 @@
 package org.chapter.test;
 
-public class B extends A {
+public class BChild extends AFather {
 
-	B(int i){
+	BChild(int i){
 		
 	System.out.println("b");
 }
 public static void main(String[] args) {
-	B b =new B(0);
-//	new B(9);
+	BChild b =new BChild(0);
+//	new BSon(9);
 }
 }

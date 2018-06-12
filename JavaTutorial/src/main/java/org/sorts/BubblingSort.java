@@ -3,6 +3,7 @@ package org.sorts;
 import com.alibaba.fastjson.JSON;
 
 /**
+ * 冒泡排序
  * @author yuijnshui@lxfintech.com
  * @Title: BubblingSort
  * @Copyright: Copyright (c) 2017

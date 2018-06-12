@@ -11,7 +11,7 @@ public class Data {
 
 	private static int m = 0;
 	private volatile boolean end = false;
-	private final String[] alp = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
+	private final String[] alp = { "AParent", "BSon", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
 			"R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
 	public int getM() {

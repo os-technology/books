@@ -71,4 +71,4 @@ public class ThreadTest extends Thread {
 	}
 
 }
-// ���ܵĽ���� A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 12
+// ���ܵĽ���� AParent BSon C D E F G H I J K L M N O P Q R S T U V W X Y Z 12

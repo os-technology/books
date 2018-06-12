@@ -393,7 +393,7 @@ public class MailTool {
 		// ע:�����õĲ���ֻ��ΪURL����,����ΪURL�ִ�,
 		DataHandler dataHandle = new DataHandler(ur);
 		try {
-			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "B"));
+			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "BSon"));
 		} catch (MessagingException e) {
 
 			e.printStackTrace();
@@ -444,7 +444,7 @@ public class MailTool {
 		DataHandler ur = null;
 		ur = new DataHandler(content, "text/plain;charset=gb2312");
 		try {
-			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "B"));
+			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "BSon"));
 		} catch (MessagingException e) {
 
 			e.printStackTrace();
@@ -463,7 +463,7 @@ public class MailTool {
 
 	/**
 	 * �����ļ���Ϊ���� �������������US-ASCII�ַ�,
-	 * �����ڷ������ı���ĸ���ʱ��Ҫ�����US-ASCII�ַ�, ��}�ֱ��뷽ʽ: B (BASE64), Q
+	 * �����ڷ������ı���ĸ���ʱ��Ҫ�����US-ASCII�ַ�, ��}�ֱ��뷽ʽ: BSon (BASE64), Q
 	 * (Quoted-Printable), ��Щ������MimeUtility�ﶼ�Ѿ����˷�װ, �����ڷ��͸���ʱʹ�÷���:
 	 * setFileName(MimeUtility.encodeText(fileName, "GBK"));
 	 * ���������ʼ�ϵͳ�Դ˴�ʵ�ֵĲ��Ǻ�һ��, ���Կ����и���ʼ�ϵͳ�յ���������,
@@ -481,7 +481,7 @@ public class MailTool {
 		// ע:�����õĲ���ֻ��ΪURL����,����ΪURL�ִ�.
 		DataHandler dataHandle = new DataHandler(ur);
 		try {
-			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "B"));
+			mdp.setFileName(MimeUtility.encodeText(newName, "GBK", "BSon"));
 		} catch (MessagingException e) {
 
 			e.printStackTrace();

@@ -5,6 +5,6 @@ public Extend(){
 	
 }
 public void show(){
-	System.out.println("class A");
+	System.out.println("class AParent");
 }
 }

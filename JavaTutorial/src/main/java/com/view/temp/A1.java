@@ -21,7 +21,7 @@ public class A1 {
     }
 
     public static void main(String[] args) {
-//        A1 a = new B();
+//        A1 a = new BSon();
 
         System.out.println(new BigDecimal(20.1).multiply(new BigDecimal("100")).setScale(0).toPlainString());
     }
@@ -29,11 +29,11 @@ public class A1 {
 }
 
 
-class B extends A1{
+class B2 extends A1{
     static {
         System.out.println(3);
     }
-    public B(){
+    public B2(){
         System.out.println(4);
     }
 }
