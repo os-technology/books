@@ -265,7 +265,7 @@ public class GenerateSql {
     }
 //PC快捷、PC网关、拉卡拉移动网页支付交易
     private void pc_lakala_sql(String merchantId,String startDate,String endDate){
-        String sql="mysql -hrr-2ze10444nlw3kt70h.mysql.rds.aliyuncs.com -upayright_read -phiXgDu86gER -e \"select order_date '订单时间',CONCAT(order_date,order_time) '支付时间',concat('''',paymax_merchant_order_no) '商户订单号',merchant_no ' Paymax 订单号',case when pay_way='A' then '借记卡快捷支付'  when pay_way='1' then '账户支付'   when pay_way='2' then '快捷支付'   when pay_way='3' then '银行卡支付' when pay_way='9' then '信用卡快捷支付'  when pay_way='4' then '网关支付' end '支付方式',round(amount/100,2) '交易总价',round(server_fee/100,2) '手续费',case when order_status='BD' then '交易成功'  when order_status='3' then '退款成功'  when order_status='RF' then '全部退款成功'  when order_status='RP' then '部分退款成功' end '订单状态' from  statement.t_lakala_statement_records where" +
+        String sql="mysql -hrr-2ze10444nlw3kt70h.mysql.rds.aliyuncs.com -upayright_read -phiXgDu86gER -e \"select order_date '订单时间',CONCAT(order_date,order_time) '支付时间',concat('''',paymax_merchant_order_no) '商户订单号',merchant_no ' Paymax 订单号',case when pay_way='AParent' then '借记卡快捷支付'  when pay_way='1' then '账户支付'   when pay_way='2' then '快捷支付'   when pay_way='3' then '银行卡支付' when pay_way='9' then '信用卡快捷支付'  when pay_way='4' then '网关支付' end '支付方式',round(amount/100,2) '交易总价',round(server_fee/100,2) '手续费',case when order_status='BD' then '交易成功'  when order_status='3' then '退款成功'  when order_status='RF' then '全部退款成功'  when order_status='RP' then '部分退款成功' end '订单状态' from  statement.t_lakala_statement_records where" +
                 " merchant_id = " +merchantId +
                 " AND trade_type='SUCCESS'" +
                 " and statement_date >= " +getYear()+startDate +
