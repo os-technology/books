@@ -1,5 +1,7 @@
 package org.number;
 
+import com.alibaba.fastjson.JSON;
+
 import java.math.BigDecimal;
 
 /**
@@ -23,8 +25,21 @@ public class Num {
 	}
 
 	public static void main(String[] args) {
-		String value = "你好";
-		System.out.println(value.length());
+//		String value = "你好";
+//		System.out.println(value.length());
+
+		int[] a = {1,5,3,8,4};
+		int tmp = 0;
+		for(int i=0;i<a.length;i++){
+			for(int j=i;j<a.length-1-i;j++){
+				if(a[j]>a[j+1]){
+					tmp=a[j];
+					a[j]=a[j+1];
+					a[j+1]=tmp;
+				}
+			}
+		}
+		System.out.println(JSON.toJSONString(a));
 	}
 
 }
