@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 /**
+ * http://www.importnew.com/28021.html
  * socketchannel客户端
  *
  * @author yuijnshui@lxfintech.com
