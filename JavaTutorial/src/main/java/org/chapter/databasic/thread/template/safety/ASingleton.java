@@ -7,7 +7,6 @@ package org.chapter.databasic.thread.template.safety;
 public class ASingleton {
 
     private static ASingleton instance = null;
-    private static Object mutex = new Object();
 
     private ASingleton() {
     }
@@ -78,7 +77,7 @@ public class ASingleton {
      */
     public static ASingleton getSynblockInstance() {
         if (instance == null) {
-            synchronized (mutex) {
+            synchronized (ASingleton.class) {
                 if (instance == null)
                     instance = new ASingleton();
             }
