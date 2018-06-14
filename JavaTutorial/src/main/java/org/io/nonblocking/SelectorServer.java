@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * http://www.importnew.com/28021.html
+ *
  * @author yuijnshui@lxfintech.com
  * @Title: SelectorServer
  * @Copyright: Copyright (c) 2017
