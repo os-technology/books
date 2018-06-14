@@ -15,6 +15,7 @@
     <modules>
         <module>springmvc4</module>
         <module>banner</module>
+        <module>ch_6_1_4</module>
     </modules>
     <properties>
         <!-- Generic properties -->
