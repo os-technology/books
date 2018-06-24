@@ -1,5 +1,6 @@
 package org.test.tmp;
 
+import com.alibaba.fastjson.JSON;
 import org.algorithm.list.base64.Base64;
 import org.junit.Test;
 
@@ -16,6 +17,30 @@ import java.util.*;
  */
 
 public class TmpTest {
+
+
+    /**
+     * 冒泡排序
+     */
+    @Test
+    public void order(){
+        int[] a = {3,2,5,7,1};
+
+        int tmp=0;
+
+        for(int i=0;i<a.length;i++){
+            for (int j=0;j<a.length-1-i;j++){
+                if (a[j] > a[j+1]) {
+                    tmp=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=tmp;
+                }
+            }
+        }
+        System.out.println(JSON.toJSONString(a));
+
+    }
+
     @Test
     public void pringGC() {
         byte[] bytes = null;
