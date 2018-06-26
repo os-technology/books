@@ -17,8 +17,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!--<java.mac.home>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre</java.mac.home>-->
-		<java.mac.home>C:/Program Files/Java/jdk1.7.0_80/jre</java.mac.home>
+		<java.mac.home>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/jre</java.mac.home>
+		<!--<java.mac.home>C:/Program Files/Java/jdk1.7.0_80/jre</java.mac.home>-->
 	</properties>
 	<modules>
 		<module>HeadFirstDesign</module>
@@ -75,7 +75,7 @@
 					<!--程序包com.sun.image.codec.jpeg不存在 问题的完美解决 注意window环境下rt.jar后面为分号，mac环境下为冒号-->
 					<compilerArguments>
 						<bootclasspath>
-							${java.mac.home}/lib/rt.jar;${java.mac.home}/lib/jce.jar
+							${java.mac.home}/lib/rt.jar:${java.mac.home}/lib/jce.jar
 						</bootclasspath>
 					</compilerArguments>
 				</configuration>
