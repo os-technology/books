@@ -2,6 +2,9 @@ package org.jvm;
 
 import org.junit.Test;
 
+/**
+ * http://www.cnblogs.com/leefreeman/category/1058724.html
+ */
 public class JvmUnitTest {
 
     /**
