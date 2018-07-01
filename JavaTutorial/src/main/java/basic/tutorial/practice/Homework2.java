@@ -147,6 +147,7 @@ public class Homework2 {
 	public void testOpt(int[] in) {
 
 		int lowIndex;
+		int count = 0;
 		for (int i = 0; i < in.length; i++) {
 			int temp = i;
 			for (int j = i + 1; j < in.length; j++) {
@@ -158,7 +159,9 @@ public class Homework2 {
 			lowIndex = in[i];
 			in[i] = in[temp];
 			in[temp] = lowIndex;
+			count++;
 		}
+		System.out.println("排序次数："+count);
 		for (int i = 0; i < in.length; i++) {
 			System.out.println(in[i]);
 		}
@@ -214,7 +217,8 @@ public class Homework2 {
 		// hw.StringBufferInsert();
 		// hw.arrayTest();
 		/*************/
-		int[] in = { 8, 4, 7, 3, 12, 6 };
+		int[] in = { 11,9,7,4 };
+//		int[] in = { 8, 4, 7, 3, 12, 6 };
 		// hw.testOrder();
 		// hw.testOpt();
 
