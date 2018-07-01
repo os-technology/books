@@ -19,14 +19,14 @@ Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](
 
 Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 
-```
+```xml
 <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.SR1</version><!--Dalston.SR1-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            </dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-dependencies</artifactId>
+    <version>Dalston.SR1</version><!--Dalston.SR1-->
+    <!--<type>pom</type>-->
+    <!--<scope>import</scope>-->
+</dependency>
             
             
 点击Dalston.SR1 ,在父pom中得到
@@ -411,6 +411,52 @@ info.from: "git"
  ```
  
  在完成了上面你的代码编写之后，读者可以将config-server-git、config-client都启动起来，然后访问 [http://localhost:2120/info](http://localhost:2120/info) 
+
+### 服务打包发布
+
+pom文件中添加了`org.springframework.boot:spring-boot-maven-plugin`插件。在添加了该插件之后，当运行`mvn package`进行打包时，会打包成一个可以直接运行的 JAR 文件，使用“java -jar”命令就可以直接运行。
+
+可以在POM中，指定生成 的是Jar还是War `<packaging>jar</packaging>` 默认为jar
+
+你还可以指定要执行的类，如果不指定的话，Spring会找有这个`public static void main(String[] args)`方法的类，当做可执行的类。当出现两个类含有main方法时，会报错。
+
+可以通过以下两个方法来指定启动类：
+
+第一种：如果你的POM是继承`spring-boot-starter-parent`的话，只需要下面的指定就行
+
+ ```xml
+    <properties>    
+        <!-- The main class to start by executing java -jar -->    
+        <start-class>com.xx.xx</start-class>
+    </properties>
+ ```
+ 
+ 第二种：如果你的POM不是继承`spring-boot-starter-parent`的话，需要下面的指定
+ 
+  ```xml
+  <build>  
+      	<plugins>  
+              <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+                  <version>1.3.5.RELEASE</version>
+                  <configuration>
+                      <mainClass>com.xx.xx</mainClass>
+                  </configuration>
+                  <executions>
+                      <execution>
+                        <goals>
+                          <goal>repackage</goal>
+                        </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+      	</plugins>  
+  </build> 
+  ```
+打包如果没有将配置文件加载进去或者有些系统，关于一些数据库或其它第三方账户等信息，由于安全问题，其配置并不会提前配置在项目中暴露给开发者。对于这样的情况，我们在运行程序的时候。能够通过參数指定一个外部配置文件。
+
+`java -jar xx.jar --spring.config.location=application.properties`
 
 ### 分布式配置中心（加密解密）
 
