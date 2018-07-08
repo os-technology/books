@@ -1,24 +1,45 @@
 package org.dubbo.provider.boot;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@SpringBootApplication(scanBasePackages = "org.dubbo.provider")
+@ImportResource(locations = {"classpath:provider.xml"})
 public class DubboProviderMain {
 
     public static void main(String[] args) {
+        springStart(args);
+//        dubboStart(args);
+    }
+
+    private static void springStart(String[] args) {
+        SpringApplication.run(DubboProviderMain.class, args);
+
+        System.out.println("dubbo-provider is started.");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 不需要spring部分的注解
+     *
+     * @param args
+     */
+    private static void dubboStart(String[] args) {
         ClassPathXmlApplicationContext
                 context = new ClassPathXmlApplicationContext("provider.xml");
-//        app.start();
-//        System.out.println("provider is started!");
-//        try {
-//            Thread.sleep(100000000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
         com.alibaba.dubbo.container.Main.main(args);
+        System.out.println("dubbo-provider is started.");
     }
 }

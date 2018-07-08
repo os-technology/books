@@ -13,7 +13,7 @@
 	<!-- 要引用的服务 url属性保证zookeeper注册中心挂掉之后，依旧可以通过直连的方式进行访问。dubbo默认链接个数为单链接，链接方式为长连接-->
 	<!--dubbo相关链接参考：https://www.cnblogs.com/yangzhilong/p/6121551.html-->
 	<dubbo:reference interface="org.dubbo.inter.api.HelloService" url="dubbo://127.0.0.1:8011"
-		id="hello" version="1.0.0"></dubbo:reference>
+		id="helloService" version="1.0.0"></dubbo:reference>
 
 
 </beans>
