@@ -15,11 +15,10 @@ import org.algorithm.list.base64.Base64;
 
 /**
  * 参考地址
- * http://blog.csdn.net/smartbetter/article/details/54017759
+ * https://blog.csdn.net/Hwaphon/article/details/52190653
  * @author yujinshui
  * @createTime 2017年4月3日 下午8:08:54
  */
-@Deprecated
 public class AesUtil {
 	/**
 	 * 加密

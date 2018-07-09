@@ -1,8 +1,11 @@
 package org.tech.redis;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,28 +27,35 @@ public class RedisClient {
 
 	@Test
 	public void redis() {
-
+		String val = "redis value is "+DateFormatUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss");
 		// 添加数据
-		jedis.set("hello", "redis 1");
+		jedis.set("hello", val);
 		// 拼接数据
 		// jedis.append("hello", " SUCCESS");
 		// jedis.del("hello");
-		System.out.println(jedis.get("hello"));
-
+		Assert.assertEquals(val,jedis.get("hello"));
 	}
 
 	@Test
 	public void addNum() {
+		jedis.del("count");
 //		jedis.set("count", "1");
 		jedis.incr("count");
 		jedis.incr("count");
 		jedis.incr("count");
-		System.out.println(jedis.get("count"));
+		String count = jedis.get("count");
+		System.out.println(count);
+		Assert.assertEquals(3,Long.valueOf(count).longValue());
 	}
 	@Test
 	 public void multValues(){
-		 jedis.mset("name","yujinshui","age","28");
+		String time = DateFormatUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss");
+
+		jedis.del("name","age","time");
+		 jedis.mset("name","yujinshui","age","28","time",time);
 		 System.out.println(jedis.get("name"));
+		System.out.println(jedis.keys("*"));
+		Assert.assertEquals(time,jedis.get("time"));
 	 }
 	@Test
 	public void testMap(){
