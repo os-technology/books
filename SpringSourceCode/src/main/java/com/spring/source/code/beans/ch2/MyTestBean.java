@@ -1,4 +1,4 @@
-package com.start.spring4.entity.ch2;
+package com.spring.source.code.beans.ch2;
 
 /**
  * @author yuijnshui
