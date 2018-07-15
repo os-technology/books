@@ -48,7 +48,7 @@ public class BeanFactoryTest {
     public void testSimpleLoad_new() {
 
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        Resource resource = new ClassPathResource("beanFactoryTest.xml", getClass());
+        Resource resource = new ClassPathResource("beanFactoryTest.xml");
         new XmlBeanDefinitionReader(factory).loadBeanDefinitions(resource);
 
         MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
