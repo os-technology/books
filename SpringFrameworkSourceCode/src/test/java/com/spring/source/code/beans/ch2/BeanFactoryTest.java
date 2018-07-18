@@ -12,6 +12,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author yuijnshui
  * @Title: BeanFactoryTest
@@ -34,6 +37,8 @@ public class BeanFactoryTest {
         myTestBean.setStr(eqlVal);
         Assert.assertEquals(eqlVal, myTestBean.getStr());
         System.out.println(this);
+
+        Assert.assertNotNull("BeanAttr is null",myTestBean.getBeanAttr());
     }
 
     /**
@@ -57,7 +62,35 @@ public class BeanFactoryTest {
         myTestBean.setStr(eqlVal);
         Assert.assertEquals(eqlVal, myTestBean.getStr());
         System.out.println(this);
+
+
     }
 
+    /**
+     *仅用来代表resource对象可以获取到inputstream信息，非测试内容
+     * @author code
+     * @date 2018/7/16 下午7:26
+     * @param
+     * @return void
+     */
+    @Test
+    public void testInputStream() throws IOException {
+        Resource resource = new ClassPathResource("beanFactoryTest.xml");
+        InputStream inputStream = resource.getInputStream();
+        Assert.assertNotNull(inputStream);
+
+
+    }
+    /**
+     * 可用于进行代码编写时进行的验证
+     * @author code
+     * @date 2018/7/16 下午7:27
+     * @param
+     * @return void
+     */
+    @Test
+    public void testNotNull(){
+        Assert.assertNotNull("String is null",null);
+    }
 
 }

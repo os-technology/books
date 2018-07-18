@@ -3,5 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myTestBean" class="com.spring.source.code.beans.ch2.MyTestBean"/>
+    <beans profile="dev">
+        <bean id="myTestBean" class="com.spring.source.code.beans.ch2.MyTestBean"/>
+
+    </beans>
+    <beans profile="pro">
+        <bean id="beanAttr" class="com.spring.source.code.beans.ch2.BeanAttr"/>
+
+    </beans>
 </beans>
+

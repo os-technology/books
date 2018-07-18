@@ -34,7 +34,7 @@
 		<module>springboot</module>
         <module>jmetertest</module>
         <module>springbootApplication</module>
-        <module>SpringSourceCode</module>
+        <module>SpringFrameworkSourceCode</module>
     </modules>
 	<dependencyManagement>
 		<dependencies>

@@ -10,7 +10,8 @@ package com.spring.source.code.beans.ch2;
  */
 public class MyTestBean {
 
-    private String str ;
+    private String str;
+    private BeanAttr beanAttr;
 
     public String getStr() {
         return str;
@@ -18,6 +19,15 @@ public class MyTestBean {
 
     public MyTestBean setStr(String str) {
         this.str = str;
+        return this;
+    }
+
+    public BeanAttr getBeanAttr() {
+        return beanAttr;
+    }
+
+    public MyTestBean setBeanAttr(BeanAttr beanAttr) {
+        this.beanAttr = beanAttr;
         return this;
     }
 }

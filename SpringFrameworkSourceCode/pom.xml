@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spring.code</groupId>
-    <artifactId>SpringSourceCode</artifactId>
+    <artifactId>SpringFrameworkSourceCode</artifactId>
     <properties>
         <springframework.version>4.0.6.RELEASE</springframework.version>
     </properties>
