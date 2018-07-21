@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <!--单元测试中采用@ActiveProfiles注解方式指定环境配置-->
     <beans profile="dev">
         <bean id="myTestBean" class="com.spring.source.code.beans.ch2.MyTestBean"/>
 

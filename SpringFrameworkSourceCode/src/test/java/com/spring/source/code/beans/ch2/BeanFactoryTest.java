@@ -8,9 +8,11 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,7 @@ import java.io.InputStream;
  * @Company: lxjr.com
  * @Created on 2018/7/14下午9:19
  */
+@ActiveProfiles("dev")
 public class BeanFactoryTest {
 
     /**
@@ -43,6 +46,7 @@ public class BeanFactoryTest {
 
     /**
      * xml文件新的读取方式
+     * profile配置方式：-Dspring.profiles.active=dev
      *
      * @param
      * @return void
@@ -50,8 +54,9 @@ public class BeanFactoryTest {
      * @date 2018/7/15 下午7:30
      */
     @Test
-    public void testSimpleLoad_new() {
 
+    public void testSimpleLoad_new() {
+//        ConfigurableEnvironment.setActiveProfiles("test");
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         Resource resource = new ClassPathResource("beanFactoryTest.xml");
         new XmlBeanDefinitionReader(factory).loadBeanDefinitions(resource);
