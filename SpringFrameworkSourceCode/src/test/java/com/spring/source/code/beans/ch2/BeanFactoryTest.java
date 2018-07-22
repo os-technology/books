@@ -1,18 +1,19 @@
 package com.spring.source.code.beans.ch2;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +27,8 @@ import java.io.InputStream;
  * @Created on 2018/7/14下午9:19
  */
 @ActiveProfiles("dev")
+//@ContextConfiguration("classpath:/beanFactoryTest.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class BeanFactoryTest {
 
     /**
@@ -71,6 +74,30 @@ public class BeanFactoryTest {
 
     }
 
+
+    @Test
+    public void testSimpleLoad_config() {
+
+
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        Resource resource = new ClassPathResource("beanFactoryTest.xml");
+
+        StandardEnvironment environment = new StandardEnvironment();
+         environment.setActiveProfiles("dev");//设置配置文件的profile方式之一
+
+        XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(factory);
+        xmlReader.setEnvironment(environment);
+        xmlReader.loadBeanDefinitions(resource);
+
+        MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
+
+        String eqlVal = "myTestBean";
+        myTestBean.setStr(eqlVal);
+        Assert.assertEquals(eqlVal, myTestBean.getStr());
+        System.out.println(this);
+
+
+    }
     /**
      *仅用来代表resource对象可以获取到inputstream信息，非测试内容
      * @author code

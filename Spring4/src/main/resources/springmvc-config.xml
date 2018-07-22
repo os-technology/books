@@ -9,9 +9,11 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
        ">
-	<!-- bean方式配置类 -->
-	<bean name="product" class="com.start.spring4.entity.Product" />
-	<bean name="controllerAction" class="com.start.spring4.action.ControllerAction" />
+	<!-- bean方式配置类 本module的profile属性配置尚未成功，参见SpringFrameworkSourceCode module-->
+	<beans profile="pro">
+		<bean name="product" class="com.start.spring4.entity.Product" />
+		<bean name="controllerAction" class="com.start.spring4.action.ControllerAction" />
+	</beans>
 	<!-- <bean name="factoryBean" class="com.spring.soft.code.factory.FactoryBean" 
 		factory-method="getFactoryBean"/> -->
 
