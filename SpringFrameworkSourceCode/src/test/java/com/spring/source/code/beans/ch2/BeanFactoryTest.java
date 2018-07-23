@@ -26,7 +26,7 @@ import java.io.InputStream;
  * @Company: lxjr.com
  * @Created on 2018/7/14下午9:19
  */
-@ActiveProfiles("dev")
+//@ActiveProfiles("dev")
 //@ContextConfiguration("classpath:/beanFactoryTest.xml")
 //@RunWith(SpringJUnit4ClassRunner.class)
 public class BeanFactoryTest {
@@ -81,7 +81,7 @@ public class BeanFactoryTest {
 
         DefaultListableBeanFactory factory = getBeanFactory("dev");
 
-        MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
+        MyTestBean myTestBean = (MyTestBean) factory.getBean("&myTestBean");
 
         String eqlVal = "myTestBean";
         myTestBean.setStr(eqlVal);
@@ -90,6 +90,30 @@ public class BeanFactoryTest {
 
 
     }
+
+    /**
+     * 带有&符号的bean类必须实现FactoryBean接口，实例化的时候才可以在字符串前缀上添加&
+     * @author code
+     * @date 2018/7/23 下午1:52
+     * @param
+     * @return void
+     */
+    @Test
+    public void testSimpleLoad_special() {
+
+
+        DefaultListableBeanFactory factory = getBeanFactory("dev");
+
+        MyTestBeanFactoryBean myTestBean = (MyTestBeanFactoryBean) factory.getBean("&myTestBeanFactoryBean");
+
+        String eqlVal = "myTestBeanFactoryBean";
+        myTestBean.setStr(eqlVal);
+        Assert.assertEquals(eqlVal, myTestBean.getStr());
+        System.out.println(this);
+
+
+    }
+
 
     private DefaultListableBeanFactory getBeanFactory(String profile) {
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
