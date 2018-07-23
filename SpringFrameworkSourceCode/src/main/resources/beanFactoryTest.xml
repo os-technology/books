@@ -10,7 +10,8 @@
 
     </beans>
     <beans profile="pro">
-        <bean id="beanAttr" class="com.spring.source.code.beans.ch2.BeanAttr"/>
+        <!-- 如果配置文件中不指定id名称，则根据传入的class进行名称查找,(会自动按照驼峰命名法进行命名)-->
+        <bean  class="com.spring.source.code.beans.ch2.BeanAttr"/>
 
     </beans>
 </beans>

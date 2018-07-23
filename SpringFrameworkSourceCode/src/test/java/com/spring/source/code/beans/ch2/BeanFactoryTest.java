@@ -76,18 +76,10 @@ public class BeanFactoryTest {
 
 
     @Test
-    public void testSimpleLoad_config() {
+    public void testSimpleLoad_profile() {
 
 
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        Resource resource = new ClassPathResource("beanFactoryTest.xml");
-
-        StandardEnvironment environment = new StandardEnvironment();
-         environment.setActiveProfiles("dev");//设置配置文件的profile方式之一
-
-        XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(factory);
-        xmlReader.setEnvironment(environment);
-        xmlReader.loadBeanDefinitions(resource);
+        DefaultListableBeanFactory factory = getBeanFactory("dev");
 
         MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
 
@@ -98,6 +90,30 @@ public class BeanFactoryTest {
 
 
     }
+
+    private DefaultListableBeanFactory getBeanFactory(String profile) {
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        Resource resource = new ClassPathResource("beanFactoryTest.xml");
+
+        StandardEnvironment environment = new StandardEnvironment();
+        environment.setActiveProfiles(profile);//设置配置文件的profile方式之一
+
+        XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(factory);
+        xmlReader.setEnvironment(environment);
+        xmlReader.loadBeanDefinitions(resource);
+        return factory;
+    }
+
+    @Test
+    public void testSimpleLoadWithoutId(){
+        DefaultListableBeanFactory factory = getBeanFactory("pro");
+
+        //如果配置文件中不指定id名称，则根据传入的class进行名称查找,(会自动按照驼峰命名法进行命名),这种方式getBean()方法不能传入字符串信息，会报错
+        BeanAttr beanAttr =  factory.getBean(BeanAttr.class);
+
+        Assert.assertNotNull(beanAttr);
+    }
+
     /**
      *仅用来代表resource对象可以获取到inputstream信息，非测试内容
      * @author code
