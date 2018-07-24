@@ -4,15 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!--单元测试中采用@ActiveProfiles注解方式指定环境配置-->
-    <beans profile="dev">
         <bean id="myTestBean" class="com.spring.source.code.beans.ch2.MyTestBean"/>
-        <bean id="myTestBeanFactoryBean" class="com.spring.source.code.beans.ch2.MyTestBeanFactoryBean"/>
-    </beans>
-    <beans profile="pro">
-        <!-- 如果配置文件中不指定id名称，则根据传入的class进行名称查找,(会自动按照驼峰命名法进行命名)-->
-        <bean  class="com.spring.source.code.beans.ch2.BeanAttr"/>
 
-    </beans>
 </beans>
 

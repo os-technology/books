@@ -59,7 +59,6 @@ public class BeanFactoryTest {
     @Test
 
     public void testSimpleLoad_new() {
-//        ConfigurableEnvironment.setActiveProfiles("test");
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         Resource resource = new ClassPathResource("beanFactoryTest.xml");
         new XmlBeanDefinitionReader(factory).loadBeanDefinitions(resource);
@@ -69,7 +68,6 @@ public class BeanFactoryTest {
         String eqlVal = "myTestBean";
         myTestBean.setStr(eqlVal);
         Assert.assertEquals(eqlVal, myTestBean.getStr());
-        System.out.println(this);
 
 
     }
@@ -81,7 +79,7 @@ public class BeanFactoryTest {
 
         DefaultListableBeanFactory factory = getBeanFactory("dev");
 
-        MyTestBean myTestBean = (MyTestBean) factory.getBean("&myTestBean");
+        MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
 
         String eqlVal = "myTestBean";
         myTestBean.setStr(eqlVal);
@@ -117,7 +115,7 @@ public class BeanFactoryTest {
 
     private DefaultListableBeanFactory getBeanFactory(String profile) {
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        Resource resource = new ClassPathResource("beanFactoryTest.xml");
+        Resource resource = new ClassPathResource("beanFactoryProfileTest.xml");
 
         StandardEnvironment environment = new StandardEnvironment();
         environment.setActiveProfiles(profile);//设置配置文件的profile方式之一
