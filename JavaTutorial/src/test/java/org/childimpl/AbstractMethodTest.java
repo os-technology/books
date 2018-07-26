@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * 抽象类子类具体实现操作
  * @author yuijnshui
  * @Title: AbstractMethodTest
  * @Copyright: Copyright (c) 2017
