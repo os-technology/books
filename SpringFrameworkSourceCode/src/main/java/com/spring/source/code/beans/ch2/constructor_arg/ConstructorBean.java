@@ -1,5 +1,7 @@
 package com.spring.source.code.beans.ch2.constructor_arg;
 
+import com.log.LogPortal;
+
 /**
  * @author yuijnshui
  * @Title: ConstructorBean
@@ -11,6 +13,7 @@ package com.spring.source.code.beans.ch2.constructor_arg;
 public class ConstructorBean {
 
     public ConstructorBean(String value,String index){
+        LogPortal.info("ConstructorBean日志测试",value);
         System.out.println("xml获取的值："+value+"  "+index);
     }
 

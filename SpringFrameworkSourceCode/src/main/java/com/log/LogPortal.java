@@ -1,4 +1,4 @@
-package org.logs.slf4j;
+package com.log;
 
 import ch.qos.logback.classic.Level;
 import org.slf4j.Logger;

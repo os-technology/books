@@ -1,5 +1,6 @@
 package com.spring.source.code.beans.ch2.constructor_arg;
 
+import com.spring.source.code.beans.ch2.BaseJunitTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @Company: lxjr.com
  * @Created on 2018/7/24下午4:39
  */
-public class ConstructorArgJunitTest {
+public class ConstructorArgJunitTest extends BaseJunitTest {
 
     @Test
     public void constructorDoubleParamTest(){

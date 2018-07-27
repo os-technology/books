@@ -29,7 +29,7 @@ import java.io.InputStream;
 //@ActiveProfiles("dev")
 //@ContextConfiguration("classpath:/beanFactoryTest.xml")
 //@RunWith(SpringJUnit4ClassRunner.class)
-public class BeanFactoryTest {
+public class BeanFactoryTest extends BaseJunitTest{
 
     /**
      * XmlBeanFactory 过期。从spring 3.2 后推荐使用DefaultListableBeanFactory和XmlBeanDefinitionReader来代替它。
