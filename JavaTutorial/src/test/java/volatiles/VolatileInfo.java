@@ -1,4 +1,4 @@
-package org.volatiles;
+package volatiles;
 
 /**
  * http://www.importnew.com/24082.html

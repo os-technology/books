@@ -1,15 +1,14 @@
-package org.tech.redis;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+package org.redis;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import redis.clients.jedis.Jedis;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RedisClient {
 	Jedis jedis = null;

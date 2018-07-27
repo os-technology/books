@@ -1,4 +1,4 @@
-package org.volatiles;
+package volatiles;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import org.junit.Test;
  * @Created on 2018/5/14上午7:55
  */
 
-public class Circulation {
+public class CirculationTest {
     public boolean flag = true;
 
 
