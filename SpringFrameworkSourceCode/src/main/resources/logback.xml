@@ -31,7 +31,7 @@
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILEOUT"/>
+        <!--<appender-ref ref="FILEOUT"/>-->
     </root>
 
 </configuration>

@@ -60,6 +60,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--LogPortal.java日志包配置-->
     </dependencies>
 
 </project>
