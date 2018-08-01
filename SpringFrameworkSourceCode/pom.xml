@@ -13,6 +13,7 @@
     <artifactId>SpringFrameworkSourceCode</artifactId>
     <properties>
         <springframework.version>4.0.6.RELEASE</springframework.version>
+        <disconf.version>2.6.36</disconf.version>
     </properties>
     <dependencies>
 
@@ -42,6 +43,16 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-client</artifactId>
+            <version>${disconf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baidu.disconf</groupId>
+            <artifactId>disconf-core</artifactId>
+            <version>${disconf.version}</version>
+        </dependency>
         <!--LogPortal.java日志包配置-->
         <dependency>
             <groupId>org.slf4j</groupId>

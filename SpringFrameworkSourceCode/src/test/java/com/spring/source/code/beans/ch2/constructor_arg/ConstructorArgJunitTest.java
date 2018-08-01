@@ -1,6 +1,6 @@
 package com.spring.source.code.beans.ch2.constructor_arg;
 
-import com.spring.source.code.beans.ch2.BaseJunitTest;
+import com.spring.source.code.beans.BaseJunitTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

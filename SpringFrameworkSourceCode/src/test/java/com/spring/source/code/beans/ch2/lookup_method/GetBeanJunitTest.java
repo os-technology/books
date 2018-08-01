@@ -1,5 +1,6 @@
 package com.spring.source.code.beans.ch2.lookup_method;
 
+import com.spring.source.code.beans.BaseJunitTest;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @Company: lxjr.com
  * @Created on 2018/7/23下午4:31
  */
-public class GetBeanJunitTest {
+public class GetBeanJunitTest  extends BaseJunitTest {
 
     @Test
     public void lookupGetBean(){

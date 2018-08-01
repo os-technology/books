@@ -1,9 +1,8 @@
 package com.spring.source.code.beans.ch2;
 
-import com.alibaba.fastjson.JSON;
+import com.spring.source.code.beans.BaseJunitTest;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -11,9 +10,6 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +25,7 @@ import java.io.InputStream;
 //@ActiveProfiles("dev")
 //@ContextConfiguration("classpath:/beanFactoryTest.xml")
 //@RunWith(SpringJUnit4ClassRunner.class)
-public class BeanFactoryTest extends BaseJunitTest{
+public class BeanFactoryTest extends BaseJunitTest {
 
     /**
      * XmlBeanFactory 过期。从spring 3.2 后推荐使用DefaultListableBeanFactory和XmlBeanDefinitionReader来代替它。
