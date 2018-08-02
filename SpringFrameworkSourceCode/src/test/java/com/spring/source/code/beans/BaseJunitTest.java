@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ImportResource;
  * @Created on 2018/7/27下午3:40
  */
 @ComponentScan(basePackages = {"com.baidu","com.xxx"})
-//@ImportResource({"classpath:disconf.xml"})//引入disconf
+//@ImportResource({"classpath:disconfig.xml"})//引入disconf
 //@ImportResource({"classpath:replaceMethodTest_disconf.xml"})//引入disconf
 public class BaseJunitTest {
     @Before
