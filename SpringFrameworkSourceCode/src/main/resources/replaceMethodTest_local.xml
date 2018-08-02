@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="testChangeMethod" class="com.spring.source.code.beans.ch2.replaced_method.TestChangeMethod">
+    <bean id="testChangeMethod" class="com.spring.source.code.beans.ch3.replaced_method.TestChangeMethod">
         <replaced-method name="changeMe" replacer="testMethodReplacer"/>
 
     </bean>
 
-    <bean id="testMethodReplacer" class="com.spring.source.code.beans.ch2.replaced_method.TestMethodReplacer"/>
+    <bean id="testMethodReplacer" class="com.spring.source.code.beans.ch3.replaced_method.TestMethodReplacer"/>
 </beans>
 

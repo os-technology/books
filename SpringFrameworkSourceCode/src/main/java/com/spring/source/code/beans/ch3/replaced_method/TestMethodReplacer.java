@@ -1,6 +1,5 @@
-package com.spring.source.code.beans.ch2.replaced_method;
+package com.spring.source.code.beans.ch3.replaced_method;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.support.MethodReplacer;
 
 import java.lang.reflect.Method;

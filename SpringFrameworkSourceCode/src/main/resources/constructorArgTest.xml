@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="constructorBean" class="com.spring.source.code.beans.ch2.constructor_arg.ConstructorBean">
+    <bean id="constructorBean" class="com.spring.source.code.beans.ch3.constructor_arg.ConstructorBean">
         <!--index代表参数顺序，此处代表构造函数中有两个参数信息-->
         <constructor-arg index="0">
             <value>初始值</value>
@@ -13,7 +13,7 @@
             <value>变更值</value>
         </constructor-arg>
     </bean>
-    <bean id="constructorSingleBean" class="com.spring.source.code.beans.ch2.constructor_arg.ConstructorBean">
+    <bean id="constructorSingleBean" class="com.spring.source.code.beans.ch3.constructor_arg.ConstructorBean">
         <!--index代表参数顺序，此处代表构造函数中有两个参数信息-->
         <constructor-arg index="0">
             <value>单参数构造</value>

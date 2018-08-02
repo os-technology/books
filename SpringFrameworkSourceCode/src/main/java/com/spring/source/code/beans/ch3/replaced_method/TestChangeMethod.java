@@ -1,4 +1,4 @@
-package com.spring.source.code.beans.ch2.replaced_method;
+package com.spring.source.code.beans.ch3.replaced_method;
 
 /**
  * @author yuijnshui

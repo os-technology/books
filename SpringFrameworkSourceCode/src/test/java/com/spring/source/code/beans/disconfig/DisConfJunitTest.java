@@ -3,7 +3,7 @@ package com.spring.source.code.beans.disconfig;
 import com.baidu.disconf.client.usertools.DisconfDataGetter;
 import com.disconf.DisconfAnnotationAutoService;
 import com.disconf.DisconfAutoService;
-import com.spring.source.code.beans.BaseJunitTest;
+import com.spring.source.code.beans.BaseDisconfJunitTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @Company: lxjr.com
  * @Created on 2018/8/1下午4:00
  */
-public class DisConfJunitTest extends BaseJunitTest {
+public class DisConfJunitTest extends BaseDisconfJunitTest {
     @Test
     public void testDisconf() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("disconf.xml");

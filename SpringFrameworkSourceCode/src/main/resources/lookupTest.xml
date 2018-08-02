@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="getBeanTest" class="com.spring.source.code.beans.ch2.lookup_method.GetBeanTest">
+    <bean id="getBeanTest" class="com.spring.source.code.beans.ch3.lookup_method.GetBeanTest">
         <lookup-method name="getBean" bean="springTeacher"/>
 
     </bean>
 
-    <bean id="springTeacher" class="com.spring.source.code.beans.ch2.lookup_method.SpringTeacher"/>
+    <bean id="springTeacher" class="com.spring.source.code.beans.ch3.lookup_method.SpringTeacher"/>
 </beans>
 

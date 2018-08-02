@@ -1,4 +1,4 @@
-package com.spring.source.code.beans.ch2.lookup_method;
+package com.spring.source.code.beans.ch3.lookup_method;
 
 /**
  * @author yuijnshui

@@ -1,4 +1,4 @@
-package com.spring.source.code.beans.ch2.constructor_arg;
+package com.spring.source.code.beans.ch3.constructor_arg;
 
 import com.log.LogPortal;
 
