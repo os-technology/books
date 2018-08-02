@@ -45,7 +45,7 @@
     </bean>
 
 
-    <bean id="disconfAutoService" class="com.disconf.DisconfAutoService">
-        <property name="auto" value="${auto}"/>
+    <bean id="disconfAnnotationAutoService" class="com.disconf.DisconfAnnotationAutoService">
+        <!--<property name="auto" value="${auto}"/>-->
     </bean>
 </beans>
