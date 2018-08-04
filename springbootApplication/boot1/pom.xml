@@ -10,14 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>boot1</artifactId>
-    <properties>
-        <springframework.version>4.1.5.RELEASE</springframework.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${springframework.version}</version>
+            <version>${springframework-version}</version>
         </dependency>
         <!-- spring aop支持 -->
         <dependency>
@@ -41,7 +38,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${springframework.version}</version>
+            <version>${springframework-version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
