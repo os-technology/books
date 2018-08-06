@@ -60,11 +60,13 @@ public class BeanFactoryTest extends BaseJunitTest {
         new XmlBeanDefinitionReader(factory).loadBeanDefinitions(resource);
 
         MyTestBean myTestBean = (MyTestBean) factory.getBean("myTestBean");
+        MyTestBean myTestBean1 = factory.getBean("myTestBean",MyTestBean.class);
 
         String eqlVal = "myTestBean";
         myTestBean.setStr(eqlVal);
         Assert.assertEquals(eqlVal, myTestBean.getStr());
 
+        Assert.assertNotNull(myTestBean1);
 
     }
 
@@ -110,17 +112,10 @@ public class BeanFactoryTest extends BaseJunitTest {
 
 
     private DefaultListableBeanFactory getBeanFactory(String profile) {
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        Resource resource = new ClassPathResource("beanFactoryProfileTest.xml");
-
-        StandardEnvironment environment = new StandardEnvironment();
-        environment.setActiveProfiles(profile);//设置配置文件的profile方式之一
-
-        XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(factory);
-        xmlReader.setEnvironment(environment);
-        xmlReader.loadBeanDefinitions(resource);
-        return factory;
+        return getDefaultListableBeanFactory(profile,"beanFactoryProfileTest.xml");
     }
+
+
 
     @Test
     public void testSimpleLoadWithoutId(){

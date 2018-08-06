@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mybean="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--自定义注解尚不可用-->
+        <bean id="annotationDefinitionBean" class="com.spring.source.code.beans.ch3.annotation_definition.AnnotationDefinitionBean">
+                <!--<mybean:user define="自定义注解值"></mybean:user>-->
+                <property name="define" value="hello,annotation"></property>
+        </bean>
+
+</beans>
+
