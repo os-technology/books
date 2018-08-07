@@ -1,8 +1,10 @@
+### 教程信息
+
 **源码地址**：[https://github.com/spring-projects/spring-framework](https://github.com/spring-projects/spring-framework)  
 **准备工作**：gradle环境，IDE，本笔记使用idea工具进行操作。
 下载完成后，项目根目录下有个import-into-eclipse.md文件，打开，按照说明进行编译。
 
-* 3.1 constructor-arg
+#### 3.1 constructor-arg
 
  类的构造函数会全部进行实例化。参见`ConstructorArgJunitTest`测试类
  
@@ -101,3 +103,16 @@
  ```
  两者关系图如下
  ![alt 关系类图](DefaultListableBeanFactory.png)
+ 
+#### 4.1 自定义标签使用
+扩展spring自定义标签配置大致需要以下几个步骤(前提是要把spring的core包加入项目中)
+
+  * 创建一个需要扩展的组件
+  * 定义一个XSD文件描述组件内容
+  * 创建一个文件，实现BeanDefinitionParser接口，用来解析XSD文件中的定义和组件容器。
+  * 编写Spring.handlers和Spring.schemas文件。
+  
+自定义标签的XSD文件中，elementFormDefault属性讲解参考：
+[http://note.youdao.com/noteshare?id=ed3e7a6a1edcd5521a6bd72a36296295](http://note.youdao.com/noteshare?id=ed3e7a6a1edcd5521a6bd72a36296295)
+
+自定义标签示例参考：[https://blog.csdn.net/shinebar/article/details/75675615](https://blog.csdn.net/shinebar/article/details/75675615)
