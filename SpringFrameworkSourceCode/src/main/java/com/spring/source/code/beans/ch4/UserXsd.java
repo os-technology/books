@@ -12,18 +12,8 @@ package com.spring.source.code.beans.ch4;
  */
 public class UserXsd {
 
-    private String id;
     private String userName;
     private String email;
-
-    public String getId() {
-        return id;
-    }
-
-    public UserXsd setId(String id) {
-        this.id = id;
-        return this;
-    }
 
     public String getUserName() {
         return userName;
