@@ -3,7 +3,7 @@ package com.spring.source.code.beans.ch4;
 /**
  * 自定义标签的使用bean
  *
- * @author yuijnshui
+ * @author code
  * @Title: UserXsd
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

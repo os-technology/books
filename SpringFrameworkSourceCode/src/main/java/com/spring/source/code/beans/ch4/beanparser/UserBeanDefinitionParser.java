@@ -2,15 +2,13 @@ package com.spring.source.code.beans.ch4.beanparser;
 
 import com.spring.source.code.beans.ch4.UserXsd;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
-import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 /**
  * 解析xsd文件的定义和组件的定义
- * @author yuijnshui
+ * @author code
  * @Title: UserBeanDefinitionParser
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

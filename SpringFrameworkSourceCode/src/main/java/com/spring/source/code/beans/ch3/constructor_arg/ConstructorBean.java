@@ -3,7 +3,7 @@ package com.spring.source.code.beans.ch3.constructor_arg;
 import com.log.LogPortal;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: ConstructorBean
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

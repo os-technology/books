@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:myname="http://www.shuijiayou.com/schema/user"
+       xmlns:myname="http://www.codejiayou.com/schema/user"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.shuijiayou.com/schema/user
-       http://www.shuijiayou.com/schema/user.xsd
+       http://www.codejiayou.com/schema/user
+       http://www.codejiayou.com/schema/user.xsd
 ">
 <!--myname与beans中的xmlns:myname的myname相对应，userxsd与MyNamespaceHandler类中的elementName相对应-->
    <myname:userxsd id="userXsdBean" email="aaa" userName="zhangsan"/>

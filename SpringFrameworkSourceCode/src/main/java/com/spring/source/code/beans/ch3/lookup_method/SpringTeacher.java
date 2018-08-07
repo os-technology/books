@@ -1,7 +1,7 @@
 package com.spring.source.code.beans.ch3.lookup_method;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: SpringTeacher
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

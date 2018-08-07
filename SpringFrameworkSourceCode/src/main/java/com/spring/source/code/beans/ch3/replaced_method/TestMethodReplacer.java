@@ -5,7 +5,7 @@ import org.springframework.beans.factory.support.MethodReplacer;
 import java.lang.reflect.Method;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: TestMethodReplacer
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

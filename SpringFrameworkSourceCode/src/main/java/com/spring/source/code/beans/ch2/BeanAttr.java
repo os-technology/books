@@ -1,7 +1,7 @@
 package com.spring.source.code.beans.ch2;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: BeanAttr
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

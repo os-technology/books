@@ -3,7 +3,7 @@ package com.spring.source.code.beans.ch2;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: MyTestBean
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

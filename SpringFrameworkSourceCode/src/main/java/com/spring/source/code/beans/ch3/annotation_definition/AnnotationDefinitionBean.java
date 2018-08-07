@@ -3,7 +3,7 @@ package com.spring.source.code.beans.ch3.annotation_definition;
 /**
  * 自定义注解使用类
  *
- * @author yuijnshui
+ * @author code
  * @Title: AnnotationDefinitionBean
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

@@ -1,7 +1,7 @@
 package com.spring.source.code.beans.ch3.replaced_method;
 
 /**
- * @author yuijnshui
+ * @author code
  * @Title: TestChangeMethod
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

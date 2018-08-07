@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--targetNamespace信息为随机填写-->
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://www.shuijiayou.com/schema/user"
-        xmlns:tns="http://www.shuijiayou.com/schema/user"
+        targetNamespace="http://www.codejiayou.com/schema/user"
+        xmlns:tns="http://www.codejiayou.com/schema/user"
         elementFormDefault="qualified">
 
     <element name="userxsd">

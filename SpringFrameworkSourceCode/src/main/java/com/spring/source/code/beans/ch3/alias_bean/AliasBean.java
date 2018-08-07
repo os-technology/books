@@ -4,7 +4,7 @@ import com.spring.source.code.beans.ch2.BeanAttr;
 
 /**
  * alias 标签进行解析
- * @author yuijnshui
+ * @author code
  * @Title: MyTestBean
  * @Copyright: Copyright (c) 2017
  * @Description: <br>

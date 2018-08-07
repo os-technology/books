@@ -7,7 +7,7 @@ import org.slf4j.MDC;
 
 /**
  * slf4j日志,配合logback.xml进行使用
- * @author yuijnshui
+ * @author code
  * @Title: LogPortal
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
