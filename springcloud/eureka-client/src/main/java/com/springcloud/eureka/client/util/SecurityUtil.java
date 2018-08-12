@@ -17,13 +17,13 @@ import java.security.SecureRandom;
 
 public class SecurityUtil {
 	/***
-	 * MD5 加密
+	 * MD5Util 加密
 	 */
 	public static String MD5(String str) {
 		if (str == null)
 			return null;
 		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			MessageDigest md5 = MessageDigest.getInstance("MD5Util");
 			md5.update(str.getBytes("UTF-8"));
 			byte[] digest = md5.digest();
 			StringBuffer hexString = new StringBuffer();
@@ -242,7 +242,7 @@ public class SecurityUtil {
 		str+=str;str+=str;str+=str;
 		String PWD = "SecurityUtil.PWD";
 		System.out.println("原文:[" + str.length() + "]" + str);
-		System.out.println("==MD5===============");
+		System.out.println("==MD5Util===============");
 		System.out.println(MD5(str));
 		System.out.println("==Base64============");
 		String strBase64 = Base64Encode(str);
@@ -266,7 +266,7 @@ public class SecurityUtil {
 		long t1= System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++)
 			MD5(str);
-		System.out.println("\nMD5:"+(System.currentTimeMillis()-t1));
+		System.out.println("\nMD5Util:"+(System.currentTimeMillis()-t1));
 		t1= System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++)
 			Base64Encode(str);

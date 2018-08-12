@@ -1,13 +1,13 @@
 package com.springcloud.eureka.client.dict;
 
 import com.alibaba.fastjson.JSON;
+import com.github.wxpay.sdk.WXPayUtil;
+import com.github.wxpay.sdk.WXPayXmlUtil;
 import com.springcloud.eureka.client.util.HxbDecodeUtil;
 import com.springcloud.eureka.client.util.JXMConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -25,12 +25,29 @@ import java.util.Map;
  * @Created on 2018/3/16下午5:36
  */
 @RestController
-public class EurekaClientController extends AbstractController{
-
+public class EurekaClientController extends AbstractController {
 
 
     @Autowired
     DiscoveryClient discoveryClient;
+
+    @RequestMapping("/wechat/notify")
+    public String callback(@RequestBody String notifyXml) {
+        if (notifyXml != null && !notifyXml.isEmpty()) {
+
+            try {
+                Map<String, String> map = WXPayUtil.xmlToMap(notifyXml);
+                System.out.println(JSON.toJSONString(map));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "<xml>\n" +
+                "\n" +
+                "   <return_code><![CDATA[SUCCESS]]></return_code>\n" +
+                "   <return_msg><![CDATA[OK]]></return_msg>\n" +
+                "</xml>";
+    }
 
     @GetMapping("/dc")
     public String dc() {
@@ -54,7 +71,7 @@ public class EurekaClientController extends AbstractController{
         System.out.println(JSON.toJSONString(parameterMap));
 
         String dataContent = parameterMap.get("dataContent").toString();
-        if(dataContent!=null) {
+        if (dataContent != null) {
             String base64DecodeResData = HxbDecodeUtil.getHXBEntryDataStr(dataContent);
             String jsonResData = JXMConvertUtil.XmlConvertJson(base64DecodeResData);
 
@@ -69,13 +86,14 @@ public class EurekaClientController extends AbstractController{
         BufferedReader br = request.getReader();
 
         String str, wholeStr = "";
-        while((str = br.readLine()) != null){
+        while ((str = br.readLine()) != null) {
             wholeStr += str;
         }
         System.out.println(wholeStr);
 
         return "OK";
     }
+
     /**
      * 解析请求参数为Map类型
      *
