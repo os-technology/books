@@ -1,4 +1,4 @@
-package org.fastjson.bean;
+package org.convertutil.fastjson.bean;
 
 public class Apple extends Fruit {
 	

@@ -1,4 +1,4 @@
-package org.fastjson.bean.comparebean;
+package org.convertutil.fastjson.bean.comparebean;
 
 /**
  * @author yuijnshui@lxfintech.com

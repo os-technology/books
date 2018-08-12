@@ -1,4 +1,4 @@
-package org.fastjson.bean;
+package org.convertutil.fastjson.bean;
 
 
 import com.alibaba.fastjson.annotation.JSONField;

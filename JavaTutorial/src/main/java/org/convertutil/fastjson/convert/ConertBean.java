@@ -1,9 +1,9 @@
-package org.fastjson.convert;
+package org.convertutil.fastjson.convert;
 
-import org.fastjson.bean.Apple;
+import org.convertutil.fastjson.bean.Apple;
 
 import com.alibaba.fastjson.JSON;
-import org.fastjson.bean.Fruit;
+import org.convertutil.fastjson.bean.Fruit;
 
 public class ConertBean {
 

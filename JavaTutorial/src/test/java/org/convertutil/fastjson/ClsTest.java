@@ -1,8 +1,8 @@
-package org.fastjson;
+package org.convertutil.fastjson;
 
 import com.alibaba.fastjson.JSON;
-import org.fastjson.bean.comparebean.ParentCls;
-import org.fastjson.bean.comparebean.SonCls;
+import org.convertutil.fastjson.bean.comparebean.ParentCls;
+import org.convertutil.fastjson.bean.comparebean.SonCls;
 import org.junit.Test;
 
 /**
