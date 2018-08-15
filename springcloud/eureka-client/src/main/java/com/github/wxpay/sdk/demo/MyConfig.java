@@ -42,7 +42,7 @@ public class MyConfig extends WXPayConfig {
     }
 
     public String getKey() {
-        return "b141398d39584785900a3b0c1fd72057";
+        return "qiandinghualian2018WXZFFWS0815QD";
     }
 
     public InputStream getCertStream() {

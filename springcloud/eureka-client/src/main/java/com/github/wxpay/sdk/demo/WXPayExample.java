@@ -101,9 +101,9 @@ public class WXPayExample {
         data.put("total_fee", "1");
         data.put("spbill_create_ip", "127.0.0.1");
         data.put("notify_url", "http://e60c36d9.ngrok.io/wechat/notify");
-//        data.put("trade_type", "JSAPI");  // 此处指定为扫码支付
+//        data.put("trade_type", "NATIVE");  // 此处指定为扫码支付
         data.put("trade_type", "JSAPI");  // 此处指定为扫码支付
-        data.put("openid", "oUpF8uMuAJO_M2pxb1Q9zNjWeS6o");
+//        data.put("openid", "oUpF8uMuAJO_M2pxb1Q9zNjWeS6o");
 //        data.put("product_id", "12");
 
         try {
