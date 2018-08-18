@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,7 +34,9 @@ public class EurekaClientController extends AbstractController {
     DiscoveryClient discoveryClient;
 
     @RequestMapping("/wechat/notify")
-    public String callback(@RequestBody String notifyXml) {
+    public String callback(HttpServletRequest request) throws Exception {
+        String notifyXml = readRequestBody(request);
+        System.out.println("xml格式："+notifyXml);
         if (notifyXml != null && !notifyXml.isEmpty()) {
 
             try {
@@ -47,6 +51,21 @@ public class EurekaClientController extends AbstractController {
                 "   <return_code><![CDATA[SUCCESS]]></return_code>\n" +
                 "   <return_msg><![CDATA[OK]]></return_msg>\n" +
                 "</xml>";
+    }
+
+    private String readRequestBody(HttpServletRequest request) throws Exception {
+        InputStream is = request.getInputStream();
+        StringBuilder buf = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            buf.append(line);
+            buf.append('\n');
+        }
+        if (buf.length() > 0) {
+            buf.deleteCharAt(buf.length() - 1);
+        }
+        return buf.toString();
     }
 
     @GetMapping("/dc")
