@@ -70,7 +70,7 @@ public class DemoServiceTest {
     @Test
     public void testParamController() throws Exception {
         String paramVal = "input";
-        mockMvc.perform(post("/testParam").param("input",paramVal))//13 模拟向/testRest进行get请求
+        mockMvc.perform(post("/testParam").param("input",paramVal))//13 模拟向/testParam进行post请求，并带上参数信息
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))//14 预期返回值的媒体类型为text/plain； charset=UTF-8
                 .andExpect(content().string(demoService.saySomething(paramVal)));//15 预期返回值的内容为demoService.saySomething（）返回值hello
