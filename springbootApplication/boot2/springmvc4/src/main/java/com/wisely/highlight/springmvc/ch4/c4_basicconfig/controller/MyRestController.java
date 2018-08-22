@@ -25,4 +25,9 @@ public class MyRestController {
         return demoService.saySomething("testRestController");
     }
 
+    @RequestMapping(value = "/testParam", produces = "text/plain;charset=UTF-8")
+    public String testRestParam(String input) {
+        return demoService.saySomething(input);
+    }
+
 }

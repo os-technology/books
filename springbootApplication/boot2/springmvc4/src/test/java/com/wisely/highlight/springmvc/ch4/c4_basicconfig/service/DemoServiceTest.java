@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -44,9 +45,10 @@ public class DemoServiceTest {
 
 
     @Before
-    public void setUp(){
+    public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();//2
     }
+
     @Test
     public void testNormalController() throws Exception {
         mockMvc.perform(get("/normal"))//8 模拟向/normal进行get请求。
@@ -54,7 +56,7 @@ public class DemoServiceTest {
                 .andExpect(view().name("page"))//10 预期view的名称为page
 
                 .andExpect(forwardedUrl("/WEB-INF/classes/views/page.jsp"))//11预期页面转向的真正路径为/WEBINF/classes/views/page.jsp
-                .andExpect(model().attribute("msg",demoService.saySomething("mockTest")));//12
+                .andExpect(model().attribute("msg", demoService.saySomething("mockTest")));//12预期model里的值是demoService.saySomething（ ） 返回值hello
     }
 
     @Test
@@ -62,7 +64,16 @@ public class DemoServiceTest {
         mockMvc.perform(get("/testRest"))//13 模拟向/testRest进行get请求
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))//14 预期返回值的媒体类型为text/plain； charset=UTF-8
-        .andExpect(content().string(demoService.saySomething("testRestController")));//15
+                .andExpect(content().string(demoService.saySomething("testRestController")));//15 预期返回值的内容为demoService.saySomething（）返回值hello
+    }
+
+    @Test
+    public void testParamController() throws Exception {
+        String paramVal = "input";
+        mockMvc.perform(post("/testParam").param("input",paramVal))//13 模拟向/testRest进行get请求
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))//14 预期返回值的媒体类型为text/plain； charset=UTF-8
+                .andExpect(content().string(demoService.saySomething(paramVal)));//15 预期返回值的内容为demoService.saySomething（）返回值hello
     }
 
 }
