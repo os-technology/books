@@ -1,10 +1,12 @@
 package com.springcloud.eureka.client.dict;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.springcloud.eureka.client.AppJunitConfig;
 import com.springcloud.eureka.client.app.EurekaClientApplication;
 import com.springcloud.eureka.client.beans.User;
 import org.hamcrest.Matcher;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
@@ -13,9 +15,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -110,11 +117,9 @@ public class EurekaClientForJunitControllerTest extends AppJunitConfig {
     }
 
 
-
-
-
-@InjectMocks
+    @InjectMocks
     private EurekaClientForJunitController eurekaClientForJunitController;
+
     /**
      * ModelAndView方式测试
      *
@@ -123,20 +128,34 @@ public class EurekaClientForJunitControllerTest extends AppJunitConfig {
     @Test
     public void getModelAndViewUser() throws Exception {
         setModelAndView();
-        User user = new User();
-        user.setId("1").setName("user");
+        User user = null;
 
         RequestBuilder request = get("/getModelAndViewUser")
                 .param("id", "1").param("name", "user");
-        mockMvc.perform(request)
-                .andExpect(status().isOk())
+        ResultActions response = mockMvc.perform(request);
 
-//                .andExpect(view().name("getModelAndViewUser"))
+
+        response.andExpect(status().isOk())
+
                 .andExpect(model().attributeExists("result"))
                 .andDo(MockMvcResultHandlers.print());
+
+        //获取返回结果的对象信息
+        ModelAndView modelAndView = response.andReturn().getModelAndView();
+        Object u = modelAndView.getModel().get("result");
+
+        Assert.assertTrue(u instanceof User);
+        if (u instanceof User) {
+            user = (User) u;
+        }
+        System.out.println("user 对象数据信息 :user.id=" + user.getId() + " user.name=" + user.getName());
+
     }
 
-    public void setModelAndView() {
+    /**
+     * 重新配置视图解析器
+     */
+    private void setModelAndView() {
         MockitoAnnotations.initMocks(this);
         InternalResourceViewResolver resolver = new InternalResourceViewResolver(); //在test中重新配置视图解析器
         resolver.setPrefix("/WEB_INF/views");
