@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,77 +40,4 @@ public class EurekaClientController extends AbstractController{
         return services;
     }
 
-    @RequestMapping("/hxb")
-    public String testRequest(HttpServletRequest request) throws Exception {
-        String platformCode = (String) request.getHeader("PlatformCode");
-//        BufferedReader br = request.getReader();
-//
-//        String str, wholeStr = "";
-//        while((str = br.readLine()) != null){
-//            wholeStr += str;
-//        }
-//        System.out.println(wholeStr);
-
-        Map<String, Object> parameterMap = getStringObjectMap(request);
-        System.out.println(JSON.toJSONString(parameterMap));
-
-        String dataContent = parameterMap.get("dataContent").toString();
-        if(dataContent!=null) {
-            String base64DecodeResData = HxbDecodeUtil.getHXBEntryDataStr(dataContent);
-            String jsonResData = JXMConvertUtil.XmlConvertJson(base64DecodeResData);
-
-            System.out.println(jsonResData);
-        }
-
-        return "OK";
-    }
-
-    @RequestMapping("/hxb/res")
-    public String testResponse(HttpServletRequest request) throws IOException {
-        BufferedReader br = request.getReader();
-
-        String str, wholeStr = "";
-        while((str = br.readLine()) != null){
-            wholeStr += str;
-        }
-        System.out.println(wholeStr);
-
-        return "OK";
-    }
-    /**
-     * 解析请求参数为Map类型
-     *
-     * @param request
-     * @return
-     */
-    private Map<String, Object> getStringObjectMap(HttpServletRequest request) {
-        Map properties = request.getParameterMap();
-        Iterator entries = properties.entrySet().iterator();
-        Map.Entry entry;
-        String name;
-        String value;
-        Map<String, Object> parameterMap = new HashMap<String, Object>();
-        while (entries.hasNext()) {
-            entry = (Map.Entry) entries.next();
-            name = (String) entry.getKey();
-            Object valueObj = entry.getValue();
-            if (valueObj instanceof String[]) {
-                String[] values = (String[]) valueObj;
-                for (int i = 0; i < values.length; i++) {
-                    parameterMap.put(name, values[i]);
-                }
-            }
-        }
-        return parameterMap;
-    }
-
-    @RequestMapping("/hello")
-    public String home() {
-        return "Hello world";
-    }
-
-    @RequestMapping("/eurekaclient")
-    public String client() {
-        return "Hello eureka-client";
-    }
 }

@@ -205,6 +205,69 @@ Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 在eureka-server中配置访问地址，[http://localhost:1111](http://localhost:1111)。  
 先启动eureka-server,然后启动eureka-client。通过http://localhost:2111/hello，访问对应的controller信息。
 
+
+####eureka-client单元测试
+
+参见`EurekaClientForJunitControllerTest`类，搭建过程如下：
+
+ * 创建单元测试类(本例创建了基础类以及测试类)
+ * 在测试类中添加单元测试相关的注解内容
+ 
+ ```java
+ //cloud单元测试基础配置注解，新版使用SpringRunner.class，替代SpringJUnit4ClassRunner.class
+ @RunWith(SpringRunner.class)
+ //该注解用来声明加载的ApplicationContext是一个WebApplicationContext
+ @WebAppConfiguration
+ //由于cloud是微服务方式启动，所以需要加上 EurekaClientApplication.class
+ //类进行服务启动，测试时可以访问相应的HTTP接口
+ @SpringBootTest(classes = {EurekaClientApplication.class,EurekaClientControllerTest.class})
+ ```
+ * 接下来添加HTTP相关类的内容，并添加单元测试方法，进行测试。完整内容如下
+ 
+ ```java
+ @RunWith(SpringRunner.class)
+	//@WebAppConfiguration//1 该注解用来声明加载的ApplicationContext是一个WebApplicationContext。
+	//@ContextConfiguration
+	//@WebAppConfiguration("src/main/resources")//1 该注解用来声明加载的ApplicationContext是一个WebApplicationContext。
+	public class AppJunitConfig {
+	    protected MockMvc mockMvc;//2 模拟MVC对象，通过MockMvcBuilders.webAppContextSetup(this.wac).build()初始化
+	
+	    @Autowired
+	    WebApplicationContext wac;//4 注入WebApplicationContext
+	
+	//    @Autowired
+	//    MockHttpSession session;//5 注入可模拟的HTTPSession，此处仅用作演示
+	//    @Autowired
+	//    MockHttpServletRequest request;//6 可注入模拟的http Request，没有使用
+	
+	    @Before
+	    public void setUp() {
+	        //2 MockMvc-模拟MVC对象，通过MockMvcBuilders.webAppContextSetup（ this.wac）.build（）初始化。
+	        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	    }
+	}
+ ```
+ ```java
+ 
+	@SpringBootTest(classes = {EurekaClientApplication.class,EurekaClientForJunitControllerTest.class})
+	public class EurekaClientForJunitControllerTest extends AppJunitConfig {
+	
+	    @Test
+	    public void testHello() throws Exception {
+	        RequestBuilder request = get("/hello");
+	        mockMvc.perform(request)
+	                .andExpect(status().isOk())
+	                .andExpect(content().string("Hello world"));
+	    }
+	}
+
+ ```
+ * 其他带参数类型的单元测试参见`EurekaClientForJunitControllerTest.java`类操作即可。
+
+
+
+
+
 #### **注意：**
 
 **谷歌浏览器mac版会发起两次请求，其他浏览器会正常的发起一次请求，原因尚不清楚。**
