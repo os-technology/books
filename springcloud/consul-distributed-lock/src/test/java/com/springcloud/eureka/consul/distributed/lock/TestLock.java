@@ -3,7 +3,6 @@ package com.springcloud.eureka.consul.distributed.lock;
 
 import com.ecwid.consul.v1.ConsulClient;
 import com.springcloud.eureka.consul.distributed.lock.dict.lock.DistributedLock;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 

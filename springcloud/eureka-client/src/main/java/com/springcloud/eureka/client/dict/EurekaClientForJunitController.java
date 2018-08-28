@@ -1,16 +1,12 @@
 package com.springcloud.eureka.client.dict;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.springcloud.eureka.client.beans.User;
-import com.springcloud.eureka.client.util.HxbDecodeUtil;
-import com.springcloud.eureka.client.util.JXMConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -48,23 +44,7 @@ public class EurekaClientForJunitController {
     }
 
 
-    @RequestMapping("/hxb")
-    public String testRequest(HttpServletRequest request) throws Exception {
 
-
-        Map<String, Object> parameterMap = getStringObjectMap(request);
-        System.out.println(JSON.toJSONString(parameterMap));
-
-        String dataContent = parameterMap.get("dataContent").toString();
-        if (dataContent != null) {
-            String base64DecodeResData = HxbDecodeUtil.getHXBEntryDataStr(dataContent);
-            String jsonResData = JXMConvertUtil.XmlConvertJson(base64DecodeResData);
-
-            System.out.println(jsonResData);
-        }
-
-        return "OK";
-    }
 
     @RequestMapping("/string")
     public String string(HttpServletRequest request) throws IOException {

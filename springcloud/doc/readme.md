@@ -17,6 +17,80 @@ GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://gi
 ### Spring Cloud与Spring Boot版本匹配关系
 Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](https://blog.csdn.net/ljj_9/article/details/78645267)
 
+**参考表格如下：**
+
+<table>
+<thead>
+<tr>
+  <th>Cloud代号</th>
+  <th>Boot版本(train)</th>
+  <th>Boot版本(tested)</th>
+  <th>lifecycle</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>Angle</td>
+  <td>1.2.x</td>
+  <td>incompatible with 1.3</td>
+  <td>EOL in July 2017</td>
+</tr>
+<tr>
+  <td>Brixton</td>
+  <td>1.3.x</td>
+  <td>1.4.x</td>
+  <td>2017-07卒</td>
+</tr>
+<tr>
+  <td>Camden</td>
+  <td>1.4.x</td>
+  <td>1.5.x</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>Dalston</td>
+  <td>1.5.x</td>
+  <td>not expected 2.x</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>Edgware</td>
+  <td>1.5.x</td>
+  <td>not expected 2.x</td>
+  <td>-</td>
+</tr>
+<tr>
+  <td>Finchley</td>
+  <td>2.x</td>
+  <td>not expected 1.5.x</td>
+  <td>-</td>
+</tr>
+</tbody></table>
+<table ><thead><tr><th>
+Spring Cloud</th>
+<th>
+Spring Boot</th>
+</tr></thead><tbody><tr><td>
+Finchley</td>
+<td>
+兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x</td>
+</tr><tr><td>
+Dalston和Edgware</td>
+<td>
+兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x</td>
+</tr><tr><td>
+Camden</td>
+<td>
+兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x</td>
+</tr><tr><td>
+Brixton</td>
+<td>
+兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x</td>
+</tr><tr><td>
+Angel</td>
+<td>
+兼容Spring Boot 1.2.x</td>
+</tr></tbody></table>
+
 Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 
 ```xml
