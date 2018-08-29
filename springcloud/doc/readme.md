@@ -1,8 +1,15 @@
 # SpringCloud
+**题外话**：Spring 技术系列干货整理 [https://mp.weixin.qq.com/s/N507Cfb_mbkGvHtg_FIaVg](https://mp.weixin.qq.com/s/N507Cfb_mbkGvHtg_FIaVg)
 
+若要将cloud升级为最新`Finchley`版，可以参考 [https://blog.csdn.net/youanyyou/article/details/81530240](https://blog.csdn.net/youanyyou/article/details/81530240)
 
 	本demo已经尽力以JDK1.7为基础进行构建，但是由于官方要求JDK1.8，所以demo的部分模块必须使用JDK1.8运行，否则报错。
 	官方要求使用jdk8，虽然spring boot在jdk7中也能运行，但是这里和spring cloud集成的时候就出问题了，问题表现为在maven build的时候出现8194错误代码。
+	
+####升级记录
+|时间|内容|
+|---|---|
+|2018-8-28|已经升级为jdk1.8版本支持，不再支持1.7版本。|
 	
 本教程参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
 
@@ -19,77 +26,23 @@ Dalston版相关描述：[https://blog.csdn.net/ljj_9/article/details/78645267](
 
 **参考表格如下：**
 
-<table>
-<thead>
-<tr>
-  <th>Cloud代号</th>
-  <th>Boot版本(train)</th>
-  <th>Boot版本(tested)</th>
-  <th>lifecycle</th>
-</tr>
-</thead>
-<tbody><tr>
-  <td>Angle</td>
-  <td>1.2.x</td>
-  <td>incompatible with 1.3</td>
-  <td>EOL in July 2017</td>
-</tr>
-<tr>
-  <td>Brixton</td>
-  <td>1.3.x</td>
-  <td>1.4.x</td>
-  <td>2017-07卒</td>
-</tr>
-<tr>
-  <td>Camden</td>
-  <td>1.4.x</td>
-  <td>1.5.x</td>
-  <td>-</td>
-</tr>
-<tr>
-  <td>Dalston</td>
-  <td>1.5.x</td>
-  <td>not expected 2.x</td>
-  <td>-</td>
-</tr>
-<tr>
-  <td>Edgware</td>
-  <td>1.5.x</td>
-  <td>not expected 2.x</td>
-  <td>-</td>
-</tr>
-<tr>
-  <td>Finchley</td>
-  <td>2.x</td>
-  <td>not expected 1.5.x</td>
-  <td>-</td>
-</tr>
-</tbody></table>
-<table ><thead><tr><th>
-Spring Cloud</th>
-<th>
-Spring Boot</th>
-</tr></thead><tbody><tr><td>
-Finchley</td>
-<td>
-兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x</td>
-</tr><tr><td>
-Dalston和Edgware</td>
-<td>
-兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x</td>
-</tr><tr><td>
-Camden</td>
-<td>
-兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x</td>
-</tr><tr><td>
-Brixton</td>
-<td>
-兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x</td>
-</tr><tr><td>
-Angel</td>
-<td>
-兼容Spring Boot 1.2.x</td>
-</tr></tbody></table>
+|Cloud代号|Boot版本(train)|Boot版本(tested)|lifecycle|
+|---|---|---|---|
+|Angle  |1.2.x  |incompatible with 1.3  |EOL in July 2017|
+|Brixton  |1.3.x  |1.4.x  |2017-07卒|
+|Camden  |1.4.x  |1.5.x  |-|
+|Dalston  |1.5.x  |not expected 2.x  |-|
+|Edgware  |1.5.x  |not expected 2.x  |-|
+|Finchley  |2.x  |not expected 1.5.x  |-|
+
+
+|Spring Cloud     |              Spring Boot                    |
+|---              |                ---                          |
+|Finchley         |兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x |
+|Dalston和Edgware |兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x |
+|Camden           |兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x|
+|Brixton          |兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x|
+|Angel            |兼容Spring Boot 1.2.x                        |
 
 Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 
@@ -103,7 +56,7 @@ Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 </dependency>
             
             
-点击Dalston.SR1 ,在父pom中得到
+<!--点击Dalston.SR1 ,在父pom中得到-->
 
  <parent>
 		<groupId>org.springframework.cloud</groupId>
@@ -112,7 +65,7 @@ Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 		<relativePath/>
 	</parent>
 	
-继续点击1.3.2.REALEASE，进入父pom，得到
+<!--继续点击1.3.2.REALEASE，进入父pom，得到-->
 	
 	<scm>
 		<url>https://github.com/spring-cloud/spring-cloud-build</url>
@@ -142,133 +95,25 @@ Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 当前版本
 通过下表，我们可以快速查阅当前各版本所包含的子项目，以及各子项目的版本号，通过此来决定需要选择怎么样的版本。
 
-<table>
-<thead>
-<tr><th>Component</th><th>Angel.SR6</th><th>Brixton.SR5</th><th>Camden.M1</th><th>Camden.BUILD-SNAPSHOT</th></tr>
-</thead>
-<tbody>
-<tr>
-<td>spring-cloud-aws</td>
-<td>1.0.4.RELEASE</td>
-<td>1.1.1.RELEASE</td>
-<td>1.1.1.RELEASE</td>
-<td>1.1.2.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-bus</td>
-<td>1.0.3.RELEASE</td>
-<td>1.1.1.RELEASE</td>
-<td>1.2.0.M1</td>
-<td>1.2.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-cli</td>
-<td>1.0.6.RELEASE</td>
-<td>1.1.5.RELEASE</td>
-<td>1.2.0.M1</td>
-<td>1.2.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-commons</td>
-<td>1.0.5.RELEASE</td>
-<td>1.1.1.RELEASE</td>
-<td>1.1.1.RELEASE</td>
-<td>1.1.2.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-contract</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>1.0.0.M2</td>
-<td>1.0.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-config</td>
-<td>1.0.4.RELEASE</td>
-<td>1.1.3.RELEASE</td>
-<td>1.2.0.M1</td>
-<td>1.2.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-netflix</td>
-<td>1.0.7.RELEASE</td>
-<td>1.1.5.RELEASE</td>
-<td>1.2.0.M1</td>
-<td>1.2.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-security</td>
-<td>1.0.3.RELEASE</td>
-<td>1.1.2.RELEASE</td>
-<td>1.1.2.RELEASE</td>
-<td>1.1.3.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-starters</td>
-<td>1.0.6.RELEASE</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<td>spring-cloud-cloudfoundry</td>
-<td>&nbsp;</td>
-<td>1.0.0.RELEASE</td>
-<td>1.0.0.RELEASE</td>
-<td>1.0.1.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-cluster</td>
-<td>&nbsp;</td>
-<td>1.0.1.RELEASE</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr>
-<td>spring-cloud-consul</td>
-<td>&nbsp;</td>
-<td>1.0.2.RELEASE</td>
-<td>1.1.0.M1</td>
-<td>1.1.0.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-sleuth</td>
-<td>&nbsp;</td>
-<td>1.0.6.RELEASE</td>
-<td>1.0.6.RELEASE</td>
-<td>1.0.7.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-stream</td>
-<td>&nbsp;</td>
-<td>1.0.2.RELEASE</td>
-<td>Brooklyn.M1</td>
-<td>Brooklyn.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-cloud-zookeeper</td>
-<td>&nbsp;</td>
-<td>1.0.2.RELEASE</td>
-<td>1.0.2.RELEASE</td>
-<td>1.0.3.BUILD-SNAPSHOT</td>
-</tr>
-<tr>
-<td>spring-boot</td>
-<td>1.2.8.RELEASE</td>
-<td>1.3.7.RELEASE</td>
-<td>1.4.0.RELEASE</td>
-<td>1.4.0.RELEASE</td>
-</tr>
-<tr>
-<td>spring-cloud-task</td>
-<td>&nbsp;</td>
-<td>1.0.2.RELEASE</td>
-<td>1.0.2.RELEASE</td>
-<td>1.0.3.BUILD-SNAPSHOT</td>
-</tr>
-</tbody>
-</table>
-
+|Component|Angel.SR6|Brixton.SR5|Camden.M1|Camden.BUILD-SNAPSHOT|
+|---|---|---|---|---|---|
+|spring-cloud-aws|1.0.4.RELEASE|1.1.1.RELEASE|1.1.1.RELEASE|1.1.2.BUILD-SNAPSHOT|
+|spring-cloud-bus|1.0.3.RELEASE|1.1.1.RELEASE|1.2.0.M1|1.2.0.BUILD-SNAPSHOT|
+|spring-cloud-cli|1.0.6.RELEASE|1.1.5.RELEASE|1.2.0.M1|1.2.0.BUILD-SNAPSHOT|
+|spring-cloud-commons|1.0.5.RELEASE|1.1.1.RELEASE|1.1.1.RELEASE|1.1.2.BUILD-SNAPSHOT|
+|spring-cloud-contract|&nbsp;|&nbsp;|1.0.0.M2|1.0.0.BUILD-SNAPSHOT|
+|spring-cloud-config|1.0.4.RELEASE|1.1.3.RELEASE|1.2.0.M1|1.2.0.BUILD-SNAPSHOT|
+|spring-cloud-netflix|1.0.7.RELEASE|1.1.5.RELEASE|1.2.0.M1|1.2.0.BUILD-SNAPSHOT|
+|spring-cloud-security|1.0.3.RELEASE|1.1.2.RELEASE|1.1.2.RELEASE|1.1.3.BUILD-SNAPSHOT|
+|spring-cloud-starters|1.0.6.RELEASE|&nbsp;|&nbsp;|&nbsp;|
+|spring-cloud-cloudfoundry|&nbsp;|1.0.0.RELEASE|1.0.0.RELEASE|1.0.1.BUILD-SNAPSHOT|
+|spring-cloud-cluster|&nbsp;|1.0.1.RELEASE|&nbsp;|&nbsp;|
+|spring-cloud-consul|&nbsp;|1.0.2.RELEASE|1.1.0.M1|1.1.0.BUILD-SNAPSHOT|
+|spring-cloud-sleuth|&nbsp;|1.0.6.RELEASE|1.0.6.RELEASE|1.0.7.BUILD-SNAPSHOT|
+|spring-cloud-stream|&nbsp;|1.0.2.RELEASE|Brooklyn.M1|Brooklyn.BUILD-SNAPSHOT|
+|spring-cloud-zookeeper|&nbsp;|1.0.2.RELEASE|1.0.2.RELEASE|1.0.3.BUILD-SNAPSHOT|
+|spring-boot|1.2.8.RELEASE|1.3.7.RELEASE|1.4.0.RELEASE|1.4.0.RELEASE|
+|spring-cloud-task|&nbsp;|1.0.2.RELEASE|1.0.2.RELEASE|1.0.3.BUILD-SNAPSHOT|
 
 不难看出，最初的Angel版本相对来说拥有的子项目较少，Brixton、Camden则拥有更全的子项目，所以能提供更多的组件支持。而Brixton与Camden之间，Brixton的发布子项目更为稳定，Camden则更为前瞻。
 
