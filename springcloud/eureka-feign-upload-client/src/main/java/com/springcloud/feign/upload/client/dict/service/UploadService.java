@@ -2,7 +2,7 @@ package com.springcloud.feign.upload.client.dict.service;
 
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

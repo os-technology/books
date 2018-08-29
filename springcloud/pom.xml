@@ -33,8 +33,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <!--<version>Dalston.SR1</version>&lt;!&ndash;Dalston.SR1&ndash;&gt;-->
-                <version>Edgware.SR4</version>
+                <version>Finchley.RELEASE</version><!--Dalston.SR1-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -43,8 +42,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>1.5.15.RELEASE</version>
-                <!--<version>2.0.4.RELEASE</version>-->
+                <version>2.0.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
