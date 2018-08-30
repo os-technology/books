@@ -124,7 +124,7 @@ Dalston.SR1对应JDK1.8。版本查找方式再pom文件中进行。
 在eureka-server中配置访问地址，[http://localhost:1111](http://localhost:1111)。  
 先启动eureka-server,然后启动eureka-client。通过http://localhost:2111/hello，访问对应的controller信息。
 
-
+**注意：如果配置的HTTP接口路径有相同的，则无法正常启动client。**
 ####eureka-client单元测试
 
 参见`EurekaClientForJunitControllerTest`类，搭建过程如下：
