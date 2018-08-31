@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
+import java.io.IOException;
+
 /**
  * slf4j日志,配合logback.xml进行使用
  * @author yuijnshui
@@ -71,6 +73,9 @@ public class LogPortal {
         public Level getLevel(){
             return this.level;
         }
+    }
+    public static void main(String[] args) {
+        debug("wrong",new IOException());
     }
 }
 

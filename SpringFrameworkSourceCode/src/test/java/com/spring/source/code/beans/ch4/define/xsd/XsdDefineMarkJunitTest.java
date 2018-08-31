@@ -22,7 +22,7 @@ public class XsdDefineMarkJunitTest extends BaseJunitTest {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ch4/xsdDefineMarkTest.xml");
         UserXsd userXsd = (UserXsd) context.getBean("userXsdBean");
-        LogPortal.info("test",userXsd);
+        LogPortal.info("test,[{}]",userXsd);
         Assert.assertEquals(userXsd.getEmail(),"aaa");
     }
 }
