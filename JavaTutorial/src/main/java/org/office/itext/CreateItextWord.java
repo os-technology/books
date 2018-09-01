@@ -33,7 +33,6 @@ public class CreateItextWord {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			doc.close();

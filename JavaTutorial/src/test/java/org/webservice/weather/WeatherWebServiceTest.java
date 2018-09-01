@@ -7,7 +7,7 @@ import org.webservice.weather.client.WeatherWebServiceStubClient;
 public class WeatherWebServiceTest {
 	@Test
 	public void weatherDataTest(){
-		String[] weather = new WeatherWebServiceStubClient().getWeatherInfoByCityName("北京");// TODO
+		String[] weather = new WeatherWebServiceStubClient().getWeatherInfoByCityName("北京");
 		WeatherWebServiceBean w = new WeatherWebServiceBean(weather);
 		System.out.println(w.getAttrProvince());
 	}

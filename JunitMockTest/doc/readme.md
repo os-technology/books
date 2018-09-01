@@ -1,19 +1,12 @@
+#JunitMockTest
+
+**说明：**本模块基于springboot+myBatis进行构建，仅能查询数据，增删改操作不可用。
+####mock测试创建步骤如下
 * 创建数据库
 * 创建库表
 
 	```sql
-	CREATE TABLE `user` (
-	  `id` int(11) NOT NULL AUTO_INCREMENT,
-	  `username` varchar(45) DEFAULT NULL COMMENT '用户名',
-	  `userid` int(11) DEFAULT NULL,
-	  `orgid` int(11) DEFAULT NULL,
-	  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	  `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	  `dtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	  PRIMARY KEY (`id`),
-	  UNIQUE KEY `uni` (`userid`,`orgid`,`createtime`)
-	) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-	
+		
 	#mock数据表
 	CREATE TABLE `dataService`.`mocktable` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -22,6 +15,7 @@
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`))
 COMMENT = 'mock数据表';
+INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALUES ('1', '123', 'aa', '2018-09-01 18:27:37');
 
 	
 	```	

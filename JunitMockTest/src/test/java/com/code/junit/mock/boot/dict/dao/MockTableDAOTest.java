@@ -31,6 +31,13 @@ public class MockTableDAOTest extends BaseAppTest {
     }
 
     @Test
+    public void updateById(){
+        MockTableDAO mockTableDAO = session.getMapper(MockTableDAO.class);
+        int count = mockTableDAO.updateById(getMockTable());
+        Assert.assertNotNull(count);
+    }
+
+    @Test
     public void selectById_1() {
         MockTable mockTable = (MockTable) session.selectOne("com.code.junit.mock.boot.dict.dao.MockTableDAO.selectById", 1);
         Assert.assertNotNull(mockTable);
@@ -39,13 +46,13 @@ public class MockTableDAOTest extends BaseAppTest {
     @Test
     public void testselectById(){
         MockTableDAO mockTableDAO = session.getMapper(MockTableDAO.class);
-        MockTable result = mockTableDAO.selectById(1);
+        MockTable result = mockTableDAO.selectById(2);
         Assert.assertNotNull(result);
     }
 
     private MockTable getMockTable() {
         MockTable table = new MockTable();
-        table.setData("test1")
+        table.setData("test1").setId(1)
                 .setName("mock1");
         return table;
     }

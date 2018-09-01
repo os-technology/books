@@ -1,7 +1,9 @@
 package com.code.junit.mock.boot.dict.controller;
 
-import org.springframework.stereotype.Controller;
+import com.code.junit.mock.boot.dict.service.MockService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author code
@@ -11,7 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/1下午1:00
  */
-@Controller
-@RequestMapping
+@RestController
 public class MockController {
+    @Autowired
+    private MockService mockService;
+
+    @RequestMapping("/index")
+    public String init(){
+        return "index is success";
+    }
+
+    @RequestMapping("save")
+    public String save(){
+        mockService.saveMock();
+        return "save is ok";
+    }
+
 }

@@ -11,10 +11,11 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -31,7 +32,10 @@ import javax.sql.DataSource;
 @ContextConfiguration(classes = BaseAppTest.class)
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@TransactionConfiguration(defaultRollback = false)
+@MapperScan("com.code.junit.mock.boot.dict.dao")
+@EnableTransactionManagement
+@ComponentScan("com.code.junit.mock.boot")
+//@TransactionConfiguration(defaultRollback = false)
 public class BaseAppTest {
     protected SqlSessionFactory sqlSessionFactory;
     protected SqlSession session ;
