@@ -36,6 +36,7 @@
         <module>jmetertest</module>
         <module>springbootApplication</module>
         <module>SpringFrameworkSourceCode</module>
+        <module>JunitMockTest</module>
     </modules>
 	<dependencyManagement>
 		<dependencies>
