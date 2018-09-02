@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableTransactionManagement
 @MapperScan("com.code.junit.mock.boot.dict.dao")//扫描的是mapper.xml中namespace指向值的包位置
 @ComponentScan("com.code.junit.mock.boot")
+@ImportResource({"classpath:spring-mvc.xml",
+        "classpath:application-bean.xml"})
 public class JunitMockApplication {
 
     public static void main(String[] args) {

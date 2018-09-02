@@ -26,25 +26,13 @@ import javax.sql.DataSource;
  */
 @Service("mockService")
 public class MockServiceImpl implements MockService {
+    @Autowired
     private MockTableDAO mockTableDAO;
 
     @Override
     public void saveMock() {
-        DataSource dataSource = null;
-        try {
-            dataSource = getDataSource();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("development", transactionFactory, dataSource);
-        Configuration configuration = new Configuration(environment);
-        configuration.addMapper(MockTableDAO.class);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
-        SqlSession session = sqlSessionFactory.openSession();
-        mockTableDAO = session.getMapper(MockTableDAO.class);
+
         mockTableDAO.save(getMockTable());
-        session.close();
 
     }
 
@@ -67,7 +55,7 @@ public class MockServiceImpl implements MockService {
 
     private MockTable getMockTable() {
         MockTable table = new MockTable();
-        table.setData("test1").setId(1)
+        table.setData("test1")//.setId(1)
                 .setName("mock1");
         return table;
     }

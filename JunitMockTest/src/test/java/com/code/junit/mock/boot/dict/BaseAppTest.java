@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -29,27 +30,29 @@ import javax.sql.DataSource;
  * @Created on 2018/9/1下午1:46
  */
 
-@ContextConfiguration(classes = BaseAppTest.class)
+@ContextConfiguration(classes = BaseAppTest.class, locations = {"classpath:spring-mvc-test.xml",
+        "classpath:application-bean-test.xml"})
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @MapperScan("com.code.junit.mock.boot.dict.dao")
 @EnableTransactionManagement
 @ComponentScan("com.code.junit.mock.boot")
-//@TransactionConfiguration(defaultRollback = false)
-public class BaseAppTest {
-    protected SqlSessionFactory sqlSessionFactory;
-    protected SqlSession session ;
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
 
-    @Before
-    public void setUp() throws Exception {
-        DataSource dataSource = getDataSource();
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("development", transactionFactory, dataSource);
-        Configuration configuration = new Configuration(environment);
-        configuration.addMapper(MockTableDAO.class);
-        sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
-          session = sqlSessionFactory.openSession();
-    }
+public class BaseAppTest {
+//    protected SqlSessionFactory sqlSessionFactory;
+//    protected SqlSession session;
+//
+//    @Before
+//    public void setUp() throws Exception {
+//        DataSource dataSource = getDataSource();
+//        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+//        Environment environment = new Environment("development", transactionFactory, dataSource);
+//        Configuration configuration = new Configuration(environment);
+//        configuration.addMapper(MockTableDAO.class);
+//        sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
+//        session = sqlSessionFactory.openSession();
+//    }
 
 
     public DataSource getDataSource() throws Exception {

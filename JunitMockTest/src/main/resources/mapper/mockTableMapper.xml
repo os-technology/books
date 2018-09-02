@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.code.junit.mock.boot.dict.dao.MockTableDAO">
+    <resultMap id="BaseResultMap" type="com.code.junit.mock.boot.dict.beans.MockTable">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="data" property="data"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <sql id="base_Column_list">
+    id,name,data,create_time
+    </sql>
+
+    <insert id="save" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
+        insert into mocktable
+        (
+        id,name,data
+        <if test="createTime!=null">
+            ,create_time
+        </if>
+        )
+        values
+        (
+        #{id},#{name},#{data}
+        <if test="createTime!=null">
+            ,#{createTime}
+        </if>
+        )
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        where id=#{id}
+    </select>
+
+    <update id="updateById"  parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
+        update mocktable set name=#{name},data=#{data} where id=#{id}
+    </update>
+
+</mapper>

@@ -5,6 +5,7 @@ import com.code.junit.mock.boot.dict.beans.MockTable;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 参考地址：
@@ -20,40 +21,31 @@ public class MockTableDAOTest extends BaseAppTest {
 
 
 
-//    @Autowired
-//    private MockTableDAO mockTableDAO;
+    @Autowired
+    private MockTableDAO mockTableDAO;
 
     @Test
     public void saveTest() {
-        MockTableDAO mockTableDAO = session.getMapper(MockTableDAO.class);
          int a = mockTableDAO.save(getMockTable());
         Assert.assertNotNull(a);
     }
 
     @Test
     public void updateById(){
-        MockTableDAO mockTableDAO = session.getMapper(MockTableDAO.class);
         int count = mockTableDAO.updateById(getMockTable());
         Assert.assertNotNull(count);
     }
 
     @Test
-    public void selectById_1() {
-        MockTable mockTable = (MockTable) session.selectOne("com.code.junit.mock.boot.dict.dao.MockTableDAO.selectById", 1);
-        Assert.assertNotNull(mockTable);
-    }
-
-    @Test
     public void testselectById(){
-        MockTableDAO mockTableDAO = session.getMapper(MockTableDAO.class);
-        MockTable result = mockTableDAO.selectById(2);
+        MockTable result = mockTableDAO.selectById(1);
         Assert.assertNotNull(result);
     }
 
     private MockTable getMockTable() {
         MockTable table = new MockTable();
-        table.setData("test1").setId(1)
-                .setName("mock1");
+        table.setData("test2").setId(1)
+                .setName("mock2");
         return table;
     }
 }

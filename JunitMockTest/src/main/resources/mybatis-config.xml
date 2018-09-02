@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--<typeAliases>-->
+		<!--<typeAlias alias="DemoDO" type="com.lxjr.credit.account.dao.data.DemoDO" />-->
+	<!--</typeAliases>-->
+
+	 <plugins>
+        <plugin interceptor="com.code.junit.mock.boot.pageholder.MybatisPageInterceptor">
+            <!-- 
+            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.OracleDialect"/>
+             -->
+            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.MySQLDialect" />
+        </plugin>
+    </plugins>
+	
+	<mappers>
+
+		<mapper resource="mapper/mockTableMapper.xml" />
+
+	</mappers>
+	
+</configuration>
