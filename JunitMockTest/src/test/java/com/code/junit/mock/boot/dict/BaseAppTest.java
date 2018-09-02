@@ -14,10 +14,12 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -30,14 +32,17 @@ import javax.sql.DataSource;
  * @Created on 2018/9/1下午1:46
  */
 
-@ContextConfiguration(classes = BaseAppTest.class, locations = {"classpath:spring-mvc-test.xml",
+@ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
         "classpath:application-bean-test.xml"})
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @MapperScan("com.code.junit.mock.boot.dict.dao")
 @EnableTransactionManagement
 @ComponentScan("com.code.junit.mock.boot")
-@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
+
+//替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
+@Transactional(transactionManager="transactionManager")
+@Rollback(value = false)
 
 public class BaseAppTest {
 //    protected SqlSessionFactory sqlSessionFactory;

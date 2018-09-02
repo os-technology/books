@@ -5,6 +5,7 @@ import com.code.junit.mock.boot.pageholder.model.PageBounds;
 import com.code.junit.mock.boot.pageholder.model.PageList;
 import com.code.junit.mock.boot.pageholder.model.Paginator;
 import com.code.junit.mock.boot.pageholder.support.SQLHelper;
+import com.code.junit.mock.boot.util.LogPortal;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -62,19 +63,19 @@ public class MybatisPageInterceptor implements Interceptor {
     }
 
     public void setDialectClass(String dialectClass) {
-//        logger.debug("dialectClass: {} ", dialectClass);
+        LogPortal.debug("dialectClass: {} ", dialectClass);
         this.dialectClass = dialectClass;
     }
 
     public void setAsyncTotalCount(boolean asyncTotalCount) {
-//        logger.debug("asyncTotalCount: {} ", asyncTotalCount);
+        LogPortal.debug("asyncTotalCount: {} ", asyncTotalCount);
         this.asyncTotalCount = asyncTotalCount;
     }
 
     public void setPoolMaxSize(int poolMaxSize) {
 
         if (poolMaxSize > 0) {
-//            logger.debug("poolMaxSize: {} ", poolMaxSize);
+            LogPortal.debug("poolMaxSize: {} ", poolMaxSize);
             Pool = Executors.newFixedThreadPool(poolMaxSize);
         } else {
             Pool = Executors.newCachedThreadPool();

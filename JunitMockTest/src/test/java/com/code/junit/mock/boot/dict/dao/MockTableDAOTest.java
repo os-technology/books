@@ -44,8 +44,8 @@ public class MockTableDAOTest extends BaseAppTest {
 
     private MockTable getMockTable() {
         MockTable table = new MockTable();
-        table.setData("test2").setId(1)
-                .setName("mock2");
+        table.setData("test3").setId(1)
+                .setName("mock3");
         return table;
     }
 }

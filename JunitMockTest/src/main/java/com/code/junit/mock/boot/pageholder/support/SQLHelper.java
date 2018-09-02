@@ -1,6 +1,7 @@
 package com.code.junit.mock.boot.pageholder.support;
 
 import com.code.junit.mock.boot.pageholder.dialect.Dialect;
+import com.code.junit.mock.boot.util.LogPortal;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
@@ -41,8 +42,8 @@ public class SQLHelper {
                                final BoundSql boundSql, Dialect dialect) throws SQLException {
 
         final String count_sql = dialect.getCountSQL();
-//        logger.debug("Total count SQL [{}] ", count_sql);
-//        logger.debug("Total count Parameters: {} ", parameterObject);
+        LogPortal.debug("Total count SQL [{}] ", count_sql);
+        LogPortal.debug("Total count Parameters: {} ", parameterObject);
 
         Connection connection = transaction.getConnection();
         PreparedStatement countStmt = connection.prepareStatement(count_sql);
@@ -55,7 +56,7 @@ public class SQLHelper {
         if (rs.next()) {
             count = rs.getInt(1);
         }
-//        logger.debug("Total count: {}", count);
+        LogPortal.debug("Total count: {}", count);
         return count;
 
     }

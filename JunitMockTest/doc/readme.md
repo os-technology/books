@@ -1,6 +1,8 @@
 #JunitMockTest
 
 **说明：**本模块基于springboot+myBatis进行构建，仅能查询数据，增删改操作不可用。
+
+##配置
 ####mock测试创建步骤如下
 * 创建数据库
 * 创建库表
@@ -49,29 +51,55 @@ INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALU
  在`mybatis-config.xml`使用方式如下：
  
  ```xml
- <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-	<typeAliases>
-		<typeAlias alias="DemoDO" type="com.lxjr.credit.account.dao.data.DemoDO" />
-	</typeAliases>
-
-	 <plugins>
-        <plugin interceptor="com.code.junit.mock.boot.pageholder.MybatisPageInterceptor">
-            <!-- 
-            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.OracleDialect"/>
-             -->
-            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.MySQLDialect" />
-        </plugin>
-    </plugins>
+	 <?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+	<configuration>
+		<typeAliases>
+			<typeAlias alias="DemoDO" type="com.lxjr.credit.account.dao.data.DemoDO" />
+		</typeAliases>
 	
-	<mappers>
-	    <!--  
-		<mapper resource="dal/sqlmap/demoUser-mapper.xml" />
-		-->
-	</mappers>
-	
-</configuration>
+		 <plugins>
+	        <plugin interceptor="com.code.junit.mock.boot.pageholder.MybatisPageInterceptor">
+	            <!-- 
+	            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.OracleDialect"/>
+	             -->
+	            <property name="dialectClass" value="com.code.junit.mock.boot.pageholder.dialect.MySQLDialect" />
+	        </plugin>
+	    </plugins>
+		
+		<mappers>
+		    <!--  
+			<mapper resource="dal/sqlmap/demoUser-mapper.xml" />
+			-->
+		</mappers>
+		
+	</configuration>
  ```
+ 
+ 如果开启aop操作，则以下两个包是必须的.
+ 
+ ```xml
+ <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+ ```
+ 同时，单元测试采用新版注解方式
+ 
+ ```java
+ //在高版本的Spring框架中（Spring4.2以后），@TransactionConfiguration已经标注为过时的注解
+ //替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
+ @Transactional(transactionManager="transactionManager")
+ @Rollback(value = false)
+ 
+ ```
+ 
+ ##Mybatis部分
  
  

@@ -25,11 +25,11 @@
     </dependencyManagement>
     <dependencies>
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-parent</artifactId>-->
-            <!--<version>2.0.4.RELEASE</version>-->
-            <!--<type>pom</type>-->
-            <!--<scope>import</scope>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>2.0.4.RELEASE</version>-->
+        <!--<type>pom</type>-->
+        <!--<scope>import</scope>-->
         <!--</dependency>-->
         <!--引入Web模块-->
         <dependency>
@@ -47,7 +47,11 @@
             <artifactId>aspectjrt</artifactId>
             <version>1.9.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.1</version>
+        </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -73,7 +77,25 @@
             <version>0.9.5.2</version>
         </dependency>
 
-
+        <!--LogPortal.java日志包配置-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--LogPortal.java日志包配置-->
 
         <!--测试模块，包括JUnit、Hamcrest、Mockito-->
         <dependency>
