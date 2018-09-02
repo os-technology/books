@@ -15,4 +15,6 @@ public interface MockService {
     public void saveMock();
 
     MockTable add(MockTable mockTable);
+
+    MockTable getById(Long id);
 }

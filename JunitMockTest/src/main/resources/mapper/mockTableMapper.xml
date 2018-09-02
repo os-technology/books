@@ -30,7 +30,7 @@
         )
     </insert>
 
-    <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+    <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.Long">
         select
         <include refid="base_Column_list"/>
         from mocktable

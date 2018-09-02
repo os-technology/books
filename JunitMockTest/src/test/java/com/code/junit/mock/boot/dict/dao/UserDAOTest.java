@@ -6,7 +6,9 @@ import com.code.junit.mock.boot.dict.beans.User;
 import com.code.junit.mock.boot.util.LogPortal;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/2下午12:44
  */
+@RunWith(SpringRunner.class)
 public class UserDAOTest extends BaseAppTest {
     @Autowired
     private UserDAO userDAO;

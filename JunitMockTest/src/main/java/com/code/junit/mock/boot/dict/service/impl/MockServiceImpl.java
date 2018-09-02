@@ -37,8 +37,18 @@ public class MockServiceImpl implements MockService {
 
     @Override
     public MockTable add(MockTable mockTable) {
+        MockTable result = mockTableDAO.selectById(mockTable.getId());
+        if (result != null) {
+            return null;
+        }
+        mockTable.setName("new Data");
         mockTableDAO.save(mockTable);
         return mockTable;
+    }
+
+    @Override
+    public MockTable getById(Long id) {
+        return mockTableDAO.selectById(id);
     }
 
 

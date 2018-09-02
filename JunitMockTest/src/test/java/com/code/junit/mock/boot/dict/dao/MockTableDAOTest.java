@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.assertj.core.util.DateUtil;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 参考地址：
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/1下午1:45
  */
+@RunWith(SpringRunner.class)
 public class MockTableDAOTest extends BaseAppTest {
 
 
@@ -41,7 +44,7 @@ public class MockTableDAOTest extends BaseAppTest {
 
     @Test
     public void testselectById(){
-        MockTable result = mockTableDAO.selectById(1);
+        MockTable result = mockTableDAO.selectById(1l);
         Assert.assertNotNull(result);
     }
     private MockTable getUpdateMockTable() {

@@ -96,7 +96,29 @@
             </exclusions>
         </dependency>
         <!--LogPortal.java日志包配置-->
+        <!--power mockito依赖部分 start-->
 
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>1.6.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>1.6.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--mockito依赖,如果不用power-mockito，此部分可以单独使用-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <!--power mockito依赖部分 end-->
         <!--测试模块，包括JUnit、Hamcrest、Mockito-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

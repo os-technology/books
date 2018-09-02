@@ -35,7 +35,6 @@ import javax.sql.DataSource;
 @ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
         "classpath:application-bean-test.xml"})
 @SpringBootTest
-@RunWith(SpringRunner.class)
 @MapperScan("com.code.junit.mock.boot.dict.dao")
 @EnableTransactionManagement
 @ComponentScan("com.code.junit.mock.boot")
