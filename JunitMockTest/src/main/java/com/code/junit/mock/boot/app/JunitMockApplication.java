@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 //开启事务用的注解
 //@EnableTransactionManagement
-@MapperScan("com.code.junit.mock.boot.dict.dao")//扫描的是mapper.xml中namespace指向值的包位置
+//@MapperScan("com.code.junit.mock.boot.dict.dao")//扫描的是mapper.xml中namespace指向值的包位置
 @ComponentScan("com.code.junit.mock.boot")
 @ImportResource({"classpath:spring-mvc.xml",
         "classpath:application-bean.xml"})
