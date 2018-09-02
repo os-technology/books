@@ -2,6 +2,7 @@ package com.code.junit.mock.boot.app;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,6 +28,7 @@ public class JunitMockApplication {
 
     public static void main(String[] args) {
 //        SpringApplication.run(JunitMockApplication.class,args);
-        new SpringApplicationBuilder(JunitMockApplication.class).web(true).run(args);
+//新版web判断写法
+        new SpringApplicationBuilder(JunitMockApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 }

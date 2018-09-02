@@ -1,5 +1,7 @@
 package com.code.junit.mock.boot.dict.service;
 
+import com.code.junit.mock.boot.dict.beans.MockTable;
+
 /**
  * @author code
  * @Title: MockService
@@ -11,4 +13,6 @@ package com.code.junit.mock.boot.dict.service;
 public interface MockService {
 
     public void saveMock();
+
+    MockTable add(MockTable mockTable);
 }

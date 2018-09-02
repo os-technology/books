@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,5 +28,23 @@ public class UserDAOTest extends BaseAppTest {
         List<User> list = userDAO.list();
         LogPortal.info(JSON.toJSONString(list));
         Assert.assertNotNull(list);
+    }
+
+    @Test
+    public void save(){
+        User user = getUser();
+        userDAO.save(user);
+        Assert.assertNotNull(user.getId());
+    }
+
+    private User getUser() {
+        User user = new User();
+        user.setCreateTime(new Date())
+                .setOrgid("2")
+                .setUsername("测试")
+                .setUserid("3")
+//                .setUpdateTime()
+        ;
+        return user;
     }
 }

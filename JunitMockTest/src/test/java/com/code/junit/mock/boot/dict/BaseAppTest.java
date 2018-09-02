@@ -42,7 +42,7 @@ import javax.sql.DataSource;
 
 //替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
 @Transactional(transactionManager="transactionManager")
-@Rollback(value = false)
+@Rollback(value = true)
 
 public class BaseAppTest {
 //    protected SqlSessionFactory sqlSessionFactory;

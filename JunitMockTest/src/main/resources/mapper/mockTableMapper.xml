@@ -12,7 +12,8 @@
     id,name,data,create_time
     </sql>
 
-    <insert id="save" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
+    <!--useGeneratedKeys="true" 保证返回最新主键-->
+    <insert id="save" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" useGeneratedKeys="true" keyProperty="id">
         insert into mocktable
         (
         id,name,data

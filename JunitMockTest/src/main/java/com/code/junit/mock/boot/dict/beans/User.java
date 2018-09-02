@@ -11,18 +11,18 @@ import java.util.Date;
  * @Created on 2018/9/2下午12:37
  */
 public class User {
-    private int id;
+    private Long id;
     private String username;
     private String userid;
     private String orgid;
     private Date createTime;
     private Date updateTime;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public User setId(int id) {
+    public User setId(Long id) {
         this.id = id;
         return this;
     }

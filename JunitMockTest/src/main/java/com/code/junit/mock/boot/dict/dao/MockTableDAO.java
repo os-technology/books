@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Update;
 public interface MockTableDAO {
 
 //    @Insert("insert into mocktable (name,data) values( #{name},#{data})")
-    public int save(MockTable mockTable);
+    public Long save(MockTable mockTable);
 //    @Select("select * from mocktable where id=#{id}")
     public MockTable selectById(Integer id);
 //    @Update("update mocktable set name=#{name},data=#{data} where id=#{id}")

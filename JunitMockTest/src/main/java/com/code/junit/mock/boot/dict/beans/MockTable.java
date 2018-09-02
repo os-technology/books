@@ -11,18 +11,18 @@ import java.util.Date;
  * @Created on 2018/9/1下午1:05
  */
 public class MockTable {
-    private int id;
+    private Long id;
 
     private String name;
     private String data;
     private Date createTime;
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public MockTable setId(int id) {
+    public MockTable setId(Long id) {
         this.id = id;
         return this;
     }

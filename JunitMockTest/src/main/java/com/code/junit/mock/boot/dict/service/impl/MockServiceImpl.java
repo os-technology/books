@@ -31,27 +31,16 @@ public class MockServiceImpl implements MockService {
 
     @Override
     public void saveMock() {
-
         mockTableDAO.save(getMockTable());
 
     }
 
-    public DataSource getDataSource() throws Exception {
-
-
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/dataService?useUnicode=true&characterEncoding=UTF-8");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        dataSource.setInitialSize(5);
-        dataSource.setMaxActive(20);
-        dataSource.setMaxIdle(10);
-        dataSource.setMinIdle(5);
-        dataSource.setTestOnBorrow(true);
-        dataSource.setValidationQuery("select 1");
-        return dataSource;
+    @Override
+    public MockTable add(MockTable mockTable) {
+        mockTableDAO.save(mockTable);
+        return mockTable;
     }
+
 
     private MockTable getMockTable() {
         MockTable table = new MockTable();
