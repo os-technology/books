@@ -118,6 +118,19 @@ INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALU
 |1.8                         |   1.3   |
 |1.7                         |   1.2.5   |
  
+ 报错参考如下：
+ 
+ ```java
+ 
+java.lang.AbstractMethodError: org.powermock.api.mockito.internal.mockmaker.PowerMockMaker.isTypeMockable(Ljava/lang/Class;)Lorg/mockito/plugins/MockMaker$TypeMockability;
+
+	at org.mockito.internal.util.MockUtil.typeMockabilityOf(MockUtil.java:29)
+	at org.mockito.internal.util.MockCreationValidator.validateType(MockCreationValidator.java:22)
+	at org.mockito.internal.creation.MockSettingsImpl.validatedSettings(MockSettingsImpl.java:232)
+	at org.mockito.internal.creation.MockSettingsImpl.build(MockSettingsImpl.java:226)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:64)
+	at org.mockito.Mockito.mock(Mockito.java:1855)
+ ```
  
 ##Mybatis部分
 

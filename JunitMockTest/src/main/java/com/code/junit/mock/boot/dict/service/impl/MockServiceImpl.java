@@ -41,7 +41,6 @@ public class MockServiceImpl implements MockService {
         if (result != null) {
             return null;
         }
-        mockTable.setName("new Data");
         mockTableDAO.save(mockTable);
         return mockTable;
     }

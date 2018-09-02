@@ -1,8 +1,7 @@
 package com.code.junit.mock.boot.dict.dao;
 
 import com.code.junit.mock.boot.dict.beans.User;
-import com.code.junit.mock.boot.dict.dao.provider.UserProvider;
-import org.apache.ibatis.annotations.Insert;
+import com.code.junit.mock.boot.dict.dao.provider.UserMapperProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -21,7 +20,13 @@ import java.util.List;
 public interface UserDAO {
     @Select("select * from user order by create_time desc")
     public List<User> list();
+
+    /**
+     * useGeneratedKeys 保证插入数据后可以返回主键ID
+     * @param user
+     * @return
+     */
     @Options(useGeneratedKeys=true, keyProperty="id")
-    @InsertProvider(type = UserProvider.class,method = "addUser")
+    @InsertProvider(type = UserMapperProvider.class,method = "addUser")
     Long save(User user);
 }

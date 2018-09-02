@@ -1,20 +1,29 @@
 package com.code.junit.mock.boot.dict.controller;
 
 import com.code.junit.mock.boot.app.JunitMockApplication;
+import com.code.junit.mock.boot.dict.beans.MockTable;
+import com.code.junit.mock.boot.util.DateUtils;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -29,7 +38,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @Created on 2018/9/1下午10:58
  */
 @RunWith(SpringRunner.class)
+//如果不添加 JunitMockApplication 类，则需要继承单元测试父类，以保证数据库部分可以被正常访问。若有启动类，尽量添加启动类方式操作
 @SpringBootTest(classes = {JunitMockApplication.class, MockControllerTest.class})
+@Transactional(transactionManager = "transactionManager")
+@Rollback(value = true)
 //@WebAppConfiguration("src/main/resources")//1 该注解用来声明加载的ApplicationContext是一个WebApplicationContext。
 public class MockControllerTest {
     protected MockMvc mockMvc;//2 模拟MVC对象，通过MockMvcBuilders.webAppContextSetup(this.wac).build()初始化
@@ -62,8 +74,40 @@ public class MockControllerTest {
     }
 
     @Test
-    public void params() {
+    public void addMock() throws Exception {
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/addMock");
+
+
+        mockMvc.perform(addMockTable(request))
+                .andExpect(status().isOk())
+                .andExpect(content().string("addMock is ok"));
 
     }
 
+    private MockHttpServletRequestBuilder addMockTable(MockHttpServletRequestBuilder request) {
+
+        String name = "time " + DateUtils.dateToString("yyyy-MM-dd HH:mm");
+        System.out.println(name.length());
+        return request.param("name", name)
+                .param("data", "random");
+    }
+
+    @Test
+    public void getModelAndView() throws Exception {
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/getModelAndView");
+
+        ResultActions response = mockMvc.perform(addMockTable(request));
+
+        response.andExpect(status().isOk())
+                .andExpect(model().attributeExists("result"))
+                .andDo(MockMvcResultHandlers.print());
+
+        //获取返回结果的对象信息
+        ModelAndView modelAndView = response.andReturn().getModelAndView();
+        Object object = modelAndView.getModel().get("result");
+        if(object instanceof MockTable){
+            MockTable mockTable = (MockTable)object;
+            Assert.assertNotNull(mockTable.getId());
+        }
+    }
 }

@@ -13,7 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.MockitoJUnitRunner;
+//import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 /**
@@ -39,10 +40,7 @@ public class MockServiceMockTest extends BaseAppTest {
     @Mock
     private MockTableDAO mockTableDAO;
 
-    @Before
-    public void setUp() {
-//        MockitoAnnotations.initMocks(this);
-    }
+
 
     @Test
     public void save(){
@@ -55,10 +53,10 @@ public class MockServiceMockTest extends BaseAppTest {
 
         Mockito.doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Object answer(InvocationOnMock invocationOnMock) {
                 MockTable mockTableAnswer = (MockTable) invocationOnMock.getArguments()[0];
                 System.out.println("=======================分割线=======================");
-                Assert.assertTrue("new Data".equals(mockTableAnswer.getName()));
+                Assert.assertTrue(mockTable.getName().equals(mockTableAnswer.getName()));
                 return null;
             }
         }).when(mockTableDAO).save(Mockito.any(MockTable.class));

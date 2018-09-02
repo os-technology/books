@@ -8,13 +8,13 @@ import java.util.Map;
 
 /**
  * @author code
- * @Title: UserProvider
+ * @Title: UserMapperProvider
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: www.qdingnet.com
  * @Created on 2018/9/2下午1:49
  */
-public class UserProvider {
+public class UserMapperProvider {
 
     public String addUser(User user) {
 
