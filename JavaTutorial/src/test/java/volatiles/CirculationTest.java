@@ -30,6 +30,8 @@ public class CirculationTest {
         int i=0;
         while (true){
             System.out.println(i++);
+            if (i>100)
+                break;
         }
     }
 

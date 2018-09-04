@@ -27,7 +27,7 @@ public class TestLock {
         new Thread(new LockRunner(3)).start();
         new Thread(new LockRunner(4)).start();
         new Thread(new LockRunner(5)).start();
-        Thread.sleep(200000L);
+        Thread.sleep(2000L);
     }
 
     class LockRunner implements Runnable {

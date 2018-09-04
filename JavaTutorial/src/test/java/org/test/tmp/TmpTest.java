@@ -19,6 +19,12 @@ import java.util.*;
 public class TmpTest {
 
 
+    @Test
+    public void indexof(){
+        String str = "hello/123";
+        System.out.println(str.lastIndexOf('/'));;
+    }
+
     /**
      * 冒泡排序
      */

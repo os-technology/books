@@ -24,3 +24,11 @@
 |**springbootApplication**| springboot书籍学习|
 |**SpringFrameworkSourceCode**| spring源码学习记录|
 |**JunitMockTest**| Junit和mock单元测试，基于springboot+mybatis|
+
+
+运行单元测试条件：
+
+* 启动zookeeper dubbo使用
+* 启动consul springcloud模块
+* redis disconf使用
+* nginx disconf使用
