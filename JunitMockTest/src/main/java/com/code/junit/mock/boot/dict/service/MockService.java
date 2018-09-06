@@ -1,6 +1,7 @@
 package com.code.junit.mock.boot.dict.service;
 
 import com.code.junit.mock.boot.dict.beans.MockTable;
+import com.code.junit.mock.boot.exceptions.ObjectNullException;
 
 /**
  * @author code
@@ -17,4 +18,8 @@ public interface MockService {
     MockTable add(MockTable mockTable);
 
     MockTable getById(Long id);
+
+    void privateAndProtectedMethod(MockTable mockTable) throws ObjectNullException;
+
+
 }

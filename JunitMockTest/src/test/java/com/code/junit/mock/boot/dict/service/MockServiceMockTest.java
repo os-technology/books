@@ -5,17 +5,27 @@ import com.code.junit.mock.boot.dict.BaseAppTest;
 import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.dict.dao.MockTableDAO;
 import com.code.junit.mock.boot.dict.service.impl.MockServiceImpl;
+import com.code.junit.mock.boot.exceptions.ObjectNullException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.exceptions.base.MockitoException;
 import org.mockito.invocation.InvocationOnMock;
 //import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import static org.hamcrest.Matchers.is;
 
 /**
  * 所有mock测试需要提前准备数据信息
@@ -27,8 +37,14 @@ import org.mockito.stubbing.Answer;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/2下午2:10
  */
-@RunWith(MockitoJUnitRunner.class)
-public class MockServiceMockTest extends BaseAppTest {
+//@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(MockServiceImpl.class)
+public class MockServiceMockTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     /**
      * @Mock: 创建一个Mock.
      * @InjectMocks: 创建一个实例，其余用@Mock（或@Spy）注解创建的mock将被注入到用该实例中。
@@ -40,13 +56,79 @@ public class MockServiceMockTest extends BaseAppTest {
     @Mock
     private MockTableDAO mockTableDAO;
 
+    @Before
+    public void setUp(){
+        //表示对该service实例进行监控，保证需要mock的全部方法可以返回指定结果
+        mockService = PowerMockito.spy(mockService);
+    }
+
+    @Test
+    public void privateAndProtectedMethod_Exception() throws ObjectNullException {
+
+        thrown.expect(ObjectNullException.class);
+        mockService.privateAndProtectedMethod(null);
+    }
+
+    /**
+     * 私有方法测试 之 json转换结果异常抛出
+     */
+    @Test
+    public void privateAndProtectedMethod_PrivateMethod() throws Exception {
+        String jsonMockTable = "{\"createTime\":1535866590000,\"data\":\"test-20180902-13:36\",\"id\":21,\"name\":\"mock\"}";
+
+        MockTable mockTable = JSON.parseObject(jsonMockTable, MockTable.class);
+
+        PowerMockito.when(mockService, "convertJson", mockTable).thenReturn("");
+//        PowerMockito.doReturn("").when(mockService, "convertJson", mockTable);
+        try {
+            mockService.privateAndProtectedMethod(mockTable);
+        } catch (Exception e) {
+            Assert.assertTrue("json is null".equals(e.getMessage()));
+        }
+    }
+
+    @Test
+    public void privateAndProtectedMethod_protectAndDoAnswerMethod() throws Exception {
+        String jsonMockTable = "{\"createTime\":1535866590000,\"data\":\"test-20180902-13:36\",\"id\":21,\"name\":\"mock\"}";
+        String jsonMockTable2 = "{\"createTime\":1535866590000,\"data\":\"test-20180902-13:36\",\"id\":100,\"name\":\"mock\"}";
+
+        MockTable mockTable = JSON.parseObject(jsonMockTable, MockTable.class);
+        MockTable mockTable2 = JSON.parseObject(jsonMockTable2, MockTable.class);
+
+        PowerMockito.when(mockService, "converMockTable", jsonMockTable).thenReturn(mockTable2);
+
+
+        PowerMockito.doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                MockTable actualObject = (MockTable) invocation.getArguments()[0];
+                Assert.assertTrue(mockTable2.getId()==actualObject.getId());
+                return null;
+            }
+        }).when(mockService,"printObject",Mockito.any(MockTable.class));
+        try {
+            mockService.privateAndProtectedMethod(mockTable);
+        } catch (Exception e) {
+            Assert.assertTrue("json is null".equals(e.getMessage()));
+        }
+    }
 
 
     @Test
-    public void save(){
+    public void privateAndProtectedMethod_TryException() {
+
+        try {
+            mockService.privateAndProtectedMethod(null);
+        } catch (ObjectNullException e) {
+            Assert.assertThat(e.getMessage(), is("mocktable object is null"));
+        }
+    }
+
+    @Test
+    public void save() {
         String jsonMockTable = "{\"createTime\":1535866590000,\"data\":\"test-20180902-13:36\",\"id\":21,\"name\":\"mock\"}";
 
-        MockTable mockTable = JSON.parseObject(jsonMockTable,MockTable.class);
+        MockTable mockTable = JSON.parseObject(jsonMockTable, MockTable.class);
 
         //数据库不存在该数据的逻辑顺序
         Mockito.when(mockTableDAO.selectById(mockTable.getId())).thenReturn(null);

@@ -22,13 +22,13 @@
 |**springboot**| springboot学习记录|
 |**jmetertest**| jmeter学习记录，实际项目需要执行压测时，可以用作参考|
 |**springbootApplication**| springboot书籍学习|
-|**SpringFrameworkSourceCode**| spring源码学习记录|
+|**SpringFrameworkSourceCode**| spring源码学习记录，包含disconf操作(后期可能会进行分离)|
 |**JunitMockTest**| Junit和mock单元测试，基于springboot+mybatis|
 
 
 运行单元测试条件：
 
-* 启动zookeeper dubbo使用
+* 启动zookeeper dubbo使用 disconf使用
 * 启动consul springcloud模块
 * redis disconf使用
 * nginx disconf使用

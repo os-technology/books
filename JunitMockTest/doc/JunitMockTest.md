@@ -100,29 +100,30 @@ INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALU
  
  ```
  
- ##mock与powerMockito版本对应关系
- 相信有些朋友也碰到和我一样的问题，mockito结合powermock做单元测试会碰到一些明明程序看起来没问题，却始终报错。
-有可能的问题就是版本使用不对，大家如果遇到这样的问题可以试试。（PS:当然也不绝对一定是版本的问题）
+## mock与powerMockito版本对应关系
  
-|Mockito                     | PowerMock|
-|---|---|
-|2.0.0-beta - 2.0.42-beta    |   1.6.5+   |
-|1.10.19                     |   1.6.4   |
-|1.10.8 - 1.10.x             |   1.6.2+   |
-|1.9.5-rc1 - 1.9.5           |   1.5.0 - 1.5.6   |
-|1.9.0-rc1 & 1.9.0           |   1.4.10 - 1.4.12   |
-|1.8.5                       |   1.3.9 - 1.4.9   |
-|1.8.4                       |   1.3.7 & 1.3.8   |
-|1.8.3                       |   1.3.6   |
-|1.8.1 & 1.8.2               |   1.3.5   |
-|1.8                         |   1.3   |
-|1.7                         |   1.2.5   |
+ * 相信有些朋友也碰到和我一样的问题，mockito结合powermock做单元测试会碰到一些明明程序看起来没问题，却始终报错。
+ * 有可能的问题就是版本使用不对，大家如果遇到这样的问题可以试试。（PS:当然也不绝对一定是版本的问题）
+ 
+ |Mockito                     | PowerMock|
+ |---|---|
+ |2.0.0-beta - 2.0.42-beta    |   1.6.5+   |
+ |1.10.19                     |   1.6.4   |
+ |1.10.8 - 1.10.x             |   1.6.2+   |
+ |1.9.5-rc1 - 1.9.5           |   1.5.0 - 1.5.6   |
+ |1.9.0-rc1 & 1.9.0           |   1.4.10 - 1.4.12   |
+ |1.8.5                       |   1.3.9 - 1.4.9   |
+ |1.8.4                       |   1.3.7 & 1.3.8   |
+ |1.8.3                       |   1.3.6   |
+ |1.8.1 & 1.8.2               |   1.3.5   |
+ |1.8                         |   1.3   |
+ |1.7                         |   1.2.5   |
  
  报错参考如下：
  
  ```java
  
-java.lang.AbstractMethodError: org.powermock.api.mockito.internal.mockmaker.PowerMockMaker.isTypeMockable(Ljava/lang/Class;)Lorg/mockito/plugins/MockMaker$TypeMockability;
+ java.lang.AbstractMethodError: org.powermock.api.mockito.internal.mockmaker.PowerMockMaker.isTypeMockable(Ljava/lang/Class;)Lorg/mockito/plugins/MockMaker$TypeMockability;
 
 	at org.mockito.internal.util.MockUtil.typeMockabilityOf(MockUtil.java:29)
 	at org.mockito.internal.util.MockCreationValidator.validateType(MockCreationValidator.java:22)
@@ -131,6 +132,46 @@ java.lang.AbstractMethodError: org.powermock.api.mockito.internal.mockmaker.Powe
 	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:64)
 	at org.mockito.Mockito.mock(Mockito.java:1855)
  ```
+
+## powerMockito环境搭建
+
+ ```java
+ @RunWith(PowerMockRunner.class)//运行环境，表明用 PowerMockerRunner来运行测试用例，否则无法使用PowerMock 
+ @PrepareForTest(MockServiceImpl.class)//所有需要测试的类，列在此处，以逗号分隔
+ ```
+
+## 注解以及相关方法说明部分
+
+#### 注解说明部分
+
+ * `@PrepareForTest`使用场景
+  
+  ```
+  当使用PowerMockito.whenNew方法时，必须加注解@PrepareForTest和@RunWith。注解@PrepareForTest里写的类是需要mock的new对象代码所在的类。
+
+  当需要mock final方法的时候，必须加注解@PrepareForTest和@RunWith。注解@PrepareForTest里写的类是final方法所在的类。 
+
+  当需要mock静态方法的时候，必须加注解@PrepareForTest和@RunWith。注解@PrepareForTest里写的类是静态方法所在的类。
+
+  当需要mock私有方法的时候, 只是需要加注解@PrepareForTest，注解里写的类是私有方法所在的类
+
+ 当需要mock系统类的静态方法的时候，必须加注解@PrepareForTest和@RunWith。注解里写的类是需要调用系统方法所在的类
+  ```
+   
+ * @Mock: 创建一个Mock.
+ * @InjectMocks: 创建一个实例，其余用@Mock（或@Spy）注解创建的mock将被注入到用该实例中。
+ * <font color=blue>注意：必须使用@RunWith(MockitoJUnitRunner.class) 或 Mockito.initMocks(this)进行mocks的初始化和注入。</font>
+ 
+#### 方法说明部分
+* `PowerMockito.spy`：监控一个真实的对象。使用方法，如果该对象中有私有方法，通过 spy方法之后，可以mock私有方法的返回值，否则无法正常mock结果返回。
+* `PowerMockito.doReturn(preValue).when(service.method)`:当需要调用when部分的`service.method`内容(一般指方法)时，返回`preValue `.即实际过程中不会调用`service.method`。
+* `PowerMockito.when(service.method, mockTable).thenReturn(afterValue)`:当调用`service.method`完成后，返回`afterValue`。即实际过程中会调用`service.method`内容。示例如下：
+
+ ```java
+ PowerMockito.when(mockService, "convertJson", mockTable).thenReturn("");
+ //表示调用 mockService 实例中的 convertJson (private或者protected)方法之后，返回空字符串。
+ ```
+* `Mockito.doAnswer(new Answer(){@Override answer(InvocationOnMock invocation){...}}).when(dao).methodName(Mockito.any(ParamType.class))`:表示当调用 `dao`中的`methodName`方法，并且传参内容为符合条件的任意参数值时，会触发`answer(InvocationOnMock invocation)`方法，并可以通过 `invocation`获得相应的对象信息(值，或者对象，或者实例等等)
  
 ##Mybatis部分
 

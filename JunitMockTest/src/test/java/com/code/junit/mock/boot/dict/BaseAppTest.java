@@ -44,35 +44,5 @@ import javax.sql.DataSource;
 @Rollback(value = true)
 
 public class BaseAppTest {
-//    protected SqlSessionFactory sqlSessionFactory;
-//    protected SqlSession session;
-//
-//    @Before
-//    public void setUp() throws Exception {
-//        DataSource dataSource = getDataSource();
-//        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-//        Environment environment = new Environment("development", transactionFactory, dataSource);
-//        Configuration configuration = new Configuration(environment);
-//        configuration.addMapper(MockTableDAO.class);
-//        sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
-//        session = sqlSessionFactory.openSession();
-//    }
 
-
-    public DataSource getDataSource() throws Exception {
-
-
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/dataService?useUnicode=true&characterEncoding=UTF-8");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        dataSource.setInitialSize(5);
-        dataSource.setMaxActive(20);
-        dataSource.setMaxIdle(10);
-        dataSource.setMinIdle(5);
-        dataSource.setTestOnBorrow(true);
-        dataSource.setValidationQuery("select 1");
-        return dataSource;
-    }
 }
