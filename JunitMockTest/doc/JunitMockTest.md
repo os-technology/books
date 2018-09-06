@@ -1,6 +1,6 @@
 #JunitMockTest
 
-**说明：**本模块基于springboot+myBatis进行构建，仅能查询数据，增删改操作不可用。
+**说明：**本模块基于springboot+myBatis进行构建，仅能查询数据，增删改操作不可用。包含Junit测试，Mockito和PowerMockito测试三部分内容。
 
 ##配置
 ####mock测试创建步骤如下
