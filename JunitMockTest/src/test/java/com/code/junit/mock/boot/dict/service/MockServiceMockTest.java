@@ -15,11 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.mockito.exceptions.base.MockitoException;
 import org.mockito.invocation.InvocationOnMock;
-//import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -78,7 +74,12 @@ public class MockServiceMockTest {
 
         MockTable mockTable = JSON.parseObject(jsonMockTable, MockTable.class);
 
-        PowerMockito.when(mockService, "convertJson", mockTable).thenReturn("");
+        //这三种写法效果在此是一样的
+        //传入任何符合条件的对象类型是MockTable的参数即可
+        PowerMockito.when(mockService, "convertJson", Mockito.any(MockTable.class)).thenReturn("");
+        //执行 convertJson 方法后，需要返回 空字符串
+//        PowerMockito.when(mockService, "convertJson", mockTable).thenReturn("");
+        //当要执行 convertJson 方法时，直接返回 空字符串
 //        PowerMockito.doReturn("").when(mockService, "convertJson", mockTable);
         try {
             mockService.privateAndProtectedMethod(mockTable);
