@@ -1,8 +1,10 @@
 package com.springcloud.eureka.consumer.app;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +30,7 @@ public class EurekaConsumerApplication {
      * @return
      */
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
@@ -35,6 +38,6 @@ public class EurekaConsumerApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(
                 EurekaConsumerApplication.class)
-                .web(true).run(args);
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

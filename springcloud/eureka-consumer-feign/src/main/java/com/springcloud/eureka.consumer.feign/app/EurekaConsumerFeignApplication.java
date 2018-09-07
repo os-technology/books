@@ -1,5 +1,6 @@
 package com.springcloud.eureka.consumer.feign.app;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -19,13 +20,13 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients(basePackages = "com.springcloud.eureka.consumer.feign")
 @EnableDiscoveryClient//用来将当前应用加入到服务治理体系中。
 @SpringBootApplication
-@ComponentScan(basePackages = "com.springcloud.eureka.consumer")
+@ComponentScan(basePackages = "com.springcloud.eureka.consumer.feign")
 public class EurekaConsumerFeignApplication {
 
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(
                 EurekaConsumerFeignApplication.class)
-                .web(true).run(args);
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

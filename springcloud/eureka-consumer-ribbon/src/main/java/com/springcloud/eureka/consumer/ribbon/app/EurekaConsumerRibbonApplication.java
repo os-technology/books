@@ -1,5 +1,6 @@
 package com.springcloud.eureka.consumer.ribbon.app;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -34,6 +35,6 @@ public class EurekaConsumerRibbonApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(
                 EurekaConsumerRibbonApplication.class)
-                .web(true).run(args);
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

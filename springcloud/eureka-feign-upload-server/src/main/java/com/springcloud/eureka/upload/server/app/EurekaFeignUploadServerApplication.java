@@ -1,5 +1,6 @@
 package com.springcloud.eureka.upload.server.app;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -22,6 +23,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class EurekaFeignUploadServerApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(EurekaFeignUploadServerApplication.class).web(true).run(args);
+        new SpringApplicationBuilder(EurekaFeignUploadServerApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 }
