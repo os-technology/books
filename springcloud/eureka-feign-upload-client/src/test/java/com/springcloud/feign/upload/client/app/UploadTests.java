@@ -40,7 +40,7 @@ public class UploadTests {
     public void testHandleFileUpload() {
 
         File file = new File("src/test/resources/tmp.txt");
-        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("upload_success",
+        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
                 MediaType.TEXT_PLAIN_VALUE, true, file.getName());
 //        File file = new File("upload.jpg");
 //        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",

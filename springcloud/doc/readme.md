@@ -305,8 +305,8 @@ public class SneakyThrows implements Runnable {
 }
 ```
 
-<font color=red><B>注意：</B></font>  
-单元测试的java类路径必须与application.java类的路径相同，否则无法正常实例化接口进行调用。本示例中，`eureka-feign-upload-client`模块，application位置在`com.springcloud.feign.upload.client.app`包下，则单元测试的位置也需要在Test中对应的包下进行创建。否则提示接口无法实例化。原因尚不清楚。
+
+
 
 ### 分布式配置中心
 
@@ -441,4 +441,33 @@ pom文件中添加了`org.springframework.boot:spring-boot-maven-plugin`插件�
 `java -jar xx.jar --spring.config.location=application.properties`
 
 ### 分布式配置中心（加密解密）
+
+`TODO`
+
+### FAQ整理
+
+##### <font color=blue><B>上传文件部分的问题</B></font>
+
+* 单元测试的java类路径必须与application.java类的路径相同，否则无法正常实例化接口进行调用。本示例中，`eureka-feign-upload-client`模块，application位置在`com.springcloud.feign.upload.client.app`包下，则单元测试的位置也需要在Test中对应的包下进行创建。否则提示接口无法实例化。原因尚不清楚。
+* 如果运行本demo出现以下异常，
+
+ ```java
+ //异常信息
+ java.lang.IllegalStateException: Could not load TestContextBootstrapper [null]. Specify @BootstrapWith's 'value' attribute or make the default bootstrapper class available.
+ 
+ ```
+
+ 请检查`spring-webmvc`和 `spring-test`版本是否差距较大。本demo使用依赖如下：
+
+
+ ```xml
+ <!--测试发现spring-test版本在4.3.16-4.3.18都可以正常操作，其他版本未实验-->
+ <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>4.3.18.RELEASE</version>
+ </dependency>
+ ```
+ <img src="webmvc-version.png" width="400">  
+ 根据`starter-web`版本，到spring-boot源码中，找到对应的版本(源码版本只有`1.5.14.RELEASE`的tag)，发现`spring-webmvc`为`4.3.18.RELEASE`,则需要将test版本改为对应版本即可。
 

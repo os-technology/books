@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ *
  * @author yuijnshui@lxfintech.com
  * @Title: ConsulController
  * @Copyright: Copyright (c) 2017
@@ -18,7 +19,7 @@ public class ConsulController {
     public String root() {
         return "Hello consul root";
     }
-    @RequestMapping("/consul")
+    @RequestMapping("/consul/client")
     public String home() {
         return "Hello consul";
     }
