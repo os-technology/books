@@ -10,12 +10,15 @@
 |时间|内容|
 |---|---|
 |2018-8-28|已经升级为jdk1.8版本支持，不再支持1.7版本。|
+|2018-9-7|升级完成，解决eureka-consumer启动报错问题|
 	
 本教程参考资料：[http://blog.didispace.com/Spring-Cloud基础教程/](http://blog.didispace.com/Spring-Cloud基础教程/)
 
 GitHub地址：[https://github.com/dyc87112/SpringCloud-Learning.git](https://github.com/dyc87112/SpringCloud-Learning.git)
 
 社区信息：[spring for all 社区](http://www.spring4all.com/)
+
+cloud源码地址：[https://github.com/spring-cloud](https://github.com/spring-cloud)
 
 **学习位置**  
 1. [链接地址](http://blog.didispace.com/spring-cloud-starter-dalston-3-2/)
@@ -305,8 +308,8 @@ public class SneakyThrows implements Runnable {
 }
 ```
 
-
-
+<font color=red><B>注意：</B></font>  
+单元测试的java类路径必须与application.java类的路径相同，否则无法正常实例化接口进行调用。本示例中，`eureka-feign-upload-client`模块，application位置在`com.springcloud.feign.upload.client.app`包下，则单元测试的位置也需要在Test中对应的包下进行创建。否则提示接口无法实例化。原因尚不清楚。
 
 ### 分布式配置中心
 
@@ -467,7 +470,20 @@ pom文件中添加了`org.springframework.boot:spring-boot-maven-plugin`插件�
     <artifactId>spring-test</artifactId>
     <version>4.3.18.RELEASE</version>
  </dependency>
+ 
  ```
  <img src="webmvc-version.png" width="400">  
  根据`starter-web`版本，到spring-boot源码中，找到对应的版本(源码版本只有`1.5.14.RELEASE`的tag)，发现`spring-webmvc`为`4.3.18.RELEASE`,则需要将test版本改为对应版本即可。
 
+
+##### <font color=blue>___2018-9-7___ 解决eureka-consumer启动报错问题，并更新application类的web方法赋值方式</font>
+ 
+* **解决方案**：原有基础上添加以下依赖即可
+ 
+  ```xml
+  <dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+  </dependency>
+  ```
+  

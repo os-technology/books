@@ -1,5 +1,6 @@
 package com.springcloud.config.server.git.app;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.config.server.EnableConfigServer;
@@ -20,6 +21,6 @@ public class ConfigServerGitApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder(ConfigServerGitApplication.class)
-                .web(true).run(args);
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

@@ -1,5 +1,6 @@
 package com.springcloud.config.client;
 
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +18,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class ConfigClientApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(ConfigClientApplication.class)
-                .web(true).run(args);
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

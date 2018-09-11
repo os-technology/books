@@ -1,8 +1,10 @@
 package com.springcloud.eureka.consumer.dict.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +23,7 @@ public class EurekaConsumerController {
     /**
      * LoadBalancerClient,这是一个负载均衡客户端的抽象定义，下面我们就看看如何使用Spring Cloud提供的负载均衡器客户端接口来实现服务的消费。
      */
-    @Autowired
+    @Autowired//(required = false)
     LoadBalancerClient loadBalancerClient;
 
     @Autowired
@@ -47,12 +49,13 @@ public class EurekaConsumerController {
 
         String url = getUrl()+"/dc";
         System.out.println(url);
-        return restTemplate.getForObject(url,String.class);
+//        return restTemplate.getForObject(url,String.class);
+        return restTemplate.getForObject("http://eureka-client/dc",String.class);
     }
     @GetMapping("/con_print")
     public String print(){
         String url = getUrl()+"/hello";
-        System.out.println(url);
+        System.out.println(url);//http://10.39.75.32:2111/hello 无法正常被调用，需要使用 http://eureka-client 方式才可以
         return restTemplate.getForObject(url,String.class);
     }
 

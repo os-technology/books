@@ -37,10 +37,47 @@ public class UploadTests {
 
     @Test
     @SneakyThrows
-    public void testHandleFileUpload() {
+    public void testHandleFileUploadSuccess() {
 
         File file = new File("src/test/resources/tmp.txt");
+
+        //createItem中第一个参数名称要与 @RequestPart(value = "file") 的value值对应，否则无法成功
         DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
+                MediaType.TEXT_PLAIN_VALUE, true, file.getName());
+//        File file = new File("upload.jpg");
+//        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
+//                MediaType.IMAGE_JPEG_VALUE,true,file.getName());
+        InputStream inputStream =null;
+        try {
+            inputStream = new FileInputStream(file);
+            OutputStream os = fileItem.getOutputStream();
+            IOUtils.copy(inputStream, os);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
+        System.out.println("返回结果信息："+uploadService.handleUploadFile(multipartFile));
+
+    }
+
+    @Test
+    @SneakyThrows
+    public void testHandleFileUploadFail_ItemIsNotRight() {
+
+        File file = new File("src/test/resources/tmp.txt");
+        //createItem中第一个参数名称要与 @RequestPart(value = "file") 的value值对应，否则无法成功
+        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("upload_success",
                 MediaType.TEXT_PLAIN_VALUE, true, file.getName());
 //        File file = new File("upload.jpg");
 //        DiskFileItem fileItem = (DiskFileItem) new DiskFileItemFactory().createItem("file",
@@ -58,10 +95,4 @@ public class UploadTests {
         MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
         System.out.println("返回结果信息："+uploadService.handleUploadFile(multipartFile));
     }
-
-    @Test
-    public void testPrint() {
-        System.out.println("Junit test is ok");
-    }
-
 }

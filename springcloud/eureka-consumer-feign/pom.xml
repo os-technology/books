@@ -12,13 +12,19 @@
     <artifactId>eureka-consumer-feign</artifactId>
 
     <dependencies>
+        <!--Spring Cloud 之 Feign （Finchley版） https://www.jianshu.com/p/ece8f7e093fe-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-netflix-eureka-server</artifactId>
+        </dependency>
+        <!--保证feign启动后，可以正常发现 eureka-client 的服务-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

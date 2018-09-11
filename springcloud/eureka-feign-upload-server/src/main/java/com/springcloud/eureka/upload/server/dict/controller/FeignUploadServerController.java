@@ -2,9 +2,7 @@ package com.springcloud.eureka.upload.server.dict.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -19,7 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class FeignUploadServerController {
 
 
-    @PostMapping(value = "/uploadFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @PostMapping(value = "/uploadFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+@RequestMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,method = RequestMethod.POST)
     public String uploadFile(@RequestPart(value = "file")MultipartFile file){
         System.out.println("上传文件名称："+file.getName());
         System.out.println(JSON.toJSONString(file));
