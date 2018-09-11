@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.code.junit.mock.boot.dict.BaseAppTest;
 import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.util.DateUtils;
+import com.code.junit.mock.boot.util.LogPortal;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,8 +33,10 @@ public class MockServiceTest extends BaseAppTest {
 
     @Test
     public void getById(){
-        MockTable result = mockService.getById(12l);
-        System.out.println(JSON.toJSONString(result));
+        MockTable data = mockService.add(getMockTable());
+        MockTable result = mockService.getById(data.getId());
+        LogPortal.info("[{}]",JSON.toJSONString(result));
+        Assert.assertNotNull(result);
     }
 
     private MockTable getMockTable() {
