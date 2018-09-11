@@ -6,6 +6,16 @@
  * wechat_tmp:微信支付临时分支，作为一次性分支，记录微信demo信息。
  * cloud:springcloud专用分支，将springcloud模块更新为最新版本，目前eureka-comsumer模块启动失败，其他模块正常。
  
+ **分支重要更新与合并记录**
+ 
+ |时间|分支|操作|from branch|内容|
+ |---|---|---|---|---|
+ |2018-9-11|dev|merge|cloud|将cloud最新分支合并至dev，build成功|
+ |2018-9-11|cloud|merge|dev|从dev中获取最新内容合并至cloud，此时cloud与dev内容为同步状态|
+ |2018-9-11|cloud-Edgware|new branch|dev|从dev中分离出cloud-Edgware分支，将cloud模块Edgware模块独立。该分支不再更新|
+ |2018-9-11|cloud-Finchley|new branch|cloud|从cloud分支中分离出cloud的Finchley版本，将Finchley版模块独立。该分支不再更新。|
+ |2018-9-11|dev,cloud|-|-|目前这两个分支为最新最全的内容分支|
+ 
  
 #### 各模块功能说明：
 
