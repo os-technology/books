@@ -264,7 +264,7 @@ Spring Cloud Feign是一套基于Netflix Feign实现的声明式服务调用客�
 <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
-    <version>1.16.20</version>
+    <version>1.18.2</version>
     <scope>provided</scope>
 </dependency>
         

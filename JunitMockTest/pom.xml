@@ -83,7 +83,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
         </dependency>
         <!--LogPortal.java日志包配置-->
         <!--power mockito依赖部分 start-->
