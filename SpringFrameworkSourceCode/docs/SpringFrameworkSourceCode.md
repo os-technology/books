@@ -104,7 +104,7 @@
  }
  ```
  两者关系图如下
- ![alt 关系类图](DefaultListableBeanFactory.png)
+<img src="DefaultListableBeanFactory.png" width="700">
  
 #### 4.1 自定义标签使用
 扩展spring自定义标签配置大致需要以下几个步骤(前提是要把spring的core包加入项目中)
@@ -310,3 +310,13 @@ public class UserXsd {
 
 
 ```
+
+#### 5.1 FactoryBean的使用
+
+* **为什么要有FactoryBean接口？**
+
+ 一般情况下，Spring 通过反射机制利用bean的class属性指定实现类来实例化bean。在某些情况下，实例化bean过程比较复杂，如果按照传统的方式，则需要在<bean>中提供大量的配置信息，配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。Spring为此提供了一个 org.Springframework.bean.factory.FactoryBean 的工厂类接口，用户可以通过实现该接口定制实例化bean的逻辑。
+
+* **demo参考**
+
+ 获取自定义bean的实例，使用`getBean("beanName")`，获取该bean的`FactoryBean`实例，只需在`beanName`前加个` &`前缀即可。参见 `CarFactoryBeanTest.java`，`BeanFactoryTest.testSimpleLoad_special()`
