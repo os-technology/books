@@ -2,6 +2,8 @@ package com.spring.source.code.beans.ch5;
 
 import com.alibaba.fastjson.JSON;
 import com.spring.source.code.beans.BaseJunitTest;
+import com.spring.source.code.beans.ch5.factorybean.Car;
+import com.spring.source.code.beans.ch5.factorybean.CarFactoryBean;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;

@@ -34,6 +34,13 @@ public class BaseJunitTest {
     /**
      * 获取beanFactory
      *
+     * <B>看看编程方式使用IoC容器</B>
+     * <p>
+     * 1.参考XmlBeanFactory的实现，我们以编程的方式使用DefaultListableBeanFactory。从中我们可以看到IoC容器使用的一些基本过程。
+     * 2.尽管我们在应用中使用IoC容器时很少会使用这样原始的方式，但是了解一下这个基本过程，对我们了解IoC容器的工作原理是非常有帮助的。
+     * 3.因为这个编程式使用容器的过程，很清楚揭示了在IoC容器实现中的那些关键的类(比如Resource、DefaultListableBeanFatory和BeanDefinitionReader)
+     * 之间的相互关系，例如它们是如何把IoC容器的功能解耦的，又是如何结合在一起为IoC容器服务的，等等。
+     *
      * @param profile
      * @param xmlFile
      * @return org.springframework.beans.factory.support.DefaultListableBeanFactory

@@ -1,4 +1,4 @@
-package com.spring.source.code.beans.ch5;
+package com.spring.source.code.beans.ch5.factorybean;
 
 import lombok.Getter;
 import lombok.Setter;

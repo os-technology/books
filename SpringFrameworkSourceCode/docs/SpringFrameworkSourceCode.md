@@ -15,7 +15,9 @@
  **ClassPathResource** : spring配置文件读取类
  
  spring profile 多环境配置管理
- [https://www.cnblogs.com/pangguoming/p/5888871.html](https://www.cnblogs.com/pangguoming/p/5888871.html)
+ 
+ https://www.cnblogs.com/pangguoming/p/5888871.html
+  
  
  在`SimpleAliasRegistry `类中，`allowAliasOverriding()`方法，默认返回true。实际在`DefaultListableBeanFactory`中有覆写操作。详细代码如下：
  
@@ -57,7 +59,7 @@
  ```
  
  ```java
- ublic class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
+ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
 		implements ConfigurableListableBeanFactory, BeanDefinitionRegistry, Serializable {
 		...
 		...
@@ -312,6 +314,7 @@ public class UserXsd {
 ```
 
 #### 5.1 FactoryBean的使用
+个人体会：可以用于进行一些字典数据的初始化操作使用。
 
 * **为什么要有FactoryBean接口？**
 
@@ -320,3 +323,75 @@ public class UserXsd {
 * **demo参考**
 
  获取自定义bean的实例，使用`getBean("beanName")`，获取该bean的`FactoryBean`实例，只需在`beanName`前加个` &`前缀即可。参见 `CarFactoryBeanTest.java`，`BeanFactoryTest.testSimpleLoad_special()`
+ 
+* **网络资料**
+<pre>
+ <div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-size: 14pt;">1.BeanFactory提供的是<strong><span style="color: #ff0000;">最基本</span></strong>的<strong><span style="color: #ff0000;">IoC容器的功能</span></strong>，关于这些<strong><span style="color: #ff0000;">功能定义</span></strong>，我们可以在<strong><span style="color: #ff0000;">接口BeanFatory中看到</span></strong>。</span></p>
+<p><span style="font-size: 14pt;">2.BeanFactory接口定义了<strong><span style="color: #ff9900;">IoC容器</span><em><span style="color: #99cc00;">最基本的容器的形式</span></em></strong>，并且提供了<strong><span style="color: #ff9900;">IoC容器所应该遵守</span></strong>的<em><strong><span style="color: #99cc00;">最基本的服务契约</span></strong></em>，同时，这也是我们<strong><span style="color: #ff9900;">使用IoC容器</span><span style="color: #ff0000;">所应遵守的</span><em><span style="color: #99cc00;">最底层</span></em></strong>和<em><strong><span style="color: #99cc00;">最基本</span></strong></em>的<em><strong><span style="color: #99cc00;">编程规范</span></strong></em>，这些接口定义勾画出了<strong><span style="color: #99cc00;">IoC的基本轮廓</span></strong>。</span></p>
+<p><span style="font-size: 14pt;">3.很显然，在Spring的代码实现中，BeanFactory<strong><span style="color: #339966;">只是一个接口类</span></strong>，并<strong><span style="color: #339966;">没有给出</span><em><span style="color: #33cccc;">容器的具体实现</span></em></strong>，而我们在图中看到的各种具体类，比如DefaultListableBeanFactory、XmlBeanFactory、ApplicationContext等<strong><span style="color: #33cccc;">都可以看成</span></strong>是<strong><span style="color: #33cccc;">容器附加了某种功能</span></strong>的<strong><span style="color: #33cccc;">具体实现</span></strong>，也就是<strong><span style="color: #339966;">容器体系</span></strong>中的<strong><span style="color: #339966;">具体容器产品</span></strong>。</span></p>
+<h1><span style="font-size: 18pt; line-height: 28px;"><strong>下面我们来看看BeanFactory是怎样定义IoC容器的基本接口的</strong></span></h1>
+<p><span style="font-size: 19px; line-height: 28px;">1.用户使用容器时，可以<strong><span style="color: #ff0000;">使用转义符"&amp;"</span></strong>来得到<strong><span style="color: #ff0000;">FactoryBean本身</span></strong>，<strong><span style="color: #ff0000;">用来区分</span><span style="color: #ff9900;"><em>通过容器来获取FactoryBean产生的对象</em></span></strong>和<em><strong><span style="color: #ff9900;">获取FactoryBean本身</span></strong></em>。</span></p>
+<p><span style="font-size: 19px; line-height: 28px;">2.举例来说，如果<strong><span style="color: #ff0000;">myJndiObject</span></strong>是一个FactoryBean，那么使用<strong><span style="color: #ffcc00;">&amp;myJndiObject</span></strong>得到的是FactroyBean，<em><strong><span style="color: #ffcc00;">而不是myJndiObject这个FactoryBean产生出来的对象</span></strong></em>。</span></p>
+<p><span style="font-size: 19px; line-height: 28px;">3.关于具体的<strong><span style="color: #ff0000;">FactoryBean</span></strong>的<strong><span style="color: #ff0000;">设计</span></strong>和<strong><span style="color: #ff0000;">实现模式</span></strong>，我们会在<strong><span style="color: #ff0000;">后面的章节中介绍</span></strong>。</span></p>
+<p><span style="font-size: 19px; line-height: 28px;">4.<span style="font-size: 14pt;">注意，理解上面这段话需要很好地区分<strong><span style="color: #ff00ff;">FactoryBean</span></strong>和<strong><span style="color: #ffcc00;">BeanFactory</span></strong>这两个在<span style="color: #00ccff;"><strong>Spring中使用频率很高的类</strong></span>，它们在拼写上非常相似。</span></span></p>
+<p><span style="font-size: 19px; line-height: 28px;"><span style="font-size: 14pt;">5.<em><strong><span style="color: #993366;">一个是Factory，也就是IoC容器或对象工厂</span></strong></em>；<em><strong><span style="color: #cc99ff;">一个是Bean</span></strong></em>。</span></span></p>
+<p><span style="font-size: 19px; line-height: 28px;"><span style="font-size: 14pt;">6.在Spring中，所有的Bean都是由BeanFactory（也就是IoC容器）来进行管理的。</span></span></p>
+<p><span style="font-size: 19px; line-height: 28px;"><span style="font-size: 14pt;">7.但对FactoryBean而言，这个Bean不是简单的Bean，<strong><span style="color: #ff99cc;">而是</span></strong>一个<strong><span style="color: #ff99cc;">能产生</span></strong>或者<strong><span style="color: #ff99cc;">修饰对象生成</span></strong>的<strong><span style="color: #ff99cc;">工厂Bean</span></strong>，它的<strong><span style="color: #339966;">实现</span></strong>与设计模式中的<strong><span style="color: #339966;">工厂模式</span></strong>和<strong><span style="color: #339966;">修饰器</span></strong>类似。</span></span></p></div><div id="MySignature"></div>
+</pre>
+
+* **看看编程方式使用IoC容器**
+ 1. 参考XmlBeanFactory的实现，我们以编程的方式使用DefaultListableBeanFactory。从中我们可以看到IoC容器使用的一些基本过程。
+
+ 2. 尽管我们在应用中使用IoC容器时很少会使用这样原始的方式，但是了解一下这个基本过程，对我们了解IoC容器的工作原理是非常有帮助的。
+
+ 3. 因为这个`编程式使用容器`的过程，很清楚揭示了在`IoC容器`实现中的那些`关键的类`(比如Resource、DefaultListableBeanFatory和BeanDefinitionReader)之间的`相互关系`，例如它们是如何把`IoC容器的功能解耦`的，又是如何结合在一起为IoC容器服务的，等等。
+ 
+   ```java
+   ClassPathResource res = new ClassPathResource("beans.xml");
+   DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+   XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+   reader.loadBeanDefinition(res);
+   ```
+
+ 这样我们就可以通过factory对象来使用DefaultListableBeanFactory这个IoC容器了。
+
+ 在使用IoC容器时，需要如下几个步骤：
+
+ 1. 创建`IoC配置文件`的`抽象资源`，这个`抽象资源`包含了`BeanDefinition的定义信息`。
+ 2. 创建一个`BeanFactory`，这里使用DefaultListableBeanFactory。
+ 3. 创建一个`载入BeanDefinition的读取器`，这里使用XmlBeanDefinitionReader来载入XML文件形式的BeanDefinition，通过一个`回调配置给BeanFactory`。
+ 4. 从定义好的`资源位置`读入配置信息，具体的解析过程由XmlBeanDefinitionReader来完成。完成整个载入和注册Bean定义之后，需要的IoC容器就建立起来了。这个时候就可以直接使用IoC容器了。
+
+#### 5.5 准备创建bean
+> 我们不可能指望在一个函数中完成一个复杂的逻辑，而且我们跟踪了这么多Spring代码，经历了这么多函数，或多或少也发现了一些规律：`一个真正千活的函数其实是以do开头`的，比如`doGetObjectFromFactoryBean`；而给我们错觉的函数，比如`getObjectFromFactoryBean`，其实只是从全局角度去做些统筹的工作。
+
+#### 5.6.2 Spring如何解决循环依赖
+在Spring中将循环依赖的处理分成了3种情况。
+
+1.  __构造器循环依赖__
+  
+  - 表示通过构造器注人构成的循环依赖，此依赖是无法解决的，只能抛出BeanCurrentlyInCreationException异常表示循环依赖。
+  - 如在创建TestA类时，构造器需要TestB类，那将去创建TestB,在创建TestB类时又发现需要TestC类，则又去创建TestC,最终在创建TestC时发现又需要TestA,从而形成一个环,没办法创建。
+  - Spring容器将每一个正在创建的bean标识符放在一个“当前创建bean池”中，bean标识符在创建过程中将一直保持在这个池中，因此如果在创建bean过程中发现自己已经在“当前创建bean池”里时，将抛出BeanCurrentlyInCreationException异常表示循环依赖;而对于创建完毕的bean将从“当前创建bean池”中清除掉。
+  - 参见测试类`CircleDependencyBeanTest.java`
+ 
+ ```
+ 针对以上测试代码的分析如下。
+Spring容器创建“testA”bean，首先去“当前创建bean池”查找是否当前bean正在创建，如果没发现，则继续准备其需要的构造器参数“testB”， 并将“testA” 标识符放到“当前创建bean池”。
+Spring容器创建“testB”bean,首先去“当前创建bean池”查找是否当前bean正在创建，如果没发现，则继续准备其需要的构造器参数“testC” ,并将“testB” 标识符放到“当前创建bean池”。
+Spring容器创建“testC”bean,首先去“当前创建bean池”查找是否当前bean正在创建，如果没发现，则继续准备其需要的构造器参数“testA”， 并将“testC” 标识符放到“当前创建Bean池”。
+到此为止Spring容器要去创建“testA” bean， 发现该bean 标识符在“当前创建bean池”中，因为表示循环依赖，抛出BeanCurrentlyInCreationException.
+ ```
+ 
+2. **setter循环依赖**
+
+ 表示通过setter, 注人方式构成的循环依赖。对于setter注人造成的依赖是通过Spring容器提前暴露刚完成构造器注人但未完成其他步骤(如setter 注人)的bean来完成的，而且只能解决单例作用域的bean循环依赖。通过提前暴露一个 单例工厂方法，从而使其他bean能引用到该bean，如下代码所示：
+ 
+ ```java
+ addSingletonFactory(beanName, new ObjectFactory(){
+ 	public Object getObject() throws BeanException{
+ 		return getEarlyBeanReference(beanName, mbd, bean);
+ 	}
+ });
+ ```
