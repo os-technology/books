@@ -76,7 +76,11 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <!--LogPortal.java日志包配置-->
 
         <!-- logback -->

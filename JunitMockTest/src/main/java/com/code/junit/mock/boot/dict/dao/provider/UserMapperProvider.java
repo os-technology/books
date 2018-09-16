@@ -23,11 +23,9 @@ public class UserMapperProvider {
         }
         String sql = new SQL() {{
             INSERT_INTO("user");
-            if (StringUtils.hasText(user.getOrgid())) {
-                VALUES("orgid","#{orgid}");
-            }
-            if (StringUtils.hasText(user.getUserid())) {
-                VALUES("userid","#{userid}");
+
+            if (StringUtils.hasText(user.getCompanyId())) {
+                VALUES("company_id","#{companyId}");
             }
             if (StringUtils.hasText(user.getUsername())){
                 VALUES("username","#{username}");
@@ -52,11 +50,9 @@ public class UserMapperProvider {
         String sql = new SQL() {{
             SELECT("*");
             FROM("user");
-            if (StringUtils.hasText(user.getOrgid())) {
-                WHERE("orgid=#{orgid}");
-            }
-            if (StringUtils.hasText(user.getUserid())) {
-                WHERE("userid=#{userid}");
+
+            if (StringUtils.hasText(user.getCompanyId())) {
+                WHERE("userid=#{companyId}");
             }
             if (user.getId() != null) {
                 WHERE("id=#{id}");

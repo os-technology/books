@@ -13,8 +13,7 @@ import java.util.Date;
 public class User {
     private Long id;
     private String username;
-    private String userid;
-    private String orgid;
+    private String companyId;
     private Date createTime;
     private Date updateTime;
 
@@ -36,21 +35,13 @@ public class User {
         return this;
     }
 
-    public String getUserid() {
-        return userid;
+
+    public String getCompanyId() {
+        return companyId;
     }
 
-    public User setUserid(String userid) {
-        this.userid = userid;
-        return this;
-    }
-
-    public String getOrgid() {
-        return orgid;
-    }
-
-    public User setOrgid(String orgid) {
-        this.orgid = orgid;
+    public User setCompanyId(String companyId) {
+        this.companyId = companyId;
         return this;
     }
 

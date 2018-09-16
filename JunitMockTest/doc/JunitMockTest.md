@@ -6,7 +6,7 @@
 ####mock测试创建步骤如下
 * 调整模块的数据库名称
 * 在对应的MySQL地址创建相应的数据库名称
-* 启动应用，库表采用初始化自动创建的方式进行操作。
+* 启动应用(`JunitMockApplication.java`)，库表采用初始化自动创建的方式进行操作。
  
  ```xml
  <!--persistence-mybatis.xml 库表初始化配置-->
@@ -162,9 +162,11 @@
 
 * mocktable : 配置mapper.xml映射文件进行操作
 * user : 没有配置mapper.xml，通过注解进行数据操作
+*  company : 配置mapper.xml映射文件进行操作
 * 映射文件通用配置方式
 
 ```xml
+<!--使用company和mocktable库表映射文件进行验证-->
  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="DS" />
 		<!--配置mybatis内容，比如sql输出等-->
@@ -182,4 +184,14 @@
  @Transactional(transactionManager="transactionManager")
 @Rollback(value = true)//事务回滚使用独立注解进行操作
 @SpringBootTest
+ ```
+ 
+## 其他
+
+* bean部分添加`lombok`依赖方式，并采用build设计模式进行参数赋值。
+
+ ```
+ 注意：使用构造者模式必须添加构造函数声明的注解，必须包含无参构造函数和全参构造函数两个。
+ @AllArgsConstructor  全参构造函数
+@NoArgsConstructor  无参构造函数
  ```

@@ -32,7 +32,7 @@ public class MockTableDAOTest extends BaseAppTest {
     @Test
     public void saveTest() {
         MockTable mockTable = getMockTable();
-        Long count = mockTableDAO.save(mockTable);
+        mockTableDAO.save(mockTable);
         Assert.assertNotNull(mockTable.getId());
     }
 

@@ -30,7 +30,7 @@ public class UserDAOTest extends BaseAppTest {
     public void list(){
         List<User> list = userDAO.list();
         LogPortal.info(JSON.toJSONString(list));
-        Assert.assertNotNull(list);
+        Assert.assertFalse(list.isEmpty());
     }
 
     @Test
@@ -43,9 +43,8 @@ public class UserDAOTest extends BaseAppTest {
     private User getUser() {
         User user = new User();
         user.setCreateTime(new Date())
-                .setOrgid("2")
                 .setUsername("测试")
-                .setUserid("3")
+                .setCompanyId("3")
 //                .setUpdateTime()
         ;
         return user;
