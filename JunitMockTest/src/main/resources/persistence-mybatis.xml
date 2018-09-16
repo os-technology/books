@@ -70,10 +70,10 @@
    </bean>
    
    <context:component-scan base-package="com.code.junit.mock.boot.dict.dao" />
-   
-   <!--<jdbc:initialize-database data-source="DS" ignore-failures="NONE">-->
-		<!--<jdbc:script location="classpath:h2.sql" />-->
-	<!--</jdbc:initialize-database>-->
+   <!--库表初始化配置-->
+   <jdbc:initialize-database data-source="DS" ignore-failures="NONE">
+		<jdbc:script location="classpath:init.sql" />
+	</jdbc:initialize-database>
 	
 	
 </beans>

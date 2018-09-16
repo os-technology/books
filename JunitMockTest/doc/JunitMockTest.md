@@ -4,36 +4,19 @@
 
 ##配置
 ####mock测试创建步骤如下
-* 创建数据库
-* 创建库表
-
-	```sql
-	CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) DEFAULT NULL COMMENT '用户名',
-  `userid` int(11) DEFAULT NULL,
-  `orgid` int(11) DEFAULT NULL,
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uni` (`userid`,`orgid`,`create_time`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-	#mock数据表
-	CREATE TABLE `dataService`.`mocktable` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL COMMENT '名称',
-  `data` VARCHAR(45) NOT NULL COMMENT '数据',
-  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`))
-COMMENT = 'mock数据表';
-INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALUES ('1', '123', 'aa', '2018-09-01 18:27:37');
-
-	
-	```	
 * 调整模块的数据库名称
+* 在对应的MySQL地址创建相应的数据库名称
+* 启动应用，库表采用初始化自动创建的方式进行操作。
+ 
+ ```xml
+ <!--persistence-mybatis.xml 库表初始化配置-->
+ <jdbc:initialize-database data-source="DS" ignore-failures="NONE">
+		<jdbc:script location="classpath:init.sql" />
+	</jdbc:initialize-database>
+ ```
 * 使用单元测试，测试数据是否能正常插入
 
+**注意**：如果不需要每次重新创建库表，则删除drop table语句即可。
 
  **特殊类说明：**
  
