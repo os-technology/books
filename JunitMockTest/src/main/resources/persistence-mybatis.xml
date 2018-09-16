@@ -61,6 +61,8 @@
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="DS" />
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	   <!--mybatis映射文件通用配置方式-->
+		<property name="mapperLocations" value="classpath*:mapper/*Mapper.xml" />
    </bean>
 
    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">    

@@ -34,7 +34,6 @@ import javax.sql.DataSource;
 
 @ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
         "classpath:application-bean-test.xml"})
-@SpringBootTest
 @MapperScan("com.code.junit.mock.boot.dict.dao")
 @EnableTransactionManagement
 @ComponentScan("com.code.junit.mock.boot")
@@ -42,7 +41,7 @@ import javax.sql.DataSource;
 //替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
 @Transactional(transactionManager="transactionManager")
 @Rollback(value = true)
-
+@SpringBootTest
 public class BaseAppTest {
 
 }

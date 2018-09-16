@@ -18,10 +18,8 @@
         </plugin>
     </plugins>
 	
-	<mappers>
-
-		<mapper resource="mapper/mockTableMapper.xml" />
-
-	</mappers>
+	<!--<mappers>-->
+		<!--<mapper resource="mapper/mockTableMapper.xml" />-->
+	<!--</mappers>-->
 	
 </configuration>

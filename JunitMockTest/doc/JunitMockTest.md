@@ -179,5 +179,24 @@ INSERT INTO `dataService`.`mocktable` (`id`, `name`, `data`, `create_time`) VALU
 
 * mocktable : 配置mapper.xml映射文件进行操作
 * user : 没有配置mapper.xml，通过注解进行数据操作
+* 映射文件通用配置方式
+
+```xml
+ <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="DS" />
+		<!--配置mybatis内容，比如sql输出等-->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	   <!--mybatis映射文件通用配置方式-->
+		<property name="mapperLocations" value="classpath*:mapper/*Mapper.xml" />
+   </bean>
+```
  
- 
+
+## springboot部分
+* 单元测试注解部分最新配置
+
+ ```java
+ @Transactional(transactionManager="transactionManager")
+@Rollback(value = true)//事务回滚使用独立注解进行操作
+@SpringBootTest
+ ```

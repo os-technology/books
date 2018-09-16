@@ -33,7 +33,7 @@ public class MockTableDAOTest extends BaseAppTest {
     public void saveTest() {
         MockTable mockTable = getMockTable();
         Long count = mockTableDAO.save(mockTable);
-        Assert.assertNotNull(count);
+        Assert.assertNotNull(mockTable.getId());
     }
 
     @Test
@@ -44,7 +44,9 @@ public class MockTableDAOTest extends BaseAppTest {
 
     @Test
     public void testselectById(){
-        MockTable result = mockTableDAO.selectById(1l);
+        MockTable mockTable = getMockTable();
+        mockTableDAO.save(mockTable);
+        MockTable result = mockTableDAO.selectById(mockTable.getId());
         Assert.assertNotNull(result);
     }
     private MockTable getUpdateMockTable() {
