@@ -31,16 +31,21 @@ public class SpringContextPathApplication {
     @Autowired
     private BookAttrbutes bookAttrbutes;
 
+    /**
+     * http://localhost:9090/helloboot/
+     *
+     * @return
+     */
     @RequestMapping("/")
-    public String contextpath(){
+    public String contextpath() {
 
-        System.out.println(bookAttrbutes.getAuthor()+"__"+ bookAttrbutes.getName());
+        System.out.println(bookAttrbutes.getAuthor() + "__" + bookAttrbutes.getName());
 
-        return "context-path config is right. Author is "+bookAuthor+" ,book name is "+bookName;
+        return "context-path config is right. Author is " + bookAuthor + " ,book name is " + bookName;
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringContextPathApplication.class,args);
+        SpringApplication.run(SpringContextPathApplication.class, args);
     }
 
 }
