@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--3. prototype范围的依赖处理-->
+    <bean id="testAA" class="com.spring.source.code.beans.ch5.prototype.TestAA" scope="prototype">
+        <property name="testBB" ref="testBB"/>
+    </bean>
+    <bean id="testBB" class="com.spring.source.code.beans.ch5.prototype.TestBB" scope="prototype">
+        <property name="testCC" ref="testCC"/>
+    </bean>
+    <bean id="testCC" class="com.spring.source.code.beans.ch5.prototype.TestCC" scope="prototype">
+        <property name="testAA" ref="testAA"/>
+    </bean>
+</beans>
+

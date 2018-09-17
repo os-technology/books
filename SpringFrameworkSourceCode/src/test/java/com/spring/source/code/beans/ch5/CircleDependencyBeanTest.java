@@ -17,6 +17,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class CircleDependencyBeanTest extends BaseJunitTest {
 
+
+    @Test(expected = BeanCurrentlyInCreationException.class)
+    public void testCircleBySetterAndPrototype() throws Throwable {
+        try {
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("ch5/circleDependencyPrototypeBean.xml");
+        ctx.getBean("testAA");
+        } catch (BeansException e) {
+            Throwable e1 = e.getCause().getCause().getCause();
+            throw e1;
+        }
+    }
+
     /**
      * BeanCurrentlyInCreationException 只会在发生异常的原始位置出现
      *

@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+        <!--1. 构造器循环依赖-->
         <bean id="testA" class="com.spring.source.code.beans.ch5.circle_dependency.TestA" >
                 <constructor-arg index="0" ref="testB"/>
         </bean>

@@ -389,9 +389,18 @@ Spring容器创建“testC”bean,首先去“当前创建bean池”查找是否
  表示通过setter, 注人方式构成的循环依赖。对于setter注人造成的依赖是通过Spring容器提前暴露刚完成构造器注人但未完成其他步骤(如setter 注人)的bean来完成的，而且只能解决单例作用域的bean循环依赖。通过提前暴露一个 单例工厂方法，从而使其他bean能引用到该bean，如下代码所示：
  
  ```java
- addSingletonFactory(beanName, new ObjectFactory(){
+   addSingletonFactory(beanName, new ObjectFactory(){
  	public Object getObject() throws BeanException{
  		return getEarlyBeanReference(beanName, mbd, bean);
- 	}
+	 }
  });
  ```
+ 
+3. **prototype范围的依赖处理**
+
+ 对于“prototype”作用域bean，Spring容器无法完成依赖注入，因为Spring容器不进行缓存“prototype”作用域的bean，因此无法提前暴露一个创建中的bean。示例如下：
+ 
+ ```java
+ 
+ ```
+ spring 循环引用的处理参考学习地址：[https://www.iflym.com/index.php/code/201208280001.html](https://www.iflym.com/index.php/code/201208280001.html)
