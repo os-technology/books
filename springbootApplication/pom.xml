@@ -18,7 +18,6 @@
     <modules>
         <module>boot1</module>
         <module>boot2</module>
-        <module>boot3</module>
     </modules>
     <dependencies>
         <dependency>

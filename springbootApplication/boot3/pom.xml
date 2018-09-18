@@ -11,7 +11,7 @@
 
     <groupId>com.mvn.test</groupId>
     <artifactId>boot3</artifactId>
-
+    <packaging>pom</packaging>
     <dependencies>
 
     </dependencies>

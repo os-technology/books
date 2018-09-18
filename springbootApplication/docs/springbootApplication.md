@@ -2,6 +2,8 @@
 
 **题外话**：Spring 技术系列干货整理 [https://mp.weixin.qq.com/s/N507Cfb_mbkGvHtg_FIaVg](https://mp.weixin.qq.com/s/N507Cfb_mbkGvHtg_FIaVg)
 
+**学习位置： 7.1 springboot的web开发支持**
+
 #笔记整理
 
 ## 6.2.3 类型安全的配置(基于properties)
