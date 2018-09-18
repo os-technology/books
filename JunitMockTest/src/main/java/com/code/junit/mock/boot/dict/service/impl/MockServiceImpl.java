@@ -5,15 +5,6 @@ import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.dict.dao.MockTableDAO;
 import com.code.junit.mock.boot.dict.service.MockService;
 import com.code.junit.mock.boot.exceptions.ObjectNullException;
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.ibatis.jdbc.Null;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,14 +21,17 @@ import javax.sql.DataSource;
  * @Created on 2018/9/1下午1:03
  */
 @Service("mockService")
+@Transactional(rollbackFor = Throwable.class)
 public class MockServiceImpl implements MockService {
     @Autowired
     private MockTableDAO mockTableDAO;
 
     @Override
     public void saveMock() {
-        mockTableDAO.save(getMockTable());
-
+        MockTable data = getMockTable();
+        mockTableDAO.save(data);
+        System.out.println(JSON.toJSONString(data));
+        throw new IllegalArgumentException();
     }
 
     @Override

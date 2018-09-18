@@ -186,6 +186,28 @@
 @SpringBootTest
  ```
  
+* 多配置文件加载方式
+ 
+ ```xml
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!--自定义Tomcat配置-->
+				<value>classpath:tomcat.properties</value>
+				<!--1 引入属性文件，在配置中占位使用 -->
+				<value>classpath*:app_dev.properties</value>
+				<!--<value>file:/opt/demo/config/demo-remote.properties</value>-->
+			</list>
+		</property>
+	</bean>
+ ```
+ 
+* 配置Tomcat自定义端口设置
+
+ 参考`TomcatConfig.java`类
+ 
+* 事务采用标准的注解方式实现，即需要事务的方法上必须添加`@Transactional`注解才能生效
+ 
 ## 其他
 
 * bean部分添加`lombok`依赖方式，并采用build设计模式进行参数赋值。
