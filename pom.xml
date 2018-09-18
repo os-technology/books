@@ -37,6 +37,7 @@
         <module>springbootApplication</module>
         <module>SpringFrameworkSourceCode</module>
         <module>JunitMockTest</module>
+        <module>ThreadTutorial</module>
     </modules>
     <dependencyManagement>
         <dependencies>
