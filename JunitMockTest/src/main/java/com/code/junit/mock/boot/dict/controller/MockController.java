@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * 项目访问地址：http://localhost:8095/junit/
  * @author code
  * @Title: WebBootController
  * @Copyright: Copyright (c) 2017
