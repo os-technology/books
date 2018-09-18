@@ -46,3 +46,22 @@
  
  ### 6.5.1 运作原理
  `@SpringBootApplication`为一个组合注解，核心功能由`@EnableAutoConfiguration`提供
+ 
+## 7.2 Thymeleaf 模板引擎
+> 官网：[https://www.thymeleaf.org/](https://www.thymeleaf.org/)
+
+由于版本问题(尚未完全找出原因) ，只能使用1.x.x版本的boot依赖包进行项目配置
+
+```xml
+ <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>1.5.15.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```

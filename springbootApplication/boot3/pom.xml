@@ -9,11 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mvn.test</groupId>
     <artifactId>boot3</artifactId>
     <packaging>pom</packaging>
-    <dependencies>
+    <modules>
+        <module>ch7thymeleaf</module>
+    </modules>
 
-    </dependencies>
 
 </project>
