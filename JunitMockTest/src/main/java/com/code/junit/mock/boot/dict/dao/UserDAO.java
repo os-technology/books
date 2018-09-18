@@ -5,6 +5,7 @@ import com.code.junit.mock.boot.dict.dao.provider.UserMapperProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,5 +29,6 @@ public interface UserDAO {
      */
     @Options(useGeneratedKeys=true, keyProperty="id")
     @InsertProvider(type = UserMapperProvider.class,method = "addUser")
+    @Transactional
     Long save(User user);
 }

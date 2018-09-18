@@ -65,6 +65,8 @@
 		<property name="dataSource" ref="datasource"></property>
 	</bean>
 	<!--支持注解驱动的事务管理，指定事务管理器 -->
+	<!--使用基于注解方式配置事务 -->
+	<!-- 全注解方式   需加上@Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 	<!--6 容器自动扫描IOC组件  -->

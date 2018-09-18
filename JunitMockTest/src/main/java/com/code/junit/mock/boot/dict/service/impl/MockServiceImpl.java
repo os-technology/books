@@ -16,6 +16,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
@@ -40,6 +41,7 @@ public class MockServiceImpl implements MockService {
     }
 
     @Override
+    @Transactional
     public MockTable add(MockTable mockTable) {
         MockTable result = mockTableDAO.selectById(mockTable.getId());
         if (result != null) {
