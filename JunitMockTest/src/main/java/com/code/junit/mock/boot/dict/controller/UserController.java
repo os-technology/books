@@ -29,7 +29,7 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value= "list",produces = { "application/json;charset=UTF-8" })
+    @RequestMapping("list")
     public String getUserList() {
 
         List<UserData> list = userService.getUserDataList();

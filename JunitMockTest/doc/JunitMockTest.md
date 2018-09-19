@@ -6,7 +6,7 @@
 ####mock测试创建步骤如下
 * 调整模块的数据库名称
 * 在对应的MySQL地址创建相应的数据库名称
-* 启动应用(`JunitMockApplication.java`)，库表采用初始化自动创建的方式进行操作。
+* 启动应用(`JunitMockApplication.java`)，库表采用初始化自动创建的方式进行操作。如果没有初始化成功，请检查 `persistence-mybatis.xml`文件配置是否注释。
  
  ```xml
  <!--persistence-mybatis.xml 库表初始化配置-->
@@ -235,7 +235,25 @@ public class DefaultFooService implements FooService {
   * 嵌套事务测试 - 外部Exception， 内部正常。**结果**：所有数据全部回滚
   * 在`@Transactional`注解中如果不配置`rollbackFor`属性,那么事物只会在遇到`RuntimeException(NullPointerException、IndexOutOfBoundsException等)`的时候才会回滚,加上`rollbackFor=Exception.class`,可以让事物在遇到`非运行时异常(SQLException,IOException以及用户自定义异常等)`时也回滚
   
- 
+ * **返回值fastjson类型中文乱码问题解决**
+  
+  ```xml
+  <!-- 文件位置：application-bean.xml -->
+    <mvc:annotation-driven>
+        <!-- 消息转换器 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter" /> <!--先进行string转换，保证最终的json格式里面没有转义字符和成对的双引号-->
+            <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+  ```
  
 ## 其他
 
