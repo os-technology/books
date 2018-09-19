@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.MultipartConfigElement;
 
 /**
+ * tomcat springboot 启动配置
  * @author code
  * @Title: TomcatConfig
  * @Copyright: Copyright (c) 2017
@@ -51,7 +52,7 @@ public class TomcatConfig {
     public ServletWebServerFactory servletContainer() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
         tomcat.addConnectorCustomizers(new GwsTomcatConnectionCustomizer());
-        tomcat.setContextPath("/junit");
+        tomcat.setContextPath("/junit");//设置项目访问根路径
         return tomcat;
     }
 

@@ -1,7 +1,6 @@
 package com.code.junit.mock.boot.dict.service;
 
 import com.alibaba.fastjson.JSON;
-import com.code.junit.mock.boot.dict.BaseAppTest;
 import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.dict.dao.MockTableDAO;
 import com.code.junit.mock.boot.dict.service.impl.MockServiceImpl;
@@ -144,10 +143,10 @@ public class MockServiceMockTest {
             }
         }).when(mockTableDAO).save(Mockito.any(MockTable.class));
 
-        mockService.add(mockTable);
+        mockService.saveWithoutSameId(mockTable);
 
         //数据库已存在该数据的逻辑顺序
         Mockito.when(mockTableDAO.selectById(mockTable.getId())).thenReturn(mockTable);
-        mockService.add(mockTable);
+        mockService.saveWithoutSameId(mockTable);
     }
 }

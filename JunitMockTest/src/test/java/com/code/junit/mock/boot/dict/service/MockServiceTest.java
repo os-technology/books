@@ -27,13 +27,13 @@ public class MockServiceTest extends BaseAppTest {
 
     @Test
     public void add(){
-        MockTable data = mockService.add(getMockTable());
+        MockTable data = mockService.saveWithoutSameId(getMockTable());
         Assert.assertNotNull(data);
     }
 
     @Test
     public void getById(){
-        MockTable data = mockService.add(getMockTable());
+        MockTable data = mockService.saveWithoutSameId(getMockTable());
         MockTable result = mockService.getById(data.getId());
         LogPortal.info("[{}]",JSON.toJSONString(result));
         Assert.assertNotNull(result);

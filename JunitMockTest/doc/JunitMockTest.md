@@ -207,6 +207,35 @@
  参考`TomcatConfig.java`类
  
 * 事务采用标准的注解方式实现，即需要事务的方法上必须添加`@Transactional`注解才能生效
+
+* 注解事务使用说明`@Transactional`，总结整理如下
+
+ ```java
+ 
+ @Transactional(readOnly = true)
+public class DefaultFooService implements FooService {
+ 
+  public Foo getFoo(String fooName) {
+    // do something
+  }
+ 
+  // these settings have precedence for this method
+  // 方法上注解属性会覆盖类注解上的相同属性
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void updateFoo(Foo foo) {
+    // do something
+  }
+}
+ ```
+  * 嵌套事务测试 - 内部try-catch, 无手动回滚 外部正常。**结果**：所有数据正常插入，没有回滚
+  * 嵌套事务测试 - 内部try-catch, 手动回滚 外部正常。**结果**：所有数据全部回滚，没有插入
+  * 嵌套事务测试 - 内部exception, 事务注解没有rollbackFor,外部正常。**结果**：所有数据正常回滚，没有插入
+  * 嵌套事务测试 - 内部exception, 事务注解包含rollbackFor,外部正常。**结果**：所有数据正常回滚，没有插入
+  * 嵌套事务测试 - 外部try-catch, 手动回滚 内部正常。**结果**：所有数据全部回滚，没有插入
+  * 嵌套事务测试 - 外部Exception， 内部正常。**结果**：所有数据全部回滚
+  * 在`@Transactional`注解中如果不配置`rollbackFor`属性,那么事物只会在遇到`RuntimeException(NullPointerException、IndexOutOfBoundsException等)`的时候才会回滚,加上`rollbackFor=Exception.class`,可以让事物在遇到`非运行时异常(SQLException,IOException以及用户自定义异常等)`时也回滚
+  
+ 
  
 ## 其他
 

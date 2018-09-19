@@ -15,11 +15,47 @@ public interface MockService {
 
     public void saveMock();
 
-    MockTable add(MockTable mockTable);
+    MockTable saveWithoutSameId(MockTable mockTable);
 
     MockTable getById(Long id);
 
     void privateAndProtectedMethod(MockTable mockTable) throws ObjectNullException;
 
 
+    MockTable saveMocktable();
+
+    /**
+     * 手动方式回滚事务
+     */
+    void saveMocktableCatch();
+
+    /**
+     * 嵌套事务测试 - 内部try-catch,无回滚 外部正常
+     */
+    void saveInnerTryCatchWithoutRollback();
+
+    /**
+     * 嵌套事务测试 - 外部try-catch,手动回滚 内部正常
+     */
+    void saveOuterTryCatchWithRollback();
+
+    /**
+     * 嵌套事务测试 - 内部try-catch,手动回滚 外部正常
+     */
+    void saveInnerTryCatchWithRollback();
+
+    /**
+     * 嵌套事务测试 - 内部exception, 事务注解没有rollbackFor,外部正常
+     */
+    void saveInnerExceptionWithoutRollbackFor();
+
+    /**
+     * 嵌套事务测试 - 内部exception, 事务注解包含rollbackFor,外部正常
+     */
+    void saveInnerExceptionWithRollbackFor();
+
+    /**
+     * 嵌套事务测试 - 外部Exception， 内部正常
+     */
+    void saveOuterException();
 }
