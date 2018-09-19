@@ -3,6 +3,7 @@ package com.code.junit.mock.boot.dict.dao;
 import com.alibaba.fastjson.JSON;
 import com.code.junit.mock.boot.dict.BaseAppTest;
 import com.code.junit.mock.boot.dict.beans.User;
+import com.code.junit.mock.boot.dict.beans.UserData;
 import com.code.junit.mock.boot.util.LogPortal;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,6 +26,13 @@ import java.util.List;
 public class UserDAOTest extends BaseAppTest {
     @Autowired
     private UserDAO userDAO;
+
+
+    @Test
+    public void userDataList(){
+        List<UserData> list = userDAO.getUserDataList();
+        Assert.assertTrue(list.size()>0);
+    }
 
     @Test
     public void list(){

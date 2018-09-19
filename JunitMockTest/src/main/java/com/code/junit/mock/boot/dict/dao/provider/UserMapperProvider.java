@@ -25,22 +25,42 @@ public class UserMapperProvider {
             INSERT_INTO("user");
 
             if (StringUtils.hasText(user.getCompanyId())) {
-                VALUES("company_id","#{companyId}");
+                VALUES("company_id", "#{companyId}");
             }
-            if (StringUtils.hasText(user.getUsername())){
-                VALUES("username","#{username}");
+            if (StringUtils.hasText(user.getUsername())) {
+                VALUES("username", "#{username}");
             }
-            if (user.getCreateTime()!=null){
-                VALUES("create_time","#{createTime}");
+            if (user.getCreateTime() != null) {
+                VALUES("create_time", "#{createTime}");
             }
-            if (user.getUpdateTime()!=null){
-                VALUES("update_time","#{updateTime}");
+            if (user.getUpdateTime() != null) {
+                VALUES("update_time", "#{updateTime}");
             }
 
         }}.toString();
 
         return sql;
     }
+
+    /**
+     * 多表关联查询
+     *
+     * @return
+     */
+    public String getUserDataList() {
+        String sql = new SQL() {
+            {
+                SELECT("u.id as userId,username,c.company_name as companyName,c.address,u.create_time as userCreateTime");
+                FROM("user u");
+                FROM("company c");
+                WHERE("u.company_id=c.id");
+                ORDER_BY("u.create_time desc");
+            }
+        }.toString();
+
+        return sql;
+    }
+
 
     public String selectUserByCondition(User user) {
 

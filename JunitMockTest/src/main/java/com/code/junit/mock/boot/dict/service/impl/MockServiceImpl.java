@@ -21,7 +21,6 @@ import org.springframework.util.StringUtils;
  * @Created on 2018/9/1下午1:03
  */
 @Service("mockService")
-
 public class MockServiceImpl implements MockService {
     @Autowired
     private MockTableDAO mockTableDAO;

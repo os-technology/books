@@ -35,5 +35,6 @@ CREATE TABLE `company` (
   comment='公司表';
 
 INSERT INTO `user` (`username`, `company_id`) VALUES ('张三', '1');
+INSERT INTO `user` (`username`, `company_id`) VALUES ('李四', '1');
 INSERT INTO `dataService`.`company` (`company_name`, `address`) VALUES ('Junit测试公司', '中国');
 INSERT INTO `mocktable` (`id`, `name`, `data`) VALUES ('1', '123', 'aa');
