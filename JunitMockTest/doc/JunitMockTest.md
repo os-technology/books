@@ -84,6 +84,12 @@
  ```
  
 ## mock与powerMockito版本对应关系
+
+* mock测试官网demo地址：
+
+ [https://github.com/powermock](https://github.com/powermock)
+
+ [https://github.com/powermock/powermock-examples-maven](https://github.com/powermock/powermock-examples-maven)
  
  * 相信有些朋友也碰到和我一样的问题，mockito结合powermock做单元测试会碰到一些明明程序看起来没问题，却始终报错。
  * 有可能的问题就是版本使用不对，大家如果遇到这样的问题可以试试。（PS:当然也不绝对一定是版本的问题）
@@ -155,6 +161,11 @@
  //表示调用 mockService 实例中的 convertJson (private或者protected)方法之后，返回空字符串。
  ```
 * `Mockito.doAnswer(new Answer(){@Override answer(InvocationOnMock invocation){...}}).when(dao).methodName(Mockito.any(ParamType.class))`:表示当调用 `dao`中的`methodName`方法，并且传参内容为符合条件的任意参数值时，会触发`answer(InvocationOnMock invocation)`方法，并可以通过 `invocation`获得相应的对象信息(值，或者对象，或者实例等等)
+ 
+#### 有参构造函数待测类
+
+* 如果待测类为有参构造函数，则需对类初始化时添加对应的参数信息，该项目暂时无此测试方式，具体参见我的另一个项目地址：
+[https://github.com/apo-soft/payment-parent/blob/dev/wechat-public/wechat-public.md](https://github.com/apo-soft/payment-parent/blob/dev/wechat-public/wechat-public.md)
  
 ##Mybatis部分
 
