@@ -20,6 +20,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.io.File;
+
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -37,8 +39,6 @@ import static org.hamcrest.Matchers.is;
 @PrepareForTest(MockServiceImpl.class)
 public class MockServiceMockTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     /**
      * @Mock: 创建一个Mock.
@@ -52,17 +52,27 @@ public class MockServiceMockTest {
     private MockTableDAO mockTableDAO;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         //表示对该service实例进行监控，保证需要mock的全部方法可以返回指定结果
         mockService = PowerMockito.spy(mockService);
     }
 
+    /**
+     * 测试方法内部new出来的对象
+     *
+     * @throws Exception
+     */
     @Test
-    public void privateAndProtectedMethod_Exception() throws ObjectNullException {
+    public void innerObjectCreate() throws Exception {
+        File file = PowerMockito.mock(File.class);
 
-        thrown.expect(ObjectNullException.class);
-        mockService.privateAndProtectedMethod(null);
+        PowerMockito.whenNew(File.class).withArguments(Mockito.anyString()).thenReturn(file);
+        PowerMockito.when(file.exists()).thenReturn(true);
+
+        boolean result = mockService.callInternalInstance("bbb");
+        Assert.assertTrue(result);
     }
+
 
     /**
      * 私有方法测试 之 json转换结果异常抛出
@@ -102,10 +112,10 @@ public class MockServiceMockTest {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 MockTable actualObject = (MockTable) invocation.getArguments()[0];
-                Assert.assertTrue(mockTable2.getId()==actualObject.getId());
+                Assert.assertTrue(mockTable2.getId() == actualObject.getId());
                 return null;
             }
-        }).when(mockService,"printObject",Mockito.any(MockTable.class));
+        }).when(mockService, "printObject", Mockito.any(MockTable.class));
         try {
             mockService.privateAndProtectedMethod(mockTable);
         } catch (Exception e) {
@@ -114,15 +124,7 @@ public class MockServiceMockTest {
     }
 
 
-    @Test
-    public void privateAndProtectedMethod_TryException() {
 
-        try {
-            mockService.privateAndProtectedMethod(null);
-        } catch (ObjectNullException e) {
-            Assert.assertThat(e.getMessage(), is("mocktable object is null"));
-        }
-    }
 
     @Test
     public void save() {

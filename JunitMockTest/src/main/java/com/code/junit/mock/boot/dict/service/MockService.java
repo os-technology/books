@@ -24,6 +24,7 @@ public interface MockService {
 
     MockTable saveMocktable();
 
+    public boolean callInternalInstance(String path) ;
     /**
      * 手动方式回滚事务
      */

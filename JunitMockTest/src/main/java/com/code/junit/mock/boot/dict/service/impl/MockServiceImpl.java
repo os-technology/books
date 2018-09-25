@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
+
 /**
  * @author code
  * @Title: MockServiceImpl
@@ -74,6 +76,13 @@ public class MockServiceImpl implements MockService {
         mockTableDAO.save(data);
         System.out.println(JSON.toJSONString(data));
         throw new IllegalArgumentException();
+    }
+
+    @Override
+    public boolean callInternalInstance(String path) {
+        File file = new File(path);
+        return file.exists();
+
     }
 
     @Override
