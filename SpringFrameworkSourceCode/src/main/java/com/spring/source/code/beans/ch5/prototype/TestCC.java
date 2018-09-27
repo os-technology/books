@@ -1,6 +1,5 @@
 package com.spring.source.code.beans.ch5.prototype;
 
-import com.spring.source.code.beans.ch5.circle_dependency.TestA;
 
 /**
  * @author code
