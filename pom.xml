@@ -38,6 +38,7 @@
         <module>SpringFrameworkSourceCode</module>
         <module>JunitMockTest</module>
         <module>ThreadTutorial</module>
+        <module>bootgroup</module>
     </modules>
     <dependencyManagement>
         <dependencies>

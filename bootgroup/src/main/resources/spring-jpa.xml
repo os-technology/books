@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+    <!--引入数据库配置文件-->
+    <context:property-placeholder location="classpath*:app_dev.properties"/>
+    <!-- 1. 配置数据源 独立的xml文件需要重新配置一次-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass">
+            <value>${jdbc.driverClass}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="user">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>3</value>
+        </property>
+        <property name="minPoolSize">
+            <value>3</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>15</value>
+        </property>
+        <!-- 最大空闲时间(单位为秒)，超过空闲时间的连接将被丢弃。为0或负数则永不丢弃。默认为0；-->
+        <property name="maxIdleTime">
+            <value>60000</value>
+        </property>
+        <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目-->
+        <property name="acquireIncrement">
+            <value>3</value>
+        </property>
+        <!-- 在从数据库获取新连接失败后重复尝试获取的次数-->
+        <property name="acquireRetryAttempts">
+            <value>20</value>
+        </property>
+
+        <!-- JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
+                             如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+        <property name="maxStatements">
+            <value>0</value>
+        </property>
+        <property name="maxStatementsPerConnection">
+            <value>0</value>
+        </property>
+
+        <!--连接关闭时默认将所有未提交的操作回滚 -->
+        <property name="autoCommitOnClose">
+            <value>false</value>
+        </property>
+        <!-- c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能通过多线程实现多个操作同时被执行。Default: 3 -->
+        <property name="numHelperThreads">
+            <value>5</value>
+        </property>
+
+        <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
+                             获取连接失败后该数据源将申明已断开并永久关闭。Default: false-->
+        <property name="breakAfterAcquireFailure">
+            <value>false</value>
+        </property>
+        <!--定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个显著提高测试速度。默认null-->
+        <property name="preferredTestQuery" value="select 1"/>
+        <!--每6个小时检查所有连接池中的空闲连接，这个值一定要小于MySQL的wait_timeout时间，默认为8小时。 单位为秒,默认0 -->
+        <property name="idleConnectionTestPeriod" value="21600"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="MYSQL" />
+                <property name="showSql" value="true" />
+            </bean>
+        </property>
+
+        <!-- 配置包扫描，扫描实体 -->
+        <property name="packagesToScan" value="com.boot.group.dict.entity"/>
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"></bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <!-- 生成的数据表的列的映射策略 -->
+                <prop key="hibernate.physical_naming_strategy">com.boot.group.TableNamingStrategy</prop>
+                <!-- hibernate 基本属性 MySQL5InnoDBDialect过期，MySQL55Dialect代码与之一模一样-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>-->
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+                <!--<prop key="hibernate.format_sql">true</prop>-->
+            </props>
+        </property>
+
+    </bean>
+
+    <!-- 5. 配置 SpringData,需要加入  jpa 的命名空间 -->
+    <!-- base-package: 扫描 Repository Bean 所在的 package 或者使用 @EnableJpaRepositories({ "com.swwx.payright.face.dao" }) 替代-->
+    <jpa:repositories base-package="com.boot.group.dict.dao" entity-manager-factory-ref="entityManagerFactory">
+    </jpa:repositories>
+    <!--库表初始化配置-->
+    <!--<jdbc:initialize-database data-source="dataSource" ignore-failures="NONE">-->
+    <!--<jdbc:script location="classpath:init.sql"/>-->
+    <!--</jdbc:initialize-database>-->
+
+</beans>
