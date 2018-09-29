@@ -3,6 +3,7 @@ package com.boot.group.dict.dao;
 import com.boot.group.dict.entity.StudentInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author code
@@ -12,6 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/29下午3:14
  */
+@Transactional(rollbackFor = Throwable.class)
 public interface StudentInfoDAO extends CrudRepository<StudentInfo, Long> {
 
     @Query
