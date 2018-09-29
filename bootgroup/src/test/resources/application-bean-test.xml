@@ -67,12 +67,12 @@
 	<!-- 全注解方式   需加上@Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!--配置事务增强（如何管理事务，只读、读写...）-->
-	<!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-		<!--<tx:attributes>-->
-			<!--<tx:method name="*save*" read-only="false"/>-->
-			<!--<tx:method name="get*" read-only="true"/>-->
-		<!--</tx:attributes>-->
-	<!--</tx:advice>-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*save*" read-only="false"/>
+			<tx:method name="get*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
 	<!--6 容器自动扫描IOC组件  -->
 	<!--<context:component-scan base-package="com.zhangguo.bookstore"></context:component-scan>-->
 

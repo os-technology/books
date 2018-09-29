@@ -1,6 +1,7 @@
 package com.boot.group.dict.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,8 +13,8 @@ import java.util.Date;
  * @Created on 2018/9/29下午2:53
  */
 @MappedSuperclass
-public class BaseEntity {
-
+public class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 7207780155261265206L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

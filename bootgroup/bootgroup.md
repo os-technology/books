@@ -79,6 +79,10 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
  ```
  对于`PhysicalNamingStrategyStandardImpl`有`DefaultNamingStrategy`的效果；对于SpringPhysicalNamingStrategy  有ImprovedNamingStrategy的效果。
+ 
+ 
+### FAQ
+springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。
 
 
 

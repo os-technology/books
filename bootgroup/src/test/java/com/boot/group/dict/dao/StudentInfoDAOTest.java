@@ -35,6 +35,12 @@ public class StudentInfoDAOTest extends BootGroupTest {
         Assert.assertNotNull(info.getId());
     }
 
+    @Test
+    public void findById(){
+        StudentInfo studentInfo = studentInfoDAO.findById(1l);
+        Assert.assertNotNull(studentInfo);
+    }
+
     private StudentInfo getStudentInfo() {
 
         StudentInfo info = new StudentInfo();
