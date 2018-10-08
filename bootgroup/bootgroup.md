@@ -55,6 +55,25 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
 * `@DynamicUpdate`属性: 设置为true,设置为true,表示update对象的时候,生成动态的update语句,如果这个字段的值是null就不会被加入到update语句中,默认false。
 比如只想更新某个属性，但是却把整个对象的属性都更新了，这并不是我们希望的结果，我们希望的结果是：我更改了哪些字段，只要更新我修改的字段就够了。
 
+* `@GeneratedValue`注解的strategy属性提供四种值：
+
+  –**AUTO**： 主键由程序控制，是默认选项，不设置即此项。
+
+  –**IDENTITY**：主键由数据库自动生成，即采用数据库ID自增长的方式，Oracle不支持这种方式。
+
+  –**SEQUENCE**：通过数据库的序列产生主键，通过@SequenceGenerator 注解指定序列名，mysql不支持这种方式。
+
+  –**TABLE**：通过特定的数据库表产生主键，使用该策略可以使应用更易于数据库移植。
+  
+  配置demo
+  
+  ```java
+  //JPA的注解来定义实体的时候，使用@Id来注解主键属性即可。如果数据库主键是自增长的，需要在增加一个注解@GeneratedValue，即
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Id
+  private String id;
+  ```
+
 #### hibernate5库表映射策略变更
 
 如果想升级`Hibernate到5.1`的话，那么之前的

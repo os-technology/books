@@ -16,7 +16,7 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 7207780155261265206L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 

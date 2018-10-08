@@ -30,7 +30,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         info.setAddressId(1)
                 .setAge(13)
                 .setGrade("5")
-                .setStudentName("李莉");
+                .setStudentName("李明");
         return info;
     }
 }
