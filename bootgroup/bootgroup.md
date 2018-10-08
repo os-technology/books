@@ -4,7 +4,7 @@
 
 ### jpa部分
 官方demo地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
-
+中文文档：[https://github.com/ityouknow/spring-data-jpa-reference-documentation](https://github.com/ityouknow/spring-data-jpa-reference-documentation)
 #### 概述
 1. Java Persistence API（Java 持久层 API）：用于对象持久化的 API
 2. 作用：使得应用程序以统一的方式访问持久层
