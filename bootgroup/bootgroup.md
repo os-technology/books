@@ -3,6 +3,7 @@
 模块说明：由springboot,jpa,shiro基础组件构成，用于进行demo学习演示。
 
 ### jpa部分
+官方demo地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
 
 #### 概述
 1. Java Persistence API（Java 持久层 API）：用于对象持久化的 API
@@ -45,6 +46,23 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  ```xml
   <jpa:repositories base-package="com.boot.group.dict.dao" entity-manager-factory-ref="entityManagerFactory">
     </jpa:repositories>
+ ```
+ 
+ 
+ `<context:component-scan/>` 扫描指定的包中的类上的注解，常用的注解有
+
+ ```java
+@Controller 声明Action组件
+@Service    声明Service组件    @Service("myMovieLister") 
+@Repository 声明Dao组件
+@Component   泛指组件, 当不好归类时. 
+@RequestMapping("/menu")  请求映射
+@Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName") 
+@Autowired 用于注入，(srping提供的) 默认按类型装配 
+@Transactional( rollbackFor={Exception.class}) 事务管理
+@ResponseBody
+@Scope("prototype")   设定bean的作用域
+
  ```
  
 #### jpa注解
@@ -123,6 +141,11 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
 ```
 
 或者在配置里面将`<context:include-filter`和`<context:exclude-filter`部分都删除。
+
+[Spring AOP 对Spring MVC的Controller切面拦截不起作用](https://www.jianshu.com/p/60665a64e2dd)
+
+Spring MVC启动时的配置文件，包含组件扫描、url映射以及设置freemarker参数，让spring不扫描带有@Service注解的类。为什么要这样设置？因为springmvc.xml与applicationContext.xml不是同时加载，如果不进行这样的设置，那么，spring就会将所有带@Service注解的类都扫描到容器中，等到加载applicationContext.xml的时候，会因为容器已经存在Service类，使得cglib将不对Service进行代理，直接导致的结果就是在applicationContext 中的事务配置不起作用，发生异常时，无法对数据进行回滚。以上就是原因所在。
+
 
 ==**hibernate-core 4版本，出现以下错误时**==
 
