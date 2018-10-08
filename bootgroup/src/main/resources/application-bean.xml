@@ -16,7 +16,7 @@
 	<!--<import resource="classpath:/dal/persistence-jpa.xml" />-->
 	<context:component-scan base-package="com.boot.group">
 		<!--Spring的applicationContext.xml文件中配置扫描包时，不要包含controller的注解-->
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
 	</context:component-scan>
 
 	<!--列表形式引入配置文件信息-->

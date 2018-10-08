@@ -82,7 +82,28 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  
  
 ### FAQ
-springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。
+==**springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。已经找到问题所在。原因如下：**==
+
+在`spring-mvc.xml`配置文件中，包扫描配置如下：
+
+  ```xml
+ <context:component-scan base-package="com.boot.group.dict"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+  ```
+
+则在`application-bean.xml`配置文件中，进行包扫描配置时，一定需要排除controller部分的扫描，否则无法正常插入数据。即配置应该如下：
+
+```xml
+<context:component-scan base-package="com.boot.group">
+		<!--Spring的applicationContext.xml文件中配置扫描包时，不要包含controller的注解-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+```
+
+或者在配置里面将`<context:include-filter`和`<context:exclude-filter`部分都删除。
 
 ==**hibernate-core 4版本，出现以下错误时**==
 
