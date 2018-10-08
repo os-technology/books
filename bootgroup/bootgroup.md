@@ -82,8 +82,129 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  
  
 ### FAQ
-springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。
+==**springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。已经找到问题所在。原因如下：**==
 
+在`spring-mvc.xml`配置文件中，包扫描配置如下：
 
+  ```xml
+ <context:component-scan base-package="com.boot.group.dict"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+  ```
 
+则在`application-bean.xml`配置文件中，进行包扫描配置时，一定需要排除controller部分的扫描，否则无法正常插入数据。即配置应该如下：
 
+```xml
+<context:component-scan base-package="com.boot.group">
+		<!--Spring的applicationContext.xml文件中配置扫描包时，不要包含controller的注解-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+```
+
+或者在配置里面将`<context:include-filter`和`<context:exclude-filter`部分都删除。
+
+==**hibernate-core 4版本，出现以下错误时**==
+
+ ```java
+ Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in URL [file:/Users/yujinshui/jobs/local_space/books/bootgroup/target/classes/spring-jpa.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: org/hibernate/boot/MetadataBuilder
+ ...
+ Caused by: java.lang.NoClassDefFoundError: org/hibernate/boot/MetadataBuilder
+ ```
+原因如下：
+
+	org.hibernate.boot.MetadataBuilder版本5中提供，在版本中4.x.x.Final，它在另一个包中定义：org/hibernate/metamodel/MetadataBuilder.class
+
+问题解决详细过程整理：
+
+1.  `spring-boot-starter-parent` 采用 `1.4.x` 版本，其中的 `hibernate-entitymanager`版本为`hibernate5`版本，由于我们使用hibernate4，所以，将它默认的hibernate依赖版本进行排除(参见`hibernate-core`在pom中的排除方式)
+2. 故障点定位。通过xml配置的方式故障点不太容易确认，我们通过使用代码配置的方式进行定位操作。
+
+  1. AppConfig.java类里面
+  
+     ```java
+
+     @Bean
+     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setGenerateDdl(false);
+        adapter.setDatabase(Database.MYSQL);
+        adapter.setShowSql(true);
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setDataSource(dataSource);
+        factory.setJpaVendorAdapter(adapter);
+        factory.setPackagesToScan("com.boot.group.dict.entity");
+        factory.setJpaDialect(new HibernateJpaDialect());
+        Properties props = new Properties();
+        props.put("hibernate.ejb.naming_strategy", "com.boot.group.TableNamingStrategy");
+        factory.setJpaProperties(props);
+        //问题发生位置。即进行entityManagerFactory构建时发生问题。
+        factory.afterPropertiesSet();
+        return factory;
+    }
+     ```
+  2. 通过对源码的调用定位，找到如下代码(`LocalContainerEntityManagerFactoryBean.java`，这里是`spring-orm:4.3.7.jar`)，问题发生位置见注释。
+
+     ```java
+     @Override
+	protected EntityManagerFactory createNativeEntityManagerFactory() throws PersistenceException {
+		PersistenceUnitManager managerToUse = this.persistenceUnitManager;
+		if (this.persistenceUnitManager == null) {
+			this.internalPersistenceUnitManager.afterPropertiesSet();
+			managerToUse = this.internalPersistenceUnitManager;
+		}
+
+		this.persistenceUnitInfo = determinePersistenceUnitInfo(managerToUse);
+		JpaVendorAdapter jpaVendorAdapter = getJpaVendorAdapter();
+		if (jpaVendorAdapter != null && this.persistenceUnitInfo instanceof SmartPersistenceUnitInfo) {
+			((SmartPersistenceUnitInfo) this.persistenceUnitInfo).setPersistenceProviderPackageName(
+					jpaVendorAdapter.getPersistenceProviderRootPackage());
+		}
+
+		PersistenceProvider provider = getPersistenceProvider();
+		if (provider == null) {
+			String providerClassName = this.persistenceUnitInfo.getPersistenceProviderClassName();
+			if (providerClassName == null) {
+				throw new IllegalArgumentException(
+						"No PersistenceProvider specified in EntityManagerFactory configuration, " +
+						"and chosen PersistenceUnitInfo does not specify a provider class name either");
+			}
+			Class<?> providerClass = ClassUtils.resolveClassName(providerClassName, getBeanClassLoader());
+			provider = (PersistenceProvider) BeanUtils.instantiateClass(providerClass);
+		}
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Building JPA container EntityManagerFactory for persistence unit '" +
+					this.persistenceUnitInfo.getPersistenceUnitName() + "'");
+		}
+		EntityManagerFactory emf =
+		//-------问题发生位置--------
+				provider.createContainerEntityManagerFactory(this.persistenceUnitInfo, getJpaPropertyMap());
+		postProcessEntityManagerFactory(emf, this.persistenceUnitInfo);
+
+		return emf;
+	}
+     ```
+  3. 因为是jpa配置，所以，我们通过跟踪发现， `provider`实体类为`SpringHibernateJpaPersistenceProvider.java`(`spring-orm:4.3.7.jar`)类，里面代码如下：
+  
+     ```java
+     public EntityManagerFactory createContainerEntityManagerFactory(PersistenceUnitInfo info, Map properties) {
+		final List<String> mergedClassesAndPackages = new ArrayList<String>(info.getManagedClassNames());
+		if (info instanceof SmartPersistenceUnitInfo) {
+			mergedClassesAndPackages.addAll(((SmartPersistenceUnitInfo) info).getManagedPackages());
+		}
+		//问题发生位置点，此处调用了hibernate-entitymanager包中的类进行实现。
+		return new EntityManagerFactoryBuilderImpl(
+				new PersistenceUnitInfoDescriptor(info) {
+					@Override
+					public List<String> getManagedClassNames() {
+						return mergedClassesAndPackages;
+					}
+				}, properties).build();
+	}
+     ```
+  4. `EntityManagerFactoryBuilderImpl`是`hibernate-entitymanager`包中的类，点击进去我们可以看到，此处是调用了`hibernate-entitymanager:5.0.12.final`包里的该类，同时也定位到`MetadataBuilder`的导包路径为`import org.hibernate.boot.MetadataBuilder;`
+  5. 解决方案，手动排除`hibernate-entitymanager`，然后在pom中导入`hibernate-entitymanager`的hibernate4版本即可。
+  6. 默认采用xml配置方式配置，如果要使用AppConfig类配置，只需将`BootGroupApplication.java`中的`@ContextConfiguration(classes = AppConfig.class)`注释解开，同时，将`application-bean.xml`配置中的`<import resource="classpath*:spring-jpa.xml"/>`注释掉即可。
+  
