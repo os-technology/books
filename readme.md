@@ -34,6 +34,7 @@
 |**springbootApplication**| springboot书籍学习|
 |**SpringFrameworkSourceCode**| spring源码学习记录，包含disconf操作(后期可能会进行分离)|
 |**JunitMockTest**| Junit和mock单元测试，基于springboot+mybatis|
+|**bootgroup**| 基于springboot2.0+jpa+hibernate5配置的框架demo|
 
 
 运行单元测试条件：
@@ -42,3 +43,23 @@
 * 启动consul springcloud模块
 * redis disconf使用
 * nginx disconf使用
+
+解决`intellij idea Language Level`版本问题(根据需求修改jdk版本
+)
+
+```xml
+ <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
+```

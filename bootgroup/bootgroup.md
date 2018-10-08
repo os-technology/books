@@ -3,7 +3,8 @@
 模块说明：由springboot,jpa,shiro基础组件构成，用于进行demo学习演示。
 
 ### jpa部分
-
+官方demo地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
+中文文档：[https://github.com/ityouknow/spring-data-jpa-reference-documentation](https://github.com/ityouknow/spring-data-jpa-reference-documentation)
 #### 概述
 1. Java Persistence API（Java 持久层 API）：用于对象持久化的 API
 2. 作用：使得应用程序以统一的方式访问持久层
@@ -47,6 +48,23 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
     </jpa:repositories>
  ```
  
+ 
+ `<context:component-scan/>` 扫描指定的包中的类上的注解，常用的注解有
+
+ ```java
+@Controller 声明Action组件
+@Service    声明Service组件    @Service("myMovieLister") 
+@Repository 声明Dao组件
+@Component   泛指组件, 当不好归类时. 
+@RequestMapping("/menu")  请求映射
+@Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName") 
+@Autowired 用于注入，(srping提供的) 默认按类型装配 
+@Transactional( rollbackFor={Exception.class}) 事务管理
+@ResponseBody
+@Scope("prototype")   设定bean的作用域
+
+ ```
+ 
 #### jpa注解
 
 * `@DynamicInsert`属性: 设置为true,设置为true,表示insert对象的时候,生成动态的insert语句,如果这个字段的值是null就不会加入到insert语句当中.默认false。
@@ -54,6 +72,25 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
 
 * `@DynamicUpdate`属性: 设置为true,设置为true,表示update对象的时候,生成动态的update语句,如果这个字段的值是null就不会被加入到update语句中,默认false。
 比如只想更新某个属性，但是却把整个对象的属性都更新了，这并不是我们希望的结果，我们希望的结果是：我更改了哪些字段，只要更新我修改的字段就够了。
+
+* `@GeneratedValue`注解的strategy属性提供四种值：
+
+  –**AUTO**： 主键由程序控制，是默认选项，不设置即此项。
+
+  –**IDENTITY**：主键由数据库自动生成，即采用数据库ID自增长的方式，Oracle不支持这种方式。
+
+  –**SEQUENCE**：通过数据库的序列产生主键，通过@SequenceGenerator 注解指定序列名，mysql不支持这种方式。
+
+  –**TABLE**：通过特定的数据库表产生主键，使用该策略可以使应用更易于数据库移植。
+  
+  配置demo
+  
+  ```java
+  //JPA的注解来定义实体的时候，使用@Id来注解主键属性即可。如果数据库主键是自增长的，需要在增加一个注解@GeneratedValue，即
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Id
+  private String id;
+  ```
 
 #### hibernate5库表映射策略变更
 
