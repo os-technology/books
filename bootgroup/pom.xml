@@ -16,8 +16,8 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <!--<version>2.0.4.RELEASE</version>-->
-                <version>2.0.0.RELEASE</version>
+                <version>1.4.5.RELEASE</version>
+                <!--<version>2.0.0.RELEASE</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -50,6 +50,27 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <!--这里由于jpa引入的是 hibernate5 版本的配置，所以需要排除掉，我们采用 hibernate4 版本进行配置-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-entitymanager</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.11.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.11.Final</version>
         </dependency>
 
         <dependency>

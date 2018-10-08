@@ -23,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(transactionManager="transactionManager")
 @Rollback(value = false)
 @SpringBootTest
-@ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
-        "classpath:application-bean-test.xml"})
+//jpa.xml配置方式
+@ContextConfiguration(locations = {"classpath:spring-mvc-test.xml", "classpath:application-bean-test.xml"})
+//代码配置jpa方式
+//@ContextConfiguration(locations = {"classpath:spring-mvc-test.xml","classpath:application-bean-test.xml"},classes = AppConfigTest.class)
+
 public class BootGroupTest {
 }

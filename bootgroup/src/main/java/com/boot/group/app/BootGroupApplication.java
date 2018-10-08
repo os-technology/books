@@ -1,11 +1,13 @@
 package com.boot.group.app;
 
-import org.springframework.boot.WebApplicationType;
+//import org.springframework.boot.WebApplicationType;
+import com.boot.group.AppConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ContextConfiguration;
 
 /**
  * @author code
@@ -19,8 +21,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.boot.group")
 @EnableJpaRepositories("com.boot.group.dict.dao")
 @ImportResource({"classpath:application-bean.xml","classpath:spring-mvc.xml"})
+//@ContextConfiguration(classes = AppConfig.class)
 public class BootGroupApplication {
     public static void main(String[] args) {
-        new SpringApplicationBuilder(BootGroupApplication.class).web(WebApplicationType.SERVLET).run(args);
+        new SpringApplicationBuilder(BootGroupApplication.class)//.web(WebApplicationType.SERVLET)
+                .run(args);
     }
 }

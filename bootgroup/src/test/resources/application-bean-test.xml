@@ -14,8 +14,10 @@
         http://www.springframework.org/schema/tx/spring-tx-4.3.xsd"
 	default-lazy-init="false">
 	<!--<import resource="classpath:/dal/persistence-jpa.xml" />-->
-	<context:component-scan base-package="com.boot.group" />
-
+	<context:component-scan base-package="com.boot.group">
+		<!--Spring的applicationContext.xml文件中配置扫描包时，不要包含controller的注解-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 	<!--列表形式引入配置文件信息-->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -53,8 +55,13 @@
 
 	<!--5 声明式事务管理 -->
 	<!--定义事物管理器，由spring管理事务 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
+	<!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+		<!--<property name="dataSource" ref="dataSource"></property>-->
+	<!--</bean>-->
+
+	<!-- Jpa 事务管理器  -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
 
 	<!--&lt;!&ndash; 3. 配置事务管理器 &ndash;&gt;-->
