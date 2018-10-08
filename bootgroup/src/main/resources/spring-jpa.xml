@@ -83,6 +83,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
+            <!-- Hibernate对Jpa的实现 -->
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="database" value="MYSQL" />
                 <property name="showSql" value="true" />
@@ -101,7 +102,8 @@
                 <!-- hibernate 基本属性 MySQL5InnoDBDialect过期，MySQL55Dialect代码与之一模一样-->
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>-->
                 <!--<prop key="hibernate.show_sql">true</prop>-->
-                <!--<prop key="hibernate.format_sql">true</prop>-->
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">none</prop>
             </props>
         </property>
 
@@ -109,8 +111,8 @@
 
     <!-- 5. 配置 SpringData,需要加入  jpa 的命名空间 -->
     <!-- base-package: 扫描 Repository Bean 所在的 package 或者使用 @EnableJpaRepositories({ "com.swwx.payright.face.dao" }) 替代-->
-    <jpa:repositories base-package="com.boot.group.dict.dao" entity-manager-factory-ref="entityManagerFactory">
-    </jpa:repositories>
+    <!--<jpa:repositories base-package="com.boot.group.dict.dao" entity-manager-factory-ref="entityManagerFactory">-->
+    <!--</jpa:repositories>-->
     <!--库表初始化配置-->
     <!--<jdbc:initialize-database data-source="dataSource" ignore-failures="NONE">-->
     <!--<jdbc:script location="classpath:init.sql"/>-->

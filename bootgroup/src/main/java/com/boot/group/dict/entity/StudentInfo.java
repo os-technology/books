@@ -2,6 +2,7 @@ package com.boot.group.dict.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Date;
 
@@ -25,7 +26,7 @@ public class StudentInfo extends BaseEntity {
     private String grade;
 
     private int addressId;
-
+    @Column(insertable = false, updatable = false)
     private Date updateTime;
 
 
