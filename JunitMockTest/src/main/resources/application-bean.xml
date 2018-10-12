@@ -36,7 +36,7 @@
 
 
 	<!--2 配置C3P0数据源 -->
-	<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<!--驱动类名 -->
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<!-- url -->
@@ -59,7 +59,7 @@
 	<!--3 会话工厂bean sqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 数据源 -->
-		<property name="dataSource" ref="datasource"></property>
+		<property name="dataSource" ref="dataSource"></property>
 		<!-- 别名 -->
 		<property name="typeAliasesPackage" value="com.zhangguo.bookstore.entities"></property>
 		<!-- sql映射文件路径 -->
@@ -79,7 +79,7 @@
 	<!--5 声明式事务管理 -->
 	<!--定义事物管理器，由spring管理事务 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="datasource"></property>
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<!--支持注解驱动的事务管理，指定事务管理器 -->
 	<!--使用基于注解方式配置事务 -->

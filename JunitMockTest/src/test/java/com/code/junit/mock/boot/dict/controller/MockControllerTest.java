@@ -67,10 +67,10 @@ public class MockControllerTest {
      */
     @Test
     public void index() throws Exception {
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/index");//被调用接口地址
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/");//被调用接口地址
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("index is success"));
+                .andExpect(content().string("JunitMockTest is success"));
     }
 
     @Test
