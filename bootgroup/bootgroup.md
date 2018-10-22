@@ -3,8 +3,12 @@
 模块说明：由springboot,jpa,shiro基础组件构成，用于进行demo学习演示。
 
 ### jpa部分
-官方demo地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
+官方地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
 中文文档：[https://github.com/ityouknow/spring-data-jpa-reference-documentation](https://github.com/ityouknow/spring-data-jpa-reference-documentation)
+
+参考demo地址：[https://github.com/ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples)
+
+demo对应的文档地址：[https://blog.csdn.net/ityouknow/article/details/73836159](https://blog.csdn.net/ityouknow/article/details/73836159)
 #### 概述
 1. Java Persistence API（Java 持久层 API）：用于对象持久化的 API
 2. 作用：使得应用程序以统一的方式访问持久层
@@ -117,6 +121,10 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  ```
  对于`PhysicalNamingStrategyStandardImpl`有`DefaultNamingStrategy`的效果；对于SpringPhysicalNamingStrategy  有ImprovedNamingStrategy的效果。
  
+
+###shiro部分
+
+`MyShiroRealm.java`中，`doGetAuthenticationInfo`方法创建`SimpleAuthenticationInfo`对象时，密码必须经过MD5加密，否则会报错。
  
 ### FAQ
 ==**springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。已经找到问题所在。原因如下：**==

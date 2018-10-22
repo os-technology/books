@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @EnableTransactionManagement
 //替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
 @Transactional(transactionManager="transactionManager")
-@Rollback(value = false)
+@Rollback(value = true)
 @SpringBootTest
 @ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
         "classpath:application-bean-test.xml"})
