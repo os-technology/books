@@ -22,9 +22,9 @@ import java.util.List;
 
 public class Consumer {
 
-    private static final String addr = "172.30.21.41:9876;172.30.21.42:9876";
+//    private static final String addr = "172.30.21.41:9876;172.30.21.42:9876";
     private static int i = 0;
-//private static final String addr = "172.30.21.43:9876";
+private static final String addr = "10.37.251.224:9876";
 
     /**
      * 当前例子是PushConsumer用法，使用方式给用户感觉是消息从RocketMQ服务器推到了应用客户端。<br>
@@ -40,12 +40,13 @@ public class Consumer {
                 "ConsumerGroupName");
         consumer.setNamesrvAddr(addr);
 //        consumer.setNamesrvAddr("127.0.0.1:9876");
-        consumer.setInstanceName("Consumber");
+        consumer.setInstanceName("Consumer");
 
         /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
          */
-        consumer.subscribe("mqtest_topic", "mqtest_tag || TagC || TagD");
+//        consumer.subscribe("mqtest_topic", "mqtest_tag || TagC || TagD");
+        consumer.subscribe("qds-payment-new", "payment-notify");
         /**
          * 订阅指定topic下所有消息<br>
          * 注意：一个consumer对象可以订阅多个topic
@@ -65,7 +66,7 @@ public class Consumer {
                         + " Receive New Messages: " + msgs.toString());
 
                 MessageExt msg = msgs.get(0);
-                if (msg.getTopic().equals("mqtest_topic")) {
+                if (msg.getTopic().equals("qds-payment-new")) {
                     try {
                         Object obj = deSerialize(msg.getBody());
                         System.out.println("输出结果：" + JSON.toJSONString(obj));

@@ -1,12 +1,17 @@
 package com.code.junit.mock.boot.dict.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.code.junit.mock.boot.dict.beans.UserData;
 import com.code.junit.mock.boot.dict.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -36,4 +41,27 @@ public class UserController {
         return JSON.toJSONString(list);
     }
 
+    /**
+     * http://localhost:8095/junit/user/report
+     * @param json
+     */
+    @RequestMapping("report")
+    public void report(HttpServletRequest request) throws Exception {
+        System.out.println(readRequestBody(request));
+
+    }
+    private String readRequestBody(HttpServletRequest request) throws Exception {
+        InputStream is = request.getInputStream();
+        StringBuilder buf = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            buf.append(line);
+            buf.append('\n');
+        }
+        if (buf.length() > 0) {
+            buf.deleteCharAt(buf.length() - 1);
+        }
+        return buf.toString();
+    }
 }
