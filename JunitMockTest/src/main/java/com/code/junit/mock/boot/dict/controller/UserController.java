@@ -1,7 +1,6 @@
 package com.code.junit.mock.boot.dict.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.code.junit.mock.boot.dict.beans.UserData;
 import com.code.junit.mock.boot.dict.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class UserController {
 
     /**
      * http://localhost:8095/junit/user/report
-     * @param json
+     * @param request
      */
     @RequestMapping("report")
     public void report(HttpServletRequest request) throws Exception {
