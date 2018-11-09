@@ -2,6 +2,7 @@ package org.test.tmp;
 
 import com.alibaba.fastjson.JSON;
 import org.algorithm.list.base64.Base64;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.*;
@@ -17,6 +18,16 @@ import java.util.*;
  */
 
 public class TmpTest {
+
+
+    @Test
+    public void matchString(){
+        Assert.assertTrue("hello".matches("^[a-z][a-zA-Z0-9]*$"));
+        Assert.assertTrue("helloH".matches("^[a-z][a-zA-Z0-9]*$"));
+        Assert.assertTrue("hello_world".matches("^[a-z][a-zA-Z0-9]*$"));
+        Assert.assertTrue("basicClass".matches("^[a-z][a-zA-Z0-9]*$"));
+        Assert.assertTrue("hell3o".matches("^[a-z][a-zA-Z0-9]*$"));
+    }
 
 
     @Test

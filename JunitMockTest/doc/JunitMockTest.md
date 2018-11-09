@@ -161,6 +161,14 @@
  //表示调用 mockService 实例中的 convertJson (private或者protected)方法之后，返回空字符串。
  ```
 * `Mockito.doAnswer(new Answer(){@Override answer(InvocationOnMock invocation){...}}).when(dao).methodName(Mockito.any(ParamType.class))`:表示当调用 `dao`中的`methodName`方法，并且传参内容为符合条件的任意参数值时，会触发`answer(InvocationOnMock invocation)`方法，并可以通过 `invocation`获得相应的对象信息(值，或者对象，或者实例等等)
+* `doReturn`与`thenReturn`方法使用区别(when中的内容不同)：
+
+ ```java
+ 	//when(实例 . 方法). thenReturn(设置结果)
+ 	PowerMockito.when(wechatPaymentHandler.createSign(params)).thenReturn(expectedValue);
+ 	//doReturn(设置结果).when(实例).方法
+ 	PowerMockito.doReturn(expectedValue).when(wechatPaymentHandler).createSign(params);
+ ```
  
 #### 有参构造函数待测类
 
