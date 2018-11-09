@@ -152,7 +152,7 @@
  * <font color=blue>注意：必须使用@RunWith(MockitoJUnitRunner.class) 或 Mockito.initMocks(this)进行mocks的初始化和注入。</font>
  
 #### 方法说明部分
-* `PowerMockito.spy`：监控一个真实的对象。使用方法，如果该对象中有私有方法，通过 spy方法之后，可以mock私有方法的返回值，否则无法正常mock结果返回。
+* **`PowerMockito.spy`**：监控一个真实的对象。使用方法，如果该对象中有私有方法，通过 spy方法之后，可以mock私有方法的返回值，否则无法正常mock结果返回。
 * `PowerMockito.doReturn(preValue).when(service.method)`:当需要调用when部分的`service.method`内容(一般指方法)时，返回`preValue `.即实际过程中不会调用`service.method`。
 * `PowerMockito.when(service.method, mockTable).thenReturn(afterValue)`:当调用`service.method`完成后，返回`afterValue`。即实际过程中会调用`service.method`内容。示例如下：
 
