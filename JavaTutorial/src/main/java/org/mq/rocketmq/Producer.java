@@ -35,9 +35,14 @@ public class Producer {
     //    private static final String addr = "127.0.0.1:9876";
 //    private static final String addr = "172.30.21.43:9876";
     public static void main(String[] args) throws MQClientException, InterruptedException {
+        //需要一个producer group名字作为构造方法的参数，这里为testProductGroup
         DefaultMQProducer producer = new DefaultMQProducer("testProductGroup");
 
+        //设置NameServer地址,此处应改为实际NameServer地址，多个地址之间用；分隔
+        //NameServer的地址必须有，但是也可以通过环境变量的方式设置，不一定非得写死在代码里
         producer.setNamesrvAddr(addr);
+        //为避免程序启动的时候报错，添加此代码，可以让rocketMq自动创建topickey
+        producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
         producer.setInstanceName("Producer");
         producer.start();
 
@@ -46,7 +51,7 @@ public class Producer {
                 for (int m = 0; m < 2000; m++) {
                     Message msg = new Message("mqtest_topic",// topic
                             "mqtest_tag",// tag
-                            "rocketMQ-test-" + m,// key
+//                            "rocketMQ-test-" + m,// key
 
                             serialize(getDataSender2(m + "")));
                     SendResult sendResult = producer.send(msg);
