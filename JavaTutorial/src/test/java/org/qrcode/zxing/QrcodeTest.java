@@ -8,18 +8,30 @@ public class QrcodeTest {
 		String text = "HTTPS://AAX0.CN/5YF8AJFUMFNW1BT5QRYD";
 		String file = "pic1.jpg";
 		try {
-			QRCodeUtil.encode(text, "", "/Users/yujinshui/Desktop", true, file);
+			QRCodeUtil.encodeForQrCode(text, "", "/Users/yujinshui/Desktop", true, file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
+	public void createBarCode() {
+		String text = "826946936";
+		String file = "bar.jpg";
+		try {
+			QRCodeUtil.encodeForBarCode(text, "", "/Users/yujinshui/Desktop", file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	@Test
 	public void createLogoQrCode() {
 		String text = "HTTPS://AAX0.CN/6YF8AJFUMFNW1BT5QRYA";
 		String file = "logo.jpg";
 		try {
-			QRCodeUtil.encode(text, "/Users/yujinshui/Desktop/11.jpg", "/Users/yujinshui/Desktop", true, file);
+			QRCodeUtil.encodeForQrCode(text, "/Users/yujinshui/Desktop/11.jpg", "/Users/yujinshui/Desktop", true, file);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
