@@ -1,9 +1,9 @@
 package org.mq.rocketmq;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.client.exception.MQBrokerException;
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.client.producer.DefaultMQProducer;
+import com.alibaba.rocketmq.client.producer.MessageQueueSelector;
 import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.common.message.Message;
 import com.alibaba.rocketmq.common.message.MessageQueue;
@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author yuijnshui@lxfintech.com
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @Created on 2017/5/27下午3:01
  */
 
-public class Producer {
+public class QueueProducer {
 
 
     public static String getDateTime() {
@@ -52,10 +52,10 @@ public class Producer {
         try {
 //            byte[] message = serialize(getDataSender2(""));
 
-            for (int i=0;i<10000;i++) {
-                byte[] message = serialize("信息发送："+i);
+            for (int i = 0; i < 10000; i++) {
+                byte[] message = serialize("信息发送：" + i);
                 SendResult result = sendMsg(producer, message);
-                System.out.println("发送次数："+i+" - "+result.getSendStatus());
+                System.out.println("发送次数：" + i + " - " + result.getSendStatus());
             }
 
         } catch (Exception e) {
@@ -69,7 +69,20 @@ public class Producer {
     private static SendResult sendMsg(DefaultMQProducer producer, byte[] message) throws MQClientException, RemotingException, MQBrokerException, InterruptedException {
         Message msg = new Message(MQConfig.topic, MQConfig.tag, message);
 
-        return producer.send(msg);
+        /**
+         * msg：     消息内容
+         * selector：MessageQueueSelector匿名类
+         * arg：     代表队列的下标信息
+         * 通过  public SendResult send(Message msg, MessageQueueSelector selector, Object arg)来指定发送消息到哪个队列
+         */
+        return producer.send(msg, new MessageQueueSelector() {
+            @Override
+            public MessageQueue select(List<MessageQueue> list, Message msg, Object arg) {
+                Integer id = (Integer) arg;
+                return list.get(id);
+
+            }
+        }, 1);//1L：代表队列的下标。
 
     }
 

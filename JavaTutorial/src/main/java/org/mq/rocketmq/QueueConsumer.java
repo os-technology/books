@@ -2,10 +2,9 @@ package org.mq.rocketmq;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import com.alibaba.rocketmq.client.consumer.listener.*;
 import com.alibaba.rocketmq.client.exception.MQClientException;
+import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
 
 import java.io.*;
@@ -21,7 +20,7 @@ import java.util.UUID;
  * @Created on 2017/5/27下午3:05
  */
 
-public class Consumer {
+public class QueueConsumer {
 
     /**
      * 当前例子是PushConsumer用法，使用方式给用户感觉是消息从RocketMQ服务器推到了应用客户端。<br>
@@ -39,6 +38,13 @@ public class Consumer {
         consumer.setInstanceName(UUID.randomUUID().toString());
 
         /**
+         * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费<br>
+         * 如果非第一次启动，那么按照上次消费的位置继续消费
+         */
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+
+
+        /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
          */
 //        consumer.subscribe("mqtest_topic", "mqtest_tag || TagC || TagD");
@@ -49,30 +55,39 @@ public class Consumer {
          */
 //        consumer.subscribe("TopicTest2", "*");
 //        consumer.subscribe("TopicTest3", "*");
-//        用MessageListenerConcurrently这种消费者是无法做到顺序消费的
-        consumer.registerMessageListener(new MessageListenerConcurrently() {
+//        MessageListenerOrderly能够保证顺序消费，从图中我们也看到了期望的结果。图中的输出是只启动了一个消费者时的输出，看起来订单号还是混在一起，
+//        但是每组订单号之间是有序的。因为消息发送时被分配到了三个队列（参见前面生产者输出日志），那么这三个队列的消息被这唯一消费者消费。
+
+        consumer.registerMessageListener(new MessageListenerOrderly() {
+
+
             /**
              * 默认msgs里只有一条消息，可以通过设置consumeMessageBatchMaxSize参数来批量接收消息
              */
             @Override
-            public ConsumeConcurrentlyStatus consumeMessage(
-                    List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                System.out.println(Thread.currentThread().getName()
-                        + " Receive New Messages: " + msgs.toString());
+            public ConsumeOrderlyStatus consumeMessage(
+                    List<MessageExt> msgs, ConsumeOrderlyContext context) {
+//                System.out.println(Thread.currentThread().getName()
+//                        + " Receive New Messages: " + msgs.toString());
 
-                MessageExt msg = msgs.get(0);
-                if (msg.getTopic().equals(MQConfig.topic)) {
-                    try {
-                        Object obj = deSerialize(msg.getBody());
-                        System.out.println("输出结果：" + JSON.toJSONString(obj));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
+//                MessageExt msg = msgs.get(0);
+
+                for (MessageExt msg : msgs) {
+
+
+                    if (msg.getTopic().equals(MQConfig.topic)) {
+                        try {
+                            Object obj = deSerialize(msg.getBody());
+                            System.out.println("输出结果：" + JSON.toJSONString(obj));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                return ConsumeOrderlyStatus.SUCCESS;
             }
         });
 
