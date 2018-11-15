@@ -404,3 +404,38 @@ Spring容器创建“testC”bean,首先去“当前创建bean池”查找是否
  
  ```
  spring 循环引用的处理参考学习地址：[https://www.iflym.com/index.php/code/201208280001.html](https://www.iflym.com/index.php/code/201208280001.html)
+ 
+ 
+ 
+## 零散笔记
+
+#### aop切面日志重复执行问题
+
+ 当使用了注解方式配置切面日志时，`不需要`在配置文件中重新配置bean信息，只需要添加
+`<aop:aspectj-autoproxy proxy-target-class="true"/>`
+注解即可。
+
+示例如下
+
+* 配置文件中配置：
+
+ ```xml
+ <aop:aspectj-autoproxy proxy-target-class="true"/>
+<!--<bean class="com.qding.payment.service.log.TracerLogAspect" />去掉该配置-->
+ ```
+* java类的配置
+ 
+ ```java
+ @Aspect
+ @Component
+ public class TracerLogAspect extends LogAspect {
+    @Around("execution(* com.qding.payment.service..*.*(..))")
+    @Override
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+...........
+            LogPortal.info("执行时间:" + (end - start) + "ms,执行类名:" + joinPoint.getTarget().getClass().getName()
+                    + ",执行方法:" + method.getName() + ",传入参数:" + sb.toString() + ",返回数据:" + (obj == null ? null : obj.toString()));
+        return obj;
+    }
+}
+ ```
