@@ -24,6 +24,7 @@ import com.google.zxing.Result;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import org.apache.commons.lang.StringUtils;
 
 public class QRCodeUtil {
 
@@ -95,7 +96,7 @@ public class QRCodeUtil {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
-        if (imgPath == null || "".equals(imgPath)) {
+        if (StringUtils.isBlank(imgPath)) {
             return image;
         }
         // 插入图片
@@ -139,10 +140,10 @@ public class QRCodeUtil {
 
     /**
      * @param content      内容
-     * @param imgPath      logo路径
+     * @param imgPath      logo路径,为空则不添加logo
      * @param destPath     输出路径
-     * @param needCompress 是否需要压缩二维码图片尺寸
-     * @param picName      图片名称
+     * @param needCompress 是否需要压缩二维码logo尺寸
+     * @param picName      指定图片名称
      * @throws Exception
      * @Author yujinshui
      * @createTime 2016年11月12日 下午9:55:06
@@ -158,10 +159,10 @@ public class QRCodeUtil {
     /**
      * 条码创建
      *
-     * @param content 内容
-     * @param imgPath
+     * @param content  内容
+     * @param imgPath  logo路径,为空则不添加logo
      * @param destPath 输出路径
-     * @param picName 图片名称
+     * @param picName  图片名称
      * @throws Exception
      */
     public static void encodeForBarCode(String content, String imgPath, String destPath, String picName)
@@ -172,7 +173,7 @@ public class QRCodeUtil {
         ImageIO.write(image, FORMAT_NAME, new File(destPath + File.separator + picName));
     }
 
-    public static void mkdirs(String destPath) {
+    private static void mkdirs(String destPath) {
         File file = new File(destPath);
         // 当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．(mkdir如果父目录不存在则会抛出异常)
         if (!file.exists() && !file.isDirectory()) {
@@ -180,16 +181,26 @@ public class QRCodeUtil {
         }
     }
 
+    /**
+     * 二维码创建
+     *
+     * @param content  内容
+     * @param imgPath  logo路径
+     * @param destPath 输出路径
+     * @throws Exception
+     */
     public static void encodeForQrCode(String content, String imgPath, String destPath) throws Exception {
         String file = new Random().nextInt(99999999) + ".jpg";
         QRCodeUtil.encodeForQrCode(content, imgPath, destPath, false, file);
     }
 
-    public static void encodeForQrCode(String content, String destPath, boolean needCompress) throws Exception {
-        String file = new Random().nextInt(99999999) + ".jpg";
-        QRCodeUtil.encodeForQrCode(content, null, destPath, needCompress, file);
-    }
-
+    /**
+     * 二维码创建
+     *
+     * @param content  内容
+     * @param destPath 图片输出路径
+     * @throws Exception
+     */
     public static void encodeForQrCode(String content, String destPath) throws Exception {
         String file = new Random().nextInt(99999999) + ".jpg";
         QRCodeUtil.encodeForQrCode(content, null, destPath, false, file);
