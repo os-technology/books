@@ -27,6 +27,15 @@ import java.io.InputStream;
 //@RunWith(SpringJUnit4ClassRunner.class)
 public class BeanFactoryTest extends BaseJunitTest {
 
+
+    @Test
+    public void sub(){
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("hello").append("123").append("world");
+        buffer.substring(buffer.toString().indexOf("123"));
+        System.out.println(buffer.substring(buffer.toString().indexOf("123")));
+    }
+
     /**
      * XmlBeanFactory 过期。从spring 3.2 后推荐使用DefaultListableBeanFactory和XmlBeanDefinitionReader来代替它。
      */
