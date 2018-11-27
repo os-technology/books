@@ -18,17 +18,39 @@ public class HtmlUtilTest {
 
     @Test
     public void testGetHtml() {
-        HtmlFilterDataRequest request = getWeChatValue();
-        String html = HtmlUtil.getHtmlByUrl(request.getUrl());
-        ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
-        Assert.assertTrue(result.size() > 0);
+        String url = "https://www.juzimi.com/tags/%E5%88%9B%E4%B8%9A";
+        HtmlFilterDataRequest request = getRequest();
+        String site="";
+        for (int i = 0; i < 30; i++) {//分页
+            System.out.println("########第" + i + "页#########");
+            if (i > 0) {
+                site = url + "?page=" + i;
+            }else {
+                site=url;
+            }
+            String html = HtmlUtil.getHtmlByUrl(site);
+            ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
 
-        for (String output : result) {
-            System.out.println(output.trim());
+            for (String output : result) {
+                System.out.println(output.trim());
+                System.out.println();
+            }
         }
     }
 
 
+    private HtmlFilterDataRequest getRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setUrl("https://www.juzimi.com/tags/%E5%88%9B%E4%B8%9A")
+                .setUrlPageSuffix("")
+                .setHtmlStartRange("<div class=\"xqfamwritercount\">")
+                .setHtmlEndRange("<div class=\"item-list\">")
+                .setTranslateStart("data=\"{'text':'")
+                .setTranslateEnd("','url':'https://www.juzimi.com/ju/");
+
+
+        return request;
+    }
 
 
     public HtmlFilterDataRequest getValue() {
@@ -60,7 +82,6 @@ public class HtmlUtilTest {
 
         return request;
     }
-
 
 
 }

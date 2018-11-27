@@ -39,7 +39,7 @@ public class UrlTest {
         String index = "list_23_";
         StringBuffer buffer = new StringBuffer();
         for (int i = 1; i < 2; i++) {
-            buffer.append("\r\n\r\n\r\n第" + i + "页抓取开始——只抓取前五页\r\n\r\n\r\n");
+            buffer.append("\r\n\r\n\r\n第" + i + "页抓取开始——只抓取前五页\r\n\r\n");
             if (i == 1) {
                 buffer.append(u.getInfoFromUrl(url, ""));
             } else {
