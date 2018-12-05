@@ -16,9 +16,10 @@ import java.io.*;
 
 public class Base64DocTest {
     @Test
-    public void outputEnv(){
-        System.out.println("环境变量："+System.getenv("PAYRIGHT_ZOOKEEPER_HOST"));
+    public void outputEnv() {
+        System.out.println("环境变量：" + System.getenv("PAYRIGHT_ZOOKEEPER_HOST"));
     }
+
     @Test
     public void testDoc() throws IOException {
         File filename = new File("/Users/yujinshui/Desktop/commonpay_pri.pfx");
@@ -31,7 +32,7 @@ public class Base64DocTest {
         System.out.println(result);
 
         byte[] out = Base64.decode(result);
-        FileOutputStream fos =new FileOutputStream("/Users/yujinshui/Desktop/com.pfx");
+        FileOutputStream fos = new FileOutputStream("/Users/yujinshui/Desktop/com.pfx");
         fos.write(out);
         fos.close();
     }

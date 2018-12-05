@@ -19,6 +19,10 @@ import java.util.*;
 
 public class TmpTest {
 
+    @Test
+    public void len(){
+        System.out.println("{\"appid\":\"1000001\",\"url\":\"http://test-123456.image.myqcloud.com/test.jpg\"}".length());
+    }
 
     @Test
     public void matchString(){
