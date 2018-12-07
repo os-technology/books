@@ -1,9 +1,13 @@
 package org.lambda;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * https://blog.csdn.net/bitcarmanlee/article/details/70195403
@@ -80,4 +84,74 @@ public class LambdaJunitTest {
         Double result = cost.stream().map(x -> x + x * 0.05).reduce((sum, x) -> sum + x).get();
         System.out.println("计算结果：" + result);
     }
+
+    /**
+     * 5.filter操作
+     * filter也是我们经常使用的一个操作。在操作集合的时候，经常需要从原始的集合中过滤掉一部分元素。
+     */
+    @Test
+    public void filterTest() {
+        List<Double> cost = Arrays.asList(10.0, 20.0, 30.0, 40.0);
+        List<Double> filterCost = cost.stream().filter(x -> x > 25.0).collect(Collectors.toList());
+        filterCost.forEach(x -> System.out.println(x));
+    }
+
+    @Test
+    public void filterMapTest() {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("a", "1");
+        map.put("b", "2");
+        map.put("c", "3");
+        map.put("d", "4");
+
+        Iterator<String> iter = map.keySet().iterator();
+        iter.forEachRemaining(k -> {
+            if (map.get(k).contains("2")) {
+                iter.remove();
+            }
+        });
+
+        System.out.println(JSON.toJSONString(map));
+
+        Map<String, String> mapResult = map.entrySet().stream()
+                .filter(ma -> !"3".equals(ma.getValue()))//filter只能过滤一个条件信息
+                .filter(ma -> !"4".equals(ma.getValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+
+        System.out.println(JSON.toJSONString(mapResult));
+    }
+
+
+    private void filter() {
+        Map<Integer, String> HOSTING = new HashMap<>();
+        HOSTING.put(1, "linode.com");
+        HOSTING.put(2, "heroku.com");
+        HOSTING.put(3, "digitalocean.com");
+        HOSTING.put(4, "aws.amazon.com");
+        String result = "";
+        for (Map.Entry<Integer, String> entry : HOSTING.entrySet()) {
+            if ("aws.amazon.com".equals(entry.getValue())) {
+                result = entry.getValue();
+            }
+        }
+        System.out.println("Before Java 8 : " + result);
+        //Map -> Stream -> Filter -> String
+        result = HOSTING.entrySet().stream()
+                .filter(map -> "aws.amazon.com".equals(map.getValue()))
+                .map(map -> map.getValue())
+                .collect(Collectors.joining());
+        System.out.println("With Java 8 : " + result);
+
+    }
+
+    /**
+     * 6.与函数式接口Predicate配合
+     */
+    @Test
+    public void predicateTest() {
+
+    }
+
 }
