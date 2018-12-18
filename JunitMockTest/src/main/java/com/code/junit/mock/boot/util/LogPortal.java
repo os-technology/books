@@ -1,6 +1,7 @@
 package com.code.junit.mock.boot.util;
 
 import ch.qos.logback.classic.Level;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -21,12 +22,12 @@ public class LogPortal {
 
     public static void debug(String msg, Object ... objs){
 
-        logger.debug(appendClassName2Msg(msg), objs);
+        logger.debug(appendClassName2Msg(msg), JSON.toJSONString(objs));
     }
 
     public static void info(String msg,Object ... objs){
 
-        logger.info(appendClassName2Msg(msg), objs);
+        logger.info(appendClassName2Msg(msg), JSON.toJSONString(objs));
     }
 
     private static String appendClassName2Msg(String msg) {
@@ -38,7 +39,7 @@ public class LogPortal {
     }
 
     public static void error(String msg,Object ... objs){
-        logger.error(appendClassName2Msg(msg), objs);
+        logger.error(appendClassName2Msg(msg), JSON.toJSONString(objs));
     }
 
     public static void error(String msg,Throwable t){

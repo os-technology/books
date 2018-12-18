@@ -37,6 +37,7 @@ public class MockServiceImpl implements MockService {
     @Override
     @Transactional
     public MockTable saveWithoutSameId(MockTable mockTable) {
+        LogPortal.info("data is {}",mockTable);
         MockTable result = mockTableDAO.selectById(mockTable.getId());
         if (result != null) {
             return null;
@@ -74,7 +75,7 @@ public class MockServiceImpl implements MockService {
     public MockTable saveMocktable() {
         MockTable data = getMockTable();
         mockTableDAO.save(data);
-        System.out.println(JSON.toJSONString(data));
+        LogPortal.info("输出信息,[{}]",data);
         throw new IllegalArgumentException();
     }
 
