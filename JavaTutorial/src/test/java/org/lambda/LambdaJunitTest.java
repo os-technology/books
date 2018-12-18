@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -11,6 +12,7 @@ import static java.util.stream.Collectors.toMap;
 
 /**
  * https://blog.csdn.net/bitcarmanlee/article/details/70195403
+ * http://www.importnew.com/16436.html
  * http://zh.lucida.me/blog/java-8-lambdas-insideout-language-features/
  *
  * @author code
@@ -152,6 +154,25 @@ public class LambdaJunitTest {
     @Test
     public void predicateTest() {
 
+        List<String> languages = Arrays.asList("Java", "Python", "scala", "Shell", "R");
+        System.out.println("Language starts with J: ");
+        predicateFilter(languages, x -> x.startsWith("J"));
+
+        System.out.println("\nLanguage ends with a: ");
+        predicateFilter(languages, x -> x.endsWith("a"));
+
+        System.out.println("\nAll languages: ");
+        predicateFilter(languages, x -> true);
+
+        System.out.println("\nNo languages: ");
+        predicateFilter(languages, x -> false);
+
+        System.out.println("\nLanguage length bigger three: ");
+        predicateFilter(languages, x -> x.length() > 4);
+
     }
 
+    private void predicateFilter(List<String> languages, Predicate<String> condition) {
+        languages.stream().filter(x -> condition.test(x)).forEach(x -> System.out.print(x + " "));
+    }
 }
