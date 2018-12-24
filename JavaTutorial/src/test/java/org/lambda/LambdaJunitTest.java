@@ -126,7 +126,8 @@ public class LambdaJunitTest {
     }
 
 
-    private void filter() {
+    @Test
+    public void filterMapDemo() {
         Map<Integer, String> HOSTING = new HashMap<>();
         HOSTING.put(1, "linode.com");
         HOSTING.put(2, "heroku.com");
