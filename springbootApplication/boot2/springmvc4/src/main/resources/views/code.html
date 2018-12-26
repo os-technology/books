@@ -11,10 +11,11 @@
 
 <body>
 <div id="js" style="text-align:center;">
-    <textarea id="it" type="text"  style="height:50px;font-size:20px;width:600px;height:200px;"></textarea>
+    <textarea id="it" type="text" style="height:50px;font-size:20px;width:600px;height:200px;"></textarea>
     <br>
     <input type="button" value="编码" onclick="bian()"/>
     <input type="button" value="解码" onclick="jie()"/>
+    <input type="button" value="转义符转换为普通符号" onclick="zhuanyi()"/>
     <input type="button" value="jquery实现" onclick="change(2)"/>
     <script type="text/javascript" src="../assets/js/jquery.js"></script>
     <br>
@@ -31,39 +32,72 @@
         <td><label>编码之后的内容</label></td>
     </tr>
     <tr>
-        <td><textarea id="old" type="text"  style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
-        <td><textarea id="new" type="text"  style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
+        <td><textarea id="old" type="text" style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
+        <td><textarea id="new" type="text" style="height:50px;font-size:20px;width:400px;height:100px;"></textarea></td>
     </tr>
 </table>
 <script type="text/javascript">
-    function bian()
-    {
-        var a = document.getElementById("it").value;
 
-        document.getElementById("cont").value=encodeURIComponent(a);
-    }
-    function jie()
-    {
+    function bian() {
         var a = document.getElementById("it").value;
+        document.getElementById("cont").value = encodeURIComponent(a);
+    }
 
-        document.getElementById("cont").value=decodeURIComponent(a);
+    function jie() {
+        var a = document.getElementById("it").value;
+        document.getElementById("cont").value = decodeURIComponent(a);
     }
-    function change(ch)
-    {
-        if(ch==2)
-        {
-            $("#js").css("display","none");
-            $("#query").css("display","block");
+
+    function zhuanyi() {
+        var a = document.getElementById("it").value;
+        a = escape2Html(a);
+        // alert(a);
+        document.getElementById("cont").value = a;
+    }
+
+    // &nbsp;转成空格
+    function nbsp2Space(str) {
+        var arrEntities = {'nbsp': ' '};
+        return str.replace(/&(nbsp);/ig, function (all, t) {
+            return arrEntities[t]
+        })
+    }
+
+    //回车转为br标签
+    function return2Br(str) {
+        return str.replace(/\r?\n/g, "<br />");
+    }
+
+    //转意符换成普通字符
+    function escape2Html(str) {
+        var arrEntities = {'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"'};
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+            return arrEntities[t];
+        })//保证 &gt;  和 gt; 两种方式都可以被转换
+            .replace(/(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+            return arrEntities[t];
+        });
+    }
+
+    var unescapeHTML = function (a) {
+        a = "" + a;
+        return a.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+    }
+
+    function change(ch) {
+        if (ch == 2) {
+            $("#js").css("display", "none");
+            $("#query").css("display", "block");
         }
-        else
-        {
-            $("#js").css("display","block");
-            $("#query").css("display","none");
+        else {
+            $("#js").css("display", "block");
+            $("#query").css("display", "none");
         }
     }
+
     $("#old").keyup(
-        function(){
-            var a =$(this).val();
+        function () {
+            var a = $(this).val();
 
             $("#new").val(encodeURIComponent(a));
         }
