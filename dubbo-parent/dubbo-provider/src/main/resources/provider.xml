@@ -8,31 +8,33 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-	<!--提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
-	<dubbo:application name="dubbo_hello"></dubbo:application>
-	<!--使用zookeeper注册中心暴露服务地址 -->
-	<!--<dubbo:registry address="zookeeper://127.0.0.1:2182"-->
-		<!--check="false" subscribe="false" register=""></dubbo:registry>-->
+    <!--提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+    <dubbo:application name="dubbo_hello"></dubbo:application>
+    <!--使用zookeeper注册中心暴露服务地址 -->
+    <!--<dubbo:registry address="zookeeper://127.0.0.1:2182"-->
+    <!--check="false" subscribe="false" register=""></dubbo:registry>-->
 
 
-<!--zookeeper集群配置两种方式-->
-	<!--集群配置方式一，特别适用于dubbo-admin 和dubbo-monitor-->
-	<!--方式一：-->
-	<dubbo:registry address="zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183"/>
-	<!--方式二：-->
-	<!--<dubbo:registry-->
-			<!--protocol="zookeeper"-->
-			<!--address="10.20.153.10:2181,10.20.153.11:2181,10.20.153.12/>-->
-	<dubbo:protocol id="helloProtocol" name="dubbo" port="8011" />
-	<!--要暴露的服务接口 -->
-	<dubbo:service interface="org.dubbo.inter.api.HelloService"
-		ref="helloService" owner="yujinshui" protocol="helloProtocol" version="1.0.0" />
-	<bean id="helloService" class="org.dubbo.provider.service.impl.HelloServiceImpl"></bean>
+    <!--zookeeper集群配置两种方式-->
+    <!--集群配置方式一，特别适用于dubbo-admin 和dubbo-monitor-->
+    <!--方式一：-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183"/>
+    <!--方式二：-->
+    <!--<dubbo:registry-->
+    <!--protocol="zookeeper"-->
+    <!--address="127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183"/>-->
 
-	<!--注解方式暴露接口 有问题-->
+    <dubbo:protocol id="helloProtocol" name="dubbo" port="8011"/>
+    <!--<dubbo:protocol id="helloProtocol" name="dubbo" port="8011" />-->
+    <!--要暴露的服务接口 -->
+    <dubbo:service interface="org.dubbo.inter.api.HelloService"
+                   ref="helloService" owner="yujinshui" version="1.0.0"/>
+    <bean id="helloService" class="org.dubbo.provider.service.impl.HelloServiceImpl"></bean>
 
-	<!--<dubbo:annotation package="org.dubbo.provider.service.impl"/>-->
+    <!--注解方式暴露接口 有问题-->
 
-	<!-- 声明监控中心 -->
-	<!-- <dubbo:monitor protocol="registry" /> -->
+    <!--<dubbo:annotation package="org.dubbo.provider.service.impl"/>-->
+
+    <!-- 声明监控中心 -->
+    <!-- <dubbo:monitor protocol="registry" /> -->
 </beans>
