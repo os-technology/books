@@ -1,0 +1,1 @@
+dubbo consumer通过Java代码进行配置时，如果provider包含版本号，则必须配置版本号信息，否则无法正常访问。
