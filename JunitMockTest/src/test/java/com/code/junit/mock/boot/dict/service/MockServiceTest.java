@@ -59,7 +59,8 @@ public class MockServiceTest extends BaseAppTest {
     public void getById() {
         MockTable data = mockService.saveWithoutSameId(getMockTable());
         MockTable result = mockService.getById(data.getId());
-        LogPortal.info("[{}]", JSON.toJSONString(result));
+        LogPortal.info(this,"hello---");
+//        LogPortal.info("[{}]", JSON.toJSONString(result));
         Assert.assertNotNull(result);
     }
 

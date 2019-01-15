@@ -29,6 +29,10 @@ public class LogPortal {
 
         logger.info(appendClassName2Msg(msg), JSON.toJSONString(objs));
     }
+public static void info(Object ojb,String msg,Object ... objs){
+
+        logger.info(appendClassName2Msg(ojb.getClass().getName()+msg), JSON.toJSONString(objs));
+    }
 
     private static String appendClassName2Msg(String msg) {
         StackTraceElement[] strackArr = Thread.currentThread().getStackTrace();

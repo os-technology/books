@@ -37,7 +37,7 @@ public class MockServiceImpl implements MockService {
     @Override
     @Transactional
     public MockTable saveWithoutSameId(MockTable mockTable) {
-        LogPortal.info("data is {}",mockTable);
+        LogPortal.info(this,"data is {}",mockTable);
         MockTable result = mockTableDAO.selectById(mockTable.getId());
         if (result != null) {
             return null;
@@ -48,6 +48,7 @@ public class MockServiceImpl implements MockService {
 
     @Override
     public MockTable getById(Long id) {
+        LogPortal.info("hello---");
         return mockTableDAO.selectById(id);
     }
 

@@ -19,13 +19,11 @@ import java.util.*;
 
 public class TmpTest {
 
-    @Test
-    public void len(){
-        System.out.println("{\"appid\":\"1000001\",\"url\":\"http://test-123456.image.myqcloud.com/test.jpg\"}".length());
-    }
+
 
     @Test
     public void matchString(){
+
         Assert.assertTrue("hello".matches("^[a-z][a-zA-Z0-9]*$"));
         Assert.assertTrue("helloH".matches("^[a-z][a-zA-Z0-9]*$"));
         Assert.assertTrue("hello_world".matches("^[a-z][a-zA-Z0-9]*$"));

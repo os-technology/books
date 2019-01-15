@@ -18,7 +18,9 @@ public class MapUtilTests {
     @Test
     public void testToMap(){
         BeanToMap bm = new BeanToMap();
-        bm.setAttr("attrData").setName("beanToMap");
+        bm.setAttr("attrData")
+//                .setName("beanToMap")
+        ;
         Map<String, Object> result = MapUtil.toMap(bm);
         Assert.assertEquals("attrData",result.get("attr"));
     }
