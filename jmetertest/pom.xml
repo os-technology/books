@@ -21,6 +21,11 @@
             <artifactId>ApacheJMeter_core</artifactId>
             <version>${jmeter.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.jmeter</groupId>-->
+            <!--<artifactId>ApacheJMeter_components</artifactId>-->
+            <!--<version>${jmeter.version}</version>-->
+        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_java -->
         <dependency>
             <groupId>org.apache.jmeter</groupId>
@@ -31,16 +36,16 @@
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_http</artifactId>
-            <version>5.0</version>
+            <version>${jmeter.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpcore</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 </project>
