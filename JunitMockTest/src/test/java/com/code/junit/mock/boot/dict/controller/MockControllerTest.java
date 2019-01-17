@@ -74,13 +74,17 @@ public class MockControllerTest {
     }
 
     @Test
-    public void addMock() throws Exception {
+    public void addMock() {
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/addMock");
 
 
-        mockMvc.perform(addMockTable(request))
-                .andExpect(status().isOk())
-                .andExpect(content().string("addMock is ok"));
+        try {
+            mockMvc.perform(addMockTable(request))
+                    .andExpect(status().isOk())
+                    .andExpect(content().string("addMock is ok"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -89,7 +93,9 @@ public class MockControllerTest {
         String name = "time " + DateUtils.dateToString("yyyy-MM-dd HH:mm");
         System.out.println(name.length());
         return request.param("name", name)
-                .param("data", "random");
+//                .param("data", "random")
+//                .param("data", "random")
+                ;
     }
 
     @Test

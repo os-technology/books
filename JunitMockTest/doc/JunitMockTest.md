@@ -273,8 +273,10 @@ public class DefaultFooService implements FooService {
         </mvc:message-converters>
     </mvc:annotation-driven>
   ```
- 
+
 ## 其他
+
+#### lombok配置
 
 * bean部分添加`lombok`依赖方式，并采用build设计模式进行参数赋值。
 
@@ -283,3 +285,8 @@ public class DefaultFooService implements FooService {
  @AllArgsConstructor  全参构造函数
 @NoArgsConstructor  无参构造函数
  ```
+
+#### smart-validate 参数校验
+地址：[https://gitee.com/os-technology/smart-validate](https://gitee.com/os-technology/smart-validate)
+
+添加了拦截器方式的配置，并测试通过
