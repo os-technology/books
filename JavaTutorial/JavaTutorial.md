@@ -1,3 +1,41 @@
+#### 2019-1-18
+
+添加`hibernate-validate` 参数校验插件
+
+依赖包内容如下：
+
+ ```xml
+ <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.3.6.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.5</version>
+        </dependency>
+ ```
+ 
+ **校验规则整理**
+ 
+  ```
+  @Max(value)     被注释的元素必须是一个数字，其值必须小于等于指定的最大值【可被用于null或必须满足的最大数值数据进行校验】
+  
+  如果传参必须指定值信息，则可以使用正则表达式
+ 
+  @Pattern(regexp = EncryptContant.HMACSHA256+"|"+EncryptContant.MD5,message = "加密方式参数值错误")
+    private String signType;
+  
+  枚举类的校验参见@EnumValue注解
+  
+  ```
+
 
 #### 2018-11-6 
 **素数判断逻辑**：假设一个数不是素数的话，那么它就是合数，即意味着这个数可以由两个自然数相乘得到，其中一个大于或等于它的平方根，另一个小于或等于它的平方根。并且成对出现。因此，判断一个数是否为素数，只需判断从2开始到该整数的平方根范围内是否有整数能整除该数，有则为合数，无则为素数。
