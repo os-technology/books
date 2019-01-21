@@ -22,6 +22,20 @@ public class TmpTest {
 
 
     @Test
+    public void cycle(){
+        String first = "https://cdn.baidu.7yy6.com/media/videos/iphone/1083/hls/lGPh5246";
+        for (int i=1;i<201;i++){
+            if(i<10) {
+                System.out.println(first+"00" + i + ".ts");
+            }else if(i<100){
+                System.out.println(first+"0" + i + ".ts");
+            }
+        }
+    }
+
+
+
+    @Test
     public void matchString(){
 
         Assert.assertTrue("hello".matches("^[a-z][a-zA-Z0-9]*$"));
