@@ -6,20 +6,15 @@
 
  ```xml
  <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.3.6.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>2.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>2.2.5</version>
-        </dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.14.Final</version>
+ </dependency>
+ <dependency>
+    <groupId>org.glassfish</groupId>
+    <artifactId>javax.el</artifactId>
+    <version>3.0.1-b08</version>
+ </dependency>
  ```
  
  **校验规则整理**

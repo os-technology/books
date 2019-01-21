@@ -1,9 +1,14 @@
 package org.validate;
 
+import org.apache.poi.ss.formula.functions.T;
+import org.hibernate.validator.HibernateValidator;
 import org.junit.Test;
 import org.validate.beans.ReceiverParams;
 import org.validate.beans.SubAccountReceiverRequestParams;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.bootstrap.ProviderSpecificBootstrap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +22,12 @@ import java.util.List;
  */
 public class ValidateTest {
 
+
+
     @Test
     public void validateBean(){
         SubAccountReceiverRequestParams params = getSubAccountReceiverRequestParams();
+
         ValidationUtils.validate(params);
     }
 

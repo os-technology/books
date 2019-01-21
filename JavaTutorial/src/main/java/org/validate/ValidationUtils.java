@@ -1,5 +1,6 @@
 package org.validate;
 
+
 import org.hibernate.validator.HibernateValidator;
 
 import javax.validation.ConstraintViolation;
@@ -20,8 +21,10 @@ public class ValidationUtils {
      * 使用hibernate的注解来进行验证
      */
     private static Validator validator = Validation
-            .byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory().getValidator();
-
+            .byProvider(HibernateValidator.class)
+            .configure()
+            .failFast(false)//快速失败返回模式(只要有一个验证失败，则返回)  failFast：true  快速失败返回模式    false 普通模式
+            .buildValidatorFactory().getValidator();//返回的Factory：ValidatorFactoryImpl
     /**
      * 功能描述: <br>
      * 〈注解验证参数〉
