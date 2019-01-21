@@ -23,12 +23,16 @@ public class TmpTest {
 
     @Test
     public void cycle(){
-        String first = "https://cdn.baidu.7yy6.com/media/videos/iphone/1083/hls/lGPh5246";
-        for (int i=1;i<201;i++){
+        String first = "https://iqiyi.com-l-iqiyi.com/20190119/21146_3f16f3ea/1000k/hls/85de2e14e5e00";
+        for (int i=0;i<1710;i++){
             if(i<10) {
-                System.out.println(first+"00" + i + ".ts");
+                System.out.println(first+"000" + i + ".ts");
             }else if(i<100){
+                System.out.println(first+"00" + i + ".ts");
+            }else if (i<1000){
                 System.out.println(first+"0" + i + ".ts");
+            }else {
+                System.out.println(first + i + ".ts");
             }
         }
     }
