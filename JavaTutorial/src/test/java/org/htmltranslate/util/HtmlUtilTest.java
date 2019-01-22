@@ -17,6 +17,13 @@ import java.util.ArrayList;
 public class HtmlUtilTest {
 
     @Test
+    public void getHtml(){
+        String url = "http://kdjghb.p9ydy.cn/pf/sx/tiantian.php?from=groupmessage&isappinstalled=0";
+        String html = HtmlUtil.getHtmlByUrl(url);
+        System.out.println(html);
+    }
+
+    @Test
     public void testGetHtml() {
         String url = "https://www.juzimi.com/tags/%E5%88%9B%E4%B8%9A";
         HtmlFilterDataRequest request = getRequest();
