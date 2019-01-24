@@ -17,6 +17,27 @@
     </properties>
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.jpcap/net-sourcedorge-jpcap -->
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.jpcap/net-sourcedorge-jpcap -->
+        <dependency>
+            <groupId>net.sourceforge.jpcap</groupId>
+            <artifactId>net-sourcedorge-jpcap</artifactId>
+            <version>0.01.16</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jpcap/jpcap-macosx-native-deps -->
+        <!--<dependency>-->
+            <!--<groupId>jpcap</groupId>-->
+            <!--<artifactId>jpcap-macosx-native-deps</artifactId>-->
+            <!--<version>0.1.18-002</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/jpcap/jpcap -->
+        <dependency>
+            <groupId>jpcap</groupId>
+            <artifactId>jpcap</artifactId>
+            <version>0.1.18-002</version>
+        </dependency>
+
         <!--hibernate validate 依赖包，2个,使用说明参考下面的官网地址-->
         <!-- https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#validator-gettingstarted -->
         <dependency>

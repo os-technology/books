@@ -7,6 +7,11 @@ import org.junit.Test;
  */
 public class JvmUnitTest {
 
+    @Test
+    public void floatPrint(){
+        System.out.println(Integer.toBinaryString(Float.floatToRawIntBits(-5)));
+    }
+
     /**
      * vm配置：
      * -verbose:gc 查看GC
