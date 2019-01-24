@@ -21,6 +21,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ImportResource({"classpath:application-bean.xml","classpath:spring-mvc.xml"})
 public class BootGroupApplication {
     public static void main(String[] args) {
-        new SpringApplicationBuilder(BootGroupApplication.class).web(WebApplicationType.SERVLET).run(args);
+        new SpringApplicationBuilder(BootGroupApplication.class)
+                .web(WebApplicationType.SERVLET).run(args);
     }
 }

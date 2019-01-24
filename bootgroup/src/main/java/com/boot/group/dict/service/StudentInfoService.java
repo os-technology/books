@@ -1,6 +1,8 @@
 package com.boot.group.dict.service;
 
 import com.boot.group.dict.entity.StudentInfo;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author code
@@ -13,4 +15,15 @@ import com.boot.group.dict.entity.StudentInfo;
 public interface StudentInfoService {
 
     StudentInfo addStudent();
+
+    Integer addStudentForTransactional();
+
+    @Transactional(propagation = Propagation.REQUIRED ,rollbackFor = Exception.class)
+    Integer addStudentForAspect();
+
+    Integer getStudentInfoForTransactional();
+
+    public Integer test1();
+    public Integer test2();
+    public Integer abcTest();
 }

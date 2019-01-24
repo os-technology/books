@@ -84,6 +84,7 @@
 	<!--<context:component-scan base-package="com.zhangguo.bookstore"></context:component-scan>-->
 
 	<!--7 aspectj支持自动代理实现AOP功能 -->
-	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
 	<import resource="classpath*:spring-jpa.xml"/>
 </beans>

@@ -25,4 +25,19 @@ public class StudentInfoController {
         StudentInfo result = studentInfoService.addStudent();
         return JSON.toJSONString(result);
     }
+
+
+    @RequestMapping("/handler")
+    public String handler() {
+        Integer result = studentInfoService.addStudentForTransactional();
+        return JSON.toJSONString(result);
+    }
+
+    @RequestMapping("/aspect")
+    public String aspect() {
+        Integer result = studentInfoService.addStudentForAspect();
+        return JSON.toJSONString(result);
+    }
+
+
 }

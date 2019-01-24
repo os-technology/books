@@ -1,6 +1,6 @@
 # bootgroup
 
-模块说明：由springboot,jpa,shiro基础组件构成，用于进行demo学习演示。
+模块说明：由springboot,jpa,shiro(该部分尚未完成)基础组件构成，用于进行demo学习演示。
 
 ### jpa部分
 官方demo地址：[https://github.com/spring-projects/spring-data-jpa](https://github.com/spring-projects/spring-data-jpa)
@@ -117,6 +117,35 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  ```
  对于`PhysicalNamingStrategyStandardImpl`有`DefaultNamingStrategy`的效果；对于SpringPhysicalNamingStrategy  有ImprovedNamingStrategy的效果。
  
+### spring事务部分
+
+|PROPAGATION类型|说明|
+|---|---|
+| REQUIRED| 加入当前已有事务；只有当前没有事务才起一个新的事务.<br>    比如说，`ServiceB.methodB`的事务级别定义为`PROPAGATION_REQUIRED`, 那么由于`ServiceA.methodA`的时候，`ServiceA.methodA`已经起了事务，这时调用`ServiceB.methodB`，`ServiceB.methodB`看到自己已经运行在`ServiceA.methodA`的事务内部，就不再起新的事务。而假如`ServiceA.methodA`运行的时候发现自己没有在事务中，它就会为自己分配一个事务。这样，在`ServiceA.methodA`或者在ServiceB.methodB内的任何地方出现异常，事务都会被回滚。|
+|SUPPORTS | 如果当前在事务中，即以事务的形式运行，如果当前不在一个事务中，那么就以非事务的形式运行 |
+|MANDATORY | 必须在一个事务中运行。也就是说，只能被一个父事务调用。否则，就要抛出异常。|
+|REQUIRES_NEW | 比如我们设计`ServiceA.methodA`的事务级别为`PROPAGATION_REQUIRED`，`ServiceB.methodB`的事务级别为`PROPAGATION_REQUIRES_NEW`，那么当执行到ServiceB.methodB的时候，`ServiceA.methodA`所在的事务就会挂起，`ServiceB.methodB`会起一个新的事务，等待`ServiceB.methodB`的事务完成以后，它才继续执行。它与`PROPAGATION_REQUIRED` 的事务区别在于事务的回滚程度了。因为`ServiceB.methodB`是新起一个事务，那么就是存在两个不同的事务。如果`ServiceB.methodB`已经提交，那么`ServiceA.methodA`失败回滚，ServiceB.methodB是不会回滚的。如果`ServiceB.methodB`失败回滚，它抛出的异常被ServiceA.methodA捕获，ServiceA.methodA事务仍然可以提交。|
+| NOT_SUPPORTED|当前不支持事务。比如`ServiceA.methodA`的事务级别是`PROPAGATION_REQUIRED` ，而`ServiceB.methodB`的事务级别是`PROPAGATION_NOT_SUPPORTED`， 那么当执行到`ServiceB.methodB`时，`ServiceA.methodA`的事务挂起，而它以非事务的状态运行完，再继续`ServiceA.methodA`的事务。 |
+| NEVER|不能在事务中运行。假设`ServiceA.methodA`的事务级别是`PROPAGATION_REQUIRED`， 而ServiceB.methodB的事务级别是`PROPAGATION_NEVER`，那么ServiceB.methodB就要抛出异常了。 |
+|NESTED | 理解Nested的关键是`savepoint`。它与`PROPAGATION_REQUIRES_NEW`的区别是，`PROPAGATION_REQUIRES_NEW`另起一个事务，将会与它的父事务相互独立，而Nested的事务和它的父事务是相依的，它的提交是要等和它的父事务一块提交的。也就是说，如果父事务最后回滚，它也要回滚的。而Nested事务的好处是它有一个savepoint。也就是说`ServiceB.methodB`失败回滚，那么`ServiceA.methodA`也会回滚到savepoint点上，`ServiceA.methodA`可以选择另外一个分支，比如`ServiceC.methodC`，继续执行，来尝试完成自己的事务。但是这个事务并没有在EJB标准中定义。|
+
+
+目前无法通过单元测试进行动态代理的测试，只能通过启动服务进行试验。通过切面来检查动态代理是否正常。
+
+`http://localhost:8080/aspect`: 被代理对象(实际对象)方式调用
+`http://localhost:8080/handler`:代理对象(创建一个代理对象)方式调用(代理的方式就会经过切面，否则是不会经过切面的)
+
+事务失效的解决方案：
+
+ ```xml
+ <aop:aspectj-autoproxy expose-proxy="true" />
+ ```
+ 
+ ```java
+ ((Service)AopContext.currentProxy()).invokeMethod();
+ ```
+ 
+ 链接参考：https://blog.csdn.net/cdsn13082487212/article/details/79515423
  
 ### FAQ
 ==**springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。已经找到问题所在。原因如下：**==
