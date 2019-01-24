@@ -130,7 +130,7 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
 |NESTED | 理解Nested的关键是`savepoint`。它与`PROPAGATION_REQUIRES_NEW`的区别是，`PROPAGATION_REQUIRES_NEW`另起一个事务，将会与它的父事务相互独立，而Nested的事务和它的父事务是相依的，它的提交是要等和它的父事务一块提交的。也就是说，如果父事务最后回滚，它也要回滚的。而Nested事务的好处是它有一个savepoint。也就是说`ServiceB.methodB`失败回滚，那么`ServiceA.methodA`也会回滚到savepoint点上，`ServiceA.methodA`可以选择另外一个分支，比如`ServiceC.methodC`，继续执行，来尝试完成自己的事务。但是这个事务并没有在EJB标准中定义。|
 
 
-目前无法通过单元测试进行动态代理的测试，只能通过启动服务进行试验。通过切面来检查动态代理是否正常。
+目前无法通过自定义的aop方式进行代理对象的单元测试，只能通过启动服务进行试验。通过切面来检查动态代理是否正常。
 
 `http://localhost:8080/aspect`: 被代理对象(实际对象)方式调用
 `http://localhost:8080/handler`:代理对象(创建一个代理对象)方式调用(代理的方式就会经过切面，否则是不会经过切面的)
