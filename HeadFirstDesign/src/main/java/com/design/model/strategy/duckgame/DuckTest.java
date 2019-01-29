@@ -1,7 +1,7 @@
-package com.design.model.duckgame;
+package com.design.model.strategy.duckgame;
 
-import com.design.model.duckgame.impl.FlyRocketPowered;
-import com.design.model.duckgame.impl.MallardDuck;
+import com.design.model.strategy.duckgame.impl.FlyRocketPowered;
+import com.design.model.strategy.duckgame.impl.MallardDuck;
 
 public class DuckTest{
 

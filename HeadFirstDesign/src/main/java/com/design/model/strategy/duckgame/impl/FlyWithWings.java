@@ -1,6 +1,6 @@
-package com.design.model.duckgame.impl;
+package com.design.model.strategy.duckgame.impl;
 
-import com.design.model.duckgame.FlyBehavior;
+import com.design.model.strategy.duckgame.FlyBehavior;
 
 /**
  * 翅膀飞行
@@ -11,7 +11,7 @@ import com.design.model.duckgame.FlyBehavior;
 public class FlyWithWings implements FlyBehavior {
 	/**
 	 * 
-	 * @see com.design.model.duckgame.FlyBehavior#fly()
+	 * @see com.design.model.strategy.duckgame.FlyBehavior#fly()
 	 */
 	@Override
 	public void fly() {

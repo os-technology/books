@@ -1,4 +1,4 @@
-package com.design.model.duckgame;
+package com.design.model.strategy.duckgame;
 
 /**
  * 叫声行为接口

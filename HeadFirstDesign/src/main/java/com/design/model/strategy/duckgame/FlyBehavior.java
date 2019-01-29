@@ -1,4 +1,4 @@
-package com.design.model.duckgame;
+package com.design.model.strategy.duckgame;
 /**
  * 飞行行为接口
  * @author Yujinshui

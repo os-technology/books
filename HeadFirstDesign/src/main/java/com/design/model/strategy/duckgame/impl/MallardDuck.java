@@ -1,7 +1,7 @@
-package com.design.model.duckgame.impl;
+package com.design.model.strategy.duckgame.impl;
 
-import com.design.model.duckgame.Duck;
-import com.design.model.duckgame.QuackBehavior;
+import com.design.model.strategy.duckgame.Duck;
+import com.design.model.strategy.duckgame.QuackBehavior;
 
 /**
  * MallardDuck 鸭子类型

@@ -1,6 +1,6 @@
-package com.design.model.duckgame.impl;
+package com.design.model.strategy.duckgame.impl;
 
-import com.design.model.duckgame.QuackBehavior;
+import com.design.model.strategy.duckgame.QuackBehavior;
 
 /**
  * Squeak叫声

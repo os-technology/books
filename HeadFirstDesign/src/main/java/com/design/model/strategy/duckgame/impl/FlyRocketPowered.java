@@ -1,6 +1,6 @@
-package com.design.model.duckgame.impl;
+package com.design.model.strategy.duckgame.impl;
 
-import com.design.model.duckgame.FlyBehavior;
+import com.design.model.strategy.duckgame.FlyBehavior;
 
 /**
  * 火箭鸭飞行方式
