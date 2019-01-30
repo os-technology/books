@@ -6,6 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @author code
@@ -16,9 +17,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @Created on 2018/9/29上午11:37
  */
 @SpringBootApplication
+//@EnableWebMvc
 @ComponentScan("com.boot.group")
 @EnableJpaRepositories("com.boot.group.dict.dao")
-@ImportResource({"classpath:application-bean.xml","classpath:spring-mvc.xml"})
+@ImportResource({"classpath:application-bean.xml"})
 public class BootGroupApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(BootGroupApplication.class)

@@ -147,6 +147,65 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  
  链接参考：https://blog.csdn.net/cdsn13082487212/article/details/79515423
  
+
+### 添加页面配置
+
+* 问题1   
+
+ 按照网上说法添加对应依赖之后，启动项目，依旧提示404
+依赖如下：
+
+ ```xml
+<!-- servlet 依赖. -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <!-- 解决访问页面404 -->
+        <!--由于Spring boot使用的内嵌的tomcat，而内嵌的tamcat是不支持jsp页面的，所有需要导入额外的包才能解决。-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+ ```
+
+启动项目报错如下：
+
+```java
+
+java.io.FileNotFoundException: /Users/yujinshui/.m2/repository/com/mchange/c3p0/0.9.5.2/mchange-commons-java-0.2.11.jar (No such file or directory)
+```
+
+解决方案：需要配置启动参数信息(忽略对该jar的检查)
+
+`-Dserver.tomcat.additional-tld-skip-patterns=*mchange-commons-java*.jar`
+
+此时依旧报错
+
+进行`working directory`的配置
+
+点击  `Edit  configurations`，找到对应的应用项目，配置`working directory`信息为`$MODEULE_DIR$`.
+
+配置web路径：
+
+点开 `Project structure`,`Project settings`-->`Modules`,`Deployment Descriptor` 配置`web.xml`路径，`Web Resource Directory`配置webapp路径即可。
+ 
 ### FAQ
 ==**springboot2.0+jpa+hibernate5 ，目前无法进行增删改操作，查询正常。检查事务配置是否正确，或者将hibernate降低为版本4，进行检查。已经找到问题所在。原因如下：**==
 

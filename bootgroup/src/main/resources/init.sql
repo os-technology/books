@@ -25,7 +25,18 @@
 --   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 --   PRIMARY KEY (`id`)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---
+
+
+-- CREATE TABLE `bless_record` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `username` varchar(45) DEFAULT NULL COMMENT '用户名',
+--   `content` varchar(300) DEFAULT NULL COMMENT '祝福内容',
+--   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='祝福记录表';
+
+
+-- -- 插入初始数据操作
 -- INSERT INTO `address` (`address_name`) VALUES ('北京市昌平区小辛庄');
 -- select sleep(1);
 -- INSERT INTO `address` (`address_name`) VALUES ('北京市海淀区丹棱SOHO');
