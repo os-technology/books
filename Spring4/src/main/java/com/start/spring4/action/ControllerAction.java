@@ -1,13 +1,12 @@
 package com.start.spring4.action;
 
-import java.io.PrintWriter;
-import java.util.Map;
-
+import com.start.spring4.entity.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.start.spring4.entity.Person;
+import java.io.PrintWriter;
+import java.util.Map;
 
 @Controller
 @RequestMapping("hello")

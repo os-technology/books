@@ -1,7 +1,6 @@
 package com.code.junit.mock.boot.dict.dao;
 
 import com.code.junit.mock.boot.dict.beans.Company;
-import com.code.junit.mock.boot.dict.beans.MockTable;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

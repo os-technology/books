@@ -1,6 +1,5 @@
 package com.wisely.highlight_spring4.ch2.event;
 
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

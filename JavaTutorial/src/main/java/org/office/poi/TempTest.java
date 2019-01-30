@@ -1,10 +1,5 @@
 package org.office.poi;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.math.BigInteger;
-import java.util.List;
-
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
@@ -13,6 +8,11 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTcPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STVerticalJc;
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.math.BigInteger;
+import java.util.List;
 
 public class TempTest {
 	/**

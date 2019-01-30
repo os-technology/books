@@ -1,8 +1,5 @@
 package org.http.client.init;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -12,8 +9,10 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 1.3 HttpClient执行上下文<br>

@@ -4,8 +4,6 @@ import com.code.junit.mock.boot.dict.beans.User;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
-
 /**
  * @author code
  * @Title: UserMapperProvider

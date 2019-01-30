@@ -1,9 +1,12 @@
 package org.office.poi;
 
-import java.io.*;
-import java.util.*;
-import org.apache.poi.poifs.filesystem.*;
-import org.apache.poi.util.LittleEndian;
+import org.apache.poi.poifs.filesystem.DirectoryEntry;
+import org.apache.poi.poifs.filesystem.DocumentEntry;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class WordTest {
 	public WordTest() {

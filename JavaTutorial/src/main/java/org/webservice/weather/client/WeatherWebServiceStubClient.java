@@ -1,15 +1,10 @@
 package org.webservice.weather.client;
 
-import java.rmi.RemoteException;
-
 import org.apache.axis2.AxisFault;
-import org.webservice.weather.beans.WeatherWebServiceBean;
 import org.webservice.weather.stub.WeatherWebServiceStub;
-import org.webservice.weather.stub.WeatherWebServiceStub.ArrayOfString;
-import org.webservice.weather.stub.WeatherWebServiceStub.GetSupportCity;
-import org.webservice.weather.stub.WeatherWebServiceStub.GetSupportCityResponse;
-import org.webservice.weather.stub.WeatherWebServiceStub.GetWeatherbyCityName;
-import org.webservice.weather.stub.WeatherWebServiceStub.GetWeatherbyCityNameResponse;
+import org.webservice.weather.stub.WeatherWebServiceStub.*;
+
+import java.rmi.RemoteException;
 
 /**
  * 天气预报wsdl调用 WeatherWebServiceStub

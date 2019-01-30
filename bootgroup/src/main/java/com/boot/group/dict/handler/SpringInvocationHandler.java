@@ -1,7 +1,6 @@
 package com.boot.group.dict.handler;
 
 import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.InvocationHandler;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 

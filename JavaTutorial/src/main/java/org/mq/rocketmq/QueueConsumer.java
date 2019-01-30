@@ -2,7 +2,9 @@ package org.mq.rocketmq;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.*;
+import com.alibaba.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
+import com.alibaba.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
+import com.alibaba.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;

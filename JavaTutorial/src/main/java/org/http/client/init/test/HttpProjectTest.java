@@ -1,8 +1,5 @@
 package org.http.client.init.test;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -11,6 +8,9 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class HttpProjectTest {
 

@@ -1,7 +1,6 @@
 package basic.tutorial.list;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class ListTest {
 	

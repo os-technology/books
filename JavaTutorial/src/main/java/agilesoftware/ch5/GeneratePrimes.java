@@ -18,8 +18,6 @@ package agilesoftware.ch5; /**
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.*;
-
 /**
  * Class declaration
  * 版本1 。版本2 参见 PrimeGenerator.java类

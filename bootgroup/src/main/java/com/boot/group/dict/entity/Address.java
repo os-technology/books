@@ -3,7 +3,6 @@ package com.boot.group.dict.entity;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
-import java.util.Date;
 
 /**
  * @author code

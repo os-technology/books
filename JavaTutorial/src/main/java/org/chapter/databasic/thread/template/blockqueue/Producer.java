@@ -1,7 +1,8 @@
 package org.chapter.databasic.thread.template.blockqueue;
 
-import java.util.concurrent.BlockingQueue;
 import org.chapter.databasic.thread.template.concurrency.Message;
+
+import java.util.concurrent.BlockingQueue;
 
 public class Producer implements Runnable {
 	private BlockingQueue<Message> queue;

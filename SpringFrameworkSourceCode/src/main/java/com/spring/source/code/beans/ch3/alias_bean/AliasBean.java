@@ -1,7 +1,5 @@
 package com.spring.source.code.beans.ch3.alias_bean;
 
-import com.spring.source.code.beans.ch2.BeanAttr;
-
 /**
  * alias 标签进行解析
  * @author code

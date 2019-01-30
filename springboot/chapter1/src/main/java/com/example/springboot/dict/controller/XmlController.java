@@ -3,7 +3,9 @@ package com.example.springboot.dict.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.springboot.dict.bean.BundingBean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * xml  https://blog.csdn.net/dmw412724/article/details/75106254

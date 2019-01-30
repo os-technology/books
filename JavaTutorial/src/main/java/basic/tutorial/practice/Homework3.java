@@ -1,7 +1,6 @@
 package basic.tutorial.practice;
 
 import java.util.Arrays;
-import java.util.StringTokenizer;
 
 /**
  * 作业三

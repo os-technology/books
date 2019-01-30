@@ -1,8 +1,7 @@
 package org.office.poi;
 
-import java.io.File;
-
 import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 
 public class DesktopPath {
 	/**

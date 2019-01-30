@@ -1,7 +1,5 @@
 package org.beans.response;
 
-import org.beans.request.HxbDataContent;
-
 /**
  * @author yuijnshui@lxfintech.com
  * @Title: NotifyContentData

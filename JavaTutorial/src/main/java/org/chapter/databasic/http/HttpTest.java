@@ -1,12 +1,12 @@
 package org.chapter.databasic.http;
 
-import java.io.IOException;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+
+import java.io.IOException;
 
 public class HttpTest {
 	public void httpRequest1(String url) {

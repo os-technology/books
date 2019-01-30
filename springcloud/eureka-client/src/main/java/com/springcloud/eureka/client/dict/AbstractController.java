@@ -1,11 +1,5 @@
 package com.springcloud.eureka.client.dict;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author: Leo
  * @Blog: http://blog.csdn.net/lc0817

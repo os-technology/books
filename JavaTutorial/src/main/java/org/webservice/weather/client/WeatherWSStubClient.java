@@ -1,25 +1,12 @@
 package org.webservice.weather.client;
 
-import java.rmi.RemoteException;
-
-import javax.xml.stream.XMLStreamException;
-
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.AxisFault;
-
 import org.webservice.weather.stub.WeatherWSStub;
-import org.webservice.weather.stub.WeatherWSStub.ArrayOfString;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionCountry;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionCountryResponse;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionDataset;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionDatasetResponse;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionDatasetResult_type0;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionProvince;
-import org.webservice.weather.stub.WeatherWSStub.GetRegionProvinceResponse;
-import org.webservice.weather.stub.WeatherWSStub.GetSupportCityString;
-import org.webservice.weather.stub.WeatherWSStub.GetSupportCityStringResponse;
-import org.webservice.weather.stub.WeatherWSStub.GetWeather;
-import org.webservice.weather.stub.WeatherWSStub.GetWeatherResponse;
+import org.webservice.weather.stub.WeatherWSStub.*;
+
+import javax.xml.stream.XMLStreamException;
+import java.rmi.RemoteException;
 
 /**
  * WeatherWSStub

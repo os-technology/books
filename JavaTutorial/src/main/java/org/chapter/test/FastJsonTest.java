@@ -1,10 +1,10 @@
 package org.chapter.test;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.alibaba.fastjson.JSON;
 
 public class FastJsonTest {
 

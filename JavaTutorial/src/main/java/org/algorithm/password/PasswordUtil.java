@@ -1,8 +1,8 @@
 package org.algorithm.password;
 
-import java.util.UUID;
-
 import org.algorithm.list.md5.Md5Util;
+
+import java.util.UUID;
 
 public class PasswordUtil {
 

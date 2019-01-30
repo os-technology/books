@@ -1,12 +1,12 @@
 package info.javaperformance.compress;
 
-import net.jpountz.lz4.*;
 import org.openjdk.jmh.annotations.*;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.concurrent.TimeUnit;
 
 /**

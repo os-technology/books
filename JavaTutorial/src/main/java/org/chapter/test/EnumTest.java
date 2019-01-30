@@ -1,7 +1,5 @@
 package org.chapter.test;
 
-import org.chapter.test.type.EnumType;
-
 public class EnumTest {
 
 	public static void e() throws IllegalAccessException {

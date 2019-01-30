@@ -1,10 +1,10 @@
 package org.webservice.weather.reflect;
 
-import java.beans.PropertyDescriptor;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.webservice.weather.beans.WeatherWSStubBean;
+
+import java.beans.PropertyDescriptor;
 
 public class ReflectBean {
 	public static void classPropertyToList(Object object) {

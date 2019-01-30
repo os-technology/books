@@ -1,7 +1,6 @@
 package com.wisely.highlight_spring4.ch3.c4_conditional;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 

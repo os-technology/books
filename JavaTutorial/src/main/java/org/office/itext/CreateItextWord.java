@@ -1,15 +1,13 @@
 package org.office.itext;
 
-import java.awt.Color;
+import com.lowagie.text.*;
+import com.lowagie.text.Font;
+import com.lowagie.text.rtf.RtfWriter2;
+
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Font;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.rtf.RtfWriter2;
 
 public class CreateItextWord {
 	public void createWord(String filePath) {

@@ -1,15 +1,11 @@
 package org.dubbo.provider.boot;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.io.IOException;
 
 @SpringBootApplication(scanBasePackages = "org.dubbo.provider")
 @ImportResource(locations = {"classpath:provider.xml"})

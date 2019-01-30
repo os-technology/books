@@ -1,10 +1,10 @@
 package info.javaperformance.compress;
 
+import org.openjdk.jmh.annotations.Benchmark;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
-
-import org.openjdk.jmh.annotations.Benchmark;
 
 /**
  * JDK GZIP test

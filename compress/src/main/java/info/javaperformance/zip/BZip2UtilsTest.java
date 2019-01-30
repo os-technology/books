@@ -1,12 +1,13 @@
 package info.javaperformance.zip;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * BZip2

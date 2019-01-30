@@ -1,10 +1,9 @@
 package org.springmvc.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {

@@ -1,11 +1,5 @@
 package org.dubbo.consumer.boot;
 
-import java.util.Scanner;
-
-import org.dubbo.inter.api.HelloService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 public class DubboComsumerMain {
 //	public static void main(String[] args) {
 //				ApplicationContext appConsumer = new ClassPathXmlApplicationContext("consumer.xml");

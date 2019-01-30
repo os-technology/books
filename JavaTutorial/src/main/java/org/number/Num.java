@@ -2,8 +2,6 @@ package org.number;
 
 import com.alibaba.fastjson.JSON;
 
-import java.math.BigDecimal;
-
 /**
  * test
  */

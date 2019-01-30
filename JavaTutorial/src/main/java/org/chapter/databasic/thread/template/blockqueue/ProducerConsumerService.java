@@ -1,9 +1,9 @@
 package org.chapter.databasic.thread.template.blockqueue;
 
+import org.chapter.databasic.thread.template.concurrency.Message;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-
-import org.chapter.databasic.thread.template.concurrency.Message;
 
 /**
  * The producer consumer service will create the BlockingQueue with fixed size

@@ -1,13 +1,8 @@
 package org.htmltranslate.dytt;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 //		import com.deal.file.FileWrite;
 

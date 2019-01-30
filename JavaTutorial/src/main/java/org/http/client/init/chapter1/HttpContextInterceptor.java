@@ -1,8 +1,5 @@
 package org.http.client.init.chapter1;
 
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
@@ -15,6 +12,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.HttpContext;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 1.4 HTTP协议拦截器

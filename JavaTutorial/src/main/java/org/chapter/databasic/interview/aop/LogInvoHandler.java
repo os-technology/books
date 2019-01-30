@@ -1,12 +1,12 @@
 package org.chapter.databasic.interview.aop;
 
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import org.apache.log4j.Logger;
 
 /**
  * 实现InvocationHandler接口，使用map来存储不同的InvocationHandler对象，避免生成过多。

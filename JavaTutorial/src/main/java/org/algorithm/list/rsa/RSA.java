@@ -1,9 +1,8 @@
 package org.algorithm.list.rsa;
 
-import javax.crypto.Cipher;
-
 import org.algorithm.list.base64.Base64;
 
+import javax.crypto.Cipher;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
