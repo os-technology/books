@@ -46,6 +46,7 @@
     </style>
 </head>
 
+<script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/placeholderForJSP.js"></script>
 <body style="text-align:center;">
 <br><br><br><br><br><br><br><br><br>
@@ -53,19 +54,28 @@
 
     <table align="center">
         <tr>
-            <td align="center"><input style="width: fit-content;height: 100px" name="name" type="text" placeholder="请输入您的姓名"></td>
+            <td align="center"><input style="width: fit-content;height: 100px" name="name" id="username" type="text" placeholder="请输入您的姓名"></td>
         </tr>
         <tr>
             <td><br><br><br></td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;<input style="width: fit-content;height: 200px" type="submit" class="button red font" value="获取祝福"></td>
+            <td>&nbsp;&nbsp;<input style="width: fit-content;height: 200px" type="submit" id="sub" class="button red font" value="获取祝福"></td>
         </tr>
 
     </table>
 
 </form>
 
+<script type="text/javascript">
+    $("#sub").click(function(){
+        var value = $("#username").val();
+        if(value==null||value==""){
+            alert("请填写您的名称");
+            return false;
+        }
+    });
+</script>
 
 </body>
 </html>
