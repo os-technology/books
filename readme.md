@@ -34,7 +34,7 @@
 |**springbootApplication**| springboot书籍学习|
 |**SpringFrameworkSourceCode**| spring源码学习记录，包含disconf操作(后期可能会进行分离)|
 |**JunitMockTest**| Junit和mock单元测试，基于springboot+mybatis|
-|**bootgroup**| 基于springboot2.0+jpa+hibernate5配置的框架demo|
+|**bootgroup**| 基于springboot2.0+jpa+hibernate5配置的框架demo，集成web访问的idea配置|
 
 
 运行单元测试条件：
