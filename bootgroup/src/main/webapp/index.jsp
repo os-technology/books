@@ -43,18 +43,26 @@
         .font{
             font-size: 100px;
         }
+        input::-webkit-input-placeholder {
+            /* placeholder颜色  */
+            color: #aab2bd;
+            /* placeholder字体大小  */
+            font-size: 30px;
+            /* placeholder位置  */
+            text-align: left;
+        }
     </style>
 </head>
 
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/placeholderForJSP.js"></script>
+<%--<script type="text/javascript" src="/js/placeholderForJSP.js"></script>--%>
 <body style="text-align:center;">
 <br><br><br><br><br><br><br><br><br>
 <form action="/happy" method="post" target="_blank">
 
     <table align="center">
         <tr>
-            <td align="center"><input style="width: fit-content;height: 100px" name="name" id="username" type="text" placeholder="请输入您的姓名"></td>
+            <td align="center"><input style="width: 230px;height: 100px;font-size: 30px; text-align: center" name="name" id="username" type="text" placeholder="请输入您的姓名"></td>
         </tr>
         <tr>
             <td><br><br><br></td>
