@@ -1,5 +1,6 @@
-package com.thread.tutorial.start;
+package com.thread.tutorial.start.ifeve;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,6 +33,12 @@ public class Calculator implements Runnable {
     public static void main(String[] args) {
 
         String logPath = "/Users/yujinshui/Desktop/logs/thread.txt";
+        File fileName = new File(logPath);
+        if (!fileName.getParentFile().exists()) {
+            fileName.getParentFile().mkdirs();
+        }
+
+
         //5. 创建一个大小为10的Thread类的数组和一个大小为10的Thread.State数组来保存将要执行的线程和它们的状态
         Thread[] thread = new Thread[10];
         Thread.State[] state = new Thread.State[10];
@@ -50,7 +57,7 @@ public class Calculator implements Runnable {
         //7.   创建一个 PrintWriter对象用于把线程状态的改变写入文档。
         try (FileWriter file = new FileWriter(logPath);
 //        try (FileWriter file = new FileWriter("./thread.txt");
-             PrintWriter pw = new PrintWriter(file);) {
+             PrintWriter pw = new PrintWriter(file)) {
             //8.   把10个线程的状态写入文档。现在，它成为NEW.
             for (int i = 0; i < 10; i++) {
                 pw.println("Main : Status of Thread " + i + " : " + thread[i].getState());
