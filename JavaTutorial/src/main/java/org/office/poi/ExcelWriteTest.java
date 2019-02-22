@@ -303,7 +303,7 @@ public class ExcelWriteTest {
 		List<Object[]> list = new ArrayList<Object[]>();
 		list.add(header);// title信息
 		for (int i = 0; i < 4; i++) {
-			Object[] e = { "璐璐" + i, "100" + i, "员工" + i,
+			Object[] e = { "张三" + i, "100" + i, "员工" + i,
 					i % 3 == 1 ? "男" : "女" };
 			list.add(e);
 		}

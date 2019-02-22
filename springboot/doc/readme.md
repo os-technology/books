@@ -10,7 +10,7 @@ GitHub源码地址：[https://github.com/dyc87112/SpringBoot-Learning](https://g
 其他参考资料：[https://github.com/rhwayfun/spring-boot-learning-examples](https://github.com/rhwayfun/spring-boot-learning-examples)  
 其他教程地址：[http://www.majunwei.com/view/201708040918493826.html](http://www.majunwei.com/view/201708040918493826.html)  
 **学习位置：**  
-1. [http://blog.didispace.com/springbootproperties/](http://blog.didispace.com/springbootproperties/)
+1. http://blog.didispace.com/springbootexception/
 
 较新版的Spring Boot取消了@SpringApplicationConfiguration这个注解,用@SpringBootTest就可以了，`RunWith`注解指定的class类，使用`SpringJUnit4ClassRunner.class`
 
