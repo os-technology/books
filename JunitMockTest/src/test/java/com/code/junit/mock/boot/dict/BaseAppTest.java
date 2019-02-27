@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = {"classpath:spring-mvc-test.xml",
         "classpath:application-bean-test.xml"})
 @MapperScan("com.code.junit.mock.boot.dict.dao")
-@EnableTransactionManagement
 @ComponentScan("com.code.junit.mock.boot")
 
 //替代@TransactionConfiguration(transactionManager="transactionManager", defaultRollback = false)
