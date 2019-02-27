@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author code
@@ -51,8 +52,8 @@ public class UserDAOTest extends BaseAppTest {
     private User getUser() {
         User user = new User();
         user.setCreateTime(new Date())
-                .setUsername("测试")
-                .setCompanyId("3")
+                .setUsername("测试"+(new Random(10).nextInt()))
+                .setCompanyId("21")
 //                .setUpdateTime()
         ;
         return user;
