@@ -20,27 +20,37 @@ import java.util.*;
 public class TmpTest {
 
 
+    @Test
+    public void phone() {
+        int[] arr = {8, 2, 1, 0, 3};
+        int[] index = {2, 0, 3, 2, 4, 0, 1, 3, 2, 3, 3};
+        String tel = "";
+        for (int i : index) {
+            tel += arr[i];
+        }
+        System.out.println("联系方式：" + tel);
+    }
+
 
     @Test
-    public void cycle(){
+    public void cycle() {
         String first = "https://iqiyi.com-l-iqiyi.com/20190119/21146_3f16f3ea/1000k/hls/85de2e14e5e00";
-        for (int i=0;i<1710;i++){
-            if(i<10) {
-                System.out.println(first+"000" + i + ".ts");
-            }else if(i<100){
-                System.out.println(first+"00" + i + ".ts");
-            }else if (i<1000){
-                System.out.println(first+"0" + i + ".ts");
-            }else {
+        for (int i = 0; i < 1710; i++) {
+            if (i < 10) {
+                System.out.println(first + "000" + i + ".ts");
+            } else if (i < 100) {
+                System.out.println(first + "00" + i + ".ts");
+            } else if (i < 1000) {
+                System.out.println(first + "0" + i + ".ts");
+            } else {
                 System.out.println(first + i + ".ts");
             }
         }
     }
 
 
-
     @Test
-    public void matchString(){
+    public void matchString() {
 
         Assert.assertTrue("hello".matches("^[a-z][a-zA-Z0-9]*$"));
         Assert.assertTrue("helloH".matches("^[a-z][a-zA-Z0-9]*$"));
@@ -51,26 +61,27 @@ public class TmpTest {
 
 
     @Test
-    public void indexof(){
+    public void indexof() {
         String str = "hello/123";
-        System.out.println(str.lastIndexOf('/'));;
+        System.out.println(str.lastIndexOf('/'));
+        ;
     }
 
     /**
      * 冒泡排序
      */
     @Test
-    public void order(){
-        int[] a = {3,2,5,7,1};
+    public void order() {
+        int[] a = {3, 2, 5, 7, 1};
 
-        int tmp=0;
+        int tmp = 0;
 
-        for(int i=0;i<a.length;i++){
-            for (int j=0;j<a.length-1-i;j++){
-                if (a[j] > a[j+1]) {
-                    tmp=a[j];
-                    a[j]=a[j+1];
-                    a[j+1]=tmp;
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length - 1 - i; j++) {
+                if (a[j] > a[j + 1]) {
+                    tmp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = tmp;
                 }
             }
         }

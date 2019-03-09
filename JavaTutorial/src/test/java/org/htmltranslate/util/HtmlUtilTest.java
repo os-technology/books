@@ -1,5 +1,6 @@
 package org.htmltranslate.util;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,43 +18,29 @@ import java.util.ArrayList;
 public class HtmlUtilTest {
 
     @Test
-    public void getHtml(){
-        String url = "http://kdjghb.p9ydy.cn/pf/sx/tiantian.php?from=groupmessage&isappinstalled=0";
-        String html = HtmlUtil.getHtmlByUrl(url);
+    public void getHtml() {
+        String url = "http://www.ygdy8.net/html/gndy/dyzz/index.html";
+        String html = HtmlUtil.getHtmlByUrl(url, "GB2312");
         System.out.println(html);
     }
 
     @Test
     public void testGetHtml() {
-        String url = "https://www.juzimi.com/tags/%E5%88%9B%E4%B8%9A";
         HtmlFilterDataRequest request = getRequest();
-        String site="";
-        for (int i = 0; i < 30; i++) {//分页
-            System.out.println("########第" + i + "页#########");
-            if (i > 0) {
-                site = url + "?page=" + i;
-            }else {
-                site=url;
-            }
-            String html = HtmlUtil.getHtmlByUrl(site);
-            ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
-
-            for (String output : result) {
-                System.out.println(output.trim());
-                System.out.println();
-            }
-        }
+        String html = HtmlUtil.getHtmlByUrl("http://www.ygdy8.net/html/gndy/dyzz/20190306/58284.html", "GB2312");
+        ArrayList<String> result = HtmlUtil.getDataListFromHTML("", html, request);
+        System.out.println(JSON.toJSONString(result));
     }
-
 
     private HtmlFilterDataRequest getRequest() {
         HtmlFilterDataRequest request = new HtmlFilterDataRequest();
-        request.setUrl("https://www.juzimi.com/tags/%E5%88%9B%E4%B8%9A")
-                .setUrlPageSuffix("")
-                .setHtmlStartRange("<div class=\"xqfamwritercount\">")
-                .setHtmlEndRange("<div class=\"item-list\">")
-                .setTranslateStart("data=\"{'text':'")
-                .setTranslateEnd("','url':'https://www.juzimi.com/ju/");
+        //注释部分的参数因为用不到，但是为了让读者更好的理解，所以没有删除
+        request//.setUrl("")
+        // .setUrlPageSuffix("")
+        // .setHtmlStartRange("<div class=\"co_content8\">")
+        // .setHtmlEndRange("<td height=\"25\" align=\"center\" bgcolor=\"#F4FAE2\">")
+                .setTranslateStart("<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><a href=\"")
+                .setTranslateEnd("\">ftp://ygdy8");
 
 
         return request;

@@ -22,23 +22,25 @@ import java.util.ArrayList;
 public class HtmlUtil {
 
 
-    public static String getHtmlByUrl(String webSiteUrl){
-        return getHtmlByUrl(webSiteUrl,"UTF-8");
+    public static String getHtmlByUrl(String webSiteUrl) {
+        return getHtmlByUrl(webSiteUrl, "UTF-8");
     }
+
     /**
      * 获取网站源码[核心方法1]
      *
      * @param webSiteUrl 网站地址
+     * @param encoding   页面编码 (UTF-8)
      * @return
      */
-    public static String getHtmlByUrl(String webSiteUrl,String encoding) {
+    public static String getHtmlByUrl(String webSiteUrl, String encoding) {
         StringBuffer buf = new StringBuffer();
 
         try {
 
             URL url = new URL(webSiteUrl);
             InputStream is = url.openStream();
-            InputStreamReader isr = new InputStreamReader(is,encoding);
+            InputStreamReader isr = new InputStreamReader(is, encoding);
             BufferedReader br = new BufferedReader(isr);
             String line = null;
             while (true) {
@@ -64,8 +66,9 @@ public class HtmlUtil {
     /**
      * 从HTML源码中获取目标内容（核心方法2）
      *
-     * @param mainUrl 网站主页地址[不需要可以为空或null]
-     * @param html    目标地址的网站源码
+     * @param mainUrl               网站主页地址[不需要可以为空或null]
+     * @param html                  目标地址的网站源码
+     * @param htmlFilterDataRequest 解析对象bean
      * @return
      */
     public static ArrayList<String> getDataListFromHTML(String mainUrl, String html,
@@ -104,9 +107,9 @@ public class HtmlUtil {
     }
 
 
-    public static String getSubResultFromString(String input,String start,String end){
+    public static String getSubResultFromString(String input, String start, String end) {
 
-        return input.substring(input.indexOf(start)+1,input.indexOf(end));
+        return input.substring(input.indexOf(start) + 1, input.indexOf(end));
 
     }
 
