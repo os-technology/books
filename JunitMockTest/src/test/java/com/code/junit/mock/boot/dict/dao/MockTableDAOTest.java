@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  * 参考地址：
  * http://www.mybatis.org/mybatis-3/zh/getting-started.html
@@ -49,6 +51,18 @@ public class MockTableDAOTest extends BaseAppTest {
         MockTable result = mockTableDAO.selectById(mockTable.getId());
         Assert.assertNotNull(result);
     }
+    @Test
+    public void testselectByName(){
+        MockTable mockTable = getMockTable();
+        mockTableDAO.save(mockTable);
+        List<MockTable> result = mockTableDAO.selectByName(mockTable.getName());
+        List<MockTable> result2 = mockTableDAO.selectByName(null);
+        Assert.assertNotNull(result);
+        Assert.assertNotNull(result2.size()>0);
+    }
+
+
+
     private MockTable getUpdateMockTable() {
         MockTable table = new MockTable();
         table.setData("test3").setId(1l)
@@ -58,7 +72,7 @@ public class MockTableDAOTest extends BaseAppTest {
     private MockTable getMockTable() {
         MockTable table = new MockTable();
         table.setData("test-"+DateUtils.dateToString("yyyyMMdd-HH:mm"))
-                .setName("mock");
+                .setName("mock"+DateUtils.dateToString("yyyyMMdd-HH:mm"));
         return table;
     }
 }

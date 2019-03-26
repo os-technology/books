@@ -195,6 +195,17 @@
    </bean>
 ```
  
+ **添加自定义参数检查**
+ 
+ ```xml
+  <if test="@com.code.junit.mock.boot.util.MybatisParamsUtil@isNotEmpty(name)">
+            where name=#{name}
+     </if>
+     MybatisParamsUtil：定义的参数校验类
+        isNotEmpty(name)：要调用的函数名
+        同时，dao层函数传参必须添加注解@Param，以保证参数会被mybatis通过getter拿到结果值
+        public List<MockTable> selectByName(@Param("name") String name);
+ ```
 
 ## springboot部分
 * 单元测试注解部分最新配置

@@ -1,6 +1,9 @@
 package com.code.junit.mock.boot.dict.dao;
 
 import com.code.junit.mock.boot.dict.beans.MockTable;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 映射mapper.xml文件操作数据库
@@ -15,5 +18,6 @@ public interface MockTableDAO {
 
     public Long save(MockTable mockTable);
     public MockTable selectById(Long id);
+    public List<MockTable> selectByName(@Param("name") String name);
     public int updateById(MockTable mockTable);
 }

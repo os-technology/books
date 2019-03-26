@@ -37,6 +37,15 @@
         where id=#{id}
     </select>
 
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        <if test="@com.code.junit.mock.boot.util.MybatisParamsUtil@isNotEmpty(name)">
+            where name=#{name}
+        </if>
+    </select>
+
     <update id="updateById"  parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
         update mocktable set name=#{name},data=#{data} where id=#{id}
     </update>
