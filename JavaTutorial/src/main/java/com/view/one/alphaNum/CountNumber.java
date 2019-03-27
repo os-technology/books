@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * @author LiuJian
+ * @author
  *
  */
 public class CountNumber extends Counter {

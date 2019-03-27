@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * @author LiuJian
+ * @author
  */
 public abstract class Counter implements Runnable {
 

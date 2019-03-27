@@ -11,7 +11,7 @@ import java.util.concurrent.locks.Lock;
  * 
  *  数字母:A 通知CountNumeric, B 通知,,and so on
  * 
- * @author LiuJian
+ * @author
  *
  */
 public class CountAlpha extends Counter {

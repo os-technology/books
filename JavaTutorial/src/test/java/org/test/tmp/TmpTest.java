@@ -19,6 +19,18 @@ import java.util.*;
 
 public class TmpTest {
 
+@Test
+    public void compare(){
+    System.out.println(Math.sqrt(16));
+    System.out.println(Long.valueOf(System.currentTimeMillis()/1000).intValue());
+        String a="hello";
+        String b = (a+"a").intern();
+        String c = "helloa";
+
+        System.out.println(c.getBytes());
+        System.out.println(b.getBytes());
+    System.out.println(c==b?true:false);
+    }
 
     @Test
     public void phone() {
