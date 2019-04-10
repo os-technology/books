@@ -71,10 +71,12 @@ public class PrimeGenerator {
     private static void putUncrossedIntegersIntoResult() {
         //创建了一个同样大小的数组来存放这些结果
         result = new int[numberOfUncrossedIntegers()];
-        //把那些没有被过滤掉的证书搬移到结果数组中。
-        for (int j = 0, i = 2; i < crossedOut.length; i++)
+        //把那些没有被过滤掉的整数搬移到结果数组中。
+        for (int j = 0, i = 2; i < crossedOut.length; i++) {
+            System.out.println(crossedOut[i]);
             if (notCrossed(i))
                 result[j++] = i;
+        }
     }
 
     /**
