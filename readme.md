@@ -39,10 +39,10 @@
 
 运行单元测试条件：
 
-* 启动zookeeper dubbo使用 disconf使用
-* 启动consul springcloud模块
-* redis disconf使用
-* nginx disconf使用
+* 启动zookeeper。dubbo使用，disconf使用
+* 启动consul。springcloud模块
+* redis。disconf使用
+* nginx。disconf使用
 
 解决`intellij idea Language Level`版本问题(根据需求修改jdk版本
 )
