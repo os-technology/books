@@ -22,7 +22,7 @@ public class PrimesGenerator {
      */
     public List<Long> getPrimes(long ceiling) {
 
-        List<Long> primes = new LinkedList<Long>();
+        List<Long> primes = new LinkedList<>();
         if (ceiling >= MIN_PRIME) {
             primes.add(MIN_PRIME);
         }
