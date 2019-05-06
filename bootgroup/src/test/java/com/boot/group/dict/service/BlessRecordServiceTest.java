@@ -21,6 +21,23 @@ public class BlessRecordServiceTest extends BootGroupTest {
     @Autowired
     BlessRecordService blessRecordService;
 
+    /**
+     * 注解 @Async的使用
+     */
+    @Test
+    public void asyncMethod(){
+        System.out.println("hello");
+        blessRecordService.asyncMethod(" async");
+        System.out.println("bye");
+
+        // 不让主进程过早结束
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void save(){
         String data = blessRecordService.save("hello");

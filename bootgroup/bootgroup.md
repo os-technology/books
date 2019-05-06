@@ -146,7 +146,20 @@ MySQLInnoDBDialect会在生成的建表SQL语句最后加上"TYPE=InnoDB"。
  ```
  
  链接参考：https://blog.csdn.net/cdsn13082487212/article/details/79515423
- 
+
+### spring注解
+
+#### @Async
+
+   ```xml
+   <!--支持 @Async 注解 必须在 component-scan 注解下面添加-->
+    <task:annotation-driven executor="annotationExecutor"/>
+    <task:executor id="annotationExecutor" pool-size="20"/>
+    <!-- Junit demo参考 BlessRecordServiceTest 类-->
+   
+   ```
+   
+   
 
 ### 添加页面配置
 
