@@ -39,6 +39,10 @@ public class HTMLParser {
 
             s += bStr.length();
             end = html.indexOf(eStr, s);
+//            if (end == -1) {
+//                end = html.indexOf(">ftp://dygod1", s);
+//            }
+
             String url = html.substring(s, end);
             urls.add((mainUrl == null ? "" : mainUrl) + url);
             s = end;
@@ -60,7 +64,8 @@ public class HTMLParser {
 
     /**
      * 获取相关地址信息/联系方式
-     *<td style="WORD-WRAP: break-word" bgcolor="#fdfddf"><a href="
+     * <td style="WORD-WRAP: break-word" bgcolor="#fdfddf"><a href="
+     *
      * @param html
      * @return
      */
@@ -68,7 +73,7 @@ public class HTMLParser {
         String htmlStart = "<div class=\"co_content8\">";// da
         String htmlEnd = "<td height=\"25\" align=\"center\" bgcolor=\"#F4FAE2\">";
         String bStr = "<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><a href=\"";// xiao
-        String eStr = "\">ftp://ygdy8";
+        String eStr = "\">ftp://";
         ArrayList<String> tels = this.getAllUrlFromHTML("", html, "", "", bStr,
                 eStr);
         if (tels.size() > 0)
@@ -82,7 +87,7 @@ public class HTMLParser {
      * @param html
      * @return
      */
-    public String getName(String html,String encoding) {
+    public String getName(String html, String encoding) {
         String htmlStart = "<div class=\"co_area2\">";
         String htmlEnd = "</p> <br><center></center>";
         String bStr = "<font color=#07519a>";

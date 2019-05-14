@@ -2,6 +2,7 @@ package org.test.tmp;
 
 import com.alibaba.fastjson.JSON;
 import org.algorithm.list.base64.Base64;
+import org.beans.UserBean;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,17 +20,51 @@ import java.util.*;
 
 public class TmpTest {
 
-@Test
-    public void compare(){
-    System.out.println(Math.sqrt(16));
-    System.out.println(Long.valueOf(System.currentTimeMillis()/1000).intValue());
-        String a="hello";
-        String b = (a+"a").intern();
+    /**
+     * list 的remove需要使用迭代器处理
+     */
+    @Test
+    public void list() {
+        List<UserBean> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            UserBean bean = new UserBean();
+            bean.setCompanyId(i + "")
+                    .setId(Long.valueOf(i))
+                    .setUsername("张三" + i)
+                    .setAge(14 + i);
+            list.add(bean);
+        }
+        System.out.println("创建list：" + JSON.toJSONString(list));
+        Iterator<UserBean> itor = list.iterator();
+
+        while (itor.hasNext()) {
+            UserBean user = itor.next();
+            if (user.getAge() < 16) {
+                itor.remove();
+            }
+        }
+
+        System.out.println("remove 后的list：" + JSON.toJSONString(list));
+    }
+
+    @Test
+    public void intIncr() {
+        int a = Integer.MAX_VALUE;
+        System.out.println(a);
+        System.out.println(++a);
+    }
+
+    @Test
+    public void compare() {
+        System.out.println(Math.sqrt(16));
+        System.out.println(Long.valueOf(System.currentTimeMillis() / 1000).intValue());
+        String a = "hello";
+        String b = (a + "a").intern();
         String c = "helloa";
 
         System.out.println(c.getBytes());
         System.out.println(b.getBytes());
-    System.out.println(c==b?true:false);
+        System.out.println(c == b ? true : false);
     }
 
     @Test
