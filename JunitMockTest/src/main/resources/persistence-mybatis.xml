@@ -2,86 +2,67 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-autowire="byName" default-lazy-init="false">
-    <!--
-    <context:property-placeholder location="classpath:/META-INF/app.properties" />
-     -->
-    <bean id="DS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass">
-            <value>${jdbc.driverClass}</value>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!--自定义Tomcat配置-->
+                <value>classpath:tomcat.properties</value>
+                <!--1 引入属性文件，在配置中占位使用 -->
+                <value>classpath:app_dev.properties</value>
+                <!--<value>file:/opt/demo/config/demo-remote.properties</value>-->
+            </list>
         </property>
-        <property name="jdbcUrl">
-            <value>${jdbc.url}</value>
-        </property>
-        <property name="user">
-            <value>${jdbc.username}</value>
-        </property>
-        <property name="password">
-            <value>${jdbc.password}</value>
-        </property>
-        <property name="initialPoolSize">
-            <value>3</value>
-        </property>
-        <property name="minPoolSize">
-            <value>3</value>
-        </property>
-        <property name="maxPoolSize">
-            <value>15</value>
-        </property>
-        <!-- 最大空闲时间(单位为秒)，超过空闲时间的连接将被丢弃。为0或负数则永不丢弃。默认为0；-->
-        <property name="maxIdleTime">
-            <value>60000</value>
-        </property>
-        <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目-->
-        <property name="acquireIncrement">
-            <value>3</value>
-        </property>
-        <!-- 在从数据库获取新连接失败后重复尝试获取的次数-->
-        <property name="acquireRetryAttempts">
-            <value>20</value>
-        </property>
-
-        <!-- JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
-                             如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
-        <property name="maxStatements">
-            <value>0</value>
-        </property>
-        <property name="maxStatementsPerConnection">
-            <value>0</value>
-        </property>
-
-        <!--连接关闭时默认将所有未提交的操作回滚 -->
-        <property name="autoCommitOnClose">
-            <value>false</value>
-        </property>
-        <!-- c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能通过多线程实现多个操作同时被执行。Default: 3 -->
-        <property name="numHelperThreads">
-            <value>5</value>
-        </property>
-
-        <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
-                             获取连接失败后该数据源将申明已断开并永久关闭。Default: false-->
-        <property name="breakAfterAcquireFailure">
-            <value>false</value>
-        </property>
-        <!--定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个显著提高测试速度。默认null-->
-        <property name="preferredTestQuery" value="select 1"/>
-        <!--每6个小时检查所有连接池中的空闲连接，这个值一定要小于MySQL的wait_timeout时间，默认为8小时。 单位为秒,默认0 -->
-        <property name="idleConnectionTestPeriod" value="21600"/>
     </bean>
+
+    <bean id="DS" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/dataService?useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true&amp;autoReconnect=true"/>
+        <property name="username" ><value>root</value></property>
+        <property name="password" value="root"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+
+    </bean>
+
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="DS"></property>
     </bean>
+    <!--支持注解驱动的事务管理，指定事务管理器 -->
+    <!--使用基于注解方式配置事务 -->
+    <!-- 全注解方式   需加上@Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
-        <property name="transactionManager" ref="transactionManager">
-        </property>
-    </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="DS"/>
@@ -89,7 +70,13 @@
         <!--mybatis映射文件通用配置方式-->
         <property name="mapperLocations" value="classpath*:mapper/*Mapper.xml"/>
     </bean>
-
+    <!--4 自动扫描对象关系映射 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <!-- 指定要自动扫描接口的基础包，实现接口 -->
+        <property name="basePackage" value="com.code.junit.mock.boot.dict.dao"></property>
+    </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
@@ -97,7 +84,7 @@
     <context:component-scan base-package="com.code.junit.mock.boot.dict.dao"/>
     <!--库表初始化配置-->
     <!--<jdbc:initialize-database data-source="DS" ignore-failures="NONE">-->
-        <!--<jdbc:script location="classpath:init.sql"/>-->
+    <!--<jdbc:script location="classpath:init.sql"/>-->
     <!--</jdbc:initialize-database>-->
 
 
