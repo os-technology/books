@@ -2,6 +2,7 @@ package org.test.tmp;
 
 import com.alibaba.fastjson.JSON;
 import org.algorithm.list.base64.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.beans.UserBean;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,6 +20,38 @@ import java.util.*;
  */
 
 public class TmpTest {
+
+    /**
+     * 测试蹩脚的map赋值操作
+     */
+    @Test
+    public void mapTest(){
+
+        //被赋值的map
+        HashMap wasSetMap = new HashMap();
+
+        //不断变更值的map
+        Map changeMap = null;
+
+        changeMap = wasSetMap;
+
+
+    }
+
+
+    @Test
+    public void spaceClean(){
+        String info = "hello world  haha";
+        System.out.println(StringUtils.deleteWhitespace(info));
+    }
+
+ @Test
+    public void JSONArray(){
+        String info = "[\"红\",\"黄\",\"绿\"]";
+     List<String> list = JSON.parseArray(info, String.class);
+        System.out.println(JSON.toJSONString(list));
+    }
+
 
     /**
      * list 的remove需要使用迭代器处理
