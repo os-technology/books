@@ -13,7 +13,8 @@
     </sql>
 
     <!--useGeneratedKeys="true" 保证返回最新主键-->
-    <insert id="save" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" useGeneratedKeys="true"
+            keyProperty="id">
         insert into mocktable
         (
         id,name,data
@@ -30,11 +31,25 @@
         )
     </insert>
 
-    <select id="selectById" resultMap="BaseResultMap"  parameterType="java.lang.Long">
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="base_Column_list"/>
         from mocktable
         where id=#{id}
+    </select>
+
+    <select id="getPageList" resultMap="BaseResultMap" parameterType="com.code.junit.mock.boot.dict.beans.MockTable">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        where 1=1
+        <if test="name!=null">
+            and name=#{name}
+        </if>
+        <if test="data!=null">
+            and data=#{data}
+        </if>
+        order by id desc
     </select>
 
     <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -46,7 +61,7 @@
         </if>
     </select>
 
-    <update id="updateById"  parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
+    <update id="updateById" parameterType="com.code.junit.mock.boot.dict.beans.MockTable" keyProperty="id">
         update mocktable set name=#{name},data=#{data} where id=#{id}
     </update>
 

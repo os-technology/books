@@ -19,5 +19,6 @@ public interface MockTableDAO {
     public Long save(MockTable mockTable);
     public MockTable selectById(Long id);
     public List<MockTable> selectByName(@Param("name") String name);
+    public List<MockTable> getPageList(MockTable mockTable);
     public int updateById(MockTable mockTable);
 }

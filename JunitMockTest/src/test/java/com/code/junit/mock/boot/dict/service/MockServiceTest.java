@@ -6,6 +6,7 @@ import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.exceptions.ObjectNullException;
 import com.code.junit.mock.boot.util.DateUtils;
 import com.code.junit.mock.boot.util.LogPortal;
+import com.github.pagehelper.PageInfo;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,6 +32,21 @@ public class MockServiceTest extends BaseAppTest {
     private MockService mockService;
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void getPageList(){
+        PageInfo<MockTable> result = mockService.getPageList(1, 3, null);
+        Assert.assertNotNull(result.getSize()==3);
+
+        result = mockService.getPageList(1, 3, getCondition());
+        Assert.assertNotNull(result.getSize()==2);
+    }
+
+    private MockTable getCondition() {
+        MockTable table = new MockTable();
+        table.setData("test1");
+        return table;
+    }
 
     @Test
     public void add() {

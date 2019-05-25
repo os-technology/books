@@ -26,10 +26,15 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 public class MockTableDAOTest extends BaseAppTest {
 
-
-
     @Autowired
     private MockTableDAO mockTableDAO;
+
+
+    @Test
+    public void getPageList(){
+        List<MockTable> list = mockTableDAO.getPageList(null);
+        Assert.assertNotNull(list);
+    }
 
     @Test
     public void saveTest() {

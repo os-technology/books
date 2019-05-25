@@ -2,6 +2,7 @@ package com.code.junit.mock.boot.dict.service;
 
 import com.code.junit.mock.boot.dict.beans.MockTable;
 import com.code.junit.mock.boot.exceptions.ObjectNullException;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author code
@@ -14,6 +15,8 @@ import com.code.junit.mock.boot.exceptions.ObjectNullException;
 public interface MockService {
 
     public void saveMock();
+
+    public PageInfo<MockTable> getPageList(int pageNo,int pageSize,MockTable mockTable);
 
     MockTable saveWithoutSameId(MockTable mockTable);
 

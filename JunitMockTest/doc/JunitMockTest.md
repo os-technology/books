@@ -206,6 +206,62 @@
         同时，dao层函数传参必须添加注解@Param，以保证参数会被mybatis通过getter拿到结果值
         public List<MockTable> selectByName(@Param("name") String name);
  ```
+ 
+ 
+ **mybatis 分页插件配置**
+ 
+ pom依赖配置
+ 
+ ```xml
+ <!--mybatis 分页插件 start-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>5.1.4</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>2.0.3-beta1</version>
+            </dependency>
+            <!--mybatis 分页插件 end-->
+ ```
+
+ mybatis.xml配置
+ 
+ ```xml
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="DS"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--mybatis映射文件通用配置方式-->
+        <property name="mapperLocations" value="classpath*:mapper/*Mapper.xml"/>
+
+        <property name="typeAliasesPackage" value="tk.mybatis.springboot.model"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+                    <property name="properties">
+                        <!--原来的 dialect 变成了 helperDialect，这是基于 PageHelper 方式的分页-->
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+ ```
+
+ 
+ **代码部分**
+ 1. 分页设置代码必须写在SQL执行之前。
+ 2. SQL语句格式为select columeName from table where 1=1 and columName='value' order by id desc 即可，不需要添加limit 0,1 配置。
+ 3. 查询结果需要放入PageInfo类中。里面包含全部分页相关数值信息。
 
 ## springboot部分
 * 单元测试注解部分最新配置

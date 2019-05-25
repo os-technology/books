@@ -6,6 +6,8 @@ import com.code.junit.mock.boot.dict.dao.MockTableDAO;
 import com.code.junit.mock.boot.dict.service.MockService;
 import com.code.junit.mock.boot.exceptions.ObjectNullException;
 import com.code.junit.mock.boot.util.LogPortal;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author code
@@ -35,9 +38,21 @@ public class MockServiceImpl implements MockService {
     }
 
     @Override
+    public PageInfo<MockTable> getPageList(int pageNo, int pageSize, MockTable mockTable) {
+
+        PageHelper.startPage(pageNo, pageSize);
+
+        List<MockTable> list = mockTableDAO.getPageList(mockTable);
+
+        PageInfo<MockTable> pageInfo = new PageInfo<>(list);
+
+        return pageInfo;
+    }
+
+    @Override
     @Transactional
     public MockTable saveWithoutSameId(MockTable mockTable) {
-        LogPortal.info(this,"data is {}",mockTable);
+        LogPortal.info(this, "data is {}", mockTable);
         MockTable result = mockTableDAO.selectById(mockTable.getId());
         if (result != null) {
             return null;
@@ -76,7 +91,7 @@ public class MockServiceImpl implements MockService {
     public MockTable saveMocktable() {
         MockTable data = getMockTable();
         mockTableDAO.save(data);
-        LogPortal.info("输出信息,[{}]",data);
+        LogPortal.info("输出信息,[{}]", data);
         throw new IllegalArgumentException();
     }
 
