@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>chapter1</module>
+        <module>boot-collection</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

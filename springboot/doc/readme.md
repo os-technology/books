@@ -42,3 +42,8 @@ SpringBoot(1.5.6.RELEASE)源码解析
 2)如果需要返回到指定页面，则需要用 @Controller配合视图解析器InternalResourceViewResolver才行。
 3)如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。
 ```
+
+
+### spring提供的内置功能
+
+RestTemplate：内置的HTTP请求操作，封装了httpclient内容。
