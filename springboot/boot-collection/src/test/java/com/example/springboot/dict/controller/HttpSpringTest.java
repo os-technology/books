@@ -1,6 +1,7 @@
 package com.example.springboot.dict.controller;
 
 import com.example.springboot.app.BootCollectionApplication;
+import com.example.springboot.dict.SpringHttpService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,15 +25,28 @@ public class HttpSpringTest {
     @Autowired
     private RestTemplate restTemplate;
 
+
+    @Autowired
+    private SpringHttpService springHttpService;
+
+
     @Test
-    public void httpTest(){
+    public void futureExecute() {
+        String result = springHttpService.futureExecute();
+        System.out.println("输出结果：" + result);
+        Assert.assertNotNull(result);
+    }
+
+
+    @Test
+    public void httpTest() {
 //        ResponseEntity<String> response = restTemplate.getForEntity("http://dev.api.qdingnet.com/qds-payment-admin-web/statement/downloadBillTask?statementDate={date}", String.class, "20190603");
 //        System.out.println("返回结果："+response.getBody());
 //        Assert.assertEquals(200,response.getStatusCode().value());
 
-        ResponseEntity<String> response = restTemplate.getForEntity("http://dev.api.qdingnet.com/qds-payment-admin-web/notify/wechat/receive",String.class);
-        System.out.println("返回结果："+response.getBody());
-        Assert.assertEquals(200,response.getStatusCode().value());
+        ResponseEntity<String> response = restTemplate.getForEntity("http://dev.api.qdingnet.com/qds-payment-admin-web/notify/wechat/receive", String.class);
+        System.out.println("返回结果：" + response.getBody());
+        Assert.assertEquals(200, response.getStatusCode().value());
 
     }
 }

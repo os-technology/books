@@ -22,6 +22,8 @@ public class SpringHttpController {
 
     @RequestMapping("springhttp")
     public String httpRequest(){
+
+
         ResponseEntity<String> response = restTemplate.getForEntity("http://dev.api.qdingnet.com/qds-payment-admin-web/statement/downloadBillTask?statementDate={date}", String.class, "20190603");
         System.out.println(response.getBody());
         return response.getBody();
