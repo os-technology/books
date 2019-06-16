@@ -19,6 +19,8 @@ import java.util.concurrent.*;
 @Service
 public class SpringHttpService {
     ExecutorService executor = Executors.newFixedThreadPool(2);
+    long userWaitTime = 3000;
+    long moneyWaitTime = 2000;
 
     /**
      * 模拟高并发情况下的数据获取方式操作，以节省时间消耗(jd,ali通用)
@@ -28,15 +30,13 @@ public class SpringHttpService {
     public String futureExecute() {
         long time = System.currentTimeMillis();
         Callable<JSONObject> userInfo = () -> {
-            Thread.sleep(3000);//模拟调用接口耗时
-            return JSONObject.parseObject("{\"user\":\"userinfo is ok\"}");
+            return getDataJson(userWaitTime, "{\"user\":\"userinfo is ok\"}");
         };
 
         Callable<JSONObject> moneyInfo = new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                Thread.sleep(2000);//模拟调用接口耗时
-                return JSONObject.parseObject("{\"money\":\"moneyInfo is ok\"}");
+                return getDataJson(moneyWaitTime, "{\"money\":\"moneyInfo is ok\"}");
             }
         };
 
@@ -63,10 +63,36 @@ public class SpringHttpService {
         System.out.println("futureExecute is success ,time is " + (System.currentTimeMillis() - time));
         return jsonObject.toJSONString();
     }
+
+    private JSONObject getDataJson(long i, String s) throws InterruptedException {
+        Thread.sleep(i);//模拟调用接口耗时
+        return JSONObject.parseObject(s);
+    }
+
+
+    /**
+     * 模拟优化之前的数据获取方式
+     */
+    public String originExecuter() {
+        long time = System.currentTimeMillis();
+        try {
+            JSONObject money = getDataJson(moneyWaitTime, "{\"money\":\"moneyInfo is ok\"}");
+            JSONObject user = getDataJson(userWaitTime, "{\"user\":\"userinfo is ok\"}");
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.putAll(user);
+            jsonObject.putAll(money);
+
+            System.out.println("originExecuter is success ,time is " + (System.currentTimeMillis() - time));
+            return jsonObject.toJSONString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 /**
  * 包含返回值的线程为 Callable，没有返回值的线程为 Runnable
- *FutureTask 中的get()方法是一个阻塞方法，在 FutureTask 执行完成后才会进行结果值的获取
+ * FutureTask 中的get()方法是一个阻塞方法，在 FutureTask 执行完成后才会进行结果值的获取
  * 线程池负责提交需要执行的 FutureTask 信息
- *
  */

@@ -36,6 +36,12 @@ public class HttpSpringTest {
         System.out.println("输出结果：" + result);
         Assert.assertNotNull(result);
     }
+    @Test
+    public void originExecuter() {
+        String result = springHttpService.originExecuter();
+        System.out.println("输出结果：" + result);
+        Assert.assertNotNull(result);
+    }
 
 
     @Test
