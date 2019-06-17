@@ -40,12 +40,12 @@ public class SpringHttpService {
             }
         };
 
-//        ShuiFutureTask userTask = new ShuiFutureTask(userInfo);
-//        ShuiFutureTask moneyTask = new ShuiFutureTask(moneyInfo);
+        ShuiFutureTask<JSONObject> userTask = new ShuiFutureTask<>(userInfo);
+        ShuiFutureTask<JSONObject> moneyTask = new ShuiFutureTask<>(moneyInfo);
 
 
-        FutureTask<JSONObject> userTask = new FutureTask<>(userInfo);
-        FutureTask<JSONObject> moneyTask = new FutureTask<>(moneyInfo);
+//        FutureTask<JSONObject> userTask = new FutureTask<>(userInfo);
+//        FutureTask<JSONObject> moneyTask = new FutureTask<>(moneyInfo);
 
         executor.submit(userTask);
         executor.submit(moneyTask);
