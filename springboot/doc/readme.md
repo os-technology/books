@@ -44,6 +44,24 @@ SpringBoot(1.5.6.RELEASE)源码解析
 ```
 
 
-### spring提供的内置功能
+### spring功能
 
-RestTemplate：内置的HTTP请求操作，封装了httpclient内容。
+
+* spring提供的内置功能  
+ RestTemplate：内置的HTTP请求操作，封装了httpclient内容。
+ 
+* async请求  
+  参见`SpringHttpController-asyncRequest`。主线程会很快执行，执行完成后，会直接释放，归还给连接池。执行结果demo如下：
+  
+  ```bash
+  主线程开始.....Thread[http-nio-9090-exec-7,5,main]----1561126125898
+  主线程结束.....Thread[http-nio-9090-exec-7,5,main]----1561126125898
+  子线程开始.....Thread[MvcAsync3,5,main]----1561126125898
+  子线程结束.....Thread[MvcAsync3,5,main]----1561126128902
+  ```
+主线程几乎瞬间完成，Tomcat最大连接数为700，在server.xml中，max-threads=700中进行设置。那么按照demo，原先耗时为3000，按照1ms耗时计算，那么性能会提升3000*700倍。CPU内核数越多，可开启的线程数越多。
+
+
+### 其他
+
+如果是Tomcat部署的springmvc项目，那么对于服务的请求，都是Tomcat线程在进行的处理。

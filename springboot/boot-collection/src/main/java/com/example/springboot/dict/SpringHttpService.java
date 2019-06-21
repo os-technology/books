@@ -22,6 +22,7 @@ public class SpringHttpService {
     long userWaitTime = 3000;
     long moneyWaitTime = 2000;
 
+
     /**
      * 模拟高并发情况下的数据获取方式操作，以节省时间消耗(jd,ali通用)
      *
@@ -89,6 +90,18 @@ public class SpringHttpService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getUserInfo(String userId) {
+        try {
+            Thread.sleep(3000);
+
+            return "用户信息：" + userId;
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 /**
