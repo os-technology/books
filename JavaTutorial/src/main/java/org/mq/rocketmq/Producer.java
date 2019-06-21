@@ -42,14 +42,14 @@ public class Producer {
         //NameServer的地址必须有，但是也可以通过环境变量的方式设置，不一定非得写死在代码里
         producer.setNamesrvAddr(MQConfig.host);
         //为避免程序启动的时候报错，添加此代码，可以让rocketMq自动创建topickey
-        producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+//        producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
         producer.setInstanceName(UUID.randomUUID().toString());
         producer.start();
 
         try {
 //            byte[] message = serialize(getDataSender2(""));
 
-            for (int i=0;i<10000;i++) {
+            for (int i=0;i<1;i++) {
                 byte[] message = serialize("信息发送："+i);
                 SendResult result = sendMsg(producer, message);
                 System.out.println("发送次数："+i+" - "+result.getSendStatus());

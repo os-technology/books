@@ -14,8 +14,8 @@ public class MQConfig {
     }
 
 //    public static final String host = "172.30.21.41:9876;172.30.21.42:9876";
-//    public static final String host = "10.37.251.224:9876";
-public static final String host = "127.0.0.1:9876";
+    public static final String host = "10.37.251.224:9876";
+//public static final String host = "127.0.0.1:9876";
 //    public static final String host = "172.30.21.43:9876";
 
     public static final String group = "demo_group";

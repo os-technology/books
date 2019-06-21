@@ -21,11 +21,34 @@ import java.util.*;
 
 public class TmpTest {
 
+    @Test
+    public void listAdd() {
+        List<UserBean> list1 = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            UserBean bean = new UserBean();
+            bean.setAge(i).setUsername("你好-" + i);
+            list1.add(bean);
+        }
+
+        List<UserBean> list2 = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            UserBean bean = new UserBean();
+            bean.setAge(i).setUsername("世界-" + i);
+            list2.add(bean);
+        }
+
+        list1.addAll(list2);
+
+        System.out.println(JSON.toJSONString(list1));
+
+    }
+
+
     /**
      * 测试蹩脚的map赋值操作
      */
     @Test
-    public void mapTest(){
+    public void mapTest() {
 
         //被赋值的map
         HashMap wasSetMap = new HashMap();
@@ -40,15 +63,15 @@ public class TmpTest {
 
 
     @Test
-    public void spaceClean(){
+    public void spaceClean() {
         String info = "hello world  haha";
         System.out.println(StringUtils.deleteWhitespace(info));
     }
 
- @Test
-    public void JSONArray(){
+    @Test
+    public void JSONArray() {
         String info = "[\"红\",\"黄\",\"绿\"]";
-     List<String> list = JSON.parseArray(info, String.class);
+        List<String> list = JSON.parseArray(info, String.class);
         System.out.println(JSON.toJSONString(list));
     }
 
