@@ -4,5 +4,5 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-lazy-init="false">
-	<bean id="mockController" class="com.code.junit.mock.boot.dict.controller.MockController"></bean>
+	<bean id="mockController" class="com.notes.boot.dict.controller.MockController"></bean>
 </beans>

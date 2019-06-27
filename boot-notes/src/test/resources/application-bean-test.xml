@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
 	   default-lazy-init="false">
 	<!--<import resource="classpath:/dal/persistence-jpa.xml" />-->
-	<context:component-scan base-package="com.code.junit.mock.boot"/>
+	<context:component-scan base-package="com.notes.boot"/>
 	<!--1 引入属性文件，在配置中占位使用 -->
 	<!--<context:property-placeholder location="classpath*:app_dev.properties" />-->
 	<!--自定义Tomcat配置-->
