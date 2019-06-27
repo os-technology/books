@@ -28,8 +28,9 @@
 |**dubbo-parent**| dubbo-demo|
 |**compress**|图片压缩demo|
 |**createBeans**| 通过数据库或者Excel创建bean操作|
+|boot-notes|享学课堂学习笔记汇总整理|
 |**springcloud**| springcloud学习记录，包含web层的单元测试学习|
-|**springboot**| springboot学习记录|
+|**springboot**| springboot学习记录。boot-collection，用于进行相关零散知识的汇总整理|
 |**jmetertest**| jmeter学习记录，实际项目需要执行压测时，可以用作参考|
 |**springbootApplication**| springboot书籍学习|
 |**SpringFrameworkSourceCode**| spring源码学习记录，包含disconf操作(后期可能会进行分离)|

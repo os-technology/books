@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.notes.boot.dict.dao.CategoryDao">
+    <resultMap id="BaseResultMap" type="com.notes.boot.dict.beans.Category" >
+        <result column="id" property="id" />
+        <result column="p_id" property="pId" />
+        <result column="category_name" property="categoryName" />
+        <result column="category_code" property="categoryCode" />
+        <result column="img_url" property="imgUrl" />
+        <result column="type" property="type" />
+        <result column="is_last" property="isLast" />
+        <result column="status" property="status" />
+        <result column="level" property="level" />
+        <result column="sort" property="sort" />
+        <result column="create_at" property="createAt" />
+        <result column="update_at" property="updateAt" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id,p_id,category_name,img_url,status,sort,create_at,update_at,create_by,update_by,level,type,is_last
+    </sql>
+    
+    <insert id="insert" parameterType="com.notes.boot.dict.beans.Category">
+        INSERT INTO category
+        (
+          id,p_id,category_name,img_url,status,sort,create_at,update_at,create_by,update_by,level,type
+        )
+        VALUES
+        (
+          #{ id },#{ pId },#{ categoryName },#{ imgUrl },#{ status },#{ sort },#{ createAt },#{ updateAt },#{ createBy },#{ updateBy },#{level},#{type}
+        )
+    </insert>
+
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+        <include refid="Base_Column_List" />
+      from category
+      where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String" >
+      update category
+      set isdel = 1
+      where id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.notes.boot.dict.beans.Category" >
+        update category
+        <set >         
+          <if test="id != null" >
+            id = #{ id },
+          </if>
+          <if test="pId != null" >
+            p_id = #{ pId },
+          </if>
+          <if test="categoryName != null" >
+            category_name = #{ categoryName },
+          </if>
+          <if test="imgUrl != null" >
+            img_url = #{ imgUrl },
+          </if>
+          <if test="status != null" >
+            status = #{ status },
+          </if>
+          <if test="sort != null" >
+            sort = #{ sort },
+          </if>
+          <if test="createAt != null" >
+            create_at = #{ createAt },
+          </if>
+          <if test="updateAt != null" >
+            update_at = #{ updateAt },
+          </if>
+          <if test="createBy != null" >
+            create_by = #{ createBy },
+          </if>
+          <if test="updateBy != null" >
+            update_by = #{ updateBy },
+          </if>
+            <if test="type != null" >
+                type = #{ type },
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    
+    <select id="getCountByCategory" parameterType="com.notes.boot.dict.beans.Category" resultType="java.lang.Integer">
+    	SELECT count(1) FROM  category t
+    		WHERE  1=1
+    		<if test="id != null">
+	            and t.id != #{ id }
+	        </if>
+    		<if test="pId != null">
+            	and t.p_id = #{ pId }
+	        </if>
+	         <if test="status != null">
+	            and t.status = #{ status }
+	        </if>
+	        <if test="categoryName != null">
+	            and t.category_name = #{ categoryName }
+	        </if>
+    </select>
+    
+   
+
+    <select id="listByPid" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    SELECT
+    t.id,t.p_id,t.category_name,t.type,t.status,t.sort,t.img_url
+    FROM category t
+    <where>
+        <if test="pId != null">
+            and t.p_id = #{ pId }
+        </if>
+        <if test="status != null">
+            and t.status = #{ status }
+        </if>
+    </where>
+    order by t.sort desc,t.update_at desc
+    </select>
+
+    <resultMap id="categoryList" type="com.notes.boot.dict.beans.CategoryDTO">
+        <id property="categoryId" column="categoryId"/>
+        <result property="pid" column="pid"/>
+        <result property="categoryName" column="categoryName"/>
+        <result property="categoryCode" column="categoryCode"/>
+        <result property="imgUrl" column="imgUrl"/>
+        <collection property="childList" ofType="com.notes.boot.dict.beans.CategoryDTO">
+            <id property="categoryId" column="childList.categoryId"/>
+            <result property="pid" column="childList.pid"/>
+            <result property="categoryName" column="childList.categoryName"/>
+            <result property="categoryCode" column="childList.categoryCode"/>
+            <result property="imgUrl" column="childList.imgUrl"/>
+            <collection property="childList" ofType="com.notes.boot.dict.beans.CategoryDTO">
+                <id property="categoryId" column="childList.childList.categoryId"/>
+                <result property="pid" column="childList.childList.pid"/>
+                <result property="categoryName" column="childList.childList.categoryName"/>
+                <result property="categoryCode" column="childList.childList.categoryCode"/>
+                <result property="imgUrl" column="childList.childList.imgUrl"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getCategoryList" resultMap="categoryList">
+       SELECT
+          c1.p_id as "pid",
+          c2.p_id as "childList.pid",
+          c3.p_id as "childList.childList.pid",
+          c1.id as "categoryId",
+          c2.id as "childList.categoryId",
+          c3.id as "childList.childList.categoryId",
+          c1.category_name as"categoryName",
+          c2.category_name as"childList.categoryName",
+          c3.category_name as"childList.childList.categoryName",
+          c1.img_url as"imgUrl",
+          c2.img_url as"childList.imgUrl",
+          c3.img_url as"childList.childList.imgUrl",
+          c1.category_code as"categoryCode",
+          c2.category_code as"childList.categoryCode",
+          c3.category_code as"childList.childList.categoryCode"
+        FROM
+            category c1
+        LEFT JOIN category c2 ON c1.id = c2.p_id
+        <if test="status !=null">
+            AND c2.`status`=#{status}
+        </if>
+        LEFT JOIN category c3 ON c2.id = c3.p_id
+        <if test="status !=null">
+            AND c3.`status`=#{status}
+        </if>
+        <where>
+            c1.p_id=0
+            <if test="status !=null">
+                AND c1.`status`=#{status}
+            </if>
+            <if test="type !=null">
+                AND c1.type=#{type}
+            </if>
+        </where>
+        order by c1.sort asc,c1.update_at DESC
+    </select>
+
+</mapper>

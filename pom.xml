@@ -39,6 +39,7 @@
         <module>JunitMockTest</module>
         <module>ThreadTutorial</module>
         <module>bootgroup</module>
+        <module>boot-notes</module>
     </modules>
     <dependencyManagement>
         <dependencies>

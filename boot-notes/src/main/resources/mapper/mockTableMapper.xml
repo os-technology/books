@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.notes.boot.dict.dao.MockTableDAO">
+    <resultMap id="BaseResultMap" type="com.notes.boot.dict.beans.MockTable">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="data" property="data"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <sql id="base_Column_list">
+    id,name,data,create_time
+    </sql>
+
+    <!--useGeneratedKeys="true" 保证返回最新主键-->
+    <insert id="save" parameterType="com.notes.boot.dict.beans.MockTable" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into mocktable
+        (
+        id,name,data
+        <if test="createTime!=null">
+            ,create_time
+        </if>
+        )
+        values
+        (
+        #{id},#{name},#{data}
+        <if test="createTime!=null">
+            ,#{createTime}
+        </if>
+        )
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        where id=#{id}
+    </select>
+
+    <select id="getPageList" resultMap="BaseResultMap" parameterType="com.notes.boot.dict.beans.MockTable">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        where 1=1
+        <if test="name!=null">
+            and name=#{name}
+        </if>
+        <if test="data!=null">
+            and data=#{data}
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="base_Column_list"/>
+        from mocktable
+        <if test="@com.notes.boot.util.MybatisParamsUtil@isNotEmpty(name)">
+            where name=#{name}
+        </if>
+    </select>
+
+    <update id="updateById" parameterType="com.notes.boot.dict.beans.MockTable" keyProperty="id">
+        update mocktable set name=#{name},data=#{data} where id=#{id}
+    </update>
+
+</mapper>

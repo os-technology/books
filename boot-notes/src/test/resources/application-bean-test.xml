@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
+	   default-lazy-init="false">
+	<!--<import resource="classpath:/dal/persistence-jpa.xml" />-->
+	<context:component-scan base-package="com.code.junit.mock.boot"/>
+	<!--1 引入属性文件，在配置中占位使用 -->
+	<!--<context:property-placeholder location="classpath*:app_dev.properties" />-->
+	<!--自定义Tomcat配置-->
+	<!--<context:property-placeholder location="classpath:tomcat.properties" />-->
+
+
+
+
+	<!--使用TransactionTemplate 不需要显式地开始事务，甚至不需要显式地提交事务。这些步骤都由模板完成。但出现异常时，应通过TransactionStatus 的setRollbackOnly 显式回滚事务。
+       TransactionTemplate 的execute 方法接收一个TransactionCallback 实例。Callback 也是Spring 的经典设计，用于简化用户操作， TransactionCallback 包含如下方法。-->
+	<!--<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">-->
+	<!--<property name="transactionManager" ref="transactionManager">-->
+	<!--</property>-->
+	<!--</bean>-->
+
+
+	<!--6 容器自动扫描IOC组件  -->
+	<!--<context:component-scan base-package="com.zhangguo.bookstore"></context:component-scan>-->
+
+	<!--7 aspectj支持自动代理实现AOP功能 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+	<import resource="classpath*:persistence-mybatis.xml"/>
+</beans>
