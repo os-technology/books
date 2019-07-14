@@ -10,7 +10,7 @@ import java.util.Date;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/2下午12:37
  */
-public class User {
+public class User{
     private Long id;
     private String username;
     private String companyId;

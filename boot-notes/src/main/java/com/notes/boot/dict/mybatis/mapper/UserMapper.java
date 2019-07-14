@@ -2,6 +2,8 @@ package com.notes.boot.dict.mybatis.mapper;
 
 import com.notes.boot.dict.beans.User;
 
+import java.util.List;
+
 /**
  * @author code
  * @Title: UserMapper
@@ -12,5 +14,6 @@ import com.notes.boot.dict.beans.User;
  */
 public interface UserMapper {
 
-    User findAll();
+    List<User> findAll();
+    User selectById(long id);
 }

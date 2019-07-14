@@ -7,6 +7,8 @@ import com.notes.boot.dict.mybatis.session.SqlSession;
 import com.notes.boot.dict.mybatis.session.SqlSessionFactory;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @author code
  * @Title: TestMybatis
@@ -31,7 +33,27 @@ public class TestMybatis {
     }
 
     @Test
+    public void page() {
+        System.out.println("分页总数：3 - " + ((7 - 1) / 3 + 1 == 3));
+        System.out.println("分页总数：2 - " + ((4 - 1) / 3 + 1 == 2));
+        System.out.println("分页总数：2 - " + ((6 / 3) == 2));
+        System.out.println("分页总数：3 - " + ((8 + 1) / 3 == 3));
+    }
+
+    @Test
     public void testFactory() {
+
+        //1. 实例化 SqlSessionFactory，加载数据库配置文件以及mapper.xml文件到 MybatisConfiguration 对象
+        SqlSessionFactory factory = new SqlSessionFactory();
+        //2. 获取 SqlSession 对象
+        SqlSession sqlSession = factory.openSession();
+        System.out.println(sqlSession);
+
+    }
+
+
+    @Test
+    public void testFactory2() {
 
         //1. 实例化 SqlSessionFactory，加载数据库配置文件以及mapper.xml文件到 MybatisConfiguration 对象
         SqlSessionFactory factory = new SqlSessionFactory();
@@ -41,9 +63,20 @@ public class TestMybatis {
         //3. 通过动态代理跨越面向接口编程和 ibatis 编程模型的鸿沟
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         //4. 遵循jdbc规范，通过底层的四大对象的合作完成数据查询和数据转化
-        User user = userMapper.findAll();
-        System.out.println("查询结果：" + JSON.toJSONString(user));
+        List<User> userList = userMapper.findAll();
+        System.out.println("userList 查询结果：" + JSON.toJSONString(userList));
+
+        User user  = userMapper.selectById(1);
+        System.out.println("user查询结果：" + JSON.toJSONString(userList));
 
 
+
+    }
+
+    public void testAutoMapping() {
+        SqlSessionFactory factory = new SqlSessionFactory();
+        //2. 获取 SqlSession 对象
+        SqlSession sqlSession = factory.openSession();
+        sqlSession.getMapper(UserMapper.class);
     }
 }

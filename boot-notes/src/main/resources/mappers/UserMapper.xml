@@ -2,22 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--手写mybatis demo-->
 <mapper namespace="com.notes.boot.dict.mybatis.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.notes.boot.dict.beans.User">
-        <result column="id" property="id"/>
-        <result column="username" property="username"/>
-        <result column="company_id" property="companyId"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-
-    </resultMap>
+    <!--<resultMap id="BaseResultMap" type="com.notes.boot.dict.beans.User">-->
+        <!--<result column="id" property="id"/>-->
+        <!--<result column="username" property="username"/>-->
+        <!--<result column="company_id" property="companyId"/>-->
+        <!--<result column="create_time" property="createTime"/>-->
+        <!--<result column="update_time" property="updateTime"/>-->
+    <!--</resultMap>-->
 
     <select id="findAll" resultType="com.notes.boot.dict.beans.User">
-    select id,username,company_id,create_time,update_time
+    select id,username,company_id as companyId,create_time as createTime,update_time as updateTime
     from user
     </select>
 
     <select id="selectById" resultType="com.notes.boot.dict.beans.User">
-    select id,username,company_id,create_time,update_time
+    select id,username,company_id as companyId,create_time as createTime,update_time as updateTime
     from user where id=?
     </select>
 </mapper>
