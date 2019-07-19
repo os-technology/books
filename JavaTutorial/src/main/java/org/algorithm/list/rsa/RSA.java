@@ -10,6 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -28,7 +30,16 @@ public class RSA {
 	
 	private static final String PRIVATE_KEY_3 = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAN/lFh/G6d6phEgKypF5VGiCJfzAoHyV+nonjCuYwI4J25HiRkAeLWkkASGdKYatalQnwLhgOuGE6BBx2h4zQL72Vi+xP8H5h5t9KUvxvU1gHyZTWQT9gmChM6D29rFpuNam7m2oA5IEXLwEtuFQdJI8YzWqKNifQNvoFgkScklPAgMBAAECgYB0l4d95MfE++G24me6ecRK5/uAM49fUXquQgnsag9b6CY/QeXzXcOoDOfJ6V3GlGfaixkA6pu+9MckSSWctHPyBAIwmC0iiT/T03KkmY6E2FauxJ7PxFTPuNv4QWb8TKOUqUp4L1xEeCHcjQK/5mmo1DbvshaPqPTMzphmne3ZgQJBAPyIFk4ac1lxoEBHIr/Ar0yt7jO40OLGCg3nidGw+mb61WJeGPCXLNWj4q0RQKRLlqfbPvwW3/2IT5k9fDf0cq0CQQDi+E+tkws/NodGb7kBmIipQlvN6UMVTO4tMY7S8fWDZzi9bd/dUOHZV1vPq8WRzeTpoExOP5Cy+FrVtTnAxidrAkEA8pwDYdHDk+C35kjxN2t0fqRyvjoGZHeCXU1eeJggWSMOMczZBPsX1b/3G/IBOlZsTKMz5ZhMZRS59Cy/1DoCmQJAN6ogmHhMtNchvCOgYwTO13wf2dNQkYPJkinqVk/jH7QMFWFCGxxAF7a2HKuLC+RMNQQMUtCCI3KHjIwiuuWeOwJBAKYpLmWRYXeD6aTo8v0PXX9aUCBKA8gJ3rxDwUyp6yqYOeoajB/Uc5EcqpQCsVrG3xKDPWhcJkRH9lFf1S4y27U=";
 	private static final String PUBLIC_KEY_3 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDb+8va4joVwB+cLDXLFd2F6SLOTpP4DasZ+gOizLxW0B/HPwMDRyrlRMOdZiCNSob1iH/NNmgYR5qcO8c/WdvmZ8xGDDq0qassLo1jSaU3sc8FiYA3oL7Xl8uOWnubZ07OronMSVFzlepvW5uDIyMhbDUCYqXmnI9dRrG6P2JvDQIDAQAB";
-	
+
+
+
+	private static final String PRIVATE_KEY_4 = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBANJWbmudv6e6xtvjEPShZICaxE+iklsrjTLrMguH6R3JZCwxaiENeiD73D+7wCxHAs2bU4/hs7/rK3LRxHrH0HE0g3AUK9fTSJdduuxpI88agwNxvARklzXlGC3BF8lYYD5K3bWvI8zmyMHIKjOMcW70gCkaccy6QPc47MHDpaElAgMBAAECgYEAr7X8cHJLlPb3AOHjXDknGDgyHsSUtwze29aW7AMRvwxqXnC5U/tKNxuvlp5ln5eCw/gqClxmKMFwfm62UEtz2FmofjXTFtvKaAH7mjrr+aIcDt1Uf3USCo/hCi1gnXosM1ZwXNxBXYHgATeeXmekxGY0P1s9hCkykYwdfzjSagECQQD3L0eFsoWyS0BY+T4cRQ288xFhdmH6H6fBYvrciItSE09gc2LYOgIUZ9Aj6ZpqMKktDNYcA43DvbKhcdvjtbhhAkEA2da/4Ph8PI2fYc9olECmGqtXmbYKg6w+62k2ymYBbgF0v5Dugk4hXkIH2EnY3gGlk2nL74A5IiLa9VcyAeVPRQJBALUhmC+ImiAEtKp+Od1NXLvRAjOBJFq9R5iWh22DQVRrggcThqMcHtoFGKi4Tcby0YWJmnv8vq1pHLThUliSmQECQEUber3tNsSjDTgja4L0y31UdDMAbG9/Wmqmc0pceAGlFpubZ/8QuEdF3WVBcDpl/Vg5zQfK/tUUh7AjnGq7i50CQQC6VwsMFcsL8TLU4iFZRR5/R/2R/2DNVTpVf4GsJiohxiTHrs5kXtmgz0BP2u62xbfGbEhtIfJYLrFxYk7WxFiA";
+    private static final String PUBLIC_KEY_4 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSVm5rnb+nusbb4xD0oWSAmsRPopJbK40y6zILh+kdyWQsMWohDXog+9w/u8AsRwLNm1OP4bO/6yty0cR6x9BxNINwFCvX00iXXbrsaSPPGoMDcbwEZJc15RgtwRfJWGA+St21ryPM5sjByCozjHFu9IApGnHMukD3OOzBw6WhJQIDAQAB";
+
+
+    private static final String PRIVATE_KEY_5 = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKV8m/Mv2ZWDaDG5d6k5ClSfKIUPSHgzUDjCjuORhlgqxmP3YenegZIKo5Dwbxh26Yx1OyLmGTJu9WFYanLRcRg8UsI0d71mzxKk3lE9oIFE8M5lml/lGtgdq6NqZ3Cxq38JBgYsxeOdF8FcvssDdpVYTnGSmMuAE8kc2kF1L+TlAgMBAAECgYEAnfwWTdYynQA0qrPrPwyLhjnjzxPGFaq3PVjQXQUDAozjlXAIc+LORAQQH0DKbsqnMEaCzFBrYbB4ZhSomzDEC9wK+NsQpEaQPsU2hNrm8eSRrU+PLnECIT2smUV7yYjKqKRQhmZpnHzsbFGVPP3PXTmjoQNVOTqxypwBrUdqYkECQQDRm05MsE06U7z/NCjOcELemVHofvfz0vNRUrY4c6Ad/UqX/8jmyuwin7PfRH2B6iK4SEOiTIFJWuTo9EBBpO8pAkEAyh1joOexBZ3rj27zeVhGAyUTyScqXsFmM9Wz2IdMnBNpJ5tQCspBdCn+p1h6hLbRI4b3as1KQUhjs0VxIxRLXQJBAIz1XYWzNmxYLgyN3jdeRYn/H5cz87mUDq+M6SAzmeUxFn37tPaIVp6+Oa+XFrRMaYb2ig1WV8emCbUjtSawLWkCQQCDtSEeUr1tzpoZjxDES3zcQcYh+A7JTrheIO2gtZJ7xr5om/JOBb0fiNo0jRjR8RxaTXJfu8WewyCNSzxNwsTVAkAp0dPKU+ie/eDBPkucLh/OpK2XulEIxHNaAr1m6SJSUIImyz6NT/Osm9BpV37OvVLWlr5jcaxzS2uiUnAVh8wC";
+    private static final String PUBLIC_KEY_5 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClfJvzL9mVg2gxuXepOQpUnyiFD0h4M1A4wo7jkYZYKsZj92Hp3oGSCqOQ8G8YdumMdTsi5hkybvVhWGpy0XEYPFLCNHe9Zs8SpN5RPaCBRPDOZZpf5RrYHaujamdwsat/CQYGLMXjnRfBXL7LA3aVWE5xkpjLgBPJHNpBdS/k5QIDAQAB";
+
 	public static String ALGORITHM = "RSA";
 
 	public static String SIGN_ALGORITHMS = "SHA1WithRSA";// 摘要加密算饭
@@ -187,7 +198,40 @@ public class RSA {
 		return res;
 
 	}
+    public static String encrypt1( String str, String publicKey ) throws Exception{
+        //base64编码的公钥
+        byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(publicKey);
+        RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(decoded));
+        //RSA加密
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, pubKey);
+        String outStr = org.apache.commons.codec.binary.Base64.encodeBase64String(cipher.doFinal(str.getBytes("UTF-8")));
+        return outStr;
+    }
 
+    /**
+     * RSA私钥解密
+     *
+     * @param str
+     *            加密字符串
+     * @param privateKey
+     *            私钥
+     * @return 铭文
+     * @throws Exception
+     *             解密过程中的异常信息
+     */
+    public static String decrypt1(String str, String privateKey) throws Exception{
+        //64位解码加密后的字符串
+        byte[] inputByte = org.apache.commons.codec.binary.Base64.decodeBase64(str.getBytes("UTF-8"));
+        //base64编码的私钥
+        byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(privateKey);
+        RSAPrivateKey priKey = (RSAPrivateKey) KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
+        //RSA解密
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, priKey);
+        String outStr = new String(cipher.doFinal(inputByte));
+        return outStr;
+    }
 	/**
 	 * 得到私钥对象
 	 * 
@@ -256,15 +300,34 @@ public class RSA {
 		if (content == null) {
 			content = "Hello,world";
 		}
-		String encryptText = encrypt(content, PRIVATE_KEY_3);
+		String encryptText = encrypt(content, PRIVATE_KEY_5);
 		System.out.println("密文：" + encryptText.length());
-		String decryptText = decrypt(encryptText, PUBLIC_KEY_3);
+		String decryptText = decrypt(encryptText, PUBLIC_KEY_5);
 		System.out.println("原文：" + decryptText);
 	}
-
+	public static void integrationTest_DE(String content) {
+		if (content == null) {
+			content = "Hello,world";
+		}
+        String encryptText = null;
+        try {
+            encryptText = encrypt(content, PUBLIC_KEY_4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("密文：" + encryptText.length());
+        String decryptText = null;
+        try {
+            decryptText = decrypt(encryptText, PRIVATE_KEY_4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("原文：" + decryptText);
+	}
 	public static void main(String[] args) {
-//		integrationTest(null);
-		checkSign();
+//		integrationTest("加油");
+//		checkSign();
+        integrationTest_DE("你好");
 	}
 
 }

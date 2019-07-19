@@ -33,16 +33,12 @@ public class SpringHttpController {
         System.out.println("主线程开始....."+Thread.currentThread()+"----"+System.currentTimeMillis());
 
         //子线程处理业务逻辑
-        Callable<String> callable = new Callable<String>() {
+        Callable<String> callable = () -> {
+            System.out.println("子线程开始....."+Thread.currentThread()+"----"+System.currentTimeMillis());
+            String user = springHttpService.getUserInfo(userId);
+            System.out.println("子线程结束....."+Thread.currentThread()+"----"+System.currentTimeMillis());
 
-            @Override
-            public String call() throws Exception {
-                System.out.println("子线程开始....."+Thread.currentThread()+"----"+System.currentTimeMillis());
-                String user = springHttpService.getUserInfo(userId);
-                System.out.println("子线程结束....."+Thread.currentThread()+"----"+System.currentTimeMillis());
-
-                return user;
-            }
+            return user;
         };
 
         System.out.println("主线程结束....."+Thread.currentThread()+"----"+System.currentTimeMillis());
