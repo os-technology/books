@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 参考地址：
@@ -27,6 +29,14 @@ public class MockTableDAOTest extends BaseAppTest {
     @Autowired
     private MockTableDAO mockTableDAO;
 
+
+    public void aa(){
+        Map<String,String> mapval =new HashMap<>();
+
+        Map<String,Map<String,String>> map = new HashMap<>();
+
+        map.put("hello",mapval);
+    }
 
     @Test
     public void getPageList(){

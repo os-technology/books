@@ -1,8 +1,10 @@
 package com.notes.boot.dict.mybatis.executor;
 
+import com.alibaba.fastjson.JSON;
 import com.notes.boot.dict.mybatis.binding.ReflectionUtil;
 import com.notes.boot.dict.mybatis.config.MapperStatement;
 import com.notes.boot.dict.mybatis.config.MybatisConfiguration;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +36,8 @@ public class DefaultMybatisExecutor implements MybatisExecutor {
     @Override
     public <E> List<E> query(MapperStatement ms, Object params) {
         System.out.println("SQL输出：" + ms.getSql());
-        System.out.println("resultType输出：" + ms.getResultType());
+//        System.out.println("resultType输出：" + ms.getResultType());
+//        System.out.println("resultMap输出：" + JSON.toJSONString(ms.getResultMap()));
         //定义返回结果集
         List<E> result = new ArrayList<>();
 
@@ -59,7 +62,7 @@ public class DefaultMybatisExecutor implements MybatisExecutor {
             //执行查询操作，获取ResultSet
             resultSet = preparedStatement.executeQuery();
             //将结果集通过反射技术，填充到list中
-            handleResultSet(resultSet, result, ms.getResultType());
+            handleResultSet(resultSet, result, ms);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,9 +93,9 @@ public class DefaultMybatisExecutor implements MybatisExecutor {
      *
      * @param <E>
      */
-    private <E> void handleResultSet(ResultSet resultSet, List<E> result, String className) {
+    private <E> void handleResultSet(ResultSet resultSet, List<E> result, MapperStatement ms) {
         Class<E> clazz = null;
-
+        String className = StringUtils.isNotEmpty(ms.getResultType()) ? ms.getResultType() : ms.getResultMap().getType();
         try {
             //通过反射获取类对象
             clazz = (Class<E>) Class.forName(className);
@@ -103,7 +106,11 @@ public class DefaultMybatisExecutor implements MybatisExecutor {
             while (resultSet.next()) {
                 Object entity = clazz.newInstance();
 
-                ReflectionUtil.setPropToBeanFromResultSet(entity, resultSet);
+                if (StringUtils.isNotEmpty(ms.getResultType())) {
+                    ReflectionUtil.setPropToBeanFromResultSet(entity, resultSet);
+                } else {
+                    ReflectionUtil.setPropToBeanFromResultSet(entity, resultSet, ms.getResultMap());
+                }
                 result.add((E) entity);
 
             }

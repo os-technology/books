@@ -24,6 +24,10 @@ public class MapperStatement {
      */
     private String resultType;
     /**
+     * 返回map类型
+     */
+    private AttrResultMapper resultMap;
+    /**
      * 要执行的SQL语句
      */
     private String sql;
@@ -61,6 +65,15 @@ public class MapperStatement {
 
     public MapperStatement setSql(String sql) {
         this.sql = sql;
+        return this;
+    }
+
+    public AttrResultMapper getResultMap() {
+        return resultMap;
+    }
+
+    public MapperStatement setResultMap(AttrResultMapper resultMap) {
+        this.resultMap = resultMap;
         return this;
     }
 }

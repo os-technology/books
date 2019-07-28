@@ -1,7 +1,10 @@
 package com.notes.boot.dict.mybatis.session;
 
+import com.notes.boot.dict.mybatis.config.AttrResultMapper;
 import com.notes.boot.dict.mybatis.config.MapperStatement;
 import com.notes.boot.dict.mybatis.config.MybatisConfiguration;
+import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -11,9 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * 1. 把配置文件加载到内存
@@ -45,9 +46,9 @@ public class SqlSessionFactory {
     private static final String DB_CONFIG_FILE = "app_dev.properties";
 
     /**
-     * 加载mapper.xml配置
+     * 加载数据库连接配置
      */
-    private void loadMapperConfig() {
+    private void loadDBConfig() {
 
         InputStream dbInputStream = SqlSessionFactory.class.getClassLoader().getResourceAsStream(DB_CONFIG_FILE);
 
@@ -66,10 +67,11 @@ public class SqlSessionFactory {
 
     }
 
+
     /**
-     * 加载数据库连接配置
+     * 加载mapper.xml配置
      */
-    private void loadDBConfig() {
+    private void loadMapperConfig() {
 
         URL resource = SqlSessionFactory.class.getClassLoader().getResource(MAPPER_CONFIG_LOCATION);
         File mapper = new File(resource.getFile());
@@ -98,39 +100,88 @@ public class SqlSessionFactory {
             Element root = document.getRootElement();
             //获取命名空间
             String namespace = root.attribute("namespace").getData().toString();
+            //加载resultMap元素信息
+            Map<String, AttrResultMapper> attrResultMapperMap = getResultMapContent(root);
             //获取select子节点列表
-            List<Element> selects = root.elements("select");
-            //遍历select节点，将信息记录到MapperStatement对象，并登记到MybatisConfiguration对象中
-            selects.forEach(select -> {
-                //实例化 MapperStatement
-                MapperStatement mapperStatement = new MapperStatement();
-                //读取ID属性
-                String id = select.attribute("id").getData().toString();
-                //读取resultType属性
-                String resultType = select.attribute("resultType").getData().toString();
-                //读取SQL语句信息
-                String sql = select.getData().toString();
-
-                String sourceId = namespace + "." + id;
-
-                //给mapperStatement赋值
-                mapperStatement.setNamespace(namespace)
-                        .setResultType(resultType)
-                        .setSourceId(sourceId)
-                        .setSql(sql);
-
-                //注册到 MybatisConfiguration 对象中
-                conf.getMapperStatementMap().put(sourceId, mapperStatement);
-
-
-            });
+            getSelectContent(root, namespace, attrResultMapperMap);
 
         } catch (DocumentException e) {
             e.printStackTrace();
         }
     }
 
-    public SqlSession openSession(){
+    /**
+     * 加载resultMap元素部分
+     *
+     * @param root
+     */
+    private Map<String, AttrResultMapper> getResultMapContent(Element root) {
+        Map<String, AttrResultMapper> resultMapperMap = new HashMap<>();
+
+        List<Element> resultMapElements = root.elements("resultMap");
+        //遍历select节点，将信息记录到MapperStatement对象，并登记到MybatisConfiguration对象中
+        resultMapElements.forEach(resultMap -> {
+            //拿到resultMap的id值
+            String resultMapId = resultMap.attribute("id").getValue();
+            String type = resultMap.attributeValue("type");
+            Map<String, String> columnProperty = new HashMap<>();
+
+            List<Element> resultList = resultMap.elements("result");
+            resultList.forEach(result -> {
+                columnProperty.put(result.attributeValue("property"), result.attributeValue("column"));
+            });
+
+            AttrResultMapper mapper = new AttrResultMapper();
+            mapper.setColumnProperty(columnProperty)
+                    .setType(type)
+                    .setId(resultMapId);
+
+            resultMapperMap.put(resultMapId, mapper);
+        });
+
+
+        return resultMapperMap;
+    }
+
+    private void getSelectContent(Element root, String namespace, Map<String, AttrResultMapper> attrResultMapperMap) {
+        List<Element> selects = root.elements("select");
+        //遍历select节点，将信息记录到MapperStatement对象，并登记到MybatisConfiguration对象中
+        selects.forEach(select -> {
+            //实例化 MapperStatement
+            MapperStatement mapperStatement = new MapperStatement();
+            //读取ID属性
+            String id = select.attribute("id").getData().toString();
+            //读取resultType属性
+//            String resultType = select.attribute("resultType").getData().toString();
+            Attribute resultTypeAttr = select.attribute("resultType");
+            String resultType = resultTypeAttr == null ? null : resultTypeAttr.getData().toString();
+
+            Attribute resultMapAttr = select.attribute("resultMap");
+            String resultMap = resultMapAttr == null ? null : resultMapAttr.getData().toString();
+
+            //如果resultmap不为空，则查找id为resultMap对应的resultMap元素映射信息，并赋值到该对象中对应位置
+            if (StringUtils.isNotEmpty(resultMap)) {
+                mapperStatement.setResultMap(attrResultMapperMap.get(resultMap));
+            }
+            //读取SQL语句信息
+            String sql = select.getData().toString();
+
+            String sourceId = namespace + "." + id;
+
+            //给mapperStatement赋值
+            mapperStatement.setNamespace(namespace)
+                    .setResultType(resultType)
+                    .setSourceId(sourceId)
+                    .setSql(sql);
+
+            //注册到 MybatisConfiguration 对象中
+            conf.getMapperStatementMap().put(sourceId, mapperStatement);
+
+
+        });
+    }
+
+    public SqlSession openSession() {
         return new DefaultSqlSession(conf);
     }
 }
