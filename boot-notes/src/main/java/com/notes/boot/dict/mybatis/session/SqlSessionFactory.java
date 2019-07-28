@@ -1,6 +1,6 @@
 package com.notes.boot.dict.mybatis.session;
 
-import com.notes.boot.dict.mybatis.config.AttrResultMapper;
+import com.notes.boot.dict.mybatis.config.ResultMapperElement;
 import com.notes.boot.dict.mybatis.config.MapperStatement;
 import com.notes.boot.dict.mybatis.config.MybatisConfiguration;
 import org.apache.commons.lang3.StringUtils;
@@ -101,7 +101,7 @@ public class SqlSessionFactory {
             //获取命名空间
             String namespace = root.attribute("namespace").getData().toString();
             //加载resultMap元素信息
-            Map<String, AttrResultMapper> attrResultMapperMap = getResultMapContent(root);
+            Map<String, ResultMapperElement> attrResultMapperMap = getResultMapContent(root);
             //获取select子节点列表
             getSelectContent(root, namespace, attrResultMapperMap);
 
@@ -115,8 +115,8 @@ public class SqlSessionFactory {
      *
      * @param root
      */
-    private Map<String, AttrResultMapper> getResultMapContent(Element root) {
-        Map<String, AttrResultMapper> resultMapperMap = new HashMap<>();
+    private Map<String, ResultMapperElement> getResultMapContent(Element root) {
+        Map<String, ResultMapperElement> resultMapperMap = new HashMap<>();
 
         List<Element> resultMapElements = root.elements("resultMap");
         //遍历select节点，将信息记录到MapperStatement对象，并登记到MybatisConfiguration对象中
@@ -131,7 +131,7 @@ public class SqlSessionFactory {
                 columnProperty.put(result.attributeValue("property"), result.attributeValue("column"));
             });
 
-            AttrResultMapper mapper = new AttrResultMapper();
+            ResultMapperElement mapper = new ResultMapperElement();
             mapper.setColumnProperty(columnProperty)
                     .setType(type)
                     .setId(resultMapId);
@@ -143,7 +143,7 @@ public class SqlSessionFactory {
         return resultMapperMap;
     }
 
-    private void getSelectContent(Element root, String namespace, Map<String, AttrResultMapper> attrResultMapperMap) {
+    private void getSelectContent(Element root, String namespace, Map<String, ResultMapperElement> attrResultMapperMap) {
         List<Element> selects = root.elements("select");
         //遍历select节点，将信息记录到MapperStatement对象，并登记到MybatisConfiguration对象中
         selects.forEach(select -> {

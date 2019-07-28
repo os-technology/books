@@ -52,6 +52,7 @@ public class DefaultSqlSession implements SqlSession {
 
     /**
      * 动态代理完成mapper接口实现类的生成
+     *
      * @param type
      * @param <T>
      * @return
@@ -59,6 +60,6 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <T> T getMapper(Class<T> type) {
         MapperProxy mp = new MapperProxy(this);
-        return (T) Proxy.newProxyInstance(type.getClassLoader(),new Class[]{type},mp);
+        return (T) Proxy.newProxyInstance(type.getClassLoader(), new Class[]{type}, mp);
     }
 }

@@ -26,7 +26,7 @@ public class MapperStatement {
     /**
      * 返回map类型
      */
-    private AttrResultMapper resultMap;
+    private ResultMapperElement resultMap;
     /**
      * 要执行的SQL语句
      */
@@ -68,11 +68,11 @@ public class MapperStatement {
         return this;
     }
 
-    public AttrResultMapper getResultMap() {
+    public ResultMapperElement getResultMap() {
         return resultMap;
     }
 
-    public MapperStatement setResultMap(AttrResultMapper resultMap) {
+    public MapperStatement setResultMap(ResultMapperElement resultMap) {
         this.resultMap = resultMap;
         return this;
     }

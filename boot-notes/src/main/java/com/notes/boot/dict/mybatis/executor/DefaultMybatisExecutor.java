@@ -65,7 +65,13 @@ public class DefaultMybatisExecutor implements MybatisExecutor {
             handleResultSet(resultSet, result, ms);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
 
 

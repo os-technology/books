@@ -5,13 +5,13 @@ import java.util.Map;
 /**
  * 负责resultMap处理，暂不深入完善
  * @author code
- * @Title: AttrResultMapper
+ * @Title: ResultMapperElement
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: www.qdingnet.com
  * @Created on 2019/7/284:00 PM
  */
-public class AttrResultMapper {
+public class ResultMapperElement {
 private String id;
 
 private String type;
@@ -22,7 +22,7 @@ private Map<String,String> columnProperty;
         return id;
     }
 
-    public AttrResultMapper setId(String id) {
+    public ResultMapperElement setId(String id) {
         this.id = id;
         return this;
     }
@@ -31,7 +31,7 @@ private Map<String,String> columnProperty;
         return type;
     }
 
-    public AttrResultMapper setType(String type) {
+    public ResultMapperElement setType(String type) {
         this.type = type;
         return this;
     }
@@ -40,7 +40,7 @@ private Map<String,String> columnProperty;
         return columnProperty;
     }
 
-    public AttrResultMapper setColumnProperty(Map<String, String> columnProperty) {
+    public ResultMapperElement setColumnProperty(Map<String, String> columnProperty) {
         this.columnProperty = columnProperty;
         return this;
     }

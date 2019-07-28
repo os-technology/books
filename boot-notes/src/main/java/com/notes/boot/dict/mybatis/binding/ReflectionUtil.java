@@ -2,7 +2,7 @@ package com.notes.boot.dict.mybatis.binding;
 
 import com.alibaba.fastjson.JSON;
 import com.notes.boot.dict.beans.User;
-import com.notes.boot.dict.mybatis.config.AttrResultMapper;
+import com.notes.boot.dict.mybatis.config.ResultMapperElement;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -84,7 +84,7 @@ public class ReflectionUtil {
      * @param resultSet 从数据库加载的数据
      * @throws SQLException
      */
-    public static void setPropToBeanFromResultSet(Object entity, ResultSet resultSet, AttrResultMapper arm) throws SQLException {
+    public static void setPropToBeanFromResultSet(Object entity, ResultSet resultSet, ResultMapperElement arm) throws SQLException {
 
         Map<String, String> property = arm.getColumnProperty();
         //通过反射获取对象所有字段
