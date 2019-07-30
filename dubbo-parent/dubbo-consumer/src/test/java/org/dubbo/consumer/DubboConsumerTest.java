@@ -35,6 +35,7 @@ public class DubboConsumerTest {
         registry.setProtocol("zookeeper");
         //dev
         String zookeeper_address_dev="zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183";
+//        String zookeeper_address_dev="zookeeper://10.37.251.221:2181?backup=10.37.251.221:2182,10.37.251.221:2183";
         registry.setAddress(zookeeper_address_dev);
 
          dubbo = new DubboProxyFactory(application,registry);

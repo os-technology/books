@@ -13,12 +13,13 @@
     <!--使用zookeeper注册中心暴露服务地址 -->
     <!--<dubbo:registry address="zookeeper://127.0.0.1:2182"-->
     <!--check="false" subscribe="false" register=""></dubbo:registry>-->
-
+<dubbo:provider accesslog="true"/>
 
     <!--zookeeper集群配置两种方式-->
     <!--集群配置方式一，特别适用于dubbo-admin 和dubbo-monitor-->
     <!--方式一：-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181?backup=127.0.0.1:2182,127.0.0.1:2183"/>
+    <!--<dubbo:registry address="zookeeper://10.37.251.221:2181?backup=10.37.251.221:2182,10.37.251.221:2183"/>-->
     <!--方式二：-->
     <!--<dubbo:registry-->
     <!--protocol="zookeeper"-->
