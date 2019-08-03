@@ -62,6 +62,8 @@ public class SpringHttpService {
             e.printStackTrace();
         }
         System.out.println("futureExecute is success ,time is " + (System.currentTimeMillis() - time));
+        //关闭线程池
+        executor.shutdown();
         return jsonObject.toJSONString();
     }
 
