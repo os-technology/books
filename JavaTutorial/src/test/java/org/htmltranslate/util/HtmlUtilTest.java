@@ -1,10 +1,11 @@
 package org.htmltranslate.util;
 
 import com.alibaba.fastjson.JSON;
-import org.junit.Assert;
 import org.junit.Test;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 
 /**
  * @author yuijnshui@lxfintech.com
@@ -16,6 +17,75 @@ import java.util.ArrayList;
  */
 
 public class HtmlUtilTest {
+
+
+    @Test
+    public void getDownloadUrl() throws ExecutionException, InterruptedException {//优化前：3342，1590，1357，1649，4409，1791
+
+
+        ExecutorService pool = Executors.newCachedThreadPool();
+
+        for (int i = 28; i <= 35; i++) {
+            long time = System.currentTimeMillis();
+            String url = "http://www.meijuniao.com/dianshiju/changanshiershichen/2-" + i + ".html";
+            if (i == 0) continue;
+//            urlArray[i] = url;
+
+
+            Callable<ArrayList<String>> playUrl = () -> {
+                String html = HtmlUtil.getHtmlByUrl(url, "utf-8");
+                HtmlFilterDataRequest request = getHtmlFilterDataRequest();
+                //拿到播放器地址
+                ArrayList<String> playUrlList = HtmlUtil.getDataListFromHTML("http://g.shumafen.cn/api/user/file_jx.php?secret=f3a81974b27a414a&id=", html, request);
+
+                return playUrlList;
+            };
+
+            FutureTask<ArrayList<String>> playUrlTask = new FutureTask<>(playUrl);
+
+            pool.submit(playUrlTask);
+
+
+            Callable<ArrayList<String>> downloadUrl = () -> {
+                ArrayList<String> result = playUrlTask.get();
+                String htmlContent = HtmlUtil.getHtmlByUrl(result.get(0), "utf-8");
+                HtmlFilterDataRequest request = getDownloadBillDataRequest();
+                //获取下载地址
+                return HtmlUtil.getDataListFromHTML("", htmlContent, request);
+            };
+
+            FutureTask<ArrayList<String>> downloadUrlTask = new FutureTask<>(downloadUrl);
+
+            pool.submit(downloadUrlTask);
+
+
+            System.out.println(URLDecoder.decode(downloadUrlTask.get().get(0)));
+
+//            System.out.println("耗时：" + (System.currentTimeMillis() - time));
+        }
+
+
+    }
+
+    private HtmlFilterDataRequest getDownloadBillDataRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("<script type=\"text/javascript\">")
+                .setHtmlEndRange("poster=\"/dplayer/loading.gif")
+                .setTranslateStart("<video src=\"")
+                .setTranslateEnd("\" controls=\"controls\"");
+        return request;
+    }
+
+    private HtmlFilterDataRequest getHtmlFilterDataRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("id=\"zanpiancms_player\">")
+                .setHtmlEndRange("<script src=\"/player/gqyun.js\"></script></div>")
+                .setTranslateStart("{\"url\":\"")
+                .setTranslateEnd("\",\"copyright\":null,\"name\":\"gqyun\"");
+
+
+        return request;
+    }
 
     @Test
     public void getHtml() {
@@ -36,9 +106,9 @@ public class HtmlUtilTest {
         HtmlFilterDataRequest request = new HtmlFilterDataRequest();
         //注释部分的参数因为用不到，但是为了让读者更好的理解，所以没有删除
         request//.setUrl("")
-        // .setUrlPageSuffix("")
-        // .setHtmlStartRange("<div class=\"co_content8\">")
-        // .setHtmlEndRange("<td height=\"25\" align=\"center\" bgcolor=\"#F4FAE2\">")
+                // .setUrlPageSuffix("")
+                // .setHtmlStartRange("<div class=\"co_content8\">")
+                // .setHtmlEndRange("<td height=\"25\" align=\"center\" bgcolor=\"#F4FAE2\">")
                 .setTranslateStart("<td style=\"WORD-WRAP: break-word\" bgcolor=\"#fdfddf\"><a href=\"")
                 .setTranslateEnd("\">ftp://ygdy8");
 
