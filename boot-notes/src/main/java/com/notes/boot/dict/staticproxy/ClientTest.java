@@ -2,6 +2,7 @@ package com.notes.boot.dict.staticproxy;
 
 import com.notes.boot.dict.dynamic.BbFactory;
 import com.notes.boot.dict.dynamic.LisonCompany;
+import com.notes.boot.dict.dynamic.ProxyUtil;
 import com.notes.boot.dict.dynamic.WomanToolsFactory;
 
 /**
@@ -41,6 +42,9 @@ public class ClientTest {
         //二号员工为他服务，完成代购
         lison2.saleWomanTools(1.8f);
 
+
+        ProxyUtil.generateClassFile(manFactory.getClass(),lison1.getClass().getSimpleName());
+        ProxyUtil.generateClassFile(womanFactory.getClass(),lison2.getClass().getSimpleName());
 
     }
 
