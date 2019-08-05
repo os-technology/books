@@ -2,10 +2,17 @@ package com.notes.boot.dict.xml;
 
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
+import org.xml.sax.InputSource;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Source;
+import javax.xml.transform.sax.SAXSource;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.StringReader;
 
 /**
  * @author code
@@ -18,11 +25,14 @@ import java.io.ByteArrayInputStream;
 public class XmlConvertTest {
 
     @Test
-    public void xmlconvert(){
+    public void xmlconvert() {
 
-        String xml =getXml();
+        String xml = getXml();
         XmlBean bean = xmlToObject(XmlBean.class, xml);
         System.out.println(JSON.toJSONString(bean));
+
+        xml = marshall(bean);
+        System.out.println(xml);
     }
 
     private String getXml() {
@@ -42,20 +52,56 @@ public class XmlConvertTest {
 
     /**
      * jdk转换xml字符串为bean对象操作
+     *
      * @param clazz
      * @param content
      * @param <T>
      * @return
      */
-    public static <T> T xmlToObject(Class<T> clazz, String content){
-        try{
+    public static <T> T xmlToObject(Class<T> clazz, String content) {
+        try {
             JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            ByteArrayInputStream in=new ByteArrayInputStream(content.getBytes());
-            return (T)unmarshaller.unmarshal(in);
-        }catch(Exception e){
-           e.printStackTrace();
+            ByteArrayInputStream in = new ByteArrayInputStream(content.getBytes());
+            return (T) unmarshaller.unmarshal(in);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 对象转换为xml字符串
+     *
+     * @param bean
+     * @return
+     */
+    public static String marshall(Object bean) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(bean.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            marshaller.marshal(bean, out);
+            return new String(out.toByteArray(), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static Object xmlToObjectSafe(Class<?> klass, String xml) throws Exception {
+        // 将外部实体、参数实体和内联DTD 都设置为false，从而避免XXE漏洞
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        spf.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        spf.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+        // Do unmarshall operation
+        Source xmlSource = new SAXSource(spf.newSAXParser().getXMLReader(), new InputSource(new StringReader(xml)));
+
+        JAXBContext context = JAXBContext.newInstance(klass);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return unmarshaller.unmarshal(xmlSource);
     }
 }
