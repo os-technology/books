@@ -1,6 +1,7 @@
 package org.test.tmp;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Joiner;
 import org.algorithm.list.base64.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.beans.UserBean;
@@ -20,6 +21,14 @@ import java.util.*;
  */
 
 public class TmpTest {
+
+    @Test
+    public void alpha(){
+        String a = "a1bcd2".substring(0,2);
+        System.out.println(StringUtils.isAlpha(a));
+        String str = Joiner.on("-").join("PAYMENT_MAIN", "hello",123,222);
+        System.out.println(str);
+    }
 
     @Test
     public void listAdd() {

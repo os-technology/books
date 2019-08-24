@@ -25,7 +25,7 @@ public class HtmlUtilTest {
 
         ExecutorService pool = Executors.newCachedThreadPool();
 
-        for (int i = 28; i <= 35; i++) {
+        for (int i = 41; i <= 42; i++) {
             long time = System.currentTimeMillis();
             String url = "http://www.meijuniao.com/dianshiju/changanshiershichen/2-" + i + ".html";
             if (i == 0) continue;

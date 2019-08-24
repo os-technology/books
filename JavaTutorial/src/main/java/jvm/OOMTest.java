@@ -18,12 +18,17 @@ public class OOMTest {
      * 我们常见的OOM（OutOfMemoryError）发生的原因不只是堆内存溢出，堆内存溢出只是OOM其中一种情况，OOM还可能发生在元空间、线程栈、直接内存。
      *
      * 程序启动设置：-Xmx50m -XX:+PrintGCDetails
+     * 查看默认GC类型：-XX:+PrintCommandLineFlags
      *
      * @param args
      */
 
     public static void main(String[] args) {
 
+        oom();
+    }
+
+    private static void oom() {
         List<Byte[]> list = new ArrayList<>();
 
         for (int i=0;i<100;i++){
