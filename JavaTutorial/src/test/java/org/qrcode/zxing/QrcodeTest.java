@@ -9,7 +9,7 @@ public class QrcodeTest {
 
     @Test
     public void createNoLogoQrCode() {
-        String text = "HTTPS://AAX0.CN/5YF8AJFUMFNW1BT5QRYD";
+        String text = "https://qr.alipay.com/bax02862euba3hm8ukpf8091";
         String file = "pic1.jpg";
         try {
             QRCodeUtil.encodeForQrCode(text, "", "/Users/yujinshui/Desktop", true, file);

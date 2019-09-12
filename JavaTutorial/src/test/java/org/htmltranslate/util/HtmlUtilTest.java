@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.concurrent.*;
 
 /**
+ * TODO 是否过滤指定数据，拿到数据的基础上，同时过滤掉一部分额外的数据。
+ * TODO 取数据通过数组方式拿到指定范围内的多组数据，而不仅仅是一组
+ *
  * @author yuijnshui@lxfintech.com
  * @Title: HtmlUtilTest
  * @Copyright: Copyright (c) 2017
@@ -18,7 +21,43 @@ import java.util.concurrent.*;
 
 public class HtmlUtilTest {
 
+    @Test
+    public void getBurnNoticeDownloadUrl() {
+        String url = "https://www.ed2000.com/ShowFile/430673.html";
+        String html = HtmlUtil.getHtmlByUrl(url, "utf-8");
+        //
+        HtmlFilterDataRequest request = getBurnNoticeRequest();
+        ArrayList<String> dataList = HtmlUtil.getDataListFromHTML("", html, request);
 
+        dataList.stream().forEach(data -> {
+            if (filter(data)) {
+                System.out.println(data);
+            }
+        });
+
+    }
+
+    public boolean filter(String input) {
+        boolean flag1 = ((input.contains("720X400") || input.contains("624X352")) && (input.contains("mp4") || input.contains("rmvb")));
+        boolean flag2 = ((input.contains("720X396") || input.contains("512X384")) && input.contains("rmvb"));
+        return flag1 || flag2;
+    }
+
+    private HtmlFilterDataRequest getBurnNoticeRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("<td colspan=\"3\">eD2k链接</td>")
+                .setHtmlEndRange("<input type=\"button\" value=\"下载选中的文件\"")
+                .setTranslateStart("<td width=\"800\"><a href=\"")
+                .setTranslateEnd("\">");
+        return request;
+    }
+
+    /**
+     * 长安十二时辰，下载地址获取
+     *
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     @Test
     public void getDownloadUrl() throws ExecutionException, InterruptedException {//优化前：3342，1590，1357，1649，4409，1791
 
