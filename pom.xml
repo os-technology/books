@@ -40,6 +40,7 @@
         <module>ThreadTutorial</module>
         <module>bootgroup</module>
         <module>boot-notes</module>
+        <module>share-notes</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -88,7 +89,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.4.1.1168</version>
+                <version>3.6.1.1688</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
