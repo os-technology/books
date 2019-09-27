@@ -34,10 +34,16 @@ public class TestMybatis {
 
     @Test
     public void page() {
-        System.out.println("分页总数：3 - " + ((7 - 1) / 3 + 1 == 3));
-        System.out.println("分页总数：2 - " + ((4 - 1) / 3 + 1 == 2));
-        System.out.println("分页总数：2 - " + ((6 / 3) == 2));
-        System.out.println("分页总数：3 - " + ((8 + 1) / 3 == 3));
+//        System.out.println("分页总数：3 - " + ((7 - 1) / 3 + 1 == 3));
+//        System.out.println("分页总数：2 - " + ((4 - 1) / 3 + 1 == 2));
+//        System.out.println("分页总数：2 - " + ((6 / 3) == 2));
+//        System.out.println("分页总数：3 - " + ((8 + 1) / 3 == 3));
+
+        int totalCount = 12;//总记录数
+        int pageSize = 2;//每页记录数
+        System.out.println(((totalCount-1)/pageSize+1));
+
+
     }
 
     @Test
