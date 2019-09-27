@@ -157,7 +157,9 @@ public class LambdaJunitTest {
 
         List<String> languages = Arrays.asList("Java", "Python", "scala", "Shell", "R");
         System.out.println("Language starts with J: ");
-        predicateFilter(languages, x -> x.startsWith("J"));
+
+        languages.stream().filter(x -> x.startsWith("J")).forEach(x-> System.out.println(x+"=="));
+//        predicateFilter(languages, x -> x.startsWith("J"));
 
         System.out.println("\nLanguage ends with a: ");
         predicateFilter(languages, x -> x.endsWith("a"));

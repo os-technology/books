@@ -5,11 +5,9 @@ import org.junit.Test;
 public class QrcodeTest {
 
 
-
-
     @Test
     public void createNoLogoQrCode() {
-        String text = "https://qr.alipay.com/bax02862euba3hm8ukpf8091";
+        String text = "https://qr.alipay.com/bax00078gsctqjtuldfa007d";
         String file = "pic1.jpg";
         try {
             QRCodeUtil.encodeForQrCode(text, "", "/Users/yujinshui/Desktop", true, file);

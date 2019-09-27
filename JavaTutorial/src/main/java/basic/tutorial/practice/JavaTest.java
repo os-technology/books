@@ -17,7 +17,7 @@ public class JavaTest {
 		// 不推荐。使用16-bit 双字节字符编码标准（Unicode 字符集），最多可以
 		// 识别65535个字符。。虽然中文标识符也能够正常编译和运行，
 		// 却不建议使用。
-		String 水 = "yujinshui";
+		String water = "yujinshui";
 	}
 
 	private void charToNumber() {

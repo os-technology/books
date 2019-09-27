@@ -274,6 +274,18 @@
 
         <!-- 天气预报配置 end -->
 
+        <!--嗅探配置 start-->
+        <dependency>
+            <groupId>org.pcap4j</groupId>
+            <artifactId>pcap4j-core</artifactId>
+            <version>[1.0, 2.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pcap4j</groupId>
+            <artifactId>pcap4j-packetfactory-static</artifactId>
+            <version>[1.0, 2.0)</version>
+        </dependency>
+        <!--嗅探配置 end-->
 
         <!-- 邮件发送配置 -->
         <dependency>
