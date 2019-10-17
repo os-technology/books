@@ -23,10 +23,25 @@ import java.util.*;
 public class TmpTest {
 
     @Test
-    public void alpha(){
-        String a = "a1bcd2".substring(0,2);
+    public void listObj() {
+        Map map=new HashMap();
+        List<UserBean> list = new ArrayList<>();
+        map.put("bean",list);
+        System.out.println(JSON.toJSONString(map));
+        UserBean bean = new UserBean();
+        bean.setAge(12).setUsername("测试");
+        list.add(bean);
+        System.out.println(JSON.toJSONString(map));
+
+
+
+    }
+
+    @Test
+    public void alpha() {
+        String a = "a1bcd2".substring(0, 2);
         System.out.println(StringUtils.isAlpha(a));
-        String str = Joiner.on("-").join("PAYMENT_MAIN", "hello",123,222);
+        String str = Joiner.on("-").join("PAYMENT_MAIN", "hello", 123, 222);
         System.out.println(str);
     }
 
