@@ -16,4 +16,5 @@ public interface UserMapper {
 
     List<User> findAll();
     User selectById(long id);
+    User selectByPrimaryKey(long id);
 }

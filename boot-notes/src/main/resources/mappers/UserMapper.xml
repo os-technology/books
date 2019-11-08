@@ -20,4 +20,9 @@
     select id,username,company_id as companyId,create_time as createTime,update_time as updateTime
     from user where id=?
     </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.notes.boot.dict.beans.User">
+    select id,username,company_id ,create_time,update_time
+    from user where id=#{id}
+    </select>
 </mapper>

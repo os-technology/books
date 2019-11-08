@@ -78,6 +78,26 @@ public class TestMybatis {
 
 
     }
+    @Test
+    public void testFactory3() {
+
+        //1. 实例化 SqlSessionFactory，加载数据库配置文件以及mapper.xml文件到 MybatisConfiguration 对象
+        SqlSessionFactory factory = new SqlSessionFactory();
+        //2. 获取 SqlSession 对象
+        SqlSession sqlSession = factory.openSession();
+        System.out.println(sqlSession);
+        //3. 通过动态代理跨越面向接口编程和 ibatis 编程模型的鸿沟
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        //4. 遵循jdbc规范，通过底层的四大对象的合作完成数据查询和数据转化
+        List<User> userList = userMapper.findAll();
+        System.out.println("userList 查询结果：" + JSON.toJSONString(userList));
+
+        User user  = userMapper.selectById(1);
+        System.out.println("user查询结果：" + JSON.toJSONString(userList));
+
+
+
+    }
 
     public void testAutoMapping() {
         SqlSessionFactory factory = new SqlSessionFactory();
