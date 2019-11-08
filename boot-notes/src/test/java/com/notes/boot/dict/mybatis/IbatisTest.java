@@ -37,7 +37,7 @@ public class IbatisTest {
     public void selectList(){
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
-        List<User> user = sqlSession.selectList("com.notes.boot.dict.mybatis.mapper.UserMapper.findList");
+        List<User> user = sqlSession.selectList("com.notes.boot.dict.mybatis.mapper.UserMapper.findAll");
         System.out.println(JSON.toJSONString(user));
     }
 
