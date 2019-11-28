@@ -31,6 +31,14 @@ public class BlessRecordController {
 
         return format(info);
     }
+    @RequestMapping("/ds")
+    public String delAndSave(HttpServletRequest request) {
+
+        blessRecordService.delAndSave();
+
+
+        return format("");
+    }
 
     private String format(String info){
         String data = "<br><br><br><br><br><br>" +

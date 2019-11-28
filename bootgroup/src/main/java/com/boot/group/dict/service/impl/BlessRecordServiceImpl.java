@@ -7,6 +7,7 @@ import com.boot.group.dict.service.BlessRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.security.SecureRandom;
@@ -55,5 +56,18 @@ public class BlessRecordServiceImpl implements BlessRecordService {
                 .setContent(String.format(info[random.nextInt(info.length)], name));
         blessRecordDAO.save(blessRecord);
         return blessRecord.getContent();
+    }
+
+    /**
+     * 此处为了测试jpa的删除插入问题，验证通过，问题复现，jpa事务的确存在问题
+     */
+    @Override
+    @Transactional(rollbackFor = Throwable.class)
+    public void delAndSave() {
+        BlessRecord blessRecord = new BlessRecord();
+        blessRecord.setUsername("啊啊啊")
+                .setContent("hello11");
+        blessRecordDAO.deleteById(56L);
+        blessRecordDAO.save(blessRecord);
     }
 }

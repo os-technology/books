@@ -15,4 +15,6 @@ public interface BlessRecordService {
     void asyncMethod(Object obj);
 
     public String save(String name);
+
+    public void delAndSave();
 }
