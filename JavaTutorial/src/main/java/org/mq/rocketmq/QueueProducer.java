@@ -52,8 +52,9 @@ public class QueueProducer {
         try {
 //            byte[] message = serialize(getDataSender2(""));
 
-            for (int i = 0; i < 10000; i++) {
-                byte[] message = serialize("信息发送：" + i);
+            for (int i = 0; i < 614; i++) {
+//                byte[] message = serialize();
+                byte[] message = ("QueueProducer信息发送：" + i).getBytes();
                 SendResult result = sendMsg(producer, message);
                 System.out.println("发送次数：" + i + " - " + result.getSendStatus());
             }

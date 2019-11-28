@@ -78,14 +78,17 @@ public class QueueConsumer {
 
 
                     if (msg.getTopic().equals(MQConfig.topic)) {
-                        try {
-                            Object obj = deSerialize(msg.getBody());
-                            System.out.println("输出结果：" + JSON.toJSONString(obj));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        String obj = new String(msg.getBody());
+                        System.out.println("输出结果：" + JSON.toJSONString(obj));
+//                        try {
+////                            Object obj = deSerialize(msg.getBody());
+//
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        } catch (ClassNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 }
 

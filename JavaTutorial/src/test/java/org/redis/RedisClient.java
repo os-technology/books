@@ -42,6 +42,7 @@ public class RedisClient {
 		jedis.incr("count");
 		jedis.incr("count");
 		jedis.incr("count");
+		jedis.incrBy("22",2);
 		String count = jedis.get("count");
 		System.out.println(count);
 		Assert.assertEquals(3,Long.valueOf(count).longValue());

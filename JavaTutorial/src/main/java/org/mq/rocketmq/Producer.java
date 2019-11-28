@@ -50,8 +50,9 @@ public class Producer {
 //            byte[] message = serialize(getDataSender2(""));
 
             for (int i=0;i<1;i++) {
-                byte[] message = serialize("信息发送："+i);
-                SendResult result = sendMsg(producer, message);
+//                byte[] message = serialize("信息发送："+i);
+                byte[] message =("信息发送："+i).getBytes();
+                        SendResult result = sendMsg(producer, message);
                 System.out.println("发送次数："+i+" - "+result.getSendStatus());
             }
 

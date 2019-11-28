@@ -22,6 +22,33 @@ import java.util.concurrent.*;
 public class HtmlUtilTest {
 
     @Test
+    public void getYanxiGonglve() {
+        for (int i = 0; i < 70; i++) {
+            String url = "https://www.kankanwu.com/Domestic/yanxigonglue/player-0-" + i + ".html";
+            String html = HtmlUtil.getHtmlByUrl(url, "utf-8");
+            HtmlFilterDataRequest request = getyanxiRequest();
+            ArrayList<String> dataList = HtmlUtil.getDataListFromHTML("", html, request);
+            final int val = i;
+            dataList.stream().forEach(data -> {
+//                data = data.substring(data.lastIndexOf("/"))
+                System.out.println("ffmpeg -i " + data + " -c copy 延禧攻略" + (val + 1) + ".ts");
+
+            });
+        }
+    }
+
+    private HtmlFilterDataRequest getyanxiRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("</tr></table></td></tr></table><iframe")
+                .setHtmlEndRange("border=\"0\" marginwidth=\"0\"")
+                .setTranslateStart("https://www.kankanwu.com/play/index.php?id=")
+                .setTranslateEnd("\" frameborder=");
+
+        return request;
+    }
+
+
+    @Test//https://www.kankanwu.com/Domestic/yanxigonglue/player-0-50.html
     public void getBurnNoticeDownloadUrl() {
         String url = "https://www.ed2000.com/ShowFile/430673.html";
         String html = HtmlUtil.getHtmlByUrl(url, "utf-8");
