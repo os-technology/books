@@ -10,11 +10,17 @@ public class JoinTest implements Runnable {
 		}
 	}
 private void runnableImpl(){
-	 Thread t = new Thread(new RunnableImpl());  
-     t.start();  
-     try {  
-         t.join(1000); 
-         System.out.println("joinFinish");  
+	 Thread t = new Thread(new RunnableImpl());
+     t.start();
+	Thread t1 = new Thread(new RunnableImpl(t,1));
+	t1.start();
+	Thread t2 = new Thread(new RunnableImpl(t1,2));
+	t2.start();
+	try {
+         t2.join();
+//         t1.join();
+//         t2.join();
+         System.out.println("joinFinish");
      } catch (InterruptedException e) {  
          e.printStackTrace();       
      }  
