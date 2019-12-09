@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>rabbitmq-test</module>
+        <module>spring-notes</module>
     </modules>
 
 
