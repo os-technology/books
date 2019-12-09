@@ -1,8 +1,10 @@
 package com.mvn.share.spring.notes;
 
+import com.mvn.share.spring.notes.beans.Student;
 import com.mvn.share.spring.notes.beans.User;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author code
@@ -20,5 +22,13 @@ public class UserTest {
 
         User user = (User)applicationContext.getBean("user");
         System.out.println(user.getUsername());
+    }
+
+    @Test
+    public void test2(){
+ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+
+        Student student = (Student)applicationContext.getBean("student");
+        System.out.println(student.getName());
     }
 }
