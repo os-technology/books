@@ -51,16 +51,13 @@ public class BlockingQueue {
 
     public static void main(String[] args) {
         final BlockingQueue queue = new BlockingQueue(4);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 10; i++) {
-                    try {
-                        queue.enqueue("put value " + i);
-                        System.out.println("put  value is " + i);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    queue.enqueue("put value " + i);
+                    System.out.println("put  value is " + i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -70,7 +67,9 @@ public class BlockingQueue {
             public void run() {
                 try {
                     Thread.sleep(200);
-                    System.out.println(Thread.currentThread().getName() + " - value is " + queue.dequeue());
+                    for (int i=0;i<10;i++){
+                        System.out.println(Thread.currentThread().getName() + " - value is " + queue.dequeue());
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
