@@ -23,19 +23,23 @@ public class Bqueue {
 
     public void add(String val) throws InterruptedException {
         synchronized (this) {
+            //添加数据至最大限制时，进入wait状态
             while (arrays.size() == limit) {
                 this.wait();
             }
-            notifyAll();
+            //如果没有超过最大限制，可以随时进行唤醒
+            this.notifyAll();
             arrays.add(val);
         }
     }
 
     public Object remove() throws InterruptedException {
         synchronized (this) {
+            //移除到数据为空时，进入等待状态
             while (arrays.size() == 0) {
                 this.wait();
             }
+            //如果没有全部移除，随时可以进行唤醒
             this.notifyAll();
             return arrays.remove(0);
         }
