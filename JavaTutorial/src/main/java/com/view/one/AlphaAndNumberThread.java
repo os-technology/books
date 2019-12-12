@@ -13,8 +13,9 @@ public class AlphaAndNumberThread extends Thread {
 		t1 = printNumber();
 		t2 = printAlpha();
 
-		t1.start();
+
 		t2.start();
+		t1.start();
 	}
 
 	private AlphaAndNumberThread printAlpha() {
