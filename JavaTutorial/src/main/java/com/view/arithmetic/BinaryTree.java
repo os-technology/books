@@ -109,7 +109,7 @@ public class BinaryTree {
     //层序遍历
     public void levelOrder(BinaryTreeNode root) {
         BinaryTreeNode temp;
-        Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+        Queue<BinaryTreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             temp = queue.poll();
@@ -122,6 +122,18 @@ public class BinaryTree {
         }
     }
 
+    /**
+     *       1
+     *     /   \
+     *    2     3
+     *   / \   / \
+     *  4   5 6   7
+     *     / \
+     *    8   9
+     *         \
+     *          10
+     * @param args
+     */
     public static void main(String[] args) {
         BinaryTreeNode node10 = new BinaryTreeNode(10, null, null);
         BinaryTreeNode node8 = new BinaryTreeNode(8, null, null);
