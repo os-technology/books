@@ -3,6 +3,8 @@ package com.view.leecode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.Executors;
+
 /**
  * @author code
  * @Title: Solution81Test
@@ -16,6 +18,7 @@ public class Solution81Test {
 
     @Test
     public void test(){
+        Executors.newCachedThreadPool();
         String s = "lee(t(c)o)de)";
         String result = solution81.minRemovedToMakeValid(s);
         Assert.assertEquals("lee(t(c)o)de",result);
