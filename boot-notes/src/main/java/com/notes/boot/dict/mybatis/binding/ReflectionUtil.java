@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.Map;
 
 /**
+ * 第八步 映射查询结果，返回数据
+ *
  * @author code
  * @Title: ReflectionUtil
  * @Copyright: Copyright (c) 2017

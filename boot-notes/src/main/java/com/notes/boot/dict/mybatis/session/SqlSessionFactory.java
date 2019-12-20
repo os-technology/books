@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
+ * 第四步
  * 1. 把配置文件加载到内存
  * 2. 工厂类生产sqlsession
  *
