@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -20,6 +21,40 @@ import java.util.concurrent.*;
  */
 
 public class HtmlUtilTest {
+
+
+    @Test//https://www.kankanwu.com/play/index.php?id
+    public void get庆余年() {
+        String url = "https://www.25ys.com/vod/play/id/42070/sid/1/nid/";
+
+        HtmlFilterDataRequest request = getQingYuNianRequest();
+        String prefix = "ffmpeg -i ";
+        String subfix = " -c copy 庆余年";
+        int count = 44;
+        getResultDataList(count, url, request, prefix, subfix);
+    }
+
+    private HtmlFilterDataRequest getQingYuNianRequest() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+request.setHtmlStartRange("<div class=\"col-lg-wide-8 col-xs-1 padding-0\">")
+        .setHtmlEndRange("src=\"/static/js/player.js\"></script>")
+        .setTranslateStart("\"url\":\"")
+        .setTranslateEnd("\",\"url_next\"");
+        return request;
+    }
+
+    private List<String> getResultDataList(int count, String url, HtmlFilterDataRequest request, String prefixString, String subfixString) {
+        for (int i = 41; i < count; i++) {
+            String html = HtmlUtil.getHtmlByUrl(url + i + ".html", "utf-8");
+            ArrayList<String> dataList = HtmlUtil.getDataListFromHTML("", html, request);
+            final int val = i;
+            dataList.stream().forEach(data -> {
+                System.out.println(prefixString + data + subfixString + (val ) + ".ts");
+
+            });
+        }
+        return null;
+    }
 
     @Test
     public void getYanxiGonglve() {

@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class TencentClassTest {
 
+
+
+
+
     @Test
     public void getClassName() {
 
