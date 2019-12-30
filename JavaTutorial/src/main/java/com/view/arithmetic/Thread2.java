@@ -1,6 +1,7 @@
 package com.view.arithmetic;
 
 /**
+ * 线程交替输出  1a 2b 3c 4d ..... 26z
  * @author code
  * @Title: Thread2
  * @Copyright: Copyright (c) 2017
@@ -10,7 +11,7 @@ package com.view.arithmetic;
  */
 public class Thread2 {
     private static boolean ok = true;//先定一个局变量
-    private static Object lock = new Object();//lock锁
+    private static volatile Object lock = new Object();//lock锁
 
     public static void main(String[] args) {
         Thread t1 = new Thread(() -> {

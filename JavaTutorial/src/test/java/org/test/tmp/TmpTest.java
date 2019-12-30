@@ -21,6 +21,48 @@ import java.util.*;
  */
 
 public class TmpTest {
+    char left = '(';
+    char right = ')';
+    public  int balancedParentheses(String str){
+        String val = handle(str);
+        if(val==null){
+            return -1;
+        }
+        int count = 0;
+        for(int i=0;i<val.length();i++){
+            if (val.charAt(i)==left){
+                count++;
+            }
+
+        }
+        return count;
+    }
+    public  String handle(String s){
+        Stack<Node> stack = new Stack<>();
+        List<Integer> removeIndex = new ArrayList<>();
+
+        for (int i=0;i<s.length();i++){
+            if (s.charAt(i)==left){
+                stack.push(new Node(i,left));
+            }else if (s.charAt(i)==right){
+                if (!stack.isEmpty()&&stack.peek().value==left){
+                    stack.pop();
+                }else {
+                    stack.push(new Node(i,right));
+                }
+            }
+        }
+
+        while (stack.isEmpty()){
+            return s;
+        }
+
+        return null;
+    }
+    @Test
+    public void exam(){
+
+    }
 
     @Test
     public void listObj() {
@@ -368,3 +410,34 @@ public class TmpTest {
     }
 
 }
+
+class Node{
+    int index;
+    Character value;
+
+    public Node(int index, Character value) {
+        this.index = index;
+        this.value = value;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public Node setIndex(int index) {
+        this.index = index;
+        return this;
+    }
+
+    public Character getValue() {
+        return value;
+    }
+
+    public Node setValue(Character value) {
+        this.value = value;
+        return this;
+    }
+}
+
+
+
