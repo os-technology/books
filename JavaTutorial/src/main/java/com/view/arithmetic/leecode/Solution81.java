@@ -1,4 +1,4 @@
-package com.view.leecode;
+package com.view.arithmetic.leecode;
 
 import java.util.ArrayList;
 import java.util.List;

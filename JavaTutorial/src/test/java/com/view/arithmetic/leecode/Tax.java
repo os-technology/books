@@ -1,4 +1,4 @@
-package com.view.leecode;
+package com.view.arithmetic.leecode;
 
 import org.junit.Assert;
 import org.junit.Test;
