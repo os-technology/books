@@ -1,6 +1,8 @@
 package org.sys.thread;
 
 /**
+ * 1.写两个线程，一个线程打印1-52，另一个线程打印字母A-Z。打印顺序为12A34B56C....5152Z。要求用线程通信。
+ *
  * @author yuijnshui@lxfintech.com
  * @Title: NumAndAlphaThread
  * @Copyright: Copyright (c) 2017
@@ -11,7 +13,7 @@ package org.sys.thread;
 
 public class NumAndAlphaThread extends Thread {
     private static Object lock = new Object();
-    static boolean flag = true;
+    static volatile boolean flag = true;
     private static NumAndAlphaThread th1 = null;
     private static NumAndAlphaThread th2 = null;
 
@@ -20,20 +22,19 @@ public class NumAndAlphaThread extends Thread {
             @Override
             public void run() {
                 synchronized (lock) {
-                    for (int i = 65; i < 91; i++) {
-                        if (!flag) {
-                            System.out.println(" " + (char) i + " ");
-                            flag = true;
-                            lock.notify();
+                    for (int i = 'A'; i <= 'Z'; i++) {
+                        while (flag) {
+                            try {
+                                lock.wait();
+                            } catch (Exception e) {
+                                e.printStackTrace();
 
-                            if (i < 91) {
-                                try {
-                                    lock.wait();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
                             }
+
                         }
+                        System.out.print((char) i + " ");
+                        flag = true;
+                        lock.notify();
                     }
                 }
             }
@@ -49,27 +50,34 @@ public class NumAndAlphaThread extends Thread {
                 synchronized (lock) {
 
                     for (int i = 1; i < 53; i++) {
+
+                        while (!flag) {
+                            try {
+                                lock.wait();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
                         System.out.print(i);
                         if (flag && i % 2 == 0) {
-                            lock.notify();
                             flag = false;
-                            if (i < 53) {
-                                try {
-                                    lock.wait();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                            lock.notify();
                         }
+
+
                     }
                 }
             }
         };
     }
 
-    private void result() {//先启动哪个线程也有关系
+    private void result() {
         th2 = printNum();
         th1 = printAlpha();
+
+
         th2.start();
         th1.start();
 
