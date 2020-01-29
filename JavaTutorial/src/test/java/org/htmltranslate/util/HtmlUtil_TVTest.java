@@ -3,6 +3,7 @@ package org.htmltranslate.util;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +14,55 @@ import java.util.concurrent.*;
  * TODO 取数据通过数组方式拿到指定范围内的多组数据，而不仅仅是一组
  *
  * @author yuijnshui@lxfintech.com
- * @Title: HtmlUtilTest
+ * @Title: HtmlUtil_TVTest
  * @Copyright: Copyright (c) 2017
  * @Description: <br>
  * @Company: lxjr.com
  * @Created on 2017/7/22上午11:02
  */
 
-public class HtmlUtilTest {
+public class HtmlUtil_TVTest {
 
+
+    @Test//https://www.tonghuacun.com/detail/60559.html
+    public void get将夜2(){
+String url = "https://www.tonghuacun.com/video/60559-0-";
+        HtmlFilterDataRequest request = getJiangYe2Request();
+        String prefix = "ffmpeg -i ";
+        String subfix = " -c copy 将夜2-";
+        int count = 6;
+        getResultDataList(5,count, url, request, prefix, subfix);
+    }
+
+    private HtmlFilterDataRequest getJiangYe2Request() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("<!--播放开始-->")
+                .setHtmlEndRange("<!--播放结束-->")
+                .setTranslateStart("var now=unescape(\"")
+                .setTranslateEnd("\");var pn=\"dp\"");
+
+        return request;
+    }
+
+    @Test//https://www.kankanwu.com/play/index.php?id
+    public void get甄嬛传() {
+        String url = "https://www.25ys.com/vod/play/id/31505/sid/1/nid/";
+
+        HtmlFilterDataRequest request = get甄嬛传Request();
+        String prefix = "ffmpeg -i ";
+        String subfix = " -c copy 甄嬛传";
+        int count = 77;
+        getResultDataList(1,count, url, request, prefix, subfix);
+    }
+
+    private HtmlFilterDataRequest get甄嬛传Request() {
+        HtmlFilterDataRequest request = new HtmlFilterDataRequest();
+        request.setHtmlStartRange("<div class=\"col-lg-wide-8 col-xs-1 padding-0\">")
+                .setHtmlEndRange("src=\"/static/js/player.js")
+                .setTranslateStart("\"url\":\"")
+                .setTranslateEnd("\",\"url_next\"");
+        return request;
+    }
 
     @Test//https://www.kankanwu.com/play/index.php?id
     public void get庆余年() {
@@ -31,7 +72,7 @@ public class HtmlUtilTest {
         String prefix = "ffmpeg -i ";
         String subfix = " -c copy 庆余年";
         int count = 44;
-        getResultDataList(count, url, request, prefix, subfix);
+        getResultDataList(41,count, url, request, prefix, subfix);
     }
 
     private HtmlFilterDataRequest getQingYuNianRequest() {
@@ -43,13 +84,13 @@ request.setHtmlStartRange("<div class=\"col-lg-wide-8 col-xs-1 padding-0\">")
         return request;
     }
 
-    private List<String> getResultDataList(int count, String url, HtmlFilterDataRequest request, String prefixString, String subfixString) {
-        for (int i = 41; i < count; i++) {
+    private List<String> getResultDataList(int startIndex,int count, String url, HtmlFilterDataRequest request, String prefixString, String subfixString) {
+        for (int i = startIndex; i < count; i++) {
             String html = HtmlUtil.getHtmlByUrl(url + i + ".html", "utf-8");
             ArrayList<String> dataList = HtmlUtil.getDataListFromHTML("", html, request);
             final int val = i;
             dataList.stream().forEach(data -> {
-                System.out.println(prefixString + data + subfixString + (val ) + ".ts");
+                    System.out.println(prefixString + URLDecoder.decode(data).replaceAll("\\\\","") + subfixString + (val ) + ".ts");
 
             });
         }
