@@ -43,19 +43,21 @@ public class RSAEncryptTest {
 
     public static void main(String[] args) throws Exception {
 //        execute();
-//        exe1(private_key,public_key);
-        exe1(PRIVATE_KEY_7,PUBLIC_KEY_7);
+        exe1(private_key,public_key);
+//        exe1(PRIVATE_KEY_7,PUBLIC_KEY_7);
 
 
     }
 
     private static void exe1(String private_key, String public_key) throws Exception {
         //加密字符串
-        String message = "数据信息";
+        String message = "老大美女1111";
 
         String messageEn = encrypt(message, public_key);
         System.out.println(message + "\t加密后的字符串为:" + messageEn);
-        String messageDe = decrypt(messageEn, private_key);
+        String ess = "ZbU7Hjz+2D79MnVgLnTB2lQm3bb2JA+xZ/Zyrt4As3MJVDXByfomacR4WoF7ngcqnm1C99cmG98lsOP3YkG+rCKGK/oirW1Higj4K7r9wVUBojKs6gFleJafK1dOLo11KUTCSSmhJ1YwcY8kn6KInaKotFMzgIea6z2xqgPnYnQ=";
+
+        String messageDe = decrypt(ess, private_key);
         System.out.println("还原后的字符串为:" + messageDe);
     }
 
