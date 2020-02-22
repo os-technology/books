@@ -19,7 +19,7 @@ import java.io.*;
 public class OuterController {
 
     /**
-     * http://localhost:8095/junit/wechat/receive
+     * http://localhost:8095/notes/wechat/receive
      * @param request
      * @param response
      * @throws Exception

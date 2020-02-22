@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 项目访问地址：http://localhost:8095/junit/
+ * 项目访问地址：http://localhost:8095/notes/
  *
  * @author code
  * @Title: WebBootController
@@ -58,7 +58,7 @@ public class MockController {
 
 
     /**
-     * http://localhost:8095/junit/saveInnerTryCatchWithoutRollback
+     * http://localhost:8095/notes/saveInnerTryCatchWithoutRollback
      * 嵌套事务测试 - 内部try-catch,无手动回滚 外部正常
      * 结果：所有数据正常插入，没有回滚
      *
@@ -71,7 +71,7 @@ public class MockController {
     }
 
     /**
-     * http://localhost:8095/junit/saveInnerTryCatchWithRollback
+     * http://localhost:8095/notes/saveInnerTryCatchWithRollback
      * 嵌套事务测试 - 内部try-catch,手动回滚 外部正常
      * 结果：所有数据全部回滚，没有插入
      *
@@ -84,7 +84,7 @@ public class MockController {
     }
 
     /**
-     * http://localhost:8095/junit/saveInnerExceptionWithoutRollbackFor
+     * http://localhost:8095/notes/saveInnerExceptionWithoutRollbackFor
      * 嵌套事务测试 - 内部exception, 事务注解没有rollbackFor,外部正常
      * 结果：所有数据正常回滚，没有插入
      *
@@ -97,7 +97,7 @@ public class MockController {
     }
 
 /**
-     * http://localhost:8095/junit/saveInnerExceptionWithRollbackFor
+     * http://localhost:8095/notes/saveInnerExceptionWithRollbackFor
      * 嵌套事务测试 - 内部exception, 事务注解包含rollbackFor,外部正常
      * 结果：所有数据正常回滚，没有插入
      *
@@ -113,7 +113,7 @@ public class MockController {
 
 
     /**
-     * http://localhost:8095/junit/saveOuterTryCatchWithRollback
+     * http://localhost:8095/notes/saveOuterTryCatchWithRollback
      * 嵌套事务测试 - 外部try-catch,手动回滚 内部正常
      * 结果：所有数据全部回滚
      *
@@ -126,7 +126,7 @@ public class MockController {
     }
 
     /**
-     * http://localhost:8095/junit/saveOuterTryCatchWithRollback
+     * http://localhost:8095/notes/saveOuterTryCatchWithRollback
      * 嵌套事务测试 - 外部Exception， 内部正常
      * 结果：所有数据全部回滚
      *

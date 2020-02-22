@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 /**
- * http://localhost:8095/junit/user
+ * http://localhost:8095/notes/user
  * @author code
  * @Title: UserController
  * @Copyright: Copyright (c) 2017
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     /**
-     * http://localhost:8095/junit/user/report
+     * http://localhost:8095/notes/user/report
      * @param request
      */
     @RequestMapping("report")
