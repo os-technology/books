@@ -3,7 +3,6 @@ package org.htmltranslate.util;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class HtmlUtil_TVTest {
 
 
     @Test//https://www.tonghuacun.com/detail/60559.html
-    public void get将夜2(){
+    public void getJiangYe2(){
 String url = "https://www.tonghuacun.com/video/60559-0-";
         HtmlFilterDataRequest request = getJiangYe2Request();
         String prefix = "ffmpeg -i ";
@@ -45,17 +44,17 @@ String url = "https://www.tonghuacun.com/video/60559-0-";
     }
 
     @Test//https://www.kankanwu.com/play/index.php?id
-    public void get甄嬛传() {
+    public void getZhenHuanZhuan() {
         String url = "https://www.25ys.com/vod/play/id/31505/sid/1/nid/";
 
-        HtmlFilterDataRequest request = get甄嬛传Request();
+        HtmlFilterDataRequest request = getZhenHuanZhuanRequest();
         String prefix = "ffmpeg -i ";
         String subfix = " -c copy 甄嬛传";
         int count = 77;
         getResultDataList(1,count, url, request, prefix, subfix);
     }
 
-    private HtmlFilterDataRequest get甄嬛传Request() {
+    private HtmlFilterDataRequest getZhenHuanZhuanRequest() {
         HtmlFilterDataRequest request = new HtmlFilterDataRequest();
         request.setHtmlStartRange("<div class=\"col-lg-wide-8 col-xs-1 padding-0\">")
                 .setHtmlEndRange("src=\"/static/js/player.js")
@@ -65,7 +64,7 @@ String url = "https://www.tonghuacun.com/video/60559-0-";
     }
 
     @Test//https://www.kankanwu.com/play/index.php?id
-    public void get庆余年() {
+    public void getQingYuNian() {
         String url = "https://www.25ys.com/vod/play/id/42070/sid/1/nid/";
 
         HtmlFilterDataRequest request = getQingYuNianRequest();

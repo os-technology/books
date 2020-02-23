@@ -272,6 +272,14 @@ public class TmpTest {
     }
 
 
+    @Test
+    public void decode(){
+        String input = "iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAABCklEQVQ4T2NkwAE2bNhi+/fv/1IGRiYTsJL//84wMzN2BwT4HMamhRGb4Jp1W6r///+fxsLEVPHvH/MBkBompr8Of/7962BiYJwZHOzThq4PwyCQS37//b+El5vV0MPD4x2yhh07dgh9/vr7PCszYwy6yzAMWrt28yYmJqblgYHey7G5dv36rZH//v2LDA729UOWxzRo3dZnDP+ZjYODPZ5jM2jt2h2SDIx/zwYHeUvhNWjN2i3/Q4J9sIYdTCM2NRgaKDZo9dqtbxkZ/gvhSg7YxP8zML4LDfYWBsnBXUSMS9ANQ9YzBA1au3bLVpCXgoN9vCnyGigcQAZgSxJDPIzwpSvaeo3SlA0AFFGwE+ewhSsAAAAASUVORK5CYII=";
+
+        System.out.println(Base64.decode(input));
+    }
+
+
     /**
      * 二进制输出
      */
