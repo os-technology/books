@@ -6,7 +6,7 @@
 |https://github.com/lxy-go/SpringBoot|这是一个B站的SpringBoot的入门程序集锦，B站上是16小时的教程。|
 |https://github.com/YunaiV/SpringBoot-Labs|该项目是基于 Spring Boot 2.X 版本的深度入门教程。<br>* 在带你快速学会 SpringMVC API 接口的编写的同时，还想告诉你还有全局返回、全局异常、拦截器、跨域处理等等功能。<br>* 在带你快速学会 MQ 消息的发送与消费的同时，还想告诉你 MQ 还有集群消费、广播消费、顺序消息、定时消息、事务消息、消费重试等等特性。<br> * 在带你快速学会 Job 任务的编写的同时，还想告诉你还有 Quartz 单体、Quartz 集群、XXL-JOB 等等企业使用更多的调度平台。|
 |https://github.com/zuihou/zuihou-admin-cloud|该项目是基于SpringCloud(Hoxton.SR1) + SpringBoot(2.2.2.RELEASE) 的SaaS 微服务脚手架，具有统一授权、认证后台管理系统，其中包含具备用户管理、资源权限管理、网关API、分布式事务、大文件断点分片续传等多个模块，支持多业务系统并行开发，可以作为后端服务的开发脚手架。代码简洁，架构清晰，适合学习和直接项目中使用。核心技术采用Nacos、Fegin、Ribbon、Zuul、Hystrix、JWT Token、Mybatis、SpringBoot、Redis、RibbitMQ等主要框架和中间件。|
-
+|https://github.com/zg-jack|享学课堂Jack教师源码笔记|
 * 算法学习
 
 |地址|项目说明|
