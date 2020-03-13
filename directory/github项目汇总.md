@@ -26,3 +26,9 @@
 |地址|项目说明|
 |---|---|
 |https://github.com/monkeyWie/proxyee-down|proxyee-down 是一个开源的下载神器，也可以说是百度云神器，不过，它需要安装证书、设置代理，初次使用会略显繁琐，但带来的速度提升也是显而易见的。现已改为https://github.com/monkeyWie/gopeed|
+
+* 博客搭建
+
+|地址|项目说明|
+|---|---|
+|https://github.com/halo-dev/halo|纯java编写，一整套内容都包含在内|
