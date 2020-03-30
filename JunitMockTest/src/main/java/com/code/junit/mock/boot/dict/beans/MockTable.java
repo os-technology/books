@@ -1,7 +1,5 @@
 package com.code.junit.mock.boot.dict.beans;
 
-import com.smart.validate.ValidateBean;
-import com.smart.validate.rule.NotNullValidate;
 
 import java.util.Date;
 
@@ -13,12 +11,10 @@ import java.util.Date;
  * @Company: www.qdingnet.com
  * @Created on 2018/9/1下午1:05
  */
-@ValidateBean
 public class MockTable {
     private Long id;
 
     private String name;
-    @NotNullValidate
     private String data;
     private Date createTime;
 
