@@ -10,7 +10,7 @@ package com.view.arithmetic;
  * @Created on 2019/12/129:54 AM
  */
 public class Thread2 {
-    private static boolean ok = true;//先定一个局变量
+    private static boolean ok = true;//先定一个全局变量
     private static volatile Object lock = new Object();//lock锁
 
     public static void main(String[] args) {
@@ -57,8 +57,8 @@ public class Thread2 {
 
         });
 
-        t2.start();
         t1.start();
+        t2.start();
     }
 
 }
