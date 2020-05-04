@@ -13,6 +13,13 @@
 |---|---|
 |https://github.com/TheAlgorithms/Java|用Java实现的所有算法|
 
+* 系统设计学习
+
+|地址|项目说明|
+|---|---|
+|[https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md](https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md)|系统设计入门|
+
+
 * 面试整理
 
 |地址|项目说明|
@@ -32,3 +39,9 @@
 |地址|项目说明|
 |---|---|
 |https://github.com/halo-dev/halo|纯java编写，一整套内容都包含在内|
+
+
+* 知识游戏
+|地址|项目说明|
+|---|---|
+|https://learngitbranching.js.org/?demo=&locale=zh_CN|git学习小游戏|
