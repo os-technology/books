@@ -16,27 +16,6 @@
 		<springframework.version>4.0.6.RELEASE</springframework.version>
 	</properties>
 	<dependencies>
-		<!--websocket jar-->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework</groupId>-->
-			<!--<artifactId>spring-websocket</artifactId>-->
-			<!--<version>4.3.9.RELEASE</version>-->
-		<!--</dependency>-->
-
-		<!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
-		<!--<dependency>-->
-			<!--<groupId>javax.websocket</groupId>-->
-			<!--<artifactId>javax.websocket-api</artifactId>-->
-			<!--<version>1.1</version>-->
-			<!--<scope>provided</scope>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>javax</groupId>-->
-			<!--<artifactId>javaee-api</artifactId>-->
-			<!--<version>6.0</version>-->
-			<!--<scope>provided</scope>-->
-		<!--</dependency>-->
 
 		<!-- Spring jars start -->
 		<dependency>
