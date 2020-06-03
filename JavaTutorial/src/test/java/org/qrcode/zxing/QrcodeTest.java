@@ -52,7 +52,7 @@ public class QrcodeTest {
     @Test
     public void translateQrCode() {
         try {
-            String result = QRCodeUtil.decode("/Users/yujinshui/Desktop/2.jpg");
+            String result = QRCodeUtil.decode("C:\\Users\\zyxf\\Desktop\\1.jpg");
             System.out.println("解析结果：" + result);
         } catch (Exception e) {
             e.printStackTrace();

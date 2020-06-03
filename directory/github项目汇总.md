@@ -53,6 +53,22 @@
 
 
 * 知识游戏
+
 |地址|项目说明|
 |---|---|
 |https://learngitbranching.js.org/?demo=&locale=zh_CN|git学习小游戏|
+
+
+* 工具信息
+
+|地址|项目说明|
+|---|---|
+|[https://github.com/agalwood/Motrix/releases](https://github.com/agalwood/Motrix/releases)|开源下载工具|
+
+
+
+
+
+
+
+
