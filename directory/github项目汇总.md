@@ -64,6 +64,7 @@
 |地址|项目说明|
 |---|---|
 |[https://github.com/agalwood/Motrix/releases](https://github.com/agalwood/Motrix/releases)|开源下载工具|
+|[https://github.com/KOHGYLW/kiftd-source](https://github.com/KOHGYLW/kiftd-source)|  java开源网盘 |
 
 
 
