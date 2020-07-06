@@ -42,9 +42,6 @@
         <module>boot-notes</module>
         <module>share-notes</module>
         <module>genabag</module>
-        <module>genabag</module>
-        <module>officebag</module>
-        <module>genabag/officebag</module>
     </modules>
     <dependencyManagement>
         <dependencies>
