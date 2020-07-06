@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,5 +31,11 @@ public class CategoryDaoTest extends BaseAppTest {
     public void getAllCategoryList(){
         List<CategoryDTO> list = categoryDao.getCategoryList(new Category());
         Assert.assertNotNull(list);
+    }
+
+    @Test
+    public void date(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM/dd");
+        System.out.println("日期类型："+sdf.format(new Date()));
     }
 }

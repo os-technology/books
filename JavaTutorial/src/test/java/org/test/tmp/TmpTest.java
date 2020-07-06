@@ -62,6 +62,18 @@ public class TmpTest {
     @Test
     public void exam(){
 
+        Integer a=null;
+        switch(1){
+            case 1:
+                break;
+            case 2:
+                a =new Integer(2);
+                break;
+            default:
+                a = new Integer(4);
+
+        }
+        System.out.println(a);
     }
 
     @Test
