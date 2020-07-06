@@ -103,7 +103,7 @@
                     <!--程序包com.sun.image.codec.jpeg不存在 问题的完美解决 注意window环境下rt.jar后面为分号，mac环境下为冒号-->
                     <compilerArguments>
                         <bootclasspath>
-                            ${java.os.home}/lib/rt.jar:${java.os.home}/lib/jce.jar
+                            ${java.os.home}/lib/rt.jar;${java.os.home}/lib/jce.jar
                         </bootclasspath>
                     </compilerArguments>
                 </configuration>
