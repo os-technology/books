@@ -66,6 +66,7 @@
 |[https://github.com/agalwood/Motrix/releases](https://github.com/agalwood/Motrix/releases)|开源下载工具|
 |[https://github.com/KOHGYLW/kiftd-source](https://github.com/KOHGYLW/kiftd-source)|  java开源网盘 |
 |[https://github.com/fengdongdongwsn/PdfTool](https://github.com/fengdongdongwsn/PdfTool)|  PDF转Word工具 |
+|[https://github.com/farsunset/cim](https://github.com/farsunset/cim)   |  一款Java开源的Springboot 即时通讯 IM 聊天系统 |
 
 
 
