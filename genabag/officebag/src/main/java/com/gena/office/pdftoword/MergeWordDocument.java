@@ -1,4 +1,4 @@
-package com.gena.office;
+package com.gena.office.pdftoword;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package com.gena.office;
+package com.gena.office.pdftoword;
 
 /**
  * @author code
