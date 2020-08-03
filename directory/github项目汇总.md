@@ -1,5 +1,5 @@
 
-* boot学习
+### **boot学习**
 
 |地址|项目说明|
 |---|---|
@@ -8,31 +8,34 @@
 |https://github.com/zuihou/zuihou-admin-cloud|该项目是基于SpringCloud(Hoxton.SR1) + SpringBoot(2.2.2.RELEASE) 的SaaS 微服务脚手架，具有统一授权、认证后台管理系统，其中包含具备用户管理、资源权限管理、网关API、分布式事务、大文件断点分片续传等多个模块，支持多业务系统并行开发，可以作为后端服务的开发脚手架。代码简洁，架构清晰，适合学习和直接项目中使用。核心技术采用Nacos、Fegin、Ribbon、Zuul、Hystrix、JWT Token、Mybatis、SpringBoot、Redis、RibbitMQ等主要框架和中间件。|
 |https://github.com/zg-jack|享学课堂Jack教师源码笔记|
 
-* 设计模式学习
+### **设计模式学习**
 
 |地址|项目说明|
 |---|---|
 |https://refactoringguru.cn/|常见的设计模式学习|
 
 
+### **review**
 
+|地址|项目说明|
+|---|---|
+|[https://jimmysong.io/eng-practices/](https://jimmysong.io/eng-practices/)|谷歌工程实践文档/代码review|
 
-
-* 算法学习
+### **算法学习**
 
 |地址|项目说明|
 |---|---|
 |https://github.com/TheAlgorithms/Java|用Java实现的所有算法|
 |[https://github.com/Wang-Jun-Chao/leetcode](https://github.com/Wang-Jun-Chao/leetcode)|leetcode题库   |
 
-* 系统设计学习
+### **系统设计学习**
 
 |地址|项目说明|
 |---|---|
 |[https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md](https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md)|系统设计入门|
 
 
-* 面试整理
+### **面试整理**
 
 |地址|项目说明|
 |---|---|
@@ -40,27 +43,23 @@
 |https://github.com/kdn251/interviews|Java工程师面试指南，里面涵盖几乎所有软件工程师面试时会碰到的问题以及答案。
 |
 
-* 下载神器
+ 
 
-|地址|项目说明|
-|---|---|
-|https://github.com/monkeyWie/proxyee-down|proxyee-down 是一个开源的下载神器，也可以说是百度云神器，不过，它需要安装证书、设置代理，初次使用会略显繁琐，但带来的速度提升也是显而易见的。现已改为https://github.com/monkeyWie/gopeed|
-
-* 博客搭建参考
+### **博客搭建参考**
 
 |地址|项目说明|
 |---|---|
 |https://github.com/halo-dev/halo|纯java编写，一整套内容都包含在内|
 
 
-* 知识游戏
+### **知识游戏**
 
 |地址|项目说明|
 |---|---|
 |https://learngitbranching.js.org/?demo=&locale=zh_CN|git学习小游戏|
 
 
-* 工具信息
+### **工具信息**
 
 |地址|项目说明|
 |---|---|
@@ -70,7 +69,15 @@
 |[https://github.com/farsunset/cim](https://github.com/farsunset/cim)   |  一款Java开源的Springboot 即时通讯 IM 聊天系统 |
 |[https://www.jianshu.com/p/33f3440f69b9](https://www.jianshu.com/p/33f3440f69b9)， <br> [https://gitee.com/sjqzhang/go-fastdfs](https://gitee.com/sjqzhang/go-fastdfs),[https://github.com/perfree/go-fastdfs-web](https://github.com/perfree/go-fastdfs-web)| go-fastdfs资料  |
 |[https://github.com/18380438200/Tiktok](https://github.com/18380438200/Tiktok)| 开源仿抖音国际版  |
+|https://mp.weixin.qq.com/s/pzOrEBrN5Jvf_3L_23QQKg|  这张二维码火了，有了它，电脑手机文件互传秒完成 |
+|https://github.com/monkeyWie/proxyee-down|proxyee-down 是一个开源的下载神器，也可以说是百度云神器，不过，它需要安装证书、设置代理，初次使用会略显繁琐，但带来的速度提升也是显而易见的。现已改为https://github.com/monkeyWie/gopeed|
 
+
+### **搜索神器**
+
+|地址|项目说明|
+|---|---|
+|[https://www.wolframalpha.com/](https://www.wolframalpha.com/)|计算知识引擎|
 
 
 
