@@ -49,7 +49,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.qds.archetype.framework.api.app.WebApplication</mainClass>
+                    <mainClass>com.example.springboot.app.BootCollectionApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
