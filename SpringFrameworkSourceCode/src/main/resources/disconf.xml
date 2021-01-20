@@ -43,7 +43,7 @@
     </bean>
 
 
-    <bean id="disconfAutoService" class="com.disconf.DisconfAutoService">
+    <bean id="disconfAutoService" class="com.disconfig.DisconfAutoService">
         <property name="auto" value="${auto}"/>
     </bean>
 </beans>
