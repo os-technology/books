@@ -1,8 +1,8 @@
 package com.spring.source.code.beans.disconfig;
 
 import com.baidu.disconf.client.usertools.DisconfDataGetter;
-import com.disconf.DisconfAnnotationAutoService;
-import com.disconf.DisconfAutoService;
+import com.disconfig.DisconfAnnotationAutoService;
+import com.disconfig.DisconfAutoService;
 import com.spring.source.code.beans.BaseDisconfJunitTest;
 import org.junit.Assert;
 import org.junit.Test;
