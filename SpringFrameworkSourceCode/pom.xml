@@ -12,7 +12,7 @@
     <groupId>com.spring.code</groupId>
     <artifactId>SpringFrameworkSourceCode</artifactId>
     <properties>
-        <springframework.version>4.0.6.RELEASE</springframework.version>
+        <springframework.version>5.2.22.RELEASE</springframework.version>
         <disconf.version>2.6.36</disconf.version>
     </properties>
     <dependencies>
