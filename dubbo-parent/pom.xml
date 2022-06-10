@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
-            <version>2.5.3</version>
+            <version>2.6.12</version>
             <!--exclusions部分是为了去掉dubbo中spring相关依赖，保证单元测试可以正常实例化-->
             <exclusions>
                 <exclusion>
